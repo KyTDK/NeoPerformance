@@ -25,18 +25,13 @@ import org.bukkit.event.world.ChunkLoadEvent;
 
 import java.util.List;
 
-public class HaltServer implements Listener {
-    private final int tpsHalt;
+public class HaltServer implements Listener, Tps {
     public static final CachedData cachedData = new CachedData();
-
-    public HaltServer(TweakDataManager tweakDataManager) {
-        this.tpsHalt = tweakDataManager.getTweakData().getTpsHaltAt();
-    }
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
             if (!cachedData.cachedTeleport.containsKey(e.getPlayer())) {
                 cachedData.cachedTeleport.put(e.getPlayer(), e.getTo());
@@ -47,8 +42,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onMove(PlayerMoveEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             Location goTo = e.getTo();
             if (goTo == null) {
                 return;
@@ -62,8 +57,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
             //remove all entities that explode
             e.setCancelled(true);
@@ -77,8 +72,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             if (!cachedData.cachedRedstoneActivity.containsKey(e.getBlock())) {
                 cachedData.cachedRedstoneActivity.put(e.getBlock(), e.getNewCurrent());
             }
@@ -88,8 +83,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onChunkLoad(ChunkLoadEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             if (e.getChunk().isLoaded()) {
                 e.getChunk().unload();
             }
@@ -98,24 +93,24 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onItemMove(InventoryMoveItemEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             if (e.getSender().getName().equals("CONSOLE")) {
                 return;
             }
@@ -125,8 +120,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
             new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
@@ -135,8 +130,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
             new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
@@ -145,16 +140,16 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onProjectile(ProjectileLaunchEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
             if (e.getEntity().getShooter() instanceof Creature) {
                 List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
@@ -170,24 +165,24 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onEntityBread(EntityBreedEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityInteract(EntityInteractEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityTarget(EntityTargetEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
             List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
             if (entities.size() >= 10) {
@@ -198,23 +193,23 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onVehicleCollision(VehicleMoveEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             Vehicle vehicle = e.getVehicle();
             vehicle.teleport(e.getFrom());
         }
     }
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             e.setCancelled(true);
         }
     }
     @EventHandler()
     public void onPlayerJoin(PlayerLoginEvent e) {
-        double tps = new Tps().getTPS();
-        if (tps <= tpsHalt) {
+        double tps = getTPS();
+        if (tps <= getHaltTps()) {
             //stop player from joining because lag might be due to too many players
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "This server is currently under heavy load. Please try again later.");
         }

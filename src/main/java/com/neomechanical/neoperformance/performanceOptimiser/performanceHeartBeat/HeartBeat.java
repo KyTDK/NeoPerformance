@@ -12,18 +12,16 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class HeartBeat {
-    private final Tps tps = new Tps();
+public class HeartBeat implements Tps{
     private final CachedData cachedData = HaltServer.cachedData;
     public void start(TweakDataManager tweakDataManager) {
-        int tpsHalt = tweakDataManager.getTweakData().getTpsHaltAt();
         final long[] haltStartTime = new long[1];
         boolean notifyAdmin = tweakDataManager.getTweakData().getNotifyAdmin();
         final boolean[] halted = {false};
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (tps.getTPS() <= tpsHalt) {
+                if (getTPS() <= getHaltTps()) {
                     if (notifyAdmin&&!halted[0]) {
                         halted[0] = true;
                         haltStartTime[0] = System.currentTimeMillis();

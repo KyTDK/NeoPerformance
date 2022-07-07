@@ -1,6 +1,6 @@
 plugins {
     `java-library`
-    id("fr.il_totore.manadrop") version "0.4.2"
+    id("net.minecrell.plugin-yml.bukkit") version "0.5.2"
 }
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -28,6 +28,36 @@ repositories {
     mavenCentral()
     // This is needed for CraftBukkit and Spigot.
 
+}
+bukkit {
+    // Default values can be overridden if needed
+    // name = "TestPlugin"
+    // version = "1.0"
+    // description = "This is a test plugin"
+    // website = "https://example.com"
+    // author = "Notch"
+
+    // Plugin main class (required)
+    main = "com.neomechanical.neoperformance.NeoPerformance"
+
+    // API version (should be set for 1.13+)
+    apiVersion = "1.13"
+
+    // Other possible properties from plugin.yml (optional)
+    load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.STARTUP // or POSTWORLD
+    authors = listOf("NeoDevs")
+    prefix = "NeoPerformance"
+    defaultPermission = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.Permission.Default.OP // TRUE, FALSE, OP or NOT_OP
+
+    commands {
+        register("neoperformance") {
+            description = "Show server performance"
+            aliases = listOf("np","performance")
+            permission = "neoperformance.admin"
+            usage = "/neoperformance"
+        }
+        // ...
+    }
 }
 
 dependencies {

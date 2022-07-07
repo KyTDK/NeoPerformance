@@ -1,11 +1,11 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
 public class TweakDataManager {
-    private static TweakDataManager instance;
+    private boolean manualHalt=false;
     private TweakData tweakData;
 
-    public TweakDataManager(TweakData tweakData) {
-        this.tweakData = tweakData;
+    public TweakDataManager() {
+        this.tweakData = new performanceTweaksConfiguration().loadTweakSettings();
     }
 
     public TweakData getTweakData() {
@@ -13,5 +13,12 @@ public class TweakDataManager {
     }
     public void setTweakData(TweakData tweakData) {
         this.tweakData = tweakData;
+    }
+    public boolean isManualHalt() {
+        return manualHalt;
+    }
+    public void toogleManualHalt() {
+        //toggle boolean manualHalt
+        manualHalt = !manualHalt;
     }
 }

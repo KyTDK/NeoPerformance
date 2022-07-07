@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
-import com.neomechanical.neoperformance.performanceOptimiser.config.performanceConfigCore;
+import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigCore;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class performanceTweaksConfiguration {
-    FileConfiguration config = performanceConfigCore.config;
+    FileConfiguration config = PerformanceConfigCore.config;
     String settings = "performance_tweak_settings.";
     public TweakData loadTweakSettings() {
         int tpsHaltAt = 0;

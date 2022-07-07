@@ -1,8 +1,0 @@
-name: NeoPerformance
-version: '${version}'
-main: com.neomechanical.neoperformance.NeoPerformance
-api-version: 1.19
-prefix: NeoPerformance
-authors: [ NeoDevs ]
-description: Prevent server lag and crashes
-website: https://neomechanical.com
