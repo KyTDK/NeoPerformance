@@ -1,0 +1,5 @@
+performance_tweak_settings:
+  # Server activity will be throttled when the tps is below or at this value
+  tpsHaltAt: 15
+  # This will notify oped users when the tps is below or at this value
+  notifyAdmin: true
