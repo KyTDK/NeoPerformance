@@ -53,8 +53,8 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                     if (p.hasPermission(parentCommand+ ".admin")) {
                         MessageUtil messageUtil = new MessageUtil();
                         messageUtil.neoMessage().addMessage("  &7Is server halted: " + fancyIsServerHalted())
-                        .addMessage("  &7Server tps: " + getFancyTps())
-                        .addMessage("  &7Server halts at: " + "&a&l"+getHaltTps())
+                                .addMessage("  &7Server tps: " + getFancyTps())
+                                .addMessage("  &7Server halts at: " + "&a&l" + getFancyHaltTps())
                         .addMessage("  &7Player count: " + "&a&l"+Bukkit.getOnlinePlayers().size())
                         .sendMessage(p);
                         return true;

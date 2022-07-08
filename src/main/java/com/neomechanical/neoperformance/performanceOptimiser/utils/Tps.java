@@ -19,6 +19,10 @@ public interface Tps {
 
     default boolean isServerHalted(@Nullable Player player) {
         double tps = MinecraftServer.getServer().recentTps[0];
+        int haltAt = tweakDataManager.getTweakData().getTpsHaltAt();
+        if (haltAt == -1) {
+            return false;
+        }
         if (player != null) {
             if (tweakDataManager.isBypassed(player)) {
                 return false;
@@ -30,7 +34,7 @@ public interface Tps {
         if (tweakDataManager.isManualHalt()) {
             return true;
         }
-        return getTPS() <= tweakDataManager.getTweakData().getTpsHaltAt();
+        return getTPS() <= haltAt;
     }
 
     default String getFancyTps() {
@@ -59,5 +63,14 @@ public interface Tps {
 
     default int getHaltTps() {
         return NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt();
+    }
+
+    default String getFancyHaltTps() {
+        int haltAt = NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt();
+        if (haltAt == -1) {
+            return "&c&lN/A";
+        } else {
+            return "&a&l" + haltAt;
+        }
     }
 }
