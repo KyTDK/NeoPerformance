@@ -23,18 +23,18 @@ public class performanceTweaksConfiguration {
             if (config.getString(performanceSettings+"notifyAdmin") != null) {
                 notifyAdmin = config.getBoolean(performanceSettings+"notifyAdmin");
             }
-            if (config.getString(mailSettings+"use_mail_server") != null&&config.getBoolean(mailSettings+"use_mail_server")) {
+            if (config.getString(mailSettings + "use_mail_server") != null && config.getBoolean(mailSettings + "use_mail_server")) {
                 useMailServer = true;
-                outgoingHost = config.getString(mailSettings+"mail_server_host");
-                outgoingPort = config.getInt(mailSettings+"mail_server_port");
-                senderEmail = config.getString(mailSettings+"mail_server_username");
-                senderPassword = config.getString(mailSettings+"mail_server_password");
+                outgoingHost = config.getString(mailSettings + "mail_server_host");
+                outgoingPort = config.getInt(mailSettings + "mail_server_port");
+                senderEmail = config.getString(mailSettings + "mail_server_username");
+                senderPassword = config.getString(mailSettings + "mail_server_password");
                 recipients = config.getStringList(mailSettings + "recipients").toArray(new String[0]);
             }
-            if (outgoingHost==null||senderEmail==null||senderPassword==null||recipients.length==0) {
-                Logger.warn("Mailing configurations not found. Mailing will be disabled.");
-                return new TweakData(tpsHaltAt, notifyAdmin, false, "", outgoingPort, "", "", recipients);
-            }
+        if (useMailServer && (outgoingHost == null || senderEmail == null || senderPassword == null || recipients.length == 0)) {
+            Logger.warn("Mailing configurations not found. Mailing will be disabled.");
+            return new TweakData(tpsHaltAt, notifyAdmin, false, "", outgoingPort, "", "", recipients);
+        }
         return new TweakData(tpsHaltAt, notifyAdmin, useMailServer, outgoingHost, outgoingPort, senderEmail, senderPassword, recipients);
     }
 }

@@ -24,6 +24,7 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
         subcommands.add(new HaltCommand(plugin));
         subcommands.add(new HelpCommand(this));
         subcommands.add(new ReloadCommand());
+        subcommands.add(new BypassCommand());
     }
 
     public void addCommand(SubCommand subCommand) {
@@ -51,7 +52,7 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                 else {
                     if (p.hasPermission(parentCommand+ ".admin")) {
                         MessageUtil messageUtil = new MessageUtil();
-                        messageUtil.neoMessage().addMessage("  &7Is server halted: " + isServerHalted())
+                        messageUtil.neoMessage().addMessage("  &7Is server halted: " + fancyIsServerHalted())
                         .addMessage("  &7Server tps: " + getFancyTps())
                         .addMessage("  &7Server halts at: " + "&a&l"+getHaltTps())
                         .addMessage("  &7Player count: " + "&a&l"+Bukkit.getOnlinePlayers().size())

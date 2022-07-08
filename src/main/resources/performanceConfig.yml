@@ -2,7 +2,7 @@
 #                            STANDARD SETTINGS                            #
 ###########################################################################
 performance_tweak_settings:
-  # Server activity will be throttled when the tps is below or at this value
+  # Server activity will be throttled when the tps is below or at this value (use -1 to disable)
   tpsHaltAt: 15
   # This will notify oped users when the tps is below or at this value
   notifyAdmin: true

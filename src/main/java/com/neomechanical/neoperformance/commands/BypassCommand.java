@@ -3,40 +3,36 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-public class HaltCommand extends SubCommand implements Tps {
+public class BypassCommand extends SubCommand implements Tps {
     @Override
     public String getName() {
-        return "halt";
+        return "bypass";
     }
 
     @Override
     public String getDescription() {
-        return "Manually halt the server, type this command to toggle";
+        return "Bypass halt, type this command to toggle";
     }
 
     @Override
     public String getSyntax() {
-        return "/np halt";
+        return "/np bypass";
     }
 
     @Override
     public String getPermission() {
-        return "neoperformance.halt";
+        return "neoperformance.bypass";
     }
 
-    public HaltCommand(Plugin plugin) {
-    }
     @Override
     public void perform(Player player, String[] args) {
-        tweakDataManager.toggleManualHalt();
-        if (tweakDataManager.isManualHalt()) {
-            player.sendMessage(MessageUtil.color("&c&lServer has been halted"));
+        if (tweakDataManager.toggleBypass(player)) {
+            player.sendMessage(MessageUtil.color("&c&lNow bypassing halt"));
         } else {
-            player.sendMessage(MessageUtil.color("&a&lServer has been resumed"));
+            player.sendMessage(MessageUtil.color("&a&lNo longer bypassing halt"));
         }
     }
 
