@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
@@ -14,9 +14,13 @@ public abstract class SubCommand {
 
     //How to use command ex. /prank freeze <player>
     public abstract String getSyntax();
+
     public abstract String getPermission();
+
+    public abstract boolean playerOnly();
+
     //code for the subcommand
-    public abstract void perform(Player player, String[] args);
+    public abstract void perform(CommandSender player, String[] args);
 
     public abstract List<String> tabSuggestions();
 

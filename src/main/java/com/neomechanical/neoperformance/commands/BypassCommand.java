@@ -2,7 +2,7 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
@@ -28,7 +28,12 @@ public class BypassCommand extends SubCommand implements Tps {
     }
 
     @Override
-    public void perform(Player player, String[] args) {
+    public boolean playerOnly() {
+        return true;
+    }
+
+    @Override
+    public void perform(CommandSender player, String[] args) {
         if (tweakDataManager.toggleBypass(player)) {
             player.sendMessage(MessageUtil.color("&c&lNow bypassing halt"));
         } else {

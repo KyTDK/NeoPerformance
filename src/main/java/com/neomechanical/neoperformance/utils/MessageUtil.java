@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 
@@ -37,15 +38,25 @@ public final class MessageUtil {
             neoMessageArray.add(msg);
             return this;
         }
-        public void sendMessage(Player player) {
-            addMessage("&7&l&m                                                         ");
-            for (String msg : neoMessageArray) {
-                player.sendMessage(color(msg));
-            }
-            neoMessageArray.clear();
+
+    public void sendMessage(Player player) {
+        addMessage("&7&l&m                                                         ");
+        for (String msg : neoMessageArray) {
+            player.sendMessage(color(msg));
         }
-        public MessageUtil neoMessage() {
-            addMessage("&7&l&m                   &a&lNeoPerformance&7&l&m                   ");
-            return this;
+        neoMessageArray.clear();
+    }
+
+    public void sendMessage(CommandSender player) {
+        addMessage("&7&l&m                                                         ");
+        for (String msg : neoMessageArray) {
+            player.sendMessage(color(msg));
         }
+        neoMessageArray.clear();
+    }
+
+    public MessageUtil neoMessage() {
+        addMessage("&7&l&m                   &a&lNeoPerformance&7&l&m                   ");
+        return this;
+    }
 }

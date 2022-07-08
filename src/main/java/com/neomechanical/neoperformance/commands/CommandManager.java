@@ -32,13 +32,15 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     }
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
-        if (sender instanceof Player p){
             if (args.length > 0) {
                     for (int i = 0; i < getSubcommands().size(); i++) {
                         if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
+                            if (getSubcommands().get(i).playerOnly() && !(sender instanceof Player)) {
+                                sender.sendMessage(MessageUtil.color("&c&lThis command is for players only"));
+                                return true;
+                            }
                             if (sender.hasPermission(getSubcommands().get(i).getPermission())) {
-                                getSubcommands().get(i).perform((Player) sender, args);
+                                getSubcommands().get(i).perform(sender, args);
                             } else {
                                 sender.sendMessage(MessageUtil.color("&c&lYou do not have permission to use this command"));
                             }
@@ -50,17 +52,16 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                     return true;
                 }
                 else {
-                    if (p.hasPermission(parentCommand+ ".admin")) {
-                        MessageUtil messageUtil = new MessageUtil();
-                        messageUtil.neoMessage().addMessage("  &7Is server halted: " + fancyIsServerHalted())
-                                .addMessage("  &7Server tps: " + getFancyTps())
-                                .addMessage("  &7Server halts at: " + "&a&l" + getFancyHaltTps())
-                        .addMessage("  &7Player count: " + "&a&l"+Bukkit.getOnlinePlayers().size())
-                        .sendMessage(p);
-                        return true;
-                    }
+                if (sender.hasPermission(parentCommand + ".admin")) {
+                    MessageUtil messageUtil = new MessageUtil();
+                    messageUtil.neoMessage().addMessage("  &7Is server halted: " + fancyIsServerHalted())
+                            .addMessage("  &7Server tps: " + getFancyTps())
+                            .addMessage("  &7Server halts at: " + "&a&l" + getFancyHaltTps())
+                            .addMessage("  &7Player count: " + "&a&l" + Bukkit.getOnlinePlayers().size())
+                            .sendMessage(sender);
+                    return true;
                 }
-        }
+                }
 
 
         return true;

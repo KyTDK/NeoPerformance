@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class TweakDataManager {
     private boolean manualHalt = false;
-    private final List<Player> bypassedPlayers = new ArrayList<>();
+    private final List<CommandSender> bypassedPlayers = new ArrayList<>();
     private TweakData tweakData;
 
     public TweakDataManager() {
@@ -31,7 +32,7 @@ public class TweakDataManager {
         manualHalt = !manualHalt;
     }
 
-    public boolean toggleBypass(Player player) {
+    public boolean toggleBypass(CommandSender player) {
         //toggle boolean manualHalt
         if (bypassedPlayers.contains(player)) {
             bypassedPlayers.remove(player);

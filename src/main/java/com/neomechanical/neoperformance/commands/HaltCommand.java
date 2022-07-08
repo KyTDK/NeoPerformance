@@ -2,7 +2,7 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
 import java.util.List;
@@ -28,10 +28,16 @@ public class HaltCommand extends SubCommand implements Tps {
         return "neoperformance.halt";
     }
 
+    @Override
+    public boolean playerOnly() {
+        return false;
+    }
+
     public HaltCommand(Plugin plugin) {
     }
+
     @Override
-    public void perform(Player player, String[] args) {
+    public void perform(CommandSender player, String[] args) {
         tweakDataManager.toggleManualHalt();
         if (tweakDataManager.isManualHalt()) {
             player.sendMessage(MessageUtil.color("&c&lServer has been halted"));
