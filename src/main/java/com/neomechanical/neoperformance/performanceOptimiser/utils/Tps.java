@@ -5,7 +5,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataM
 import net.minecraft.server.MinecraftServer;
 
 public interface Tps {
-    TweakDataManager tweakDataManager = new TweakDataManager();
+    TweakDataManager tweakDataManager = NeoPerformance.getTweakDataManager();
     default double getTPS() {
         double tps = MinecraftServer.getServer().recentTps[0];
         if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.

@@ -1,29 +1,30 @@
 package com.neomechanical.neoperformance.performanceOptimiser.config;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.utils.Logger;
+import com.neomechanical.neoperformance.utils.config.ConfigUpdater;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class PerformanceConfigCore implements ConfigFile {
-    private static File f = new File(NeoPerformance.getInstance().getDataFolder().getAbsolutePath() + File.separator + "performanceConfig.yml");
+    private static final NeoPerformance plugin = NeoPerformance.getInstance();
+    private static final File f = new File(plugin.getDataFolder(),"performanceConfig.yml");
     public static FileConfiguration config = YamlConfiguration.loadConfiguration(f);
     public void createConfig() {
         if (!f.exists()) {
-            try {
-                if (!f.createNewFile()) {
-                    Logger.warn("Could not create performanceConfig.yml");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return;
+            plugin.saveResource(getName(), false);
         }
-        NeoPerformance.getInstance().saveResource(getName(), false);
-        f = new File(NeoPerformance.getInstance().getDataFolder().getAbsolutePath() + File.separator + getName());
-        config = YamlConfiguration.loadConfiguration(f);
+//The config needs to exist before using the updater
+        try {
+            ConfigUpdater.update(plugin, "performanceConfig.yml", f, List.of(""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     public static void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(f);

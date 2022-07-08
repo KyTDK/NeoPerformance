@@ -20,7 +20,7 @@ public class registerOptimiserEvents {
                 Logger.info("Server finished starting, registering performance optimisers");
                 plugin.getServer().getPluginManager().registerEvents(new HaltServer(), plugin);
                 plugin.getServer().getPluginManager().registerEvents(new lagPrevention(), plugin);
-                new HeartBeat().start(tweakDataManager);
+                new HeartBeat().start();
             }
         }.runTaskLater(NeoPerformance.getInstance(), 1L);
     }

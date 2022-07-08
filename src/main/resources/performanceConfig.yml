@@ -1,5 +1,30 @@
+###########################################################################
+#                            STANDARD SETTINGS                            #
+###########################################################################
 performance_tweak_settings:
   # Server activity will be throttled when the tps is below or at this value
   tpsHaltAt: 15
   # This will notify oped users when the tps is below or at this value
   notifyAdmin: true
+
+###########################################################################
+#        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #
+###########################################################################
+
+#If you have a mail server set up, you can use the following settings to send a mail to admins when the server halts. (can be a bit spammy)
+#SSL is enabled by default
+email_notifications:
+  # If you want to use a mail server, set this to true, otherwise it won't work
+  use_mail_server: false
+  # The mail server hostname
+  mail_server_host: smtp.gmail.com
+   # The mail server port
+  mail_server_port: 587
+  # The mail server email address that will be used to send the mail
+  mail_server_username: example@gmail.com.com
+  # The mail server password
+  mail_server_password: password
+  # The recipients
+  recipients:
+    - "example@gmail.com"
+    - "example2@gmail.com"

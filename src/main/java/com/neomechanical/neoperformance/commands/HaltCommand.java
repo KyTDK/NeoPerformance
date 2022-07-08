@@ -2,14 +2,14 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-public class HaltCommand extends SubCommand {
-    private final TweakDataManager tweakDataManager = NeoPerformance.getTweakDataManager();
+public class HaltCommand extends SubCommand implements Tps {
     @Override
     public String getName() {
         return "halt";
