@@ -51,7 +51,7 @@ public interface Tps {
 
     default String fancyIsServerHalted() {
         double tps = MinecraftServer.getServer().recentTps[0];
-        if (tps <= NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt()) {
+        if (isServerHalted(null)) {
             return "&c&ltrue";
         }
         return "&a&lfalse";
