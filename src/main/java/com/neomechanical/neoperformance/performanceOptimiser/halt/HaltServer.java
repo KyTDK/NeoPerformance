@@ -26,10 +26,10 @@ import java.util.List;
 
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
-    private final float TERMINAL_VELOCITY = 3.92000381462276f;
+
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
-        if (isServerHalted(e.getPlayer())) {
+        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltTeleportation()) {
             e.setCancelled(true);
             if (!cachedData.cachedTeleport.containsKey(e.getPlayer())) {
                 cachedData.cachedTeleport.put(e.getPlayer(), e.getTo());
@@ -54,7 +54,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltExplosions()) {
             List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
             //remove all entities that explode
             e.setCancelled(true);
@@ -68,7 +68,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltRedstone()) {
             if (!cachedData.cachedRedstoneActivity.containsKey(e.getBlock())) {
                 cachedData.cachedRedstoneActivity.put(e.getBlock(), e.getNewCurrent());
             }
@@ -78,7 +78,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onChunkLoad(ChunkLoadEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltChunkLoading()) {
             if (e.getChunk().isLoaded()) {
                 e.getChunk().unload();
             }
@@ -87,21 +87,21 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltMobSpawning()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onItemMove(InventoryMoveItemEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltInventoryMovement()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltCommandBlock()) {
             if (e.getSender().getName().equals("CONSOLE")) {
                 return;
             }
@@ -111,7 +111,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (isServerHalted(e.getPlayer())) {
+        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltMobSpawning()) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
             new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
@@ -120,7 +120,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (isServerHalted(e.getPlayer())) {
+        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltMobSpawning()) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
             new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
@@ -129,14 +129,14 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltProjectiles()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onProjectile(ProjectileLaunchEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltProjectiles()) {
             e.setCancelled(true);
             if (e.getEntity().getShooter() instanceof Creature) {
                 List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
@@ -152,21 +152,21 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onEntityBread(EntityBreedEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltEntityBreeding()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityInteract(EntityInteractEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltEntityInteractions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityTarget(EntityTargetEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltEntityTargeting()) {
             e.setCancelled(true);
             List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
             if (entities.size() >= 10) {
@@ -177,14 +177,14 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltVehicleCollisions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && getTweakData().getHaltBlockPhysics()) {
             e.setCancelled(true);
         }
     }

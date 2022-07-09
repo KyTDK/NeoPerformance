@@ -19,11 +19,13 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
         final long[] haltStartTime = new long[1];
         boolean notifyAdmin = getTweakData().getNotifyAdmin();
         final boolean[] halted = {false};
+        final boolean[] manualHalt = {false};
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (getTPS() <= getHaltTps()) {
-                    if (!halted[0]) {
+                if (isServerHalted(null)) {
+                    manualHalt[0] = tweakDataManager.isManualHalt();
+                    if (!halted[0] && !manualHalt[0]) {
                         haltStartTime[0] = System.currentTimeMillis();
                         if (getTweakData().getUseMailServer()) {
                             EmailClient emailClient = new EmailClient();
@@ -37,14 +39,14 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         }
                     }
                     halted[0] = true;
-                    if (System.currentTimeMillis() - haltStartTime[0] >= 1000 * 60 * 10) {
+                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000 * 60 * 10)) {
                         //after 10 minutes of the server being halted, reboot the server
                         NeoPerformance.getInstance().getServer().shutdown();
                     }
                 }
                 else {
                     if (halted[0]) {
-                        if (notifyAdmin) {
+                        if (notifyAdmin && !manualHalt[0]) {
                             MessageUtil.messageAdmins("&aTPS is back to normal, recovering server");
                         }
                         halted[0] = false;

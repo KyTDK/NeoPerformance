@@ -20,6 +20,7 @@ public class PerformanceConfigCore implements ConfigFile {
 //The config needs to exist before using the updater
         try {
             ConfigUpdater.update(plugin, "performanceConfig.yml", f, List.of(""));
+            reloadConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
+import com.neomechanical.neoperformance.performanceOptimiser.config.performanceTweaksConfiguration;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
