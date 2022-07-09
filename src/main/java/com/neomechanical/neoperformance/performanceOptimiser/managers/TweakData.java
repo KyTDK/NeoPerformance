@@ -10,6 +10,7 @@ public class TweakData {
     final Integer tpsHaltAt;//18 is the default value.
     private @NotNull Boolean notifyAdmin;//true is the default value.
     private @NotNull Integer mobCap;
+    private @NotNull Boolean allowJoinWhileHalted;
 
     //Mailing settings
     private @NotNull Boolean useMailServer;

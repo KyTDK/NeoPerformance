@@ -193,7 +193,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         if (e.getPlayer().hasPermission("neoperformance.bypass")) {
             return;
         }
-        if (isServerHalted(null)) {
+        if (isServerHalted(null) && !getTweakData().getAllowJoinWhileHalted()) {
             //stop player from joining because lag might be due to too many players
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "This server is currently under heavy load. Please try again later.");
         }

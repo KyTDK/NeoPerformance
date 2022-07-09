@@ -21,10 +21,11 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     private final String parentCommand = "neoperformance";
     public CommandManager(){
         Plugin plugin = NeoPerformance.getInstance();
-        subcommands.add(new HaltCommand(plugin));
+        subcommands.add(new HaltCommand());
         subcommands.add(new HelpCommand(this));
         subcommands.add(new ReloadCommand());
         subcommands.add(new BypassCommand());
+        subcommands.add(new ChunksCommand());
     }
 
     public void addCommand(SubCommand subCommand) {
@@ -68,13 +69,20 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     }
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         List<String> list = new ArrayList<>();
-        if (sender instanceof Player){
-            for (int i = 0; i < getSubcommands().size(); i++){
-                if (args.length > 0){
-                    list = getSubcommands().get(i).tabSuggestions();
+            for (int i = 0; i < getSubcommands().size(); i++) {
+                if (args.length == 1) {
+                    list.add(getSubcommands().get(i).getName());
+                } else if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
+                        List<String> suggestions = getSubcommands().get(i).tabSuggestions();
+                        if (suggestions != null) {
+                            list.addAll(suggestions);
+                        } else {
+                            return null;
+                        }
+                    }
                 }
             }
-        }
         return list;
     }
     public void init(NeoPerformance plugin){

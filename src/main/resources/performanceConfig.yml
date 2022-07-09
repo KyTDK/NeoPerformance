@@ -8,6 +8,8 @@ performance_tweak_settings:
   notifyAdmin: true
   # The maximum number of entities that can exist in a small radius (use -1 to disable)
   mobCap: 50
+  # Should players be allowed to join while the server is halted (users with 'neoperformance.bypass' will still be able to join)?
+  allowJoinWhileHalted: true
 
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #

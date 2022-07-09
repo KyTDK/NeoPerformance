@@ -3,7 +3,6 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
@@ -31,9 +30,6 @@ public class HaltCommand extends SubCommand implements Tps {
     @Override
     public boolean playerOnly() {
         return false;
-    }
-
-    public HaltCommand(Plugin plugin) {
     }
 
     @Override
