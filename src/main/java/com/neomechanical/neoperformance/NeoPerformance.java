@@ -12,13 +12,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class NeoPerformance extends JavaPlugin {
     private static NeoPerformance instance;
     private static TweakDataManager tweakDataManager;
+    private Metrics metrics;
+
     public static NeoPerformance getInstance() {
         return instance;
     }
+
     private static CommandManager commandManager;
+
     public static CommandManager getCommandManager() {
         return commandManager;
     }
+
     public static TweakDataManager getTweakDataManager() {
         return tweakDataManager;
     }
@@ -37,12 +42,13 @@ public final class NeoPerformance extends JavaPlugin {
         ////////////////////////////////////////////////////////////////////////////////////////
         //Metrics
         int pluginId = 15711; // <-- Replace with the id of your plugin!
+        @SuppressWarnings("unused")
         Metrics metrics = new Metrics(this, pluginId);
         PerformanceConfigCore config = new PerformanceConfigCore();
         config.createConfig();
         // Plugin startup logic
         tweakDataManager = new TweakDataManager();
-        Logger.info("NeoPerformance is enabled");
+        Logger.info("NeoPerformance is enabled and using bStats!");
         registerOptimiserEvents.register(this);
         commandManager = RegisterCommands.register(this);
     }
