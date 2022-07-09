@@ -6,6 +6,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceC
 import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.registerOptimiserEvents;
 import com.neomechanical.neoperformance.utils.Logger;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NeoPerformance extends JavaPlugin {
@@ -34,6 +35,9 @@ public final class NeoPerformance extends JavaPlugin {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
+        //Metrics
+        int pluginId = 15711; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
         PerformanceConfigCore config = new PerformanceConfigCore();
         config.createConfig();
         // Plugin startup logic

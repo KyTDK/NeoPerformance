@@ -80,7 +80,8 @@ repositories {
 
 dependencies {
     paperDevBundle("1.19-R0.1-SNAPSHOT")
-
+// https://mavenlibs.com/maven/dependency/org.bstats/bstats-bukkit
+    implementation("org.bstats:bstats-bukkit:3.0.0")
     implementation("org.jetbrains:annotations:23.0.0")
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")    // Pick only one of these and read the comment in the repositories block.
