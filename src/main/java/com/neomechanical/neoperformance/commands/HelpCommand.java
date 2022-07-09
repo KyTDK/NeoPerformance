@@ -41,7 +41,7 @@ public class HelpCommand extends SubCommand{
         MessageUtil messageUtil = new MessageUtil();
         messageUtil.neoMessage();
         for (int i = 0; i < commandManager.getSubcommands().size(); i++) {
-            messageUtil.addMessage("  &7" + commandManager.getSubcommands().get(i).getSyntax() + " - " + commandManager.getSubcommands().get(i).getDescription());
+            messageUtil.addMessage("  &7&l" + commandManager.getSubcommands().get(i).getSyntax() + " - &r&7" + commandManager.getSubcommands().get(i).getDescription());
         }
         messageUtil.sendMessage(player);
     }

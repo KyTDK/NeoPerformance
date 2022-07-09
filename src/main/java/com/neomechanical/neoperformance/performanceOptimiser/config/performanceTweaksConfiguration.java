@@ -6,8 +6,8 @@ import com.neomechanical.neoperformance.utils.Logger;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class performanceTweaksConfiguration {
     FileConfiguration config = PerformanceConfigCore.config;
@@ -27,8 +27,8 @@ public class performanceTweaksConfiguration {
                     booleans.put(configurationSection, (Boolean) value);
                 } else if (value instanceof String) {
                     strings.put(configurationSection, (String) value);
-                } else if (value instanceof List) {
-                    stringsArrays.put(configurationSection, config.getStringList(configurationSection).toArray(new String[0]));
+                } else if (value instanceof ArrayList) {
+                    stringsArrays.put(configurationSection, configSection.getStringList(configurationSection).toArray(new String[0]));
                 } else if (value instanceof Number) {
                     nums.put(configurationSection, (Integer) value);
                 } else {
@@ -43,7 +43,7 @@ public class performanceTweaksConfiguration {
                 }
             }
         }
-        return new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), nums.get("mobCap"),
+        return new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap"),
                 booleans.get("allowJoinWhileHalted"), nums.get("maxSpeed"), booleans.get("haltTeleportation"), booleans.get("haltExplosions"),
                 booleans.get("haltRedstone"), booleans.get("haltChunkLoading"), booleans.get("haltMobSpawning"),
                 booleans.get("haltInventoryMovement"), booleans.get("haltCommandBlock"), booleans.get("haltProjectiles"),

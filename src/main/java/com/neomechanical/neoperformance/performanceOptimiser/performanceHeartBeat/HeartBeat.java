@@ -8,6 +8,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     public void start() {
         final long[] haltStartTime = new long[1];
         boolean notifyAdmin = getTweakData().getNotifyAdmin();
+        boolean broadcastAll = getTweakData().getBroadcastHalt();
         final boolean[] halted = {false};
         final boolean[] manualHalt = {false};
         new BukkitRunnable() {
@@ -33,9 +35,11 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                                     "The TPS is currently at " + getTPS() + " and the TPS threshold is " + getHaltTps() + ".\n" +
                                     "The server will restart in " + "10" + " minutes if it doesn't recover.");
                         }
-                        if (notifyAdmin) {
-                            halted[0] = true;
-                            MessageUtil.messageAdmins("&cTPS is too low, halting server");
+                        String message = "&cTPS is too low, halting server";
+                        if (broadcastAll) {
+                            Bukkit.broadcastMessage(MessageUtil.color(message));
+                        } else if (notifyAdmin) {
+                            MessageUtil.messageAdmins(message);
                         }
                     }
                     halted[0] = true;
@@ -46,14 +50,19 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 }
                 else {
                     if (halted[0]) {
-                        if (notifyAdmin && !manualHalt[0]) {
-                            MessageUtil.messageAdmins("&aTPS is back to normal, recovering server");
+                        if (!manualHalt[0]) {
+                            String message = "&aTPS is back to normal, recovering server";
+                            if (broadcastAll) {
+                                Bukkit.broadcastMessage(MessageUtil.color(message));
+                            } else if (notifyAdmin) {
+                                MessageUtil.messageAdmins(message);
+                            }
                         }
                         halted[0] = false;
                         haltStartTime[0] = 0;
                         //run teleport cache
                         for (Player player : cachedData.cachedTeleport.keySet()) {
-                            if(player.isOnline()) {
+                            if (player.isOnline()) {
                                 player.teleport(cachedData.cachedTeleport.get(player));
                             }
                         }

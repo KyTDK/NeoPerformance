@@ -6,6 +6,8 @@ performance_tweak_settings:
   tpsHaltAt: 15
   # This will notify oped users when the tps is below or at this value
   notifyAdmin: true
+  # Broadcast that the server is under load and is halting
+  broadcastHalt: false
   # The maximum number of entities that can exist in a small radius (use -1 to disable)
   mobCap: 50
 
