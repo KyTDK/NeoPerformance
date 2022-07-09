@@ -48,7 +48,7 @@ email_notifications:
    # The mail server port
   mail_server_port: 587
   # The mail server email address that will be used to send the mail
-  mail_server_username: example@gmail.com.com
+  mail_server_username: example@gmail.com
   # The mail server password
   mail_server_password: password
   # The recipients
