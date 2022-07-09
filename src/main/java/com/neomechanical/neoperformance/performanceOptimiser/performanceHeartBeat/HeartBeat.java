@@ -5,17 +5,13 @@ import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceC
 import com.neomechanical.neoperformance.performanceOptimiser.halt.CachedData;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
+import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;
@@ -60,10 +56,15 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             }
                         }
                         for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
-                                BlockData data = block.getBlockData();
-                                if (!(data instanceof AnaloguePowerable powerable)) continue; // Ignore any non-powerable blocks
+                            try {
+                                org.bukkit.block.data.BlockData data = block.getBlockData();
+                                if (!(data instanceof AnaloguePowerable powerable))
+                                    continue; // Ignore any non-powerable blocks
                                 powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
                                 block.setBlockData(powerable);
+                            } catch (NoClassDefFoundError e) {
+                                Logger.outdated();
+                            }
                         }
                         //clear cache entirely
                         cachedData.cachedTeleport.clear();

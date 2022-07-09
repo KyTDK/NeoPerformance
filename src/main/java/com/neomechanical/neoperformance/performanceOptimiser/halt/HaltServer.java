@@ -1,12 +1,12 @@
 package com.neomechanical.neoperformance.performanceOptimiser.halt;
 
+import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -19,12 +19,12 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.server.ServerCommandEvent;
-import org.bukkit.event.vehicle.VehicleMoveEvent;
+import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 
 import java.util.List;
 
-public class HaltServer implements Listener, Tps {
+public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
 
     @EventHandler()
@@ -176,12 +176,12 @@ public class HaltServer implements Listener, Tps {
     }
 
     @EventHandler()
-    public void onVehicleCollision(VehicleMoveEvent e) {
+    public void onVehicleCollision(VehicleEntityCollisionEvent e) {
         if (isServerHalted(null)) {
-            Vehicle vehicle = e.getVehicle();
-            vehicle.teleport(e.getFrom());
+            e.setCancelled(true);
         }
     }
+
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
         if (isServerHalted(null)) {
