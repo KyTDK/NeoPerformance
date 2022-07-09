@@ -11,6 +11,7 @@ public class TweakData {
     private @NotNull Boolean notifyAdmin;//true is the default value.
     private @NotNull Integer mobCap;
     private @NotNull Boolean allowJoinWhileHalted;
+    private @NotNull Integer maxSpeed;
 
     //Mailing settings
     private @NotNull Boolean useMailServer;

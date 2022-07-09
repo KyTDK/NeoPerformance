@@ -114,13 +114,6 @@ tasks {
 }
 
 bukkit {
-    // Default values can be overridden if needed
-    // name = "TestPlugin"
-    // version = "1.0"
-    // description = "This is a test plugin"
-    // website = "https://example.com"
-    // author = "Notch"
-
     // Plugin main class (required)
     main = "com.neomechanical.neoperformance.NeoPerformance"
 

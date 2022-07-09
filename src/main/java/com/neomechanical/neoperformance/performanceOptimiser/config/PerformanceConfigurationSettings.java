@@ -20,4 +20,12 @@ public interface PerformanceConfigurationSettings {
         }
         return list.size() <= getTweakData().getMobCap();
     }
+
+    default boolean canMove(double instantaneousSpeed) {
+        int maxSpeed = getTweakData().getMaxSpeed();
+        if (maxSpeed == -1) {
+            return true;
+        }
+        return instantaneousSpeed < maxSpeed;
+    }
 }

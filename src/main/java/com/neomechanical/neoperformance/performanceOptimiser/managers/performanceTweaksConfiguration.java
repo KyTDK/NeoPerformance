@@ -13,6 +13,7 @@ public class performanceTweaksConfiguration {
         boolean notifyAdmin = false;
         int mobCap = 0;
         boolean allowJoinWhileHalted = false;
+        int maxSpeed = 0;
         boolean useMailServer = false;
         String outgoingHost = "";
         int outgoingPort = 0;
@@ -31,6 +32,9 @@ public class performanceTweaksConfiguration {
         if (config.contains(performanceSettings + "allowJoinWhileHalted")) {
             allowJoinWhileHalted = config.getBoolean(performanceSettings + "allowJoinWhileHalted");
         }
+        if (config.contains(performanceSettings + "maxSpeed")) {
+            maxSpeed = config.getInt(performanceSettings + "maxSpeed");
+        }
         if (config.contains(mailSettings + "use_mail_server") && config.contains(mailSettings + "use_mail_server")) {
             useMailServer = true;
             outgoingHost = config.getString(mailSettings + "mail_server_host");
@@ -41,8 +45,8 @@ public class performanceTweaksConfiguration {
         }
         if (useMailServer && (outgoingHost == null || senderEmail == null || senderPassword == null || recipients.length == 0)) {
             Logger.warn("Mailing configurations not found. Mailing will be disabled.");
-            return new TweakData(tpsHaltAt, notifyAdmin, mobCap, allowJoinWhileHalted, false, "", outgoingPort, "", "", recipients);
+            return new TweakData(tpsHaltAt, notifyAdmin, mobCap, allowJoinWhileHalted, maxSpeed, false, "", outgoingPort, "", "", recipients);
         }
-        return new TweakData(tpsHaltAt, notifyAdmin, mobCap, allowJoinWhileHalted, useMailServer, outgoingHost, outgoingPort, senderEmail, senderPassword, recipients);
+        return new TweakData(tpsHaltAt, notifyAdmin, mobCap, allowJoinWhileHalted, maxSpeed, useMailServer, outgoingHost, outgoingPort, senderEmail, senderPassword, recipients);
     }
 }

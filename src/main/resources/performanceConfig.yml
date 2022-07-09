@@ -10,6 +10,8 @@ performance_tweak_settings:
   mobCap: 50
   # Should players be allowed to join while the server is halted (users with 'neoperformance.bypass' will still be able to join)?
   allowJoinWhileHalted: true
+  # Maximum speed of player during halt (use -1 to disable)
+  maxSpeed: -1 # 3.92000381462276 m/s is the instantaneous terminal velocity of a player in minecraft (use -1 to disable)
 
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #

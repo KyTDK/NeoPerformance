@@ -26,7 +26,7 @@ import java.util.List;
 
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
-
+    private final float TERMINAL_VELOCITY = 3.92000381462276f;
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
         if (isServerHalted(e.getPlayer())) {
@@ -45,7 +45,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             if (goTo == null) {
                 return;
             }
-            if (e.getFrom().distance(e.getTo()) > 1) {
+            if (!canMove(e.getFrom().distance(goTo))) {
                 e.setCancelled(true);
                 new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
             }
