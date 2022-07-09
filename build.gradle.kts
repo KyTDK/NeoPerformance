@@ -93,11 +93,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.4.20")
     implementation("io.papermc:paperlib:1.0.7")
 }
+val shadowPath = "com.neomechanical.neoperformance.shadow"
 tasks.withType<ShadowJar> {
+    relocate("org.bstats", "$shadowPath.bstats")
     dependencies {
         include(dependency("io.papermc:paperlib:"))
         include(dependency("com.sun.mail:javax.mail:1.6.2"))
         include(dependency("javax.activation:activation:1.1.1"))
+        include(dependency("org.bstats:"))
     }
     archiveClassifier.set("")
 }
