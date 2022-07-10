@@ -34,7 +34,7 @@ public final class NeoPerformance extends JavaPlugin {
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
         //Metrics
-        int pluginId = 15711; // <-- Replace with the id of your plugin!
+        int pluginId = 15711;
         @SuppressWarnings("unused")
         Metrics metrics = new Metrics(this, pluginId);
         //Config updater
