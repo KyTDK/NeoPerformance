@@ -9,14 +9,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.metadata.MetadataValue;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class lagPrevention implements Listener, PerformanceConfigurationSettings {
+public class LagPrevention implements Listener, PerformanceConfigurationSettings {
     private final HashMap<String, Long> lastTeleport = new HashMap<>();
     private final HashMap<CommandSender, Long> lastCommand = new HashMap<>();
 
@@ -68,19 +67,6 @@ public class lagPrevention implements Listener, PerformanceConfigurationSettings
             return;
         }
         lastTeleport.put(e.getPlayer().getName(), System.currentTimeMillis());
-    }
-    @EventHandler()
-    public void onServerCommand(ServerCommandEvent e) {
-        if (lastCommand.containsKey(e.getSender())) {
-            long last = lastCommand.get(e.getSender());
-            if (System.currentTimeMillis() - last < 50) {
-                e.setCancelled(true);
-            } else {
-                lastCommand.put(e.getSender(), System.currentTimeMillis());
-            }
-            return;
-        }
-        lastCommand.put(e.getSender(), System.currentTimeMillis());
     }
 
     @EventHandler()

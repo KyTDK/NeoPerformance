@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
 
     private final String parentCommand = "neoperformance";
     public CommandManager(){
-        Plugin plugin = NeoPerformance.getInstance();
         subcommands.add(new HaltCommand());
         subcommands.add(new HelpCommand(this));
         subcommands.add(new ReloadCommand());
@@ -70,10 +68,11 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         List<String> list = new ArrayList<>();
             for (int i = 0; i < getSubcommands().size(); i++) {
-                if (args.length == 1) {
-                    list.add(getSubcommands().get(i).getName());
+                SubCommand subCommand = getSubcommands().get(i);
+                if (args.length == 1 && sender.hasPermission(subCommand.getPermission())) {
+                    list.add(subCommand.getName());
                 } else if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
+                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName()) && sender.hasPermission(subCommand.getPermission())) {
                         List<String> suggestions = getSubcommands().get(i).tabSuggestions();
                         if (suggestions != null) {
                             list.addAll(suggestions);

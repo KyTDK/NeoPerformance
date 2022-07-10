@@ -1,27 +1,20 @@
 package com.neomechanical.neoperformance;
 
-import com.neomechanical.neoperformance.commands.CommandManager;
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigCore;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.registerOptimiserEvents;
 import com.neomechanical.neoperformance.utils.Logger;
+import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NeoPerformance extends JavaPlugin {
     private static NeoPerformance instance;
     private static TweakDataManager tweakDataManager;
-    private Metrics metrics;
 
     public static NeoPerformance getInstance() {
         return instance;
-    }
-
-    private static CommandManager commandManager;
-
-    public static CommandManager getCommandManager() {
-        return commandManager;
     }
 
     public static TweakDataManager getTweakDataManager() {
@@ -44,14 +37,23 @@ public final class NeoPerformance extends JavaPlugin {
         int pluginId = 15711; // <-- Replace with the id of your plugin!
         @SuppressWarnings("unused")
         Metrics metrics = new Metrics(this, pluginId);
+        //Config updater
         PerformanceConfigCore config = new PerformanceConfigCore();
         config.createConfig();
+        //Check for updates
+        new UpdateChecker(this, 103183).getVersion(version -> {
+            if (!this.getDescription().getVersion().equals(version)) {
+                Logger.info("There is a new update available. Download it at: https://www.spigotmc.org/resources/neoperformance-an-essential-for-any-server.103183/");
+            }
+        });
         // Plugin startup logic
         tweakDataManager = new TweakDataManager();
         Logger.info("NeoPerformance is enabled and using bStats!");
         registerOptimiserEvents.register(this);
-        commandManager = RegisterCommands.register(this);
+        //Commands
+        RegisterCommands.register(this);
     }
+
 
     @Override
     public void onDisable() {

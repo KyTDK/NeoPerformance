@@ -55,12 +55,15 @@ public class ChunksCommand extends SubCommand {
                 return;
             }
         }
-        List<Chunk> chunks;
         if (world == null) {
-            chunks = Chunks.getChunksWithMostEntities(10);
+            Chunks.getChunksWithMostEntities(10, result -> sendChatData(result, null, playerAsPlayer));
         } else {
-            chunks = Chunks.getChunksWithMostEntities(world, 10);
+            World finalWorld = world;
+            Chunks.getChunksWithMostEntities(world, 10, result -> sendChatData(result, finalWorld, playerAsPlayer));
         }
+    }
+
+    private void sendChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
         ArrayList<BaseComponent[]> messages = new ArrayList<>();
         for (Chunk chunk : chunks) {
             ChatColor colour;

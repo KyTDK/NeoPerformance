@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.neomechanical.neoperformance"
-version = "1.7.2"
+version = "1.7.3"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -123,7 +123,7 @@ bukkit {
 
     // API version (should be set for 1.13+)
     apiVersion = "1.13"
-    version = "1.7.2"
+    version = rootProject.version.toString()
     // Other possible properties from plugin.yml (optional)
     load = net.minecrell.pluginyml.bukkit.BukkitPluginDescription.PluginLoadOrder.STARTUP // or POSTWORLD
     authors = listOf("NeoDevs")

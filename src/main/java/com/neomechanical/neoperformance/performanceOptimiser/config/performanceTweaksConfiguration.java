@@ -44,8 +44,8 @@ public class performanceTweaksConfiguration {
             }
         }
         return new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap"),
-                booleans.get("allowJoinWhileHalted"), nums.get("maxSpeed"), booleans.get("haltTeleportation"), booleans.get("haltExplosions"),
-                booleans.get("haltRedstone"), booleans.get("haltChunkLoading"), booleans.get("haltMobSpawning"),
+                booleans.get("allowJoinWhileHalted"), nums.get("maxSpeed"), booleans.get("haltTeleportation"),
+                booleans.get("haltExplosions"), booleans.get("haltRedstone"), booleans.get("haltChunkLoading"), booleans.get("haltMobSpawning"),
                 booleans.get("haltInventoryMovement"), booleans.get("haltCommandBlock"), booleans.get("haltProjectiles"),
                 booleans.get("haltEntityBreeding"), booleans.get("haltEntityInteractions"), booleans.get("haltEntityTargeting"),
                 booleans.get("haltVehicleCollisions"), booleans.get("haltBlockPhysics"), booleans.get("use_mail_server"),
