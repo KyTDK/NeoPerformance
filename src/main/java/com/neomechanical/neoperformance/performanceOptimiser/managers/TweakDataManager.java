@@ -13,15 +13,14 @@ public class TweakDataManager {
     private TweakData tweakData;
 
     public TweakDataManager() {
+    }
+
+    public void loadTweakSettings() {
         this.tweakData = new performanceTweaksConfiguration().loadTweakSettings();
     }
 
     public TweakData getTweakData() {
         return this.tweakData;
-    }
-
-    public void setTweakData(TweakData tweakData) {
-        this.tweakData = tweakData;
     }
 
     public boolean isManualHalt() {

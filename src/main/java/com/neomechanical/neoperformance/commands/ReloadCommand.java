@@ -32,11 +32,11 @@ public class ReloadCommand extends SubCommand{
     public boolean playerOnly() {
         return false;
     }
-
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
     @Override
     public void perform(CommandSender player, String[] args) {
         NeoPerformance.reloadTweakDataManager();
-        player.sendMessage(MessageUtil.color("&a&lConfig file reloaded"));
+        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("reload.onReload", null));
     }
 
     @Override

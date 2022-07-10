@@ -2,7 +2,6 @@ package com.neomechanical.neoperformance.performanceOptimiser.lagPrevention;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +16,6 @@ import java.util.List;
 
 public class LagPrevention implements Listener, PerformanceConfigurationSettings {
     private final HashMap<String, Long> lastTeleport = new HashMap<>();
-    private final HashMap<CommandSender, Long> lastCommand = new HashMap<>();
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {

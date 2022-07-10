@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.neomechanical.neoperformance"
-version = "1.7.3"
+version = "1.8"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -90,17 +90,26 @@ dependencies {
     implementation("com.sun.mail:javax.mail:1.6.2")
     implementation("javax.activation:activation:1.1.1")
     implementation("io.netty:netty-all:4.1.77.Final")
-    implementation("org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.4.20")
+    implementation("org.jetbrains.kotlin:kotlin-annotation-processing-gradle:1.7.0")
     implementation("io.papermc:paperlib:1.0.7")
+    //Shaded
+    implementation("net.kyori:adventure-text-minimessage:4.11.0") {
+        exclude(group = "net.kyori", module = "adventure-api")
+        exclude(group = "net.kyori", module = "adventure-bom")
+    }
+    implementation("net.kyori:adventure-platform-bukkit:4.1.1")
 }
 val shadowPath = "com.neomechanical.neoperformance.shadow"
 tasks.withType<ShadowJar> {
     relocate("org.bstats", "$shadowPath.bstats")
+    relocate("net.kyori", "$shadowPath.kyori")
     dependencies {
         include(dependency("io.papermc:paperlib:"))
         include(dependency("com.sun.mail:javax.mail:1.6.2"))
         include(dependency("javax.activation:activation:1.1.1"))
+        include(dependency("net.kyori:"))
         include(dependency("org.bstats:"))
+
     }
     archiveClassifier.set("")
 }

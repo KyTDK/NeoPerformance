@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Chunks;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import net.md_5.bungee.api.ChatColor;
@@ -44,6 +45,7 @@ public class ChunksCommand extends SubCommand {
         return true;
     }
 
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
@@ -51,7 +53,7 @@ public class ChunksCommand extends SubCommand {
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
             if (world == null) {
-                player.sendMessage(MessageUtil.color("&c&lWorld not found"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
         }

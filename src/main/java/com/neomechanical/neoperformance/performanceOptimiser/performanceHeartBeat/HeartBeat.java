@@ -8,7 +8,6 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.entity.Player;
@@ -16,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
     public void start() {
         final long[] haltStartTime = new long[1];
         boolean notifyAdmin = getTweakData().getNotifyAdmin();
@@ -31,15 +31,14 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         haltStartTime[0] = System.currentTimeMillis();
                         if (getTweakData().getUseMailServer()) {
                             EmailClient emailClient = new EmailClient();
-                            emailClient.sendAsHtml("TPS is too low, halting server", "The server has halted because the TPS is too low.\n" +
-                                    "The TPS is currently at " + getTPS() + " and the TPS threshold is " + getHaltTps() + ".\n" +
-                                    "The server will restart in " + "10" + " minutes if it doesn't recover.");
+                            emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
+                                    plugin.getLanguageManager().getString("email_notifications.body", null));
                         }
-                        String message = "&cTPS is too low, halting server";
+                        String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
                         if (broadcastAll) {
-                            Bukkit.broadcastMessage(MessageUtil.color(message));
+                            MessageUtil.sendMMAll(message);
                         } else if (notifyAdmin) {
-                            MessageUtil.messageAdmins(message);
+                            MessageUtil.sendMMAdmins(message);
                         }
                     }
                     halted[0] = true;
@@ -51,11 +50,11 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 else {
                     if (halted[0]) {
                         if (!manualHalt[0]) {
-                            String message = "&aTPS is back to normal, recovering server";
+                            String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
                             if (broadcastAll) {
-                                Bukkit.broadcastMessage(MessageUtil.color(message));
+                                MessageUtil.sendMMAll(message);
                             } else if (notifyAdmin) {
-                                MessageUtil.messageAdmins(message);
+                                MessageUtil.sendMMAdmins(message);
                             }
                         }
                         halted[0] = false;

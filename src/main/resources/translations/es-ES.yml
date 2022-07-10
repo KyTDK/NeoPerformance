@@ -1,0 +1,38 @@
+main:
+  isServerHalted: '<gray>  ¿El servidor está detenido: %SERVERHALTED%'
+  serverTps: '<gray>  Servidor TPS: %TPS%'
+  serverHaltsAt: '<gray>  El servidor se detiene en: %TPSHALT%'
+  playerCount: '<gray>  Número de jugadores: <green><bold>%PLAYERCOUNT%'
+notify:
+  serverHalted: '<red><bold>TPS es demasiado bajo, deteniendo el servidor'
+  serverResumed: '<green><bold>TPS vuelve a la normalidad, recuperando el servidor'
+email_notifications:
+  subject: 'TPS es demasiado bajo, deteniendo el servidor'
+  body: "El servidor se detuvo porque el TPS es demasiado bajo.\nEl TPS está actualmente en %TPS% y el umbral de TPS es %TPSHALT%.\n El servidor se reiniciará en 10 minutos si no se recupera"
+#comandos
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Jugador no encontrado'
+  errorInvalidSyntax: '<red><bold>Sintaxis no válida: escriba "/np help" para obtener ayuda'
+  errorWorldNotFound: '<red><bold>Mundo no encontrado'
+  errorNoPermission: '<red><bold>No tiene permiso para usar este comando'
+  errorNotPlayer: '<red><bold>Este comando es solo para jugadores'
+  errorCommandNotFound: '<red><bold>Comando no encontrado, intente /np ayuda'
+bypass:
+  errorNotPlayer: '<red><bold>Debes ser un jugador para evitarte a ti mismo'
+  nowBypassing: '<red><bold>Ahora omitiendo detener'
+  noLongerBypassing: '<green><bold>Ya no se omite detener'
+  nowBypassingPlayer: '<red><bold>Ahora omitiendo el alto para %PLAYER%'
+  noLongerBypassingPlayer: '<green><bold>Ya no se omite el alto para %PLAYER%'
+  errorNoPermissionOthers: '<red><bold>No tienes permiso para pasar por alto a otros jugadores'
+halt:
+  toggleHaltOn: '<red><bold>El servidor se ha detenido'
+  toggleHaltOff: '<green><bold>El servidor se ha reanudado'
+reload:
+  onReload: '<green><bold>Archivo de configuración recargado'
+  #Detener mensajes relacionados
+halted:
+  actionBarMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
+  actionBarTeleportMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Serás teletransportado momentáneamente.'
+  onJoin: 'Este servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
+  onBlockBreak: '<green>Esta acción ha sido cancelada para evitar la pérdida de datos. El servidor se encuentra actualmente bajo una gran carga, por lo tanto, todos los elementos que se suelten serán destruidos.'
+  onItemDrop: '<green>Esta acción ha sido cancelada para evitar la pérdida de datos. El servidor se encuentra actualmente bajo una gran carga, por lo tanto, todos los elementos que se suelten serán destruidos.'

@@ -1,5 +1,9 @@
 package com.neomechanical.neoperformance.utils;
 
+import com.neomechanical.neoperformance.NeoPerformance;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,15 +32,8 @@ public final class MessageUtil {
             return msg == null ? null : ChatColor.translateAlternateColorCodes('&', msg);
         }
 
-    public static void messageAdmins(String msg) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.isOp()) {
-                player.sendMessage(color(msg));
-            }
-        }
-    }
-
     static List<String> neoMessageArray = new ArrayList<>();
+    static List<Component> neoComponentArray = new ArrayList<>();
 
     public static void sendBaseMessages(List<BaseComponent[]> msg, Player player) {
         player.sendMessage(color("&7&l&m                   &a&lNeoPerformance&7&l&m                   "));
@@ -44,14 +41,6 @@ public final class MessageUtil {
             player.spigot().sendMessage(components);
         }
         player.sendMessage(color("&7&l&m                                                         "));
-    }
-
-    public void sendMessage(Player player) {
-        addMessage("&7&l&m                                                         ");
-        for (String msg : neoMessageArray) {
-            player.sendMessage(color(msg));
-        }
-        neoMessageArray.clear();
     }
 
     public void sendMessage(CommandSender player) {
@@ -62,13 +51,65 @@ public final class MessageUtil {
         neoMessageArray.clear();
     }
 
+    public static void sendMM(CommandSender sendTo, Component parsed) {
+        Audience player = NeoPerformance.adventure().sender(sendTo);
+        player.sendMessage(parsed);
+    }
+
     public MessageUtil addMessage(String msg) {
         neoMessageArray.add(msg);
         return this;
     }
 
+    public static void sendMM(CommandSender sendTo, String msg) {
+        var mm = MiniMessage.miniMessage();
+        Component parsed = mm.deserialize(msg);
+        Audience player = NeoPerformance.adventure().sender(sendTo);
+        player.sendMessage(parsed);
+    }
+
     public MessageUtil neoMessage() {
         addMessage("&7&l&m                   &a&lNeoPerformance&7&l&m                   ");
+        return this;
+    }
+
+    public static void sendMMAll(String string) {
+        Audience player = NeoPerformance.adventure().all();
+        var mm = MiniMessage.miniMessage();
+        Component parsed = mm.deserialize(string);
+        player.sendMessage(parsed);
+    }
+
+    public static void sendMMAdmins(String string) {
+        var mm = MiniMessage.miniMessage();
+        Component parsed = mm.deserialize(string);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.isOp()) {
+                Audience audience = NeoPerformance.adventure().player(player);
+                audience.sendMessage(parsed);
+            }
+        }
+    }
+
+    public void sendNeoComponentMessage(CommandSender player) {
+        player.sendMessage(color("&7&l&m                   &a&lNeoPerformance&7&l&m                   "));
+        //addComponent("<bold><gray><strikethrough>                                                         ");
+        for (Component msg : neoComponentArray) {
+            sendMM(player, msg);
+        }
+        player.sendMessage(color("&7&l&m                                                         "));
+        neoComponentArray.clear();
+    }
+
+    public MessageUtil addComponent(String msg) {
+        var mm = MiniMessage.miniMessage();
+        Component parsed = mm.deserialize(msg);
+        neoComponentArray.add(parsed);
+        return this;
+    }
+
+    public MessageUtil neoComponentMessage() {
+        //addComponent("<bold><gray><strikethrough>                   <reset><green><bold>NeoPerformance<reset><bold><gray><strikethrough>                   ");
         return this;
     }
 }

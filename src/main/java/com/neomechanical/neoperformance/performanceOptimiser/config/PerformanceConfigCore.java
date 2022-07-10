@@ -13,20 +13,17 @@ public class PerformanceConfigCore implements ConfigFile {
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
     private static final File f = new File(plugin.getDataFolder(),"performanceConfig.yml");
     public static FileConfiguration config = YamlConfiguration.loadConfiguration(f);
-    public void createConfig() {
+    public FileConfiguration createConfig() {
         if (!f.exists()) {
             plugin.saveResource(getName(), false);
         }
 //The config needs to exist before using the updater
         try {
             ConfigUpdater.update(plugin, "performanceConfig.yml", f, List.of(""));
-            reloadConfig();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-    public static void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(f);
+        return config;
     }
 }

@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.Bukkit;
@@ -34,35 +35,37 @@ public class BypassCommand extends SubCommand implements Tps {
         return false;
     }
 
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
+
     @Override
     public void perform(CommandSender player, String[] args) {
         if (args.length == 1) {
             if (!(player instanceof Player)) {
-                player.sendMessage(MessageUtil.color("&c&lYou must be a player to bypass yourself"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNotPlayer", null));
                 return;
             }
             if (tweakDataManager.toggleBypass(player)) {
-                player.sendMessage(MessageUtil.color("&c&lNow bypassing halt"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassing", null));
             } else {
-                player.sendMessage(MessageUtil.color("&a&lNo longer bypassing halt"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassing", null));
             }
         } else if (args.length == 2) {
             if (!player.hasPermission("neoperformance.bypass.others")) {
-                player.sendMessage(MessageUtil.color("&c&lYou do not have permission to bypass other players"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNoPermissionOthers", null));
                 return;
             }
             Player player1 = Bukkit.getPlayer(args[1]);
             if (player1 != null) {
                 if (tweakDataManager.toggleBypass(player1)) {
-                    player.sendMessage(MessageUtil.color("&c&lNow bypassing halt for " + player1.getName()));
+                    MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassingPlayer", player1));
                 } else {
-                    player.sendMessage(MessageUtil.color("&a&lNo longer bypassing halt for " + player1.getName()));
+                    MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassingPlayer", player1));
                 }
             } else {
-                player.sendMessage(MessageUtil.color("&c&lPlayer not found"));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorPlayerNotFound", null));
             }
         } else {
-            player.sendMessage(MessageUtil.color("&c&lInvalid syntax - type '/np help' for help"));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
         }
     }
 

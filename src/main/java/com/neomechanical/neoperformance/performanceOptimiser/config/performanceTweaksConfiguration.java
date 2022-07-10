@@ -10,11 +10,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class performanceTweaksConfiguration {
-    FileConfiguration config = PerformanceConfigCore.config;
+    FileConfiguration config = null;
 
     public TweakData loadTweakSettings() {
-        new PerformanceConfigCore().createConfig();
         //Performance Tweak Settings
+        if (config == null) {
+            PerformanceConfigCore configUnit = new PerformanceConfigCore();
+            config = configUnit.createConfig();
+        }
+        //Config updater
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         HashMap<String, Boolean> booleans = new HashMap<>();
         HashMap<String, String> strings = new HashMap<>();
         HashMap<String, String[]> stringsArrays = new HashMap<>();
@@ -43,12 +48,12 @@ public class performanceTweaksConfiguration {
                 }
             }
         }
-        return new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap"),
+        return new TweakData(strings.get("language"), nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap"),
                 booleans.get("allowJoinWhileHalted"), nums.get("maxSpeed"), booleans.get("haltTeleportation"),
                 booleans.get("haltExplosions"), booleans.get("haltRedstone"), booleans.get("haltChunkLoading"), booleans.get("haltMobSpawning"),
-                booleans.get("haltInventoryMovement"), booleans.get("haltCommandBlock"), booleans.get("haltProjectiles"),
-                booleans.get("haltEntityBreeding"), booleans.get("haltEntityInteractions"), booleans.get("haltEntityTargeting"),
-                booleans.get("haltVehicleCollisions"), booleans.get("haltBlockPhysics"), booleans.get("use_mail_server"),
+                booleans.get("haltInventoryMovement"), booleans.get("haltCommandBlock"), booleans.get("haltItemDrops"), booleans.get("haltBlockBreaking"),
+                booleans.get("haltProjectiles"), booleans.get("haltEntityBreeding"), booleans.get("haltEntityInteractions"),
+                booleans.get("haltEntityTargeting"), booleans.get("haltVehicleCollisions"), booleans.get("haltBlockPhysics"), booleans.get("use_mail_server"),
                 strings.get("mail_server_host"), nums.get("mail_server_port"), strings.get("mail_server_username"),
                 strings.get("mail_server_password"), stringsArrays.get("recipients"));
     }

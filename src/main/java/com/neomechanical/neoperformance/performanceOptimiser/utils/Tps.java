@@ -43,23 +43,23 @@ public interface Tps {
         double tps = getTPS();
         tps = (double) Math.round(tps * 100) / 100;
         if (tps >= 18) {
-            return "&a&l" + tps;
+            return "<green><bold>" + tps;
         } else if (tps <= 18 && tps >= 15) {
-            return "&e&l" + tps;
+            return "<yellow><bold>" + tps;
         } else if (tps <= 15 && tps >= 10) {
-            return "&c&l" + tps;
+            return "<red><bold>" + tps;
         } else if (tps <= 10 && tps >= 0) {
-            return "&4&l" + tps;
+            return "<dark_red><bold>" + tps;
         } else {
-            return "&4&l" + tps;
+            return "<dark_red><bold>" + tps;
         }
     }
 
     default String fancyIsServerHalted() {
         if (isServerHalted(null)) {
-            return "&c&ltrue";
+            return "<red><bold>true";
         }
-        return "&a&lfalse";
+        return "<green><bold>false";
     }
 
     default int getHaltTps() {
@@ -69,9 +69,9 @@ public interface Tps {
     default String getFancyHaltTps() {
         int haltAt = NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
-            return "&c&lN/A";
+            return "<red><bold>N/A";
         } else {
-            return "&a&l" + haltAt;
+            return "<green><bold>" + haltAt;
         }
     }
 }

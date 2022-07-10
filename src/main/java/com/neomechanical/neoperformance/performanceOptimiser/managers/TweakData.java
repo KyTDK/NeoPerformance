@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 @Data
 public class TweakData {
+    //Visual
+    private @NotNull String language;
     //Performance tweak settings
     private @NotNull
     final Integer tpsHaltAt;//18 is the default value.
@@ -22,6 +24,8 @@ public class TweakData {
     private @NotNull Boolean haltMobSpawning;
     private @NotNull Boolean haltInventoryMovement;
     private @NotNull Boolean haltCommandBlock;
+    private @NotNull Boolean haltItemDrops;
+    private @NotNull Boolean haltBlockBreaking;
     private @NotNull Boolean haltProjectiles;
     private @NotNull Boolean haltEntityBreeding;
     private @NotNull Boolean haltEntityInteractions;

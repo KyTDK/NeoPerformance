@@ -3,7 +3,6 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
-
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
     private final String parentCommand = "neoperformance";
     public CommandManager(){
         subcommands.add(new HaltCommand());
@@ -35,29 +34,30 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                     for (int i = 0; i < getSubcommands().size(); i++) {
                         if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
                             if (getSubcommands().get(i).playerOnly() && !(sender instanceof Player)) {
-                                sender.sendMessage(MessageUtil.color("&c&lThis command is for players only"));
+                                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
                                 return true;
                             }
                             if (sender.hasPermission(getSubcommands().get(i).getPermission())) {
                                 getSubcommands().get(i).perform(sender, args);
                             } else {
-                                sender.sendMessage(MessageUtil.color("&c&lYou do not have permission to use this command"));
+                                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorNoPermission", null));
                             }
                             return true;
                         }
                     }
                     //If the command is not found, send a message to the player
-                    sender.sendMessage(MessageUtil.color("&c&lCommand not found, try /np help"));
+                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
                     return true;
                 }
                 else {
                 if (sender.hasPermission(parentCommand + ".admin")) {
                     MessageUtil messageUtil = new MessageUtil();
-                    messageUtil.neoMessage().addMessage("  &7Is server halted: " + fancyIsServerHalted())
-                            .addMessage("  &7Server tps: " + getFancyTps())
-                            .addMessage("  &7Server halts at: " + "&a&l" + getFancyHaltTps())
-                            .addMessage("  &7Player count: " + "&a&l" + Bukkit.getOnlinePlayers().size())
-                            .sendMessage(sender);
+                    messageUtil.neoComponentMessage()
+                            .addComponent(plugin.getLanguageManager().getString("main.isServerHalted", null))
+                            .addComponent(plugin.getLanguageManager().getString("main.serverTps", null))
+                            .addComponent(plugin.getLanguageManager().getString("main.serverHaltsAt", null))
+                            .addComponent(plugin.getLanguageManager().getString("main.playerCount", null))
+                            .sendNeoComponentMessage(sender);
                     return true;
                 }
                 }

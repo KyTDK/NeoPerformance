@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.halt;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
@@ -26,6 +27,7 @@ import java.util.List;
 
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
+    private final NeoPerformance plugin = NeoPerformance.getInstance();
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
@@ -34,7 +36,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             if (!cachedData.cachedTeleport.containsKey(e.getPlayer())) {
                 cachedData.cachedTeleport.put(e.getPlayer(), e.getTo());
             }
-            new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. You will be teleported momentarily."));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarTeleportMessage", null));
         }
     }
 
@@ -47,7 +49,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             }
             if (!canMove(e.getFrom().distance(goTo))) {
                 e.setCancelled(true);
-                new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
+                new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
             }
         }
     }
@@ -111,19 +113,19 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltMobSpawning()) {
+        if (isServerHalted(e.getPlayer()) && (getTweakData().getHaltMobSpawning() || getTweakData().getHaltItemDrops())) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
-            new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
+            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltMobSpawning()) {
+        if (isServerHalted(e.getPlayer()) && (getTweakData().getHaltMobSpawning() || getTweakData().getHaltBlockBreaking())) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(MessageUtil.color("&aThis action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed."));
-            new ActionBar().sendToPlayer(e.getPlayer(), MessageUtil.color("&cServer is currently under heavy load. Please try again later."));
+            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
 
@@ -195,7 +197,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         }
         if (isServerHalted(null) && !getTweakData().getAllowJoinWhileHalted()) {
             //stop player from joining because lag might be due to too many players
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "This server is currently under heavy load. Please try again later.");
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, plugin.getLanguageManager().getString("halted.onJoin", null));
         }
     }
 }

@@ -26,6 +26,8 @@ halt_settings:
   haltMobSpawning: true
   haltInventoryMovement: true #Does not affect players, only hoppers and chests
   haltCommandBlock: true
+  haltItemDrops: true
+  haltBlockBreaking: true
   haltProjectiles: true
   haltEntityBreeding: false
   haltEntityInteractions: true
@@ -55,3 +57,5 @@ email_notifications:
   recipients:
     - "example@gmail.com"
     - "example2@gmail.com"
+visual:
+  language: en-US
