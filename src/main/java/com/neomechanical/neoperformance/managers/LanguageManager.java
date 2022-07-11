@@ -49,6 +49,8 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
         final ArrayList<String> languageFiles = new ArrayList<>();
         languageFiles.add("en-US.yml");
         languageFiles.add("es-ES.yml");
+        languageFiles.add("tr-TR.yml");
+        languageFiles.add("fr-FR.yml");
 
         if (!languageFolder.exists()) {
             if (!languageFolder.mkdirs()) {

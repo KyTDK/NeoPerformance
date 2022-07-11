@@ -1,0 +1,38 @@
+main:
+  isServerHalted: '<gray> Le serveur est-il arrêté: %SERVERHALTED%'
+  serverTps: '<gray> Serveur TPS: %TPS%'
+  serverHaltsAt: "<gray> Le serveur s'arrête à: %TPSHALT%"
+  playerCount: '<gray> Nombre de joueurs: <green><bold>%PLAYERCOUNT%'
+notify:
+  serverHalted: '<red><bold>TPS est trop bas, arrêt du serveur'
+  serverResumed: '<green><bold>TPS retour à la normale, récupération du serveur'
+email_notifications:
+  subject: "Le TPS est trop bas, le serveur s'arrête"
+  body: "Le serveur s'est arrêté car le TPS est trop bas.\nLe TPS est actuellement à %TPS% et le seuil TPS est %TPSHALT%.\n Le serveur redémarrera dans 10 minutes s'il ne récupère pas"
+#commandes
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Joueur introuvable'
+  errorInvalidSyntax: "<red><bold>Syntaxe non valide - tapez '/np help' pour obtenir de l'aide"
+  errorWorldNotFound: '<red><bold>Monde introuvable'
+  errorNoPermission: "<red><bold>Vous n'êtes pas autorisé à utiliser cette commande"
+  errorNotPlayer: '<red><bold>Cette commande est réservée aux joueurs'
+  errorCommandNotFound: '<red><bold>Commande introuvable, essayez /np help'
+bypass:
+  errorNotPlayer: '<red><bold>Vous devez être un joueur pour vous contourner'
+  nowBypassing: "<red><bold>Maintenant, contournement de l'arrêt"
+  noLongerBypassing: "<green><bold>Ne contourne plus l'arrêt"
+  nowBypassingPlayer: "<red><bold>Maintenant, contournement de l'arrêt pour %PLAYER%"
+  noLongerBypassingPlayer: "<green><bold>Ne contourne plus l'arrêt pour %PLAYER%"
+  errorNoPermissionOthers: "<red><bold>Vous n'êtes pas autorisé à contourner les autres joueurs"
+halt:
+  toggleHaltOn: '<red><bold>Le serveur a été arrêté'
+  toggleHaltOff: '<green><bold>Le serveur a été repris'
+reload:
+  onReload: '<green><bold>Fichier de configuration rechargé'
+#Arrêter les messages liés
+halted:
+  actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'
+  actionBarTeleportMessage: '<red>Le serveur est actuellement sous forte charge. Vous serez téléporté momentanément.'
+  onJoin: 'Ce serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'
+  onBlockBreak: '<green>Cette action a été annulée pour éviter la perte de données. Le serveur est actuellement sous forte charge, par conséquent, tous les éléments abandonnés seront détruits.'
+  onItemDrop: '<green>Cette action a été annulée pour éviter la perte de données. Le serveur est actuellement sous forte charge, par conséquent, tous les éléments abandonnés seront détruits.'

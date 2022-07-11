@@ -1,14 +1,10 @@
 package com.neomechanical.neoperformance.utils.updates;
+import java.lang.module.ModuleDescriptor.Version;
 
 public class IsUpToDate {
     public static boolean isUpToDate(String currentVersion, String latestVersion) {
-        String[] currentVersionSplit = currentVersion.split("\\.");
-        String[] latestVersionSplit = latestVersion.split("\\.");
-        for (int i = 0; i < currentVersionSplit.length; i++) {
-            if (Integer.parseInt(currentVersionSplit[i]) < Integer.parseInt(latestVersionSplit[i])) {
-                return false;
-            }
-        }
-        return true;
+        Version current = Version.parse(currentVersion);
+        Version latest = Version.parse(latestVersion);
+        return current.compareTo(latest) >= 0;
     }
 }
