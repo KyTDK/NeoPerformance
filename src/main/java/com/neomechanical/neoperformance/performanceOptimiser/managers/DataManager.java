@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
-import com.neomechanical.neoperformance.performanceOptimiser.config.performanceTweaksConfiguration;
+import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceTweaksConfiguration;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,7 +19,7 @@ public class DataManager {
     }
 
     public void loadTweakSettings() {
-        new performanceTweaksConfiguration().loadTweakSettings(this);
+        new PerformanceTweaksConfiguration().loadTweakSettings(this);
     }
 
     public TweakData getTweakData() {

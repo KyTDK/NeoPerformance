@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class performanceTweaksConfiguration {
+public class PerformanceTweaksConfiguration {
     FileConfiguration config = null;
     HashMap<String, Boolean> booleans = new HashMap<>();
     HashMap<String, String> strings = new HashMap<>();

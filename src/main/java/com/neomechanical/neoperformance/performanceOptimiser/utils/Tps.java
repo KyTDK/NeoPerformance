@@ -2,23 +2,16 @@ package com.neomechanical.neoperformance.performanceOptimiser.utils;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
-import static com.neomechanical.neoperformance.performanceOptimiser.utils.Lag.getRecentTpsRefl;
 
 public interface Tps {
     DataManager DATA_MANAGER = NeoPerformance.getTweakDataManager();
-
     default double getTPS() {
-
-        double tps = getRecentTpsRefl()[0];
-        if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.
-            tps = 20;
-        }
-        return tps;
+        return HeartBeat.getUpdatedTPS();
     }
-
     default boolean isServerHalted(@Nullable Player player) {
         double tps = getTPS();
         int haltAt = DATA_MANAGER.getTweakData().getTpsHaltAt();

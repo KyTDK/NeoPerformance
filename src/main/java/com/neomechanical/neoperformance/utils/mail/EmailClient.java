@@ -1,6 +1,8 @@
 package com.neomechanical.neoperformance.utils.mail;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import org.bukkit.Bukkit;
 
 import javax.activation.DataHandler;
 import javax.mail.*;
@@ -21,22 +23,24 @@ public class EmailClient implements PerformanceConfigurationSettings {
     private final int outgoingPort = getMailData().getOutgoingPort();
 
     public void sendAsHtml(String title, String html) {
-        Session session = createSession();
-        //create message using session
-        Message message = new MimeMessage(session);
-        for (String s : recipients) {
-            try {
-                prepareEmailMessage(message, s, title, html);
-            } catch (MessagingException | IOException e) {
-                throw new RuntimeException(e);
+        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
+            Session session = createSession();
+            //create message using session
+            Message message = new MimeMessage(session);
+            for (String s : recipients) {
+                try {
+                    prepareEmailMessage(message, s, title, html);
+                } catch (MessagingException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+                //sending message
+                try {
+                    Transport.send(message);
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            //sending message
-            try {
-                Transport.send(message);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        });
     }
 
     private void prepareEmailMessage(Message message, String to, String title, String html)
