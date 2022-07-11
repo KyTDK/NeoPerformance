@@ -31,7 +31,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
-        if (isServerHalted(e.getPlayer()) && getTweakData().getHaltTeleportation()) {
+        if (isServerHalted(e.getPlayer()) && getHaltData().getHaltTeleportation()) {
             e.setCancelled(true);
             if (!cachedData.cachedTeleport.containsKey(e.getPlayer())) {
                 cachedData.cachedTeleport.put(e.getPlayer(), e.getTo());
@@ -56,7 +56,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltExplosions()) {
+        if (isServerHalted(null) && getHaltData().getHaltExplosions()) {
             List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
             //remove all entities that explode
             e.setCancelled(true);
@@ -70,7 +70,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltRedstone()) {
+        if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
             if (!cachedData.cachedRedstoneActivity.containsKey(e.getBlock())) {
                 cachedData.cachedRedstoneActivity.put(e.getBlock(), e.getNewCurrent());
             }
@@ -80,7 +80,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onChunkLoad(ChunkLoadEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltChunkLoading()) {
+        if (isServerHalted(null) && getHaltData().getHaltChunkLoading()) {
             if (e.getChunk().isLoaded()) {
                 e.getChunk().unload();
             }
@@ -89,21 +89,21 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltMobSpawning()) {
+        if (isServerHalted(null) && getHaltData().getHaltMobSpawning()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onItemMove(InventoryMoveItemEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltInventoryMovement()) {
+        if (isServerHalted(null) && getHaltData().getHaltInventoryMovement()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltCommandBlock()) {
+        if (isServerHalted(null) && getHaltData().getHaltCommandBlock()) {
             if (e.getSender().getName().equals("CONSOLE")) {
                 return;
             }
@@ -113,7 +113,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (isServerHalted(e.getPlayer()) && (getTweakData().getHaltMobSpawning() || getTweakData().getHaltItemDrops())) {
+        if (isServerHalted(e.getPlayer()) && (getHaltData().getHaltMobSpawning() || getHaltData().getHaltItemDrops())) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
@@ -122,7 +122,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (isServerHalted(e.getPlayer()) && (getTweakData().getHaltMobSpawning() || getTweakData().getHaltBlockBreaking())) {
+        if (isServerHalted(e.getPlayer()) && (getHaltData().getHaltMobSpawning() || getHaltData().getHaltBlockBreaking())) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
@@ -131,14 +131,14 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltProjectiles()) {
+        if (isServerHalted(null) && getHaltData().getHaltProjectiles()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onProjectile(ProjectileLaunchEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltProjectiles()) {
+        if (isServerHalted(null) && getHaltData().getHaltProjectiles()) {
             e.setCancelled(true);
             if (e.getEntity().getShooter() instanceof Creature) {
                 List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
@@ -154,21 +154,21 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onEntityBread(EntityBreedEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltEntityBreeding()) {
+        if (isServerHalted(null) && getHaltData().getHaltEntityBreeding()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityInteract(EntityInteractEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltEntityInteractions()) {
+        if (isServerHalted(null) && getHaltData().getHaltEntityInteractions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityTarget(EntityTargetEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltEntityTargeting()) {
+        if (isServerHalted(null) && getHaltData().getHaltEntityTargeting()) {
             e.setCancelled(true);
             List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
             if (entities.size() >= 10) {
@@ -179,14 +179,14 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltVehicleCollisions()) {
+        if (isServerHalted(null) && getHaltData().getHaltVehicleCollisions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        if (isServerHalted(null) && getTweakData().getHaltBlockPhysics()) {
+        if (isServerHalted(null) && getHaltData().getHaltBlockPhysics()) {
             e.setCancelled(true);
         }
     }
@@ -195,7 +195,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         if (e.getPlayer().hasPermission("neoperformance.bypass")) {
             return;
         }
-        if (isServerHalted(null) && !getTweakData().getAllowJoinWhileHalted()) {
+        if (isServerHalted(null) && !getHaltData().getAllowJoinWhileHalted()) {
             //stop player from joining because lag might be due to too many players
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, plugin.getLanguageManager().getString("halted.onJoin", null));
         }

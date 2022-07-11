@@ -14,11 +14,11 @@ import java.util.Date;
 import java.util.Properties;
 
 public class EmailClient implements PerformanceConfigurationSettings {
-    private final String outgoingHost = getTweakData().getOutgoingHost();
-    private final String senderEmail = getTweakData().getSenderEmail();
-    private final String[] recipients = getTweakData().getRecipients();
-    private final String senderPassword = getTweakData().getSenderPassword();
-    private final int outgoingPort = getTweakData().getOutgoingPort();
+    private final String outgoingHost = getMailData().getOutgoingHost();
+    private final String senderEmail = getMailData().getSenderEmail();
+    private final String[] recipients = getMailData().getRecipients();
+    private final String senderPassword = getMailData().getSenderPassword();
+    private final int outgoingPort = getMailData().getOutgoingPort();
 
     public void sendAsHtml(String title, String html) {
         Session session = createSession();

@@ -26,10 +26,10 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
             @Override
             public void run() {
                 if (isServerHalted(null)) {
-                    manualHalt[0] = tweakDataManager.isManualHalt();
+                    manualHalt[0] = DATA_MANAGER.isManualHalt();
                     if (!halted[0] && !manualHalt[0]) {
                         haltStartTime[0] = System.currentTimeMillis();
-                        if (getTweakData().getUseMailServer()) {
+                        if (getMailData().getUseMailServer()) {
                             EmailClient emailClient = new EmailClient();
                             emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
                                     plugin.getLanguageManager().getString("email_notifications.body", null));

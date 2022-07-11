@@ -1,14 +1,14 @@
 package com.neomechanical.neoperformance.performanceOptimiser.utils;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.Lag.getRecentTpsRefl;
 
 public interface Tps {
-    TweakDataManager tweakDataManager = NeoPerformance.getTweakDataManager();
+    DataManager DATA_MANAGER = NeoPerformance.getTweakDataManager();
 
     default double getTPS() {
 
@@ -21,19 +21,19 @@ public interface Tps {
 
     default boolean isServerHalted(@Nullable Player player) {
         double tps = getTPS();
-        int haltAt = tweakDataManager.getTweakData().getTpsHaltAt();
+        int haltAt = DATA_MANAGER.getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
             return false;
         }
         if (player != null) {
-            if (tweakDataManager.isBypassed(player)) {
+            if (DATA_MANAGER.isBypassed(player)) {
                 return false;
             }
         }
         if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.
             return false;
         }
-        if (tweakDataManager.isManualHalt()) {
+        if (DATA_MANAGER.isManualHalt()) {
             return true;
         }
         return getTPS() <= haltAt;

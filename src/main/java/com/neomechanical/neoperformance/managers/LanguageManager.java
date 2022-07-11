@@ -131,7 +131,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
     public final void loadLanguageConfig() {
         loadMissingDefaultLanguageFiles();
 
-        final String languageCode = getTweakData().getLanguage();
+        final String languageCode = getVisualData().getLanguage();
         /*
          * If the generalConfigFile Object doesn't exist yet, this will load the file
          * or create a new general.yml file if it does not exist yet and load it into the
@@ -153,7 +153,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
 
             }
 
-            languageConfigFile = new File(languageFolder, getTweakData().getLanguage() + ".yml");
+            languageConfigFile = new File(languageFolder, getVisualData().getLanguage() + ".yml");
             try {
                 ConfigUpdater.update(main, "translations/" + languageCode + ".yml", languageConfigFile, List.of(""));
             } catch (IOException e) {
@@ -166,12 +166,12 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
                     //Try to create the language.yml config file, and throw an error if it fails.
 
                     if (!languageConfigFile.createNewFile()) {
-                        Logger.warn("There was an error creating the " + getTweakData().getLanguage() + ".yml language file.");
+                        Logger.warn("There was an error creating the " + getVisualData().getLanguage() + ".yml language file.");
                         return;
 
                     }
                 } catch (IOException ioException) {
-                    Logger.warn("There was an error creating the " + getTweakData().getLanguage() + ".yml language file.");
+                    Logger.warn("There was an error creating the " + getVisualData().getLanguage() + ".yml language file.");
                     return;
                 }
             }

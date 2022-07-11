@@ -1,8 +1,17 @@
+/*
+ * NeoPerformance
+ * Copyright (C) 2022 KyTDK
+ *
+ * This program is exclusive software: you can redistribute it as long as you do not modify any of the files or profit from it.
+ *
+ *
+ */
+
 package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.LanguageManager;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakDataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.registerOptimiserEvents;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
@@ -18,7 +27,7 @@ public final class NeoPerformance extends JavaPlugin {
     private static NeoPerformance instance;
     private static LanguageManager languageManager;
     private static BukkitAudiences adventure;
-    private static TweakDataManager tweakDataManager;
+    private static DataManager dataManager;
     private Metrics metrics;
 
     public static @NonNull BukkitAudiences adventure() {
@@ -32,12 +41,12 @@ public final class NeoPerformance extends JavaPlugin {
         return instance;
     }
 
-    public static TweakDataManager getTweakDataManager() {
-        return tweakDataManager;
+    public static DataManager getTweakDataManager() {
+        return dataManager;
     }
 
     public static void reloadTweakDataManager() {
-        tweakDataManager.loadTweakSettings();
+        dataManager.loadTweakSettings();
         NeoPerformance.getInstance().getLanguageManager().loadLanguageConfig();
     }
 
@@ -56,8 +65,8 @@ public final class NeoPerformance extends JavaPlugin {
         ////////////////////////////////////////////////////////////////////////////////////////
         //set instances
         // Initialize an audiences instance for the plugin
-        tweakDataManager = new TweakDataManager();
-        tweakDataManager.loadTweakSettings();
+        dataManager = new DataManager();
+        dataManager.loadTweakSettings();
         adventure = BukkitAudiences.create(this);
         languageManager = new LanguageManager(this);
         //Check for updates
@@ -68,7 +77,7 @@ public final class NeoPerformance extends JavaPlugin {
         });
         // Plugin startup logic
         setupBStats();
-        Logger.info("NeoPerformance is enabled and using bStats!");
+        Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
         registerOptimiserEvents.register(this);
         //Commands
         RegisterCommands.register(this);

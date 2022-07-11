@@ -44,7 +44,7 @@ public class BypassCommand extends SubCommand implements Tps {
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNotPlayer", null));
                 return;
             }
-            if (tweakDataManager.toggleBypass(player)) {
+            if (DATA_MANAGER.toggleBypass(player)) {
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassing", null));
             } else {
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassing", null));
@@ -56,7 +56,7 @@ public class BypassCommand extends SubCommand implements Tps {
             }
             Player player1 = Bukkit.getPlayer(args[1]);
             if (player1 != null) {
-                if (tweakDataManager.toggleBypass(player1)) {
+                if (DATA_MANAGER.toggleBypass(player1)) {
                     MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassingPlayer", player1));
                 } else {
                     MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassingPlayer", player1));
