@@ -33,7 +33,8 @@ public class PerformanceTweaksConfiguration {
         finishSection();
         //Set tweak data
         getDataSet("performance_tweak_settings");
-        dataManager.setTweakData(new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap")));
+        dataManager.setTweakData(new TweakData(nums.get("tpsHaltAt"), booleans.get("notifyAdmin"), booleans.get("broadcastHalt"), nums.get("mobCap"),
+                nums.get("explosionCap")));
         finishSection();
         //Set visual data
         getDataSet("visual");

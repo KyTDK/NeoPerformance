@@ -11,4 +11,5 @@ public class TweakData {
     private @NotNull Boolean notifyAdmin;//true is the default value.
     private @NotNull Boolean broadcastHalt;
     private @NotNull Integer mobCap;
+    private @NotNull Integer explosionCap;
 }

@@ -1,13 +1,11 @@
 package com.neomechanical.neoperformance.performanceOptimiser.lagPrevention;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
-import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.metadata.MetadataValue;
 
@@ -19,15 +17,9 @@ public class LagPrevention implements Listener, PerformanceConfigurationSettings
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
-        int tntHalt = 18;
-        list.removeIf(entity -> entity.getType() != e.getEntity().getType());
-        if (list.size() > tntHalt) {
+        //canExplode handles removing entities from the list so that the explosion doesn't happen and lag is prevented
+        if (!canExplode(e)) {
             e.setCancelled(true);
-            //remove all in list
-            for (Entity entity : list) {
-                entity.remove();
-            }
         }
     }
     public boolean isNpc(Entity b) {
@@ -37,36 +29,20 @@ public class LagPrevention implements Listener, PerformanceConfigurationSettings
         }
         return false;
     }
+
+    //Unnecessary amount of mobs in area will be capped.
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (isNpc(e.getEntity())) {
-            return;
-        }
         if (!canMobSpawn(e)) {
+            //Making sure it's not an NPC ensures that nothing is broken by the lag prevention
+            if (isNpc(e.getEntity())) {
+                return;
+            }
             e.setCancelled(true);
         }
     }
-    @EventHandler()
-    public void onTeleport(PlayerTeleportEvent e) {
-        if (isNpc(e.getPlayer())) {
-            return;
-        }
-        if (!e.getCause().equals(PlayerTeleportEvent.TeleportCause.COMMAND)) {
-            return;
-        }
-        if (lastTeleport.containsKey(e.getPlayer().getName())) {
-            long last = lastTeleport.get(e.getPlayer().getName());
-            if (System.currentTimeMillis() - last < 10) {
-                e.getPlayer().sendMessage(MessageUtil.color("&cYou can't teleport too fast!"));
-                e.setCancelled(true);
-            } else {
-                lastTeleport.put(e.getPlayer().getName(), System.currentTimeMillis());
-            }
-            return;
-        }
-        lastTeleport.put(e.getPlayer().getName(), System.currentTimeMillis());
-    }
 
+    //Prevents minecart powered lagging machines
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
         List<Entity> list = e.getVehicle().getNearbyEntities(10, 10, 10);
