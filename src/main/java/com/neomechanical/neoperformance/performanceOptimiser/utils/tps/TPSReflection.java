@@ -1,11 +1,11 @@
-package com.neomechanical.neoperformance.performanceOptimiser.utils;
+package com.neomechanical.neoperformance.performanceOptimiser.utils.tps;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 
 import java.lang.reflect.Field;
 
-public class Lag {
+public class TPSReflection {
     private static Object minecraftServer;
     private static Field recentTps;
 
@@ -28,4 +28,5 @@ public class Lag {
         }
 
     }
+
 }
