@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.smartClear.SmartScan;
+import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -121,14 +122,15 @@ public class SmartClearCommand extends SubCommand {
         if (toBeConfirmed.remove(playerName)) {
             return true;
         }
-        toBeConfirmed.add(playerName);
         new BukkitRunnable() {
             @Override
             public void run() {
-                SmartClearCommand.this.toBeConfirmed.remove(playerName);
-                Bukkit.broadcastMessage("" + SmartClearCommand.this.toBeConfirmed);
+                if (!toBeConfirmed.remove(playerName)) {
+                    Logger.warn("An error occured for SmartClear");
+                }
             }
         }.runTaskLater(NeoPerformance.getInstance(), 20L * 10);
+        toBeConfirmed.add(playerName);
         return false;
     }
 }

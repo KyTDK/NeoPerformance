@@ -40,6 +40,7 @@ public class HelpCommand extends SubCommand{
     public void perform(CommandSender player, String[] args) {
         MessageUtil messageUtil = new MessageUtil();
         messageUtil.neoMessage();
+        //TODO PAGINATION
         for (int i = 0; i < commandManager.getSubcommands().size(); i++) {
             messageUtil.addMessage("  &7&l" + commandManager.getSubcommands().get(i).getSyntax() + " - &r&7" + commandManager.getSubcommands().get(i).getDescription());
         }
