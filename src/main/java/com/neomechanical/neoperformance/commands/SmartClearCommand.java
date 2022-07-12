@@ -77,12 +77,15 @@ public class SmartClearCommand extends SubCommand {
             }
             Entity entity = entityList.get(0);
             Location location = entity.getLocation();
+            if (location.getWorld()==null) {
+                return;
+            }
             String command = "/minecraft:execute in " + location.getWorld().getKey()
                     + " run tp " + playerAsPlayer.getName() + " " + location.getX()
                     + " " + location.getY() + " " + location.getZ();
             final TextComponent textComponent = Component.text()
-                    .content("Found cluster of entities with size: " + entityList.size()).color(color)
-                    .append(Component.text(" Click to teleport"))
+                    .content("Found cluster of entities with size " + entityList.size()).color(color)
+                    .append(Component.text(" - Click to teleport"))
                     .clickEvent(
                             ClickEvent.runCommand(command))
                     .hoverEvent(
@@ -91,6 +94,7 @@ public class SmartClearCommand extends SubCommand {
                     )
                     .build();
             if (isConfirmed(playerAsPlayer.getName())) {
+                //Remove
                 for (Entity e : entityList) {
                     if (e instanceof Player) {
                         continue;
@@ -114,8 +118,7 @@ public class SmartClearCommand extends SubCommand {
     }
 
     private boolean isConfirmed(String playerName) {
-        if (toBeConfirmed.contains(playerName)) {
-            toBeConfirmed.remove(playerName);
+        if (toBeConfirmed.remove(playerName)) {
             return true;
         }
         toBeConfirmed.add(playerName);
@@ -125,7 +128,7 @@ public class SmartClearCommand extends SubCommand {
                 SmartClearCommand.this.toBeConfirmed.remove(playerName);
                 Bukkit.broadcastMessage("" + SmartClearCommand.this.toBeConfirmed);
             }
-        }.runTaskLater(NeoPerformance.getInstance(), 20 * 10L);
+        }.runTaskLater(NeoPerformance.getInstance(), 20L * 10);
         return false;
     }
 }
