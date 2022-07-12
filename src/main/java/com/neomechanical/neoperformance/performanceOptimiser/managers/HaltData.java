@@ -23,4 +23,5 @@ public class HaltData {
     private @NotNull Boolean haltEntityTargeting;
     private @NotNull Boolean haltVehicleCollisions;
     private @NotNull Boolean haltBlockPhysics;
+    private @NotNull Integer haltTimeout;
 }

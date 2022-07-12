@@ -37,6 +37,8 @@ halt_settings:
   haltEntityTargeting: true
   haltVehicleCollisions: true
   haltBlockPhysics: true
+  # Restart server if the server is halted for more than this amount of time in seconds (s) (use -1 to disable)
+  haltTimeout: 600
 
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #

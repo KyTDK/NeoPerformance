@@ -56,7 +56,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         }
                     }
                     halted[0] = true;
-                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000 * 60 * 10)) {
+                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * getHaltData().getHaltTimeout())) {
                         //after 10 minutes of the server being halted, reboot the server
                         NeoPerformance.getInstance().getServer().shutdown();
                     }

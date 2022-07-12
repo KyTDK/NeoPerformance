@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.utils;
 import com.neomechanical.neoperformance.NeoPerformance;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
@@ -52,6 +53,11 @@ public final class MessageUtil {
     }
 
     public static void sendMM(CommandSender sendTo, Component parsed) {
+        Audience player = NeoPerformance.adventure().sender(sendTo);
+        player.sendMessage(parsed);
+    }
+
+    public static void sendMM(CommandSender sendTo, TextComponent parsed) {
         Audience player = NeoPerformance.adventure().sender(sendTo);
         player.sendMessage(parsed);
     }

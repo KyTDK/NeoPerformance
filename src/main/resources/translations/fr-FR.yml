@@ -29,6 +29,7 @@ halt:
   toggleHaltOff: '<green><bold>Le serveur a été repris'
 reload:
   onReload: '<green><bold>Fichier de configuration rechargé'
+smartClear
 #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'

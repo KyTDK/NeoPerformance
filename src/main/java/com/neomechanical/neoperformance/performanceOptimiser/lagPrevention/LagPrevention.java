@@ -9,11 +9,9 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.metadata.MetadataValue;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class LagPrevention implements Listener, PerformanceConfigurationSettings {
-    private final HashMap<String, Long> lastTeleport = new HashMap<>();
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {

@@ -23,6 +23,7 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
         subcommands.add(new ReloadCommand());
         subcommands.add(new BypassCommand());
         subcommands.add(new ChunksCommand());
+        subcommands.add(new SmartClearCommand());
     }
 
     public void addCommand(SubCommand subCommand) {
