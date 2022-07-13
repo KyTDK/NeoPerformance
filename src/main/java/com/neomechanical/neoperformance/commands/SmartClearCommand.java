@@ -206,6 +206,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                     e.remove();
                 }
                 MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.cleared", null));
+                return;
             }
             for (int i = 0; i < toClear; i++) {
                 //No clusters, show error message and return
