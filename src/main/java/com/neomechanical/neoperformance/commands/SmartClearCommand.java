@@ -77,23 +77,29 @@ public class SmartClearCommand extends SubCommand {
         } else {
             entities = SmartScan.scan(10, world);
         }
-        if (entities.isEmpty()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
-            return;
+        int toClear = 1;
+        if (clearAll) {
+            toClear = entities.size();
         }
-        List<Entity> entityList = entities.get(0);
-        NamedTextColor color;
-        if (entityList.size() > 100) {
-            color = NamedTextColor.RED;
-        } else if (entityList.size() > 50) {
-            color = NamedTextColor.YELLOW;
-        } else {
-            color = NamedTextColor.GREEN;
-        }
-        Entity entity = entityList.get(0);
-        Location location = entity.getLocation();
-        if (location.getWorld() == null) {
-            return;
+        for (int i = 0; i < toClear; i++) {
+            if (entities.isEmpty()) {
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+                return;
+            }
+            List<Entity> entityList = entities.get(i);
+            NamedTextColor color;
+            if (entityList.size() > 100) {
+                color = NamedTextColor.RED;
+            } else if (entityList.size() > 50) {
+                color = NamedTextColor.YELLOW;
+            } else {
+                color = NamedTextColor.GREEN;
+            }
+            Entity entity = entityList.get(0);
+            Location location = entity.getLocation();
+            if (location.getWorld() == null) {
+                return;
+            }
         }
         String command = "/minecraft:execute in " + location.getWorld().getKey()
                 + " run tp " + playerAsPlayer.getName() + " " + location.getX()
