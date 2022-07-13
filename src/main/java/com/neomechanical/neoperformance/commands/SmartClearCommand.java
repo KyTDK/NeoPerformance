@@ -53,6 +53,7 @@ public class SmartClearCommand extends SubCommand {
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
+        boolean clearAll = false;
         World world = null;
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
@@ -61,55 +62,65 @@ public class SmartClearCommand extends SubCommand {
                 return;
             }
         }
+        for (String arg : args) {
+            switch (arg) {
+                case "-all":
+                    clearAll = true;
+                case "-force":
+                    toBeConfirmed.add(playerAsPlayer.getName());
+            }
+        }
+        List<List<Entity>> entities;
         if (world == null) {
-            List<List<Entity>> entities = SmartScan.scan(10);
-            if (entities.isEmpty()) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
-                return;
-            }
-            List<Entity> entityList = entities.get(0);
-            NamedTextColor color;
-            if (entityList.size() > 100) {
-                color = NamedTextColor.RED;
-            } else if (entityList.size() > 50) {
-                color = NamedTextColor.YELLOW;
-            } else {
-                color = NamedTextColor.GREEN;
-            }
-            Entity entity = entityList.get(0);
-            Location location = entity.getLocation();
-            if (location.getWorld()==null) {
-                return;
-            }
-            String command = "/minecraft:execute in " + location.getWorld().getKey()
-                    + " run tp " + playerAsPlayer.getName() + " " + location.getX()
-                    + " " + location.getY() + " " + location.getZ();
-            final TextComponent textComponent = Component.text()
-                    .content("Found cluster of entities with size " + entityList.size()).color(color)
-                    .append(Component.text(" - Click to teleport"))
-                    .clickEvent(
-                            ClickEvent.runCommand(command))
-                    .hoverEvent(
-                            HoverEvent.showText(Component.text("Click to teleport")
-                            )
-                    )
-                    .build();
-            if (isConfirmed(playerAsPlayer.getName())) {
-                //Remove
-                for (Entity e : entityList) {
-                    if (e instanceof Player) {
-                        continue;
-                    }
-                    e.remove();
-                }
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
-            } else {
-                MessageUtil.sendMM(player, textComponent);
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
-                toBeConfirmed.add(playerAsPlayer.getName());
-            }
+            entities = SmartScan.scan(10);
+
         } else {
-            SmartScan.scan(10, world);
+            entities = SmartScan.scan(10, world);
+        }
+        if (entities.isEmpty()) {
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            return;
+        }
+        List<Entity> entityList = entities.get(0);
+        NamedTextColor color;
+        if (entityList.size() > 100) {
+            color = NamedTextColor.RED;
+        } else if (entityList.size() > 50) {
+            color = NamedTextColor.YELLOW;
+        } else {
+            color = NamedTextColor.GREEN;
+        }
+        Entity entity = entityList.get(0);
+        Location location = entity.getLocation();
+        if (location.getWorld() == null) {
+            return;
+        }
+        String command = "/minecraft:execute in " + location.getWorld().getKey()
+                + " run tp " + playerAsPlayer.getName() + " " + location.getX()
+                + " " + location.getY() + " " + location.getZ();
+        final TextComponent textComponent = Component.text()
+                .content("Found cluster of entities with size " + entityList.size()).color(color)
+                .append(Component.text(" - Click to teleport"))
+                .clickEvent(
+                        ClickEvent.runCommand(command))
+                .hoverEvent(
+                        HoverEvent.showText(Component.text("Click to teleport")
+                        )
+                )
+                .build();
+        if (isConfirmed(playerAsPlayer.getName())) {
+            //Remove
+            for (Entity e : entityList) {
+                if (e instanceof Player) {
+                    continue;
+                }
+                e.remove();
+            }
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
+        } else {
+            MessageUtil.sendMM(player, textComponent);
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+            toBeConfirmed.add(playerAsPlayer.getName());
         }
     }
 
