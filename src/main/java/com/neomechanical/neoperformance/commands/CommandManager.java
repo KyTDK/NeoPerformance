@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.commands.smartClear.SmartClearCommand;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.command.Command;
