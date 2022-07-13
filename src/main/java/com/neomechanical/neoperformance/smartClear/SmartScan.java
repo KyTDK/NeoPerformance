@@ -11,7 +11,7 @@ import java.util.*;
 
 public class SmartScan implements PerformanceConfigurationSettings {
 
-    public static List<List<Entity>> scan(int totalChunksReturn, CommandData commandData, World... worlds) {
+    public static List<List<Entity>> scan(int totalChunksReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
         for (World world : Bukkit.getWorlds()) {
@@ -27,7 +27,10 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 continue;
             }
             List<Entity> newCluster = entity.getNearbyEntities(4, 4, 4);
-            if (newCluster.size() >= commandData.getDefaultClusterSize()) {
+            if (clusterSize == 0) {
+                clusterSize = commandData.getDefaultClusterSize();
+            }
+            if (newCluster.size() >= clusterSize) {
                 boolean isNewCluster = true;
                 for (Entity e : newCluster) {
                     if (previousClusters.contains(e)) {
