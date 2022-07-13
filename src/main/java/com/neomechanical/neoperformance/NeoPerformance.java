@@ -41,7 +41,7 @@ public final class NeoPerformance extends JavaPlugin {
         return instance;
     }
 
-    public static DataManager getTweakDataManager() {
+    public static DataManager getDataManager() {
         return dataManager;
     }
 
@@ -87,7 +87,7 @@ public final class NeoPerformance extends JavaPlugin {
         int pluginId = 15711;
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> NeoPerformance.getInstance().getLanguageManager().getLanguage()));
-        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getTweakDataManager().getTweakData().getTpsHaltAt())));
+        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
     }
 
     @Override

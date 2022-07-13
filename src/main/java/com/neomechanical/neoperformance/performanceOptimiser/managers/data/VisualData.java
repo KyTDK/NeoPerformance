@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performanceOptimiser.managers;
+package com.neomechanical.neoperformance.performanceOptimiser.managers.data;
 
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;

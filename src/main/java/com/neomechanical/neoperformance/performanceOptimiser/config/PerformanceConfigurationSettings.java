@@ -1,10 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.config;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.HaltData;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.MailData;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.TweakData;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.VisualData;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.data.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
@@ -13,19 +10,23 @@ import java.util.List;
 
 public interface PerformanceConfigurationSettings {
     default TweakData getTweakData() {
-        return NeoPerformance.getTweakDataManager().getTweakData();
+        return NeoPerformance.getDataManager().getTweakData();
     }
 
     default HaltData getHaltData() {
-        return NeoPerformance.getTweakDataManager().getHaltData();
+        return NeoPerformance.getDataManager().getHaltData();
     }
 
     default MailData getMailData() {
-        return NeoPerformance.getTweakDataManager().getMailData();
+        return NeoPerformance.getDataManager().getMailData();
     }
 
     default VisualData getVisualData() {
-        return NeoPerformance.getTweakDataManager().getVisualData();
+        return NeoPerformance.getDataManager().getVisualData();
+    }
+
+    default CommandData getCommandData() {
+        return NeoPerformance.getDataManager().getCommandData();
     }
 
     default boolean canMobSpawn(EntitySpawnEvent e) {

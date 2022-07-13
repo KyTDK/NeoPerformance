@@ -40,6 +40,11 @@ halt_settings:
   # Restart server if the server is halted for more than this amount of time in seconds (s) (use -1 to disable)
   haltTimeout: 600
 
+commands:
+  #SmartClear
+  #Define cluster size for smartClear, using anything below 10 can be dangerous and
+  #too high of a value might not do anything
+  defaultClusterSize: 15
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #
 ###########################################################################

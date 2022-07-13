@@ -1,6 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.config;
 
-import com.neomechanical.neoperformance.performanceOptimiser.managers.*;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.data.*;
 import com.neomechanical.neoperformance.utils.Logger;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -43,7 +44,10 @@ public class PerformanceTweaksConfiguration {
         //Set mail data
         getDataSet("email_notifications");
         dataManager.setMailData(new MailData(booleans.get("use_mail_server"), strings.get("mail_server_host"), nums.get("mail_server_port"),
-                strings.get("mail_server_username"), strings.get("mail_server_password"), stringsArrays.get("recipients")));
+                strings.get("mail_se    rver_username"), strings.get("mail_server_password"), stringsArrays.get("recipients")));
+        finishSection();
+        getDataSet("commands");
+        dataManager.setCommandData(new CommandData(nums.get("defaultClusterSize")));
         finishSection();
     }
 

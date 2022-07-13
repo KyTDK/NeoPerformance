@@ -1,6 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceTweaksConfiguration;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.data.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,6 +15,7 @@ public class DataManager {
     private HaltData haltData;
     private VisualData visualData;
     private MailData mailData;
+    private CommandData commandData;
 
     public DataManager() {
     }
@@ -22,6 +24,7 @@ public class DataManager {
         new PerformanceTweaksConfiguration().loadTweakSettings(this);
     }
 
+    //Tweak data
     public TweakData getTweakData() {
         return this.tweakData;
     }
@@ -31,6 +34,7 @@ public class DataManager {
         return this.tweakData;
     }
 
+    //Halt Data
     public HaltData getHaltData() {
         return this.haltData;
     }
@@ -40,6 +44,7 @@ public class DataManager {
         return this.haltData;
     }
 
+    //Mail data
     public MailData getMailData() {
         return this.mailData;
     }
@@ -49,6 +54,7 @@ public class DataManager {
         return this.mailData;
     }
 
+    //Visual data
     public VisualData getVisualData() {
         return this.visualData;
     }
@@ -56,6 +62,15 @@ public class DataManager {
     public VisualData setVisualData(VisualData visualData) {
         this.visualData = visualData;
         return this.visualData;
+    }
+
+    //Commands
+    public CommandData getCommandData() {
+        return this.commandData;
+    }
+
+    public void setCommandData(CommandData commandData) {
+        this.commandData = commandData;
     }
 
     public boolean isManualHalt() {

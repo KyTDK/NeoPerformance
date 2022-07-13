@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public interface Tps {
-    DataManager DATA_MANAGER = NeoPerformance.getTweakDataManager();
+    DataManager DATA_MANAGER = NeoPerformance.getDataManager();
     default double getTPS() {
         return HeartBeat.getUpdatedTPS();
     }
@@ -56,11 +56,11 @@ public interface Tps {
     }
 
     default int getHaltTps() {
-        return NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt();
+        return NeoPerformance.getDataManager().getTweakData().getTpsHaltAt();
     }
 
     default String getFancyHaltTps() {
-        int haltAt = NeoPerformance.getTweakDataManager().getTweakData().getTpsHaltAt();
+        int haltAt = NeoPerformance.getDataManager().getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
             return "<red><bold>N/A";
         } else {
