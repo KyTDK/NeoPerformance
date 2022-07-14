@@ -121,7 +121,9 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         }
 
         public void force() {
-            clusterLogic();
+            if (!toBeConfirmed.containsKey(playerAsPlayer)) {
+                clusterLogic();
+            }
         }
 
         public void size(int clusterSize) {
@@ -211,7 +213,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 Entity entity = entityList.get(0);
                 Location location = entity.getLocation();
                 if (location.getWorld() == null) {
-                    return;
+                    continue;
                 }
                 //Command to review cluster
                 String command = "/minecraft:execute in " + location.getWorld().getKey()
