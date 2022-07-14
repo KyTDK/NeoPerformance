@@ -8,14 +8,14 @@ public class Pagination {
      * returns a view (not a new list) of the sourceList for the
      * range based on page and pageSize
      *
-     * @param sourceList
+     * @param sourceList The list that is being paginated
      * @param page,      page number should start from 1
-     * @param pageSize
+     * @param pageSize   The amount of elements to put on a page
      * @return custom error can be given instead of returning emptyList
      */
     public static <T> List<T> getPage(List<T> sourceList, int page, int pageSize) {
         if (pageSize <= 0 || page <= 0) {
-            throw new IllegalArgumentException("invalid page size: " + pageSize);
+            return null;
         }
 
         int fromIndex = (page - 1) * pageSize;

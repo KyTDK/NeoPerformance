@@ -43,9 +43,8 @@ public class HelpCommand extends SubCommand{
     @Override
     public void perform(CommandSender player, String[] args) {
         MessageUtil messageUtil = new MessageUtil();
-        messageUtil.neoMessage();
-        //TODO PAGINATION
-        int page = 0;
+        messageUtil.neoComponentMessage();
+        int page = 1;
         if (args.length == 2) {
             if (Integer.getInteger(args[1]) == null) {
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
@@ -53,11 +52,15 @@ public class HelpCommand extends SubCommand{
             }
             page = Integer.getInteger(args[1]);
         }
-        List<String> page = Pagination.getPage(commandManager.getSubcommands(), page, 10)
-        for (int i = 0; i < commandManager.getSubcommands().size(); i++) {
-            messageUtil.addMessage("  &7&l" + commandManager.getSubcommands().get(i).getSyntax() + " - &r&7" + commandManager.getSubcommands().get(i).getDescription());
+        List<SubCommand> pageList = Pagination.getPage(commandManager.getSubcommands(), page, 10);
+        if (pageList == null) {
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            return;
         }
-        messageUtil.sendMessage(player);
+        for (SubCommand subCommand : pageList) {
+            messageUtil.addComponent("  <gray><bold>" + subCommand.getSyntax() + "</bold> - " + subCommand.getDescription());
+        }
+        messageUtil.sendNeoComponentMessage(player);
     }
 
     @Override
