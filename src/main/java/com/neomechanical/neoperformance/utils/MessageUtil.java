@@ -57,8 +57,18 @@ public final class MessageUtil {
         player.sendMessage(parsed);
     }
 
+    public static void sendMM(Player sendTo, Component parsed) {
+        Audience player = NeoPerformance.adventure().player(sendTo);
+        player.sendMessage(parsed);
+    }
+
     public static void sendMM(CommandSender sendTo, TextComponent parsed) {
         Audience player = NeoPerformance.adventure().sender(sendTo);
+        player.sendMessage(parsed);
+    }
+
+    public static void sendMM(Player sendTo, TextComponent parsed) {
+        Audience player = NeoPerformance.adventure().player(sendTo);
         player.sendMessage(parsed);
     }
 

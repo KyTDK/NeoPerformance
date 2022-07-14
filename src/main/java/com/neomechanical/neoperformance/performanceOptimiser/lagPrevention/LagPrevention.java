@@ -1,13 +1,13 @@
 package com.neomechanical.neoperformance.performanceOptimiser.lagPrevention;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.utils.NPC;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
-import org.bukkit.metadata.MetadataValue;
 
 import java.util.List;
 
@@ -20,20 +20,13 @@ public class LagPrevention implements Listener, PerformanceConfigurationSettings
             e.setCancelled(true);
         }
     }
-    public boolean isNpc(Entity b) {
-        List<MetadataValue> metaDataValues = b.getMetadata("NPC");
-        for (MetadataValue value : metaDataValues) {
-            return value.asBoolean();
-        }
-        return false;
-    }
 
     //Unnecessary amount of mobs in area will be capped.
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
         if (!canMobSpawn(e)) {
             //Making sure it's not an NPC ensures that nothing is broken by the lag prevention
-            if (isNpc(e.getEntity())) {
+            if (NPC.isNpc(e.getEntity())) {
                 return;
             }
             e.setCancelled(true);

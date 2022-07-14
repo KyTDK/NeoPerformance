@@ -2,7 +2,7 @@ package com.neomechanical.neoperformance.smartClear;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
-import org.bukkit.Bukkit;
+import com.neomechanical.neoperformance.utils.NPC;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -14,7 +14,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
     public static List<List<Entity>> scan(int totalChunksReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
-        for (World world : Bukkit.getWorlds()) {
+        for (World world : worlds) {
             entities.addAll(world.getEntities());
         }
         Iterator<Entity> iterator = entities.iterator();
@@ -26,7 +26,15 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 iterator.remove();
                 continue;
             }
-            List<Entity> newCluster = entity.getNearbyEntities(4, 4, 4);
+            if (entity.getCustomName() != null) {
+                iterator.remove();
+                continue;
+            }
+            if (NPC.isNpc(entity)) {
+                iterator.remove();
+                continue;
+            }
+            List<Entity> newCluster = entity.getNearbyEntities(4, 2, 4);
             if (clusterSize == 0) {
                 clusterSize = commandData.getDefaultClusterSize();
             }
