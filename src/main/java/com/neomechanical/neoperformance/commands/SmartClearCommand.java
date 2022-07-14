@@ -170,8 +170,6 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 }
             }.runTaskLater(plugin, 20L * 10);
             clusterLogic();
-            MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.confirm", null));
-
         }
 
         private void clusterLogic() {
@@ -236,6 +234,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                     toBeConfirmed.put(playerAsPlayer, entityList);
                 }
             }
+            MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.confirm", null));
         }
     }
 }
