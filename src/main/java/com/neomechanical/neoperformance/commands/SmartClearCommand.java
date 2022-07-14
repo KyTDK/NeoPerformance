@@ -84,36 +84,6 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
     private static boolean isConfirmed(Player playerAsPlayer, List<Entity> entityList, boolean force) {
         if (toBeConfirmed.containsKey(playerAsPlayer) || force) {
-            NamedTextColor color;
-            //Calculate colour to represent severity of cluster
-            if (entityList.size() > 100) {
-                color = NamedTextColor.RED;
-            } else if (entityList.size() > 50) {
-                color = NamedTextColor.YELLOW;
-            } else {
-                color = NamedTextColor.GREEN;
-            }
-            //Get first entity to use for location
-            Entity entity = entityList.get(0);
-            Location location = entity.getLocation();
-            if (location.getWorld() == null) {
-                return true;
-            }
-            //Command to review cluster
-            String command = "/minecraft:execute in " + location.getWorld().getKey()
-                    + " run tp " + playerAsPlayer.getName() + " " + location.getX()
-                    + " " + location.getY() + " " + location.getZ();
-            final TextComponent textComponent = Component.text()
-                    .content("Found cluster of entities with size " + entityList.size()).color(color)
-                    .append(Component.text(" - Click to teleport"))
-                    .clickEvent(
-                            ClickEvent.runCommand(command))
-                    .hoverEvent(
-                            HoverEvent.showText(Component.text("Click to teleport")
-                            )
-                    )
-                    .build();
-            MessageUtil.sendMM(playerAsPlayer, textComponent);
             toBeConfirmed.remove(playerAsPlayer);
             return true;
         }
@@ -124,9 +94,41 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 toBeConfirmed.remove(playerAsPlayer);
             }
         }.runTaskLater(plugin, 20L * 10);
+        //Message logic and construct entity list
+        NamedTextColor color;
+        //Calculate colour to represent severity of cluster
+        if (entityList.size() > 100) {
+            color = NamedTextColor.RED;
+        } else if (entityList.size() > 50) {
+            color = NamedTextColor.YELLOW;
+        } else {
+            color = NamedTextColor.GREEN;
+        }
+        //Get first entity to use for location
+        Entity entity = entityList.get(0);
+        Location location = entity.getLocation();
+        if (location.getWorld() == null) {
+            return false;
+        }
+        //Command to review cluster
+        String command = "/minecraft:execute in " + location.getWorld().getKey()
+                + " run tp " + playerAsPlayer.getName() + " " + location.getX()
+                + " " + location.getY() + " " + location.getZ();
+        final TextComponent textComponent = Component.text()
+                .content("Found cluster of entities with size " + entityList.size()).color(color)
+                .append(Component.text(" - Click to teleport"))
+                .clickEvent(
+                        ClickEvent.runCommand(command))
+                .hoverEvent(
+                        HoverEvent.showText(Component.text("Click to teleport")
+                        )
+                )
+                .build();
+        MessageUtil.sendMM(playerAsPlayer, textComponent);
         toBeConfirmed.put(playerAsPlayer, entityList);
         MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.confirm", null));
         return false;
+
     }
 
     @Override
