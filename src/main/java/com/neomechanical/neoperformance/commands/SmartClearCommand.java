@@ -247,6 +247,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         for (World world : Bukkit.getWorlds()) {
             worldNames.add(world.getName());
         }
+        //must have space in the map, otherwise it will be suggested it before you press space.
         suggestions.put("-world", worldNames);
         return suggestions;
     }

@@ -69,21 +69,19 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
         List<String> list = new ArrayList<>();
             for (int i = 0; i < getSubcommands().size(); i++) {
                 SubCommand subCommand = getSubcommands().get(i);
-                if (args.length == 1 && sender.hasPermission(subCommand.getPermission())) {
+                if (!sender.hasPermission(subCommand.getPermission())) {
+                    return null;
+                }
+                if (args.length == 1) {
                     list.add(subCommand.getName());
                 } else if (args.length >= 2) {
-                    if (!sender.hasPermission(subCommand.getPermission())) {
-                        return null;
-                    }
                     if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
                         List<String> suggestions = getSubcommands().get(i).tabSuggestions();
                         Map<String, List<String>> mapSuggestions = getSubcommands().get(i).mapSuggestions();
-                        if (mapSuggestions != null) {
-                            List<String> listArgs = List.of(args);
-                            String currentArg = listArgs.get(listArgs.size() - 1);
-                            if (mapSuggestions.containsKey(currentArg)) {
-                                list.addAll(mapSuggestions.get(currentArg));
-                            }
+                        List<String> listArgs = List.of(args);
+                        String currentArg = listArgs.get(listArgs.size() - 2);
+                        if (mapSuggestions != null && mapSuggestions.containsKey(currentArg)) {
+                            list.addAll(mapSuggestions.get(currentArg));
                         } else if (suggestions != null) {
                             list.addAll(suggestions);
                         } else {
