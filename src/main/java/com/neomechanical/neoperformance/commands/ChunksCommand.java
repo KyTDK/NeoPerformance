@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ChunksCommand extends SubCommand {
     @Override
@@ -108,5 +109,10 @@ public class ChunksCommand extends SubCommand {
             worlds.add(world.getName());
         }
         return worlds;
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
+        return null;
     }
 }

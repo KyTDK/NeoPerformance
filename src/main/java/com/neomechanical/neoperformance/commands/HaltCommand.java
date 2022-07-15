@@ -6,6 +6,7 @@ import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
+import java.util.Map;
 
 public class HaltCommand extends SubCommand implements Tps {
     @Override
@@ -45,6 +46,11 @@ public class HaltCommand extends SubCommand implements Tps {
     }
 
     public List<String> tabSuggestions() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
         return null;
     }
 }

@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.commands;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class SubCommand {
 
@@ -21,4 +22,5 @@ public abstract class SubCommand {
 
     public abstract List<String> tabSuggestions();
 
+    public abstract Map<String, List<String>> mapSuggestions();
 }

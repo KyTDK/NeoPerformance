@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
+import java.util.Map;
 
 public class ReloadCommand extends SubCommand{
 
@@ -33,6 +34,7 @@ public class ReloadCommand extends SubCommand{
         return false;
     }
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+
     @Override
     public void perform(CommandSender player, String[] args) {
         NeoPerformance.reloadTweakDataManager();
@@ -41,6 +43,11 @@ public class ReloadCommand extends SubCommand{
 
     @Override
     public List<String> tabSuggestions() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
         return null;
     }
 }

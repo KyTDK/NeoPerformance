@@ -6,6 +6,7 @@ import com.neomechanical.neoperformance.utils.Pagination;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
+import java.util.Map;
 
 public class HelpCommand extends SubCommand{
     private final CommandManager commandManager;
@@ -65,6 +66,11 @@ public class HelpCommand extends SubCommand{
 
     @Override
     public List<String> tabSuggestions() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
         return null;
     }
 }

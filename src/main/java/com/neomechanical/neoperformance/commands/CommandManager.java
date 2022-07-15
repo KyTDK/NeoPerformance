@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class CommandManager implements CommandExecutor, TabCompleter, Tps {
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
@@ -72,10 +74,20 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                 SubCommand subCommand = getSubcommands().get(i);
                 if (args.length == 1 && sender.hasPermission(subCommand.getPermission())) {
                     list.add(subCommand.getName());
-                } else if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName()) && sender.hasPermission(subCommand.getPermission())) {
+                } else if (args.length >= 2) {
+                    if (!sender.hasPermission(subCommand.getPermission())) {
+                        return null;
+                    }
+                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
                         List<String> suggestions = getSubcommands().get(i).tabSuggestions();
-                        if (suggestions != null) {
+                        Map<String, List<String>> mapSuggestions = getSubcommands().get(i).mapSuggestions();
+                        if (mapSuggestions != null) {
+                            List<String> listArgs = List.of(args);
+                            if (mapSuggestions.keySet().containsAll(listArgs)) {
+                                int argIndex = listArgs.indexOf(listArgs.get(listArgs.size() - 1));
+                                list.addAll(mapSuggestions.get(listArgs.get(argIndex)));
+                            }
+                        } else if (suggestions != null) {
                             list.addAll(suggestions);
                         } else {
                             return null;
@@ -86,7 +98,7 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
         return list;
     }
     public void init(NeoPerformance plugin){
-        plugin.getCommand(parentCommand).setExecutor(this);
+        Objects.requireNonNull(plugin.getCommand(parentCommand)).setExecutor(this);
     }
     public ArrayList<SubCommand> getSubcommands(){
         return subcommands;

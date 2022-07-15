@@ -148,11 +148,6 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         accumulator.complete();
     }
 
-    @Override
-    public List<String> tabSuggestions() {
-        return PROCESSORS.keySet().stream().toList();
-    }
-
     class SmartClearAccumulator {
         private final Player playerAsPlayer;
         private World world;
@@ -220,5 +215,21 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 entityList.addAll(entities.get(i));
             }
         }
+    }
+
+    @Override
+    public List<String> tabSuggestions() {
+        return PROCESSORS.keySet().stream().toList();
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
+        Map<String, List<String>> suggestions = new HashMap<>();
+        List<String> worldNames = new ArrayList<>();
+        for (World world : Bukkit.getWorlds()) {
+            worldNames.add(world.getName());
+        }
+        suggestions.put("-world", worldNames);
+        return suggestions;
     }
 }

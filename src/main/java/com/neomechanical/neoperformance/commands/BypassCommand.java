@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Map;
 
 public class BypassCommand extends SubCommand implements Tps {
     @Override
@@ -70,6 +71,11 @@ public class BypassCommand extends SubCommand implements Tps {
     }
 
     public List<String> tabSuggestions() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<String>> mapSuggestions() {
         return null;
     }
 }
