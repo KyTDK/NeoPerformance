@@ -214,17 +214,20 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 String command = "/minecraft:execute in " + location.getWorld().getKey()
                         + " run tp " + player.getName() + " " + location.getX()
                         + " " + location.getY() + " " + location.getZ();
-                final TextComponent textComponent = Component.text()
-                        .content("Found cluster of entities with size " + entityList.size()).color(color)
-                        .append(Component.text(" - Click to teleport"))
-                        .clickEvent(
-                                ClickEvent.runCommand(command))
-                        .hoverEvent(
-                                HoverEvent.showText(Component.text("Click to teleport")
-                                )
-                        )
-                        .build();
-                MessageUtil.sendMM(player, textComponent);
+                final TextComponent.Builder builder = Component.text()
+                        .content("Found cluster of entities with size " + entityList.size()).color(color);
+                if (player instanceof Player) {
+                    builder.append(Component.text(" - Click to teleport"))
+                            .clickEvent(
+                                    ClickEvent.runCommand(command))
+                            .hoverEvent(
+                                    HoverEvent.showText(Component.text("Click to teleport")
+                                    )
+                            );
+                } else {
+                    builder.append(Component.text(" - Location: " + location.getX() + "," + location.getY() + "," + location.getZ()));
+                }
+                MessageUtil.sendMM(player, builder.build());
                 if (toBeConfirmed.containsKey(player)) {
                     toBeConfirmed.get(player).addAll(entityList);
                 } else {
