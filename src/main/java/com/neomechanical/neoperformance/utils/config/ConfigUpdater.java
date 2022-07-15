@@ -28,7 +28,7 @@ public class ConfigUpdater {
             Logger.warn("The resource " + resourceName + " doesn't exist!");
             return;
         }
-        FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(resourceName), StandardCharsets.UTF_8));
+        FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(plugin.getResource(resourceName)), StandardCharsets.UTF_8));
         FileConfiguration currentConfig = YamlConfiguration.loadConfiguration(toUpdate);
         Map<String, String> comments = parseComments(plugin, resourceName, defaultConfig);
         Map<String, String> ignoredSectionsValues = parseIgnoredSections(toUpdate, currentConfig, comments, ignoredSections == null ? Collections.emptyList() : ignoredSections);

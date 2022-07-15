@@ -71,7 +71,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
                     }
 
                     InputStream inputStream = main.getResource("translations/" + fileName);
-                    //Instead of creating a new language file, we will copy the one from inside of the plugin jar into the plugin folder:
+                    //Instead of creating a new language file, we will copy the one from inside the plugin jar into the plugin folder:
                     if (inputStream != null) {
                         try (OutputStream outputStream = new FileOutputStream(file)) {
                             IOUtils.copy(inputStream, outputStream);
@@ -90,7 +90,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
                     File defaultFile = new File(languageFolder, "default.yml");
 
                     InputStream inputStream = main.getResource("translations/en-US.yml");
-                    //Instead of creating a new language file, we will copy the one from inside of the plugin jar into the plugin folder:
+                    //Instead of creating a new language file, we will copy the one from inside the plugin jar into the plugin folder:
                     if (inputStream != null) {
                         try (OutputStream defaultOutputStream = new FileOutputStream(defaultFile)) {
                             IOUtils.copy(inputStream, defaultOutputStream);

@@ -29,9 +29,8 @@ public class DataManager {
         return this.tweakData;
     }
 
-    public TweakData setTweakData(TweakData tweakData) {
+    public void setTweakData(TweakData tweakData) {
         this.tweakData = tweakData;
-        return this.tweakData;
     }
 
     //Halt Data
@@ -39,9 +38,8 @@ public class DataManager {
         return this.haltData;
     }
 
-    public HaltData setHaltData(HaltData haltData) {
+    public void setHaltData(HaltData haltData) {
         this.haltData = haltData;
-        return this.haltData;
     }
 
     //Mail data
@@ -49,9 +47,8 @@ public class DataManager {
         return this.mailData;
     }
 
-    public MailData setMailData(MailData mailData) {
+    public void setMailData(MailData mailData) {
         this.mailData = mailData;
-        return this.mailData;
     }
 
     //Visual data
@@ -59,9 +56,8 @@ public class DataManager {
         return this.visualData;
     }
 
-    public VisualData setVisualData(VisualData visualData) {
+    public void setVisualData(VisualData visualData) {
         this.visualData = visualData;
-        return this.visualData;
     }
 
     //Commands

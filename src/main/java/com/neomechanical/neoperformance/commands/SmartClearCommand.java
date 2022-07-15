@@ -182,7 +182,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 //Scan for individual world
                 clusters = SmartScan.scan(10, clusterSize, getCommandData(), world);
             }
-            //One removes largest cluster only
+            //One removes the largest cluster only
             int toClear = 1;
             if (all) {
                 toClear = clusters.size();

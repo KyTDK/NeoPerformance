@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Chunks {
     public static void getChunksWithMostEntities(World world, int totalChunksReturn, final FindOneCallback callback) {
-        // Run outside of the tick loop
+        // Run outside the tick loop
         List<Entity> entities = world.getEntities();
         Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
             //arrange entities in descending order of chunk count
@@ -45,7 +45,7 @@ public class Chunks {
     }
 
     public static void getChunksWithMostEntities(int totalChunksReturn, final FindOneCallback callback) {
-        // Run outside of the tick loop
+        // Run outside the tick loop
         List<Entity> entities = new ArrayList<>();
         for (World world : Bukkit.getWorlds()) {
             entities.addAll(world.getEntities());

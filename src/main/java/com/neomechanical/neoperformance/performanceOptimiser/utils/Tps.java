@@ -55,10 +55,6 @@ public interface Tps {
         return "<green><bold>false";
     }
 
-    default int getHaltTps() {
-        return NeoPerformance.getDataManager().getTweakData().getTpsHaltAt();
-    }
-
     default String getFancyHaltTps() {
         int haltAt = NeoPerformance.getDataManager().getTweakData().getTpsHaltAt();
         if (haltAt == -1) {

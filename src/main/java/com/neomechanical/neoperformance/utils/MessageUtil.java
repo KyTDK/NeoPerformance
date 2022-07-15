@@ -44,25 +44,7 @@ public final class MessageUtil {
         player.sendMessage(color("&7&l&m                                                         "));
     }
 
-    public void sendMessage(CommandSender player) {
-        addMessage("&7&l&m                                                         ");
-        for (String msg : neoMessageArray) {
-            player.sendMessage(color(msg));
-        }
-        neoMessageArray.clear();
-    }
-
     public static void sendMM(CommandSender sendTo, Component parsed) {
-        Audience player = NeoPerformance.adventure().sender(sendTo);
-        player.sendMessage(parsed);
-    }
-
-    public static void sendMM(Player sendTo, Component parsed) {
-        Audience player = NeoPerformance.adventure().player(sendTo);
-        player.sendMessage(parsed);
-    }
-
-    public static void sendMM(CommandSender sendTo, TextComponent parsed) {
         Audience player = NeoPerformance.adventure().sender(sendTo);
         player.sendMessage(parsed);
     }
