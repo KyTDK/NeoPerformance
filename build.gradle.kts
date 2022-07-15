@@ -60,11 +60,6 @@ repositories {
         }
     }
 
-    maven("https://mvn.lumine.io/repository/maven-public/") {
-        content {
-            includeGroup("io.lumine.xikage")
-        }
-    }
 
     maven("https://repo.incendo.org/content/repositories/snapshots") {
         content {
