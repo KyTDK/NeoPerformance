@@ -28,9 +28,6 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
         subcommands.add(new SmartClearCommand());
     }
 
-    public void addCommand(SubCommand subCommand) {
-        subcommands.add(subCommand);
-    }
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
             if (args.length > 0) {
