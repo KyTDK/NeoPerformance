@@ -80,9 +80,9 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                         Map<String, List<String>> mapSuggestions = getSubcommands().get(i).mapSuggestions();
                         if (mapSuggestions != null) {
                             List<String> listArgs = List.of(args);
-                            if (mapSuggestions.keySet().containsAll(listArgs)) {
-                                int argIndex = listArgs.indexOf(listArgs.get(listArgs.size() - 1));
-                                list.addAll(mapSuggestions.get(listArgs.get(argIndex)));
+                            String currentArg = listArgs.get(listArgs.size() - 1);
+                            if (mapSuggestions.containsKey(currentArg)) {
+                                list.addAll(mapSuggestions.get(currentArg));
                             }
                         } else if (suggestions != null) {
                             list.addAll(suggestions);
