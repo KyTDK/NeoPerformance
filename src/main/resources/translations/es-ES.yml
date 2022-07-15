@@ -1,4 +1,3 @@
-
 main:
   isServerHalted: '<gray>  Actividad detenida: %SERVERHALTED%'
   serverTps: '<gray>  TPS del servidor: %TPS%'
