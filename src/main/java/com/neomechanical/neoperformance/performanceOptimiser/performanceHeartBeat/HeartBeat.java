@@ -9,7 +9,6 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -80,7 +79,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
                         try {
                             org.bukkit.block.data.BlockData data = block.getBlockData();
-                            if (!(data instanceof AnaloguePowerable powerable))
+                            if (!(data instanceof org.bukkit.block.data.AnaloguePowerable powerable))
                                 continue; // Ignore any non-powerable blocks
                             powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
                             block.setBlockData(powerable);
