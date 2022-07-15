@@ -24,7 +24,7 @@ import java.util.function.BiConsumer;
 public class SmartClearCommand extends SubCommand implements PerformanceConfigurationSettings {
 
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
-    private static final HashMap<Player, List<Entity>> toBeConfirmed = new HashMap<>();
+    private static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
 
     @Override
     public String getName() {
@@ -79,7 +79,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     private static void size(SmartClearAccumulator accumulator, List<String> arguments) {
         if (arguments.size() == 1) {
             if (Integer.getInteger(arguments.get(0)) != null) {
-                MessageUtil.sendMM(accumulator.playerAsPlayer, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                MessageUtil.sendMM(accumulator.player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             accumulator.size(Integer.parseInt(arguments.get(0)));
@@ -92,7 +92,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         Stack<String> commandStack = new Stack<>();
         commandStack.addAll(Arrays.asList(args));
         List<String> commandArgs = new ArrayList<>();
-        SmartClearAccumulator accumulator = new SmartClearAccumulator((Player) player);
+        SmartClearAccumulator accumulator = new SmartClearAccumulator(player);
         while (!commandStack.isEmpty()) {
             String element = commandStack.pop();
             if (PROCESSORS.containsKey(element)) {
@@ -105,18 +105,18 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     }
 
     class SmartClearAccumulator {
-        private final Player playerAsPlayer;
+        private final CommandSender player;
         private World world;
         private boolean all = false;
         private int clusterSize;
         private boolean cancel = false;
 
-        private SmartClearAccumulator(Player playerAsPlayer) {
-            this.playerAsPlayer = playerAsPlayer;
+        private SmartClearAccumulator(CommandSender player) {
+            this.player = player;
         }
 
         public void force() {
-            if (!toBeConfirmed.containsKey(playerAsPlayer)) {
+            if (!toBeConfirmed.containsKey(player)) {
                 clusterLogic();
             }
         }
@@ -128,12 +128,12 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         public void world(String name) {
             world = Bukkit.getWorld(name);
             if (world == null) {
-                MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
             }
         }
 
         public void cancel() {
-            toBeConfirmed.remove(playerAsPlayer);
+            toBeConfirmed.remove(player);
             cancel = true;
         }
 
@@ -143,27 +143,27 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
         public void complete() {
             if (cancel) {
-                MessageUtil.sendMM(playerAsPlayer, "<red><bold>Cancelled");
+                MessageUtil.sendMM(player, "<red><bold>Cancelled");
                 cancel = false;
                 return;
             }
-            if (toBeConfirmed.containsKey(playerAsPlayer)) {
+            if (toBeConfirmed.containsKey(player)) {
                 //Remove
-                for (Entity e : toBeConfirmed.get(playerAsPlayer)) {
+                for (Entity e : toBeConfirmed.get(player)) {
                     if (e instanceof Player) {
                         continue;
                     }
                     e.remove();
                 }
-                MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.cleared", null));
-                toBeConfirmed.remove(playerAsPlayer);
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
+                toBeConfirmed.remove(player);
                 return;
             }
             //Remove from list if not confirmed after 10 seconds
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    toBeConfirmed.remove(playerAsPlayer);
+                    toBeConfirmed.remove(player);
                 }
             }.runTaskLater(plugin, 20L * 10);
             clusterLogic();
@@ -189,7 +189,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             }
             //No clusters, show error message and return
             if (clusters.isEmpty()) {
-                MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
                 return;
             }
             for (int i = 0; i < toClear; i++) {
@@ -212,7 +212,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 }
                 //Command to review cluster
                 String command = "/minecraft:execute in " + location.getWorld().getKey()
-                        + " run tp " + playerAsPlayer.getName() + " " + location.getX()
+                        + " run tp " + player.getName() + " " + location.getX()
                         + " " + location.getY() + " " + location.getZ();
                 final TextComponent textComponent = Component.text()
                         .content("Found cluster of entities with size " + entityList.size()).color(color)
@@ -224,14 +224,14 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                                 )
                         )
                         .build();
-                MessageUtil.sendMM(playerAsPlayer, textComponent);
-                if (toBeConfirmed.containsKey(playerAsPlayer)) {
-                    toBeConfirmed.get(playerAsPlayer).addAll(entityList);
+                MessageUtil.sendMM(player, textComponent);
+                if (toBeConfirmed.containsKey(player)) {
+                    toBeConfirmed.get(player).addAll(entityList);
                 } else {
-                    toBeConfirmed.put(playerAsPlayer, entityList);
+                    toBeConfirmed.put(player, entityList);
                 }
             }
-            MessageUtil.sendMM(playerAsPlayer, plugin.getLanguageManager().getString("smartClear.confirm", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
         }
     }
 

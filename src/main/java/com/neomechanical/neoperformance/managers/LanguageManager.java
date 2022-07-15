@@ -52,6 +52,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
         languageFiles.add("tr-TR.yml");
         languageFiles.add("fr-FR.yml");
         languageFiles.add("zh-CN.yml");
+        languageFiles.add("ru-RU.yml");
 
         if (!languageFolder.exists()) {
             if (!languageFolder.mkdirs()) {

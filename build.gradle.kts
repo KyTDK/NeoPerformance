@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.neomechanical.neoperformance"
-version = "1.9.3"
+version = "1.9.4"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
