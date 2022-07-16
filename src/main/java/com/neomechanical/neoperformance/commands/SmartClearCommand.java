@@ -106,7 +106,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
     class SmartClearAccumulator {
         private final CommandSender player;
-        private World world;
+        private final List<World> world = new ArrayList<>();
         private boolean all = false;
         private int clusterSize;
         private boolean cancel = false;
@@ -125,12 +125,11 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             this.clusterSize = clusterSize;
         }
 
-        //TODO allow multiple worlds
         public void world(String name) {
-            world = Bukkit.getWorld(name);
-            if (world == null) {
+            if (Bukkit.getWorld(name) == null) {
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
             }
+            world.add(Bukkit.getWorld(name));
         }
 
         public void cancel() {
@@ -171,14 +170,15 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             //Message logic and construct entity list
             NamedTextColor color;
             List<List<Entity>> clusters;
-            if (world == null) {
-                //Scan for all worlds
+            if (world.isEmpty()) {
+                //Scan for all world
                 World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
                 clusters = SmartScan.scan(10, clusterSize, getCommandData(), worlds);
 
             } else {
+                World[] worldsList = world.toArray(World[]::new);
                 //Scan for individual world
-                clusters = SmartScan.scan(10, clusterSize, getCommandData(), world);
+                clusters = SmartScan.scan(10, clusterSize, getCommandData(), worldsList);
             }
             //One removes the largest cluster only
             int toClear = 1;
