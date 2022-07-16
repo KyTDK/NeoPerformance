@@ -125,6 +125,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             this.clusterSize = clusterSize;
         }
 
+        //TODO allow multiple worlds
         public void world(String name) {
             world = Bukkit.getWorld(name);
             if (world == null) {
