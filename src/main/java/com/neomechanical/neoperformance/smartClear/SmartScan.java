@@ -31,6 +31,10 @@ public class SmartScan implements PerformanceConfigurationSettings {
             if (newCluster.size() >= clusterSize) {
                 boolean isNewCluster = true;
                 for (Entity e : newCluster) {
+                    if (previousClusters.contains(e)) {
+                        isNewCluster = false;
+                        break;
+                    }
                     if (e instanceof Player) {
                         toRemove.add(e);
                         continue;
@@ -41,11 +45,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
                     }
                     if (NPC.isNpc(e)) {
                         toRemove.add(e);
-                        continue;
-                    }
-                    if (previousClusters.contains(e)) {
-                        isNewCluster = false;
-                        break;
                     }
                 }
                 //Remove entities that are not part of the cluster
