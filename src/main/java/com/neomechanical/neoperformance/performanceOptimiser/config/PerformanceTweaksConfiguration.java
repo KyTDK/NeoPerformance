@@ -47,7 +47,7 @@ public class PerformanceTweaksConfiguration {
                 strings.get("mail_server_username"), strings.get("mail_server_password"), stringsArrays.get("recipients")));
         finishSection();
         getDataSet("commands");
-        dataManager.setCommandData(new CommandData(nums.get("defaultClusterSize")));
+        dataManager.setCommandData(new CommandData(nums.get("defaultClusterSize"), stringsArrays.get("smartClearExcludeEntities")));
         finishSection();
     }
 

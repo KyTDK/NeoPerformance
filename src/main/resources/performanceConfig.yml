@@ -45,6 +45,12 @@ commands:
   #Define cluster size for smartClear, using anything below 10 can be dangerous and
   #too high of a value might not do anything
   defaultClusterSize: 15
+  #What items should SmartClear ignore?
+  smartClearExcludeEntities:
+    - item_frame
+    - painting
+    - armor_stand
+
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #
 ###########################################################################

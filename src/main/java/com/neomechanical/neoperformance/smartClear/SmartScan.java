@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.smartClear;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -48,6 +49,13 @@ public class SmartScan implements PerformanceConfigurationSettings {
                     }
                     if (NPC.isNpc(e)) {
                         toRemove.add(e);
+                    }
+                    for (String s : commandData.getSmartClearExcludeEntities()) {
+                        if (e.getType().name().equals(s)) {
+                            Bukkit.broadcastMessage("Excluding " + e.getType().name());
+                            toRemove.add(e);
+                            break;
+                        }
                     }
                 }
                 //Remove entities that are not part of the cluster

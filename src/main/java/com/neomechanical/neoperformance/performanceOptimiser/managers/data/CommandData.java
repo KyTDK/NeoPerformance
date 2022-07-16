@@ -7,4 +7,5 @@ import org.jetbrains.annotations.NotNull;
 public class CommandData {
     //Smart Clear
     private @NotNull Integer defaultClusterSize;
+    private @NotNull String[] smartClearExcludeEntities;
 }
