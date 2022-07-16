@@ -30,6 +30,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
             }
             if (newCluster.size() >= clusterSize) {
                 boolean isNewCluster = true;
+                //Deal with cluster, checks, etc.
                 for (Entity e : newCluster) {
                     if (previousClusters.contains(e)) {
                         isNewCluster = false;
@@ -54,6 +55,8 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 if (isNewCluster) {
                     cluster.put(newCluster, newCluster.size());
                     previousClusters.addAll(newCluster);
+                    //Reset booleans, arrays, etc. for next cluster
+                    toRemove.clear();
                 }
             }
         }
