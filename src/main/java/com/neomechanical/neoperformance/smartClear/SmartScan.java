@@ -22,12 +22,14 @@ public class SmartScan implements PerformanceConfigurationSettings {
         List<Entity> previousClusters = new ArrayList<>();
         List<Entity> toRemove = new ArrayList<>();
 
+        if (clusterSize == 0) {
+            clusterSize = commandData.getDefaultClusterSize();
+        }
+
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
             List<Entity> newCluster = entity.getNearbyEntities(4, 2, 4);
-            if (clusterSize == 0) {
-                clusterSize = commandData.getDefaultClusterSize();
-            }
+            newCluster.add(entity);
             if (newCluster.size() >= clusterSize) {
                 boolean isNewCluster = true;
                 //Deal with cluster, checks, etc.
@@ -60,6 +62,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 }
             }
         }
+        //Sort clusters by size
         List<List<Entity>> topClusters = new ArrayList<>();
         for (int i = 0; i < totalClustersReturn; i++) {
             if (cluster.isEmpty()) {
