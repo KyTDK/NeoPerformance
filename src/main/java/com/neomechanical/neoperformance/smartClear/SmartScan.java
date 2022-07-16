@@ -11,7 +11,7 @@ import java.util.*;
 
 public class SmartScan implements PerformanceConfigurationSettings {
 
-    public static List<List<Entity>> scan(int totalChunksReturn, int clusterSize, CommandData commandData, World... worlds) {
+    public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
         for (World world : worlds) {
@@ -61,7 +61,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
             }
         }
         List<List<Entity>> topClusters = new ArrayList<>();
-        for (int i = 0; i < totalChunksReturn; i++) {
+        for (int i = 0; i < totalClustersReturn; i++) {
             if (cluster.isEmpty()) {
                 break;
             }
