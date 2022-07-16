@@ -20,20 +20,10 @@ public class SmartScan implements PerformanceConfigurationSettings {
         Iterator<Entity> iterator = entities.iterator();
         Map<List<Entity>, Integer> cluster = new HashMap<>();
         List<Entity> previousClusters = new ArrayList<>();
+        List<Entity> toRemove = new ArrayList<>();
+
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
-            if (entity instanceof Player) {
-                iterator.remove();
-                continue;
-            }
-            if (entity.getCustomName() != null) {
-                iterator.remove();
-                continue;
-            }
-            if (NPC.isNpc(entity)) {
-                iterator.remove();
-                continue;
-            }
             List<Entity> newCluster = entity.getNearbyEntities(4, 2, 4);
             if (clusterSize == 0) {
                 clusterSize = commandData.getDefaultClusterSize();
@@ -41,10 +31,26 @@ public class SmartScan implements PerformanceConfigurationSettings {
             if (newCluster.size() >= clusterSize) {
                 boolean isNewCluster = true;
                 for (Entity e : newCluster) {
+                    if (e instanceof Player) {
+                        toRemove.add(e);
+                        continue;
+                    }
+                    if (e.getCustomName() != null) {
+                        toRemove.add(e);
+                        continue;
+                    }
+                    if (NPC.isNpc(e)) {
+                        toRemove.add(e);
+                        continue;
+                    }
                     if (previousClusters.contains(e)) {
                         isNewCluster = false;
                         break;
                     }
+                }
+                //Remove entities that are not part of the cluster
+                for (Entity e : toRemove) {
+                    newCluster.remove(e);
                 }
                 if (isNewCluster) {
                     cluster.put(newCluster, newCluster.size());

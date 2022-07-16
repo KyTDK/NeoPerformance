@@ -150,9 +150,6 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
                 for (Entity e : toBeConfirmed.get(player)) {
-                    if (e instanceof Player) {
-                        continue;
-                    }
                     e.remove();
                 }
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
