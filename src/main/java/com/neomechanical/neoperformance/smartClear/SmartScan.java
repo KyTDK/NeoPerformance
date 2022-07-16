@@ -3,7 +3,6 @@ package com.neomechanical.neoperformance.smartClear;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
-import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -51,8 +50,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
                         toRemove.add(e);
                     }
                     for (String s : commandData.getSmartClearExcludeEntities()) {
-                        if (e.getType().name().equals(s)) {
-                            Bukkit.broadcastMessage("Excluding " + e.getType().name());
+                        if (e.getType().name().replaceAll("_", " ").equalsIgnoreCase(s.replaceAll("_", " "))) {
                             toRemove.add(e);
                             break;
                         }
@@ -62,7 +60,8 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 for (Entity e : toRemove) {
                     newCluster.remove(e);
                 }
-                if (isNewCluster) {
+                //Add cluster to map
+                if (isNewCluster && newCluster.size() >= clusterSize) {
                     cluster.put(newCluster, newCluster.size());
                     previousClusters.addAll(newCluster);
                     //Reset booleans, arrays, etc. for next cluster
