@@ -79,6 +79,10 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
                         try {
                             org.bukkit.block.data.BlockData data = block.getBlockData();
+                            if (data instanceof org.bukkit.block.data.Powerable powerable2) {
+                                powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) >= 1);
+                                block.setBlockData(powerable2);
+                            }
                             if (!(data instanceof org.bukkit.block.data.AnaloguePowerable powerable))
                                 continue; // Ignore any non-powerable blocks
                             powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
