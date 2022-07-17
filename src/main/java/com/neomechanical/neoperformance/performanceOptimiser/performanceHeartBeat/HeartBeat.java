@@ -113,7 +113,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 }
 
             }
-        }.runTaskTimer(NeoPerformance.getInstance(), 0, 1);
+        }.runTaskTimer(NeoPerformance.getInstance(), 0, getTweakData().getHeartBeatRate());
     }
 
     private void setTPS() {

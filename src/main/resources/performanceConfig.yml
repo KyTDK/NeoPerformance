@@ -14,7 +14,10 @@ performance_tweak_settings:
   mobCapRadius: 10
   # The maximum number of explosions that can exist in a small radius (use -1 to disable)
   explosionCap: 50
-
+  # Heart beat rate is how often NeoPerformance updates the tps, checks if the server has been halted and
+  # Restores the server if it has been halted. Going above 20 is usually a bad idea and might actually
+  # ruin user experience (in ticks)
+  heartBeatRate: 20
 # [halt_settings] These settings only apply when the server is halted
 halt_settings:
   # Should players be allowed to join while the server is halted (users with 'neoperformance.bypass' will still be able to join)?
