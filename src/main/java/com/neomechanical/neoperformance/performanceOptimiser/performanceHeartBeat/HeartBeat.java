@@ -9,7 +9,6 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.PistonUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import net.minecraft.world.level.block.DiodeBlock;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -84,13 +83,6 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         try {
                             org.bukkit.block.data.BlockData data = block.getBlockData();
                             if (data instanceof org.bukkit.block.data.Powerable powerable2) {
-                                if (data instanceof DiodeBlock diode) {
-                                    int delay = diode.set
-                                    if (delay > 0) {
-                                        diode.setDelay(delay - 1);
-                                        block.setBlockData(diode.get);
-                                    }
-                                }
                                 powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
                                 block.setBlockData(powerable2);
                                 continue;
