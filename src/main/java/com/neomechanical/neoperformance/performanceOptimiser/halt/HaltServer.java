@@ -79,19 +79,17 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             int newCurrent = e.getNewCurrent();
             int oldCurrent = e.getOldCurrent();
             e.setNewCurrent(oldCurrent);
-            if (block.getType().name().toLowerCase().contains("button")) {
+            String redstoneName = block.getType().name().toLowerCase();
+            if (redstoneName.contains("button") || redstoneName.contains("lever")) {
                 return;
             }
-            if (!cachedData.cachedRedstoneActivity.containsKey(block)) {
-                cachedData.cachedRedstoneActivity.put(e.getBlock(), newCurrent);
-            }
+            cachedData.cachedRedstoneActivity.put(e.getBlock(), newCurrent);
         }
     }
 
     @EventHandler()
     public void onPistonExtend(BlockPistonExtendEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), 1);
             e.setCancelled(true);
         }
     }
@@ -100,7 +98,6 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     @EventHandler()
     public void onPistonRetract(BlockPistonRetractEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), 0);
             e.setCancelled(true);
         }
     }
