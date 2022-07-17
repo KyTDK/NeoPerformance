@@ -30,7 +30,7 @@ public interface PerformanceConfigurationSettings {
     }
 
     default boolean canMobSpawn(EntitySpawnEvent e) {
-        List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
+        List<Entity> list = e.getEntity().getNearbyEntities(getTweakData().getMobCapRadius(), 2, getTweakData().getMobCapRadius());
         int mobCap = getTweakData().getMobCap();
         if (mobCap == -1) {
             return true;

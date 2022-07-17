@@ -10,6 +10,8 @@ performance_tweak_settings:
   broadcastHalt: false
   # The maximum number of entities that can exist in a small radius (use -1 to disable)
   mobCap: 50
+  # Define the small radius for map (The larger the radius, the more stress on the server, don't make it too large)
+  mobCapRadius: 10
   # The maximum number of explosions that can exist in a small radius (use -1 to disable)
   explosionCap: 50
 

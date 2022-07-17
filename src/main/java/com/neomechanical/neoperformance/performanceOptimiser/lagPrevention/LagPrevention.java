@@ -36,7 +36,7 @@ public class LagPrevention implements Listener, PerformanceConfigurationSettings
     //Prevents minecart powered lagging machines
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        List<Entity> list = e.getVehicle().getNearbyEntities(10, 10, 10);
+        List<Entity> list = e.getVehicle().getNearbyEntities(getTweakData().getMobCapRadius(), 2, getTweakData().getMobCapRadius());
         list.removeIf(entity -> entity.getType() != e.getVehicle().getType());
         if (list.size() >= 20) {
             e.getVehicle().remove();
