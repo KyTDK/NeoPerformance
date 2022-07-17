@@ -83,6 +83,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         try {
                             org.bukkit.block.data.BlockData data = block.getBlockData();
                             if (data instanceof org.bukkit.block.data.Powerable powerable2) {
+                                //Block data retains delay for repeater
                                 powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
                                 block.setBlockData(powerable2);
                                 continue;
