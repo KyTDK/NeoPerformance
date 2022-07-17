@@ -7,7 +7,9 @@ import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
+import com.neomechanical.neoperformance.utils.PistonUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
+import net.minecraft.world.level.block.DiodeBlock;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -40,18 +42,20 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 //check if the server is halted
                 if (isServerHalted(null)) {
                     manualHalt[0] = DATA_MANAGER.isManualHalt();
-                    if (!halted[0] && !manualHalt[0]) {
-                        haltStartTime[0] = System.currentTimeMillis();
-                        if (getMailData().getUseMailServer()) {
-                            EmailClient emailClient = new EmailClient();
-                            emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
-                                    plugin.getLanguageManager().getString("email_notifications.body", null));
-                        }
-                        String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
-                        if (broadcastAll) {
-                            MessageUtil.sendMMAll(message);
-                        } else if (notifyAdmin) {
-                            MessageUtil.sendMMAdmins(message);
+                    if (!halted[0]) {
+                        if (!manualHalt[0]) {
+                            haltStartTime[0] = System.currentTimeMillis();
+                            if (getMailData().getUseMailServer()) {
+                                EmailClient emailClient = new EmailClient();
+                                emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
+                                        plugin.getLanguageManager().getString("email_notifications.body", null));
+                            }
+                            String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
+                            if (broadcastAll) {
+                                MessageUtil.sendMMAll(message);
+                            } else if (notifyAdmin) {
+                                MessageUtil.sendMMAdmins(message);
+                            }
                         }
                     }
                     halted[0] = true;
@@ -80,15 +84,34 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         try {
                             org.bukkit.block.data.BlockData data = block.getBlockData();
                             if (data instanceof org.bukkit.block.data.Powerable powerable2) {
-                                powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) >= 1);
+                                if (data instanceof DiodeBlock diode) {
+                                    int delay = diode.set
+                                    if (delay > 0) {
+                                        diode.setDelay(delay - 1);
+                                        block.setBlockData(diode.get);
+                                    }
+                                }
+                                powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
                                 block.setBlockData(powerable2);
+                                continue;
                             }
-                            if (!(data instanceof org.bukkit.block.data.AnaloguePowerable powerable))
-                                continue; // Ignore any non-powerable blocks
-                            powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
-                            block.setBlockData(powerable);
+                            //For piston
+                            if (data instanceof org.bukkit.block.data.type.Piston) {
+                                //extend piston
+                                if (cachedData.cachedRedstoneActivity.get(block) > 0) {
+                                    PistonUtil.movePiston(block);
+                                    continue;
+                                }
+                                continue;
+                            }
+                            if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
+                                powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
+                                block.setBlockData(powerable);
+                            }
                         } catch (NoClassDefFoundError e) {
                             Logger.outdated();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
                         }
                     }
                     //clear cache entirely
@@ -97,7 +120,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 }
 
             }
-        }.runTaskTimer(NeoPerformance.getInstance(), 0, 20);
+        }.runTaskTimer(NeoPerformance.getInstance(), 0, 1);
     }
 
     private void setTPS() {

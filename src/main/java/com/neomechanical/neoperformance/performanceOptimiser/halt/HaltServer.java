@@ -6,13 +6,12 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPhysicsEvent;
-import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -68,13 +67,40 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         }
     }
 
+    //Halt all redstone activity
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), e.getNewCurrent());
-            e.setNewCurrent(e.getOldCurrent());
+            Block block = e.getBlock();
+            int newCurrent = e.getNewCurrent();
+            int oldCurrent = e.getOldCurrent();
+            e.setNewCurrent(oldCurrent);
+            if (block.getType().name().toLowerCase().contains("button")) {
+                return;
+            }
+            if (!cachedData.cachedRedstoneActivity.containsKey(block)) {
+                cachedData.cachedRedstoneActivity.put(e.getBlock(), newCurrent);
+            }
         }
     }
+
+    @EventHandler()
+    public void onPistonExtend(BlockPistonExtendEvent e) {
+        if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
+            cachedData.cachedRedstoneActivity.put(e.getBlock(), 1);
+            e.setCancelled(true);
+        }
+    }
+    //event listener for when redstone signal dies out
+
+    @EventHandler()
+    public void onPistonRetract(BlockPistonRetractEvent e) {
+        if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
+            cachedData.cachedRedstoneActivity.put(e.getBlock(), 0);
+            e.setCancelled(true);
+        }
+    }
+    //End of Halt all redstone activity
 
     @EventHandler()
     public void onChunkLoad(ChunkLoadEvent e) {

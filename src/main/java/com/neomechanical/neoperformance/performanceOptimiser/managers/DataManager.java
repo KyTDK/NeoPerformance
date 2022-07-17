@@ -16,6 +16,7 @@ public class DataManager {
     private VisualData visualData;
     private MailData mailData;
     private CommandData commandData;
+    private boolean isReadyToUnhalt = true;
 
     public DataManager() {
     }
@@ -87,6 +88,14 @@ public class DataManager {
             bypassedPlayers.add(player);
             return true;
         }
+    }
+
+    public boolean isReadyToUnhalt() {
+        return isReadyToUnhalt;
+    }
+
+    public void setReadyToUnhalt(boolean readyToUnhalt) {
+        this.isReadyToUnhalt = readyToUnhalt;
     }
 
     public boolean isBypassed(Player player) {
