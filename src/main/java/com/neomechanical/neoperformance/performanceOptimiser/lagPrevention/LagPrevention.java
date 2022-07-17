@@ -33,7 +33,7 @@ public class LagPrevention implements Listener, PerformanceConfigurationSettings
         }
     }
 
-    //Prevents minecart powered lagging machines
+    //Prevents minecart powered lagging machines, apart mobCapRadius
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
         List<Entity> list = e.getVehicle().getNearbyEntities(getTweakData().getMobCapRadius(), 2, getTweakData().getMobCapRadius());
