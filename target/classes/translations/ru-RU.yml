@@ -1,0 +1,43 @@
+main:
+  isServerHalted: '<gray>  Отключена ли активность: %SERVERHALTED%'
+  serverTps: '<gray>  ТПС сервера: %TPS%'
+  serverHaltsAt: '<gray>  Остановка активности при: %TPSHALT%'
+  playerCount: '<gray>  Число игроков: <green><bold>%PLAYERCOUNT%'
+notify:
+  serverHalted: '<red><bold>ТПС слишком низкий. Выполняется остановка активности'
+  serverResumed: '<green><bold>ТПС выглядит нормальным. Активность возобновлена'
+email_notifications:
+  subject: 'ТПС слишком низкий. Активность сервера остановлена'
+  body: 'Активность сервера была отключена в связи с низким ТПС На данный момент показатель тпс равен %TPS% в то время как минимальное значение %TPSHALT%.\n Сервер перезагрузится через 10 минут, если он не восстановится.'
+#команды
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Игрок не найден'
+  errorInvalidSyntax: '<red><bold>Неверный аргумент - напишите "/np help" для помощи'
+  errorWorldNotFound: '<red><bold>Мир не найден'
+  errorNoPermission: '<red><bold>У вас нет разрешения на использование этой команды'
+  errorNotPlayer: '<red><bold>Эта команда только для игроков'
+  errorCommandNotFound: '<red><bold>Команда не найдена, попробуйте /np help'
+bypass:
+  errorNotPlayer: '<red><bold>Вы должны быть игроком, чтобы выдать байпасс самому себе'
+  nowBypassing: '<red><bold>Теперь вы обходите запреты остановки активности'
+  noLongerBypassing: '<green><bold>Вы более не обходите запреты остановки активности'
+  nowBypassingPlayer: '<red><bold>Теперь игрок %PLAYER% обходит запреты'
+  noLongerBypassingPlayer: '<green><bold>Игрок %PLAYER% более не обходит запреты'
+  errorNoPermissionOthers: '<red><bold>У вас нет разрешения на выдачу байпасса другому игроку.'
+halt:
+  toggleHaltOn: '<red><bold>Активность на сервере отключена'
+  toggleHaltOff: '<green><bold>Активность на сервере включена'
+reload:
+  onReload: '<green><bold>Конфиг перезагружен'
+smartClear:
+  confirm: '<red><bold>Введите команду еще раз, чтобы подтвердить отчистку'
+  cleared: '<green><bold>Существа отчищены'
+  noEntities: '<red><bold>Ни одно существо ни удалено'
+
+#сообщения при остановке активности
+halted:
+  actionBarMessage: '<red>В настоящее время сервер перегружен. Пожалуйста, повторите попытку позже.'
+  actionBarTeleportMessage: '<red>В настоящее время сервер перегружен. Вы будете мгновенно телепортированы.'
+  onJoin: 'В настоящее время сервер перегружен. Пожалуйста, повторите попытку входа позже.'
+  onBlockBreak: '<green>Это действие было отменено, чтобы предотвратить лаги. В настоящее время сервер находится под большой нагрузкой, следовательно, блоки ломать нельзя.'
+  onItemDrop: '<green>Это действие было отменено, чтобы предотвратить потерю данных. В настоящее время сервер находится под большой нагрузкой, следовательно, все выброшенные предметы будут уничтожены.'

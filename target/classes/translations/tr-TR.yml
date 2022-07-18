@@ -1,0 +1,43 @@
+main:
+  isServerHalted: '<gray>  Sunucu durduruldu: %SERVERHALTED%'
+  serverTps: '<gray>  Sunucu TPS: %TPS%'
+  serverHaltsAt: '<gray>  Sunucu şu anda duruyor: %TPSHALT%'
+  playerCount: '<gray>  Oyuncu sayısı: <green><bold>%PLAYERCOUNT%'
+notify:
+  serverHalted: '<red><bold>TPS çok düşük, sunucu durduruluyor'
+  serverResumed: '<green><bold>TPS normale döndü, sunucu kurtarılıyor'
+email_notifications:
+  subject: 'TPS çok düşük, sunucu durduruluyor'
+  body: "TPS çok düşük olduğu için sunucu durdu.\nTPS şu anda %TPS%'de ve TPS eşiği %TPSHALT%.\n İyileşmezse sunucu 10 dakika içinde yeniden başlatılacak"
+#komutlar
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Oyuncu bulunamadı'
+  errorInvalidSyntax: '<red><bold>Geçersiz sözdizimi - yardım için "/np help" yazın'
+  errorWorldNotFound: '<red><bold>Dünya bulunamadı'
+  errorNoPermission: '<red><bold>Bu komutu kullanma izniniz yok'
+  errorNotPlayer: '<red><bold>Bu komut sadece oyuncular içindir'
+  errorCommandNotFound: '<red><bold>Komut bulunamadı, /np yardımını deneyin'
+bypass:
+  errorNotPlayer: '<red><bold>Kendini geçmek için oyuncu olmalısın'
+  nowBypassing: '<red><bold>Şimdi durmayı atlayarak'
+  noLongerBypassing: '<green><bold>Artık durmayı atlamıyor'
+  nowBypassingPlayer: '<red><bold>Şimdi %PLAYER% için durdurmayı atlıyor'
+  noLongerBypassingPlayer: '<green><bold>Artık %PLAYER% için durdurmayı atlamıyor'
+  errorNoPermissionOthers: '<red><bold>Diğer oyuncuları atlama izniniz yok'
+halt:
+  toggleHaltOn: '<red><bold>Sunucu durduruldu'
+  toggleHaltOff: '<green><bold>Sunucu yeniden başlatıldı'
+reload:
+  onReload: '<green><bold>Yapılandırma dosyası yeniden yüklendi'
+smartClear:
+  confirm: "<red><bold>Küme silme işlemini onaylamak için komutu tekrar yazın"
+  cleared: "<green><bold>Küme silindi"
+  noEntities: "<red><bold>Hiçbir varlık silinmedi"
+
+#İlgili mesajları durdur
+halted:
+  actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'
+  actionBarTeleportMessage: '<red>Sunucu şu anda ağır yük altında. Bir anlığına ışınlanacaksınız.'
+  onJoin: 'Bu sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'
+  onBlockBreak: '<green>Veri kaybını önlemek için bu eylem iptal edildi. Sunucu şu anda ağır yük altında, dolayısıyla düşen tüm eşyalar yok edilecek.'
+  onItemDrop: '<green>Veri kaybını önlemek için bu eylem iptal edildi. Sunucu şu anda ağır yük altında, dolayısıyla düşen tüm eşyalar yok edilecek.'

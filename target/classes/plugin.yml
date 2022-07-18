@@ -1,0 +1,17 @@
+name: NeoPerformance
+version: '1.9.9'
+main: com.neomechanical.neoperformance.NeoPerformance
+load: STARTUP
+authors:
+  - NeoDevs
+prefix: NeoPerformance
+commands:
+  neoperformance:
+    description: Show server performance
+    aliases:
+      - np
+      - performance
+    permission: neoperformance.admin
+    usage: /neoperformance
+api-version: 1.13
+default-permission: op
