@@ -9,8 +9,11 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.PistonUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.material.PistonBaseMaterial;
+import org.bukkit.material.PistonExtensionMaterial;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
@@ -85,19 +88,28 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             if (data instanceof org.bukkit.block.data.Powerable powerable2) {
                                 //Block data retains delay for repeater
                                 powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
+
                                 block.setBlockData(powerable2);
-                                continue;
                             }
                             //For piston
-                            if (data instanceof org.bukkit.block.data.type.Piston) {
+                            else if (data instanceof org.bukkit.block.data.type.Piston) {
                                 //extend piston
                                 if (cachedData.cachedRedstoneActivity.get(block) > 0) {
+                                    PistonBaseMaterial piston = (PistonBaseMaterial) block.getState().getData();
+                                    Block l = block.getRelative(piston.getFacing());
+
+                                    piston.setPowered(true);
+                                    block.setData(piston.getData());
+                                    //if power is true,
+                                    l.setType(Material.PISTON_EXTENSION);
+                                    PistonExtensionMaterial pe = (PistonExtensionMaterial) l.getState().getData();
+                                    l.setData(pe.getData());
+
+                                    l.getState().update();
+                                    block.getState().update();
                                     PistonUtil.movePiston(block);
-                                    continue;
                                 }
-                                continue;
-                            }
-                            if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
+                            } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
                                 powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
                                 block.setBlockData(powerable);
                             }
