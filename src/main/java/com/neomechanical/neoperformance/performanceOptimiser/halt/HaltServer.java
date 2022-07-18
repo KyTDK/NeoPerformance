@@ -71,31 +71,21 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     //Halt all redstone activity
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
-        if (cachedData.cachedRedstoneActivity.containsKey(e.getBlock()) && cachedData.cachedRedstoneActivity.get(e.getBlock()) > 0) {
+        if (cachedData.cachedRedstoneActivity.containsKey(e.getBlock()) && e.getNewCurrent() > 0) {
             return;
         }
-        if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
+        if (getHaltData().getHaltRedstone()) {
             Block block = e.getBlock();
             int newCurrent = e.getNewCurrent();
-            int oldCurrent = e.getOldCurrent();
-            e.setNewCurrent(0);
+            if (isServerHalted(null)) {
+                e.setNewCurrent(0);
+            }
             String redstoneName = block.getType().name().toLowerCase();
             if (redstoneName.contains("button") || redstoneName.contains("lever")) {
                 return;
             }
-            if (newCurrent > 0) {
-                if (!cachedData.cachedRedstoneActivity.containsKey(block)) {
-                    cachedData.cachedRedstoneActivity.put(block, newCurrent);
-                }
-            } else {
-                cachedData.cachedRedstoneActivity.remove(block);
-            }
-            Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity.toString());
-            return;
-        }
-        if (cachedData.cachedRedstoneActivity.containsKey(e.getBlock())) {
-            //If the redstone hasn't been restored yet, cancel the event
-            e.setNewCurrent(0);
+            cachedData.cachedRedstoneActivity.put(block, newCurrent);
+            Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity + " power " + newCurrent);
         }
     }
 

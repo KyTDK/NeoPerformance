@@ -11,16 +11,16 @@
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
             </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>net.md-5</groupId>
-        <artifactId>specialsource-maven-plugin</artifactId>
-        <version>1.2.3</version>
-        <executions>
-          <execution>
-            <id>remap-obf</id>
-            <phase>package</phase>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>net.md-5</groupId>
+                <artifactId>specialsource-maven-plugin</artifactId>
+                <version>1.2.3</version>
+                <executions>
+                    <execution>
+                        <id>remap-obf</id>
+                        <phase>package</phase>
             <goals>
               <goal>remap</goal>
             </goals>
