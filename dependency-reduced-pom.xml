@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.neoperformance</groupId>
-  <artifactId>NeoPerformance</artifactId>
-  <version>1.9.9</version>
-  <build>
-    <resources>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/resources</directory>
-      </resource>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.neoperformance</groupId>
+    <artifactId>NeoPerformance</artifactId>
+    <version>1.9.9</version>
+    <build>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
     </resources>
     <plugins>
       <plugin>
@@ -39,8 +39,8 @@
               <goal>remap</goal>
             </goals>
             <configuration>
-              <inputFile>${project.build.directory}/${project.artifactId}-${project.version}-remapped-obf.jar
-              </inputFile>
+                <inputFile>${project.build.directory}/${project.artifactId}-${project.version}-remapped-obf.jar
+                </inputFile>
               <srgIn>org.spigotmc:minecraft-server:1.19-R0.1-SNAPSHOT:csrg:maps-spigot</srgIn>
               <remappedDependencies>org.spigotmc:spigot:1.19-R0.1-SNAPSHOT:jar:remapped-obf</remappedDependencies>
             </configuration>

@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceC
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
@@ -70,21 +71,31 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     //Halt all redstone activity
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
+        if (cachedData.cachedRedstoneActivity.containsKey(e.getBlock()) && cachedData.cachedRedstoneActivity.get(e.getBlock()) > 0) {
+            return;
+        }
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
             Block block = e.getBlock();
             int newCurrent = e.getNewCurrent();
             int oldCurrent = e.getOldCurrent();
-            e.setNewCurrent(oldCurrent);
+            e.setNewCurrent(0);
             String redstoneName = block.getType().name().toLowerCase();
             if (redstoneName.contains("button") || redstoneName.contains("lever")) {
                 return;
             }
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), newCurrent);
+            if (newCurrent > 0) {
+                if (!cachedData.cachedRedstoneActivity.containsKey(block)) {
+                    cachedData.cachedRedstoneActivity.put(block, newCurrent);
+                }
+            } else {
+                cachedData.cachedRedstoneActivity.remove(block);
+            }
+            Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity.toString());
             return;
         }
         if (cachedData.cachedRedstoneActivity.containsKey(e.getBlock())) {
             //If the redstone hasn't been restored yet, cancel the event
-            e.setNewCurrent(e.getOldCurrent());
+            e.setNewCurrent(0);
         }
     }
 
