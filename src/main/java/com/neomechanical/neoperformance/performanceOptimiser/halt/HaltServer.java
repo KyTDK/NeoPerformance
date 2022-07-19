@@ -5,7 +5,6 @@ import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceC
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
@@ -74,20 +73,14 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
             Block block = e.getBlock();
             int newCurrent = e.getNewCurrent();
+            cachedData.cachedRedstoneActivity.put(block.getState(), newCurrent);
             e.setNewCurrent(0);
-            String redstoneName = block.getType().name().toLowerCase();
-            if (redstoneName.contains("button") || redstoneName.contains("lever")) {
-                return;
-            }
-            cachedData.cachedRedstoneActivity.put(block, newCurrent);
-            Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity + " power " + newCurrent);
         }
     }
 
     @EventHandler()
     public void onPistonExtend(BlockPistonExtendEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), 1);
             e.setCancelled(true);
         }
     }
@@ -96,7 +89,6 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     @EventHandler()
     public void onPistonRetract(BlockPistonRetractEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            cachedData.cachedRedstoneActivity.put(e.getBlock(), 0);
             e.setCancelled(true);
         }
     }

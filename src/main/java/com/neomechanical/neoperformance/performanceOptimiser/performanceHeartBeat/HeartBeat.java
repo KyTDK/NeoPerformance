@@ -9,9 +9,12 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
@@ -79,16 +82,20 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             player.teleport(cachedData.cachedTeleport.get(player));
                         }
                     }
-                    for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
+                    Map<Integer, String> inverseMap = new HashMap<>();
+                    for (Map.Entry<String, Integer> entry : cachedData.cachedRedstoneActivity.entrySet()) {
+                        inverseMap.put(entry.getValue(), entry.getKey());
+                    }
+                    for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
                         try {
-                            org.bukkit.block.data.BlockData data = block.getBlockData();
-                            if (data instanceof org.bukkit.block.data.Powerable powerable2) {
-                                powerable2.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
-                                Bukkit.broadcastMessage("Restored redstone activity for block " + block.getX() + " " + block.getY() + " " + block.getZ());
-                                block.setBlockData(powerable2);
+                            org.bukkit.block.data.BlockData data = blockState.getBlockData();
+                            if (data instanceof org.bukkit.block.data.Powerable) {
+                                blockState.getBlock().setBlockData(data);
+                                blockState.getBlock().getState().update(true, false);
+                                Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.get(blockState));
                             } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
-                                powerable.setPower(cachedData.cachedRedstoneActivity.get(block));
-                                block.setBlockData(powerable);
+                                powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
+                                blockState.setBlockData(powerable);
                             }
                         } catch (NoClassDefFoundError e) {
                             Logger.outdated();
