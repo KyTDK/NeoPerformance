@@ -13,9 +13,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
@@ -76,40 +73,41 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    //run teleport cache
-                    for (Player player : cachedData.cachedTeleport.keySet()) {
-                        if (player.isOnline()) {
-                            player.teleport(cachedData.cachedTeleport.get(player));
-                        }
-                    }
-                    Map<Integer, String> inverseMap = new HashMap<>();
-                    for (Map.Entry<String, Integer> entry : cachedData.cachedRedstoneActivity.entrySet()) {
-                        inverseMap.put(entry.getValue(), entry.getKey());
-                    }
-                    for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
-                        try {
-                            org.bukkit.block.data.BlockData data = blockState.getBlockData();
-                            if (data instanceof org.bukkit.block.data.Powerable) {
-                                blockState.getBlock().setBlockData(data);
-                                blockState.getBlock().getState().update(true, false);
-                                Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.get(blockState));
-                            } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
-                                powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
-                                blockState.setBlockData(powerable);
-                            }
-                        } catch (NoClassDefFoundError e) {
-                            Logger.outdated();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    //clear cache entirely
-                    cachedData.cachedTeleport.clear();
-                    cachedData.cachedRedstoneActivity.clear();
+                    restoreServer();
                 }
 
             }
         }.runTaskTimer(NeoPerformance.getInstance(), 0, getTweakData().getHeartBeatRate());
+    }
+
+    private void restoreServer() {
+        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
+            //run teleport cache
+            for (Player player : cachedData.cachedTeleport.keySet()) {
+                if (player.isOnline()) {
+                    player.teleport(cachedData.cachedTeleport.get(player));
+                }
+            }
+            for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
+                try {
+                    org.bukkit.block.data.BlockData data = blockState.getBlockData();
+                    if (data instanceof org.bukkit.block.data.Powerable) {
+                        blockState.getBlock().setBlockData(data);
+                        blockState.getBlock().getState().update(true, false);
+                    } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
+                        powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
+                        blockState.setBlockData(powerable);
+                    }
+                } catch (NoClassDefFoundError e) {
+                    Logger.outdated();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            //clear cache entirely
+            cachedData.cachedTeleport.clear();
+            cachedData.cachedRedstoneActivity.clear();
+        });
     }
 
     private void setTPS() {
