@@ -59,10 +59,11 @@ public class ChunksCommand extends SubCommand {
             }
         }
         if (world == null) {
-            Chunks.getChunksWithMostEntities(10, result -> sendChatData(result, null, playerAsPlayer));
+            World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+            Chunks.getChunksWithMostEntities(10, result -> sendChatData(result, null, playerAsPlayer), worlds);
         } else {
             World finalWorld = world;
-            Chunks.getChunksWithMostEntities(world, 10, result -> sendChatData(result, finalWorld, playerAsPlayer));
+            Chunks.getChunksWithMostEntities(10, result -> sendChatData(result, finalWorld, playerAsPlayer), world);
         }
     }
 
