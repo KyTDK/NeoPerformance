@@ -5,17 +5,10 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
 import com.neomechanical.neoperformance.utils.MessageUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -117,7 +110,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
         public void force() {
             if (!toBeConfirmed.containsKey(player)) {
-                clusterLogic();
+                SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
             }
         }
 
@@ -163,76 +156,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                     toBeConfirmed.remove(player);
                 }
             }.runTaskLater(plugin, 20L * 10);
-            clusterLogic();
-        }
-
-        private void clusterLogic() {
-            //Message logic and construct entity list
-            NamedTextColor color;
-            List<List<Entity>> clusters;
-            if (world.isEmpty()) {
-                //Scan for all world
-                World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
-                clusters = SmartScan.scan(10, clusterSize, getCommandData(), worlds);
-
-            } else {
-                World[] worldsList = world.toArray(World[]::new);
-                //Scan for individual world
-                clusters = SmartScan.scan(10, clusterSize, getCommandData(), worldsList);
-            }
-            //One removes the largest cluster only
-            int toClear = 1;
-            if (all) {
-                toClear = clusters.size();
-            }
-            //No clusters, show error message and return
-            if (clusters.isEmpty()) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
-                return;
-            }
-            for (int i = 0; i < toClear; i++) {
-                //Get cluster
-                List<Entity> entityList = clusters.get(i);
-
-                //Calculate colour to represent severity of cluster
-                if (entityList.size() > 100) {
-                    color = NamedTextColor.RED;
-                } else if (entityList.size() > 50) {
-                    color = NamedTextColor.YELLOW;
-                } else {
-                    color = NamedTextColor.GREEN;
-                }
-                //Get first entity to use for location
-                Entity entity = entityList.get(0);
-                Location location = entity.getLocation();
-                if (location.getWorld() == null) {
-                    continue;
-                }
-                //Command to review cluster
-                String command = "/minecraft:execute in " + location.getWorld().getKey()
-                        + " run tp " + player.getName() + " " + location.getX()
-                        + " " + location.getY() + " " + location.getZ();
-                final TextComponent.Builder builder = Component.text()
-                        .content("Found cluster of entities with size " + entityList.size()).color(color);
-                if (player instanceof Player) {
-                    builder.append(Component.text(" - Click to teleport"))
-                            .clickEvent(
-                                    ClickEvent.runCommand(command))
-                            .hoverEvent(
-                                    HoverEvent.showText(Component.text("Click to teleport")
-                                    )
-                            );
-                } else {
-                    builder.append(Component.text(" - Location: " + location.getX() + "," + location.getY() + "," + location.getZ()));
-                }
-                MessageUtil.sendMM(player, builder.build());
-                if (toBeConfirmed.containsKey(player)) {
-                    toBeConfirmed.get(player).addAll(entityList);
-                } else {
-                    toBeConfirmed.put(player, entityList);
-                }
-            }
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+            SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
         }
     }
 
