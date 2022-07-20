@@ -70,12 +70,16 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     //Halt all redstone activity
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
+        if (!cachedData.cachedRedstoneActivity.isEmpty() && !isServerHalted(null)) {
+            //e.setNewCurrent(e.getOldCurrent());
+            return;
+        }
         if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
             Block block = e.getBlock();
             int newCurrent = e.getNewCurrent();
-            cachedData.cachedRedstoneActivity.put(block, newCurrent);
+            cachedData.cachedRedstoneActivity.put(block.getState(), newCurrent);
             //Set to 0 to prevent broken circuits
-            e.setNewCurrent(0);
+            e.setNewCurrent(e.getOldCurrent());
         }
     }
 
