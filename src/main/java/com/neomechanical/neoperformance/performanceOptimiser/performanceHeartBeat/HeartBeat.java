@@ -13,9 +13,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
@@ -81,10 +78,6 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         if (player.isOnline()) {
                             player.teleport(cachedData.cachedTeleport.get(player));
                         }
-                    }
-                    Map<Integer, String> inverseMap = new HashMap<>();
-                    for (Map.Entry<String, Integer> entry : cachedData.cachedRedstoneActivity.entrySet()) {
-                        inverseMap.put(entry.getValue(), entry.getKey());
                     }
                     for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
                         try {
