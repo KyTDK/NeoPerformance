@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.smartClear;
+package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;

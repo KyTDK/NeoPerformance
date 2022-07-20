@@ -74,6 +74,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             Block block = e.getBlock();
             int newCurrent = e.getNewCurrent();
             cachedData.cachedRedstoneActivity.put(block.getState(), newCurrent);
+            //Set to 0 to prevent broken circuits
             e.setNewCurrent(0);
         }
     }

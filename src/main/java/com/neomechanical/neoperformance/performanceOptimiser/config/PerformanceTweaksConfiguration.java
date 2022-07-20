@@ -46,8 +46,13 @@ public class PerformanceTweaksConfiguration {
         dataManager.setMailData(new MailData(booleans.get("use_mail_server"), strings.get("mail_server_host"), nums.get("mail_server_port"),
                 strings.get("mail_server_username"), strings.get("mail_server_password"), stringsArrays.get("recipients")));
         finishSection();
+        //Set command data
         getDataSet("commands");
         dataManager.setCommandData(new CommandData(nums.get("defaultClusterSize"), stringsArrays.get("smartClearExcludeEntities")));
+        finishSection();
+        //Set lag notifier data
+        getDataSet("lag_notifier");
+        dataManager.setLagNotifierData(new LagNotifierData(nums.get("runInterval"), nums.get("entitiesInChunkNotify"), nums.get("clusterSizeNotify")));
         finishSection();
     }
 

@@ -42,10 +42,12 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 if (isServerHalted(null)) {
                     manualHalt[0] = DATA_MANAGER.isManualHalt();
                     if (!halted[0]) {
+                        //A manual halt doesn't constitute emails or notifications
                         if (!manualHalt[0]) {
                             haltStartTime[0] = System.currentTimeMillis();
                             if (getMailData().getUseMailServer()) {
                                 EmailClient emailClient = new EmailClient();
+                                //Is run asynchronously
                                 emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
                                         plugin.getLanguageManager().getString("email_notifications.body", null));
                             }
@@ -63,6 +65,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         NeoPerformance.getInstance().getServer().shutdown();
                     }
                 } else if (halted[0]) {
+                    //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
                         String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
                         if (broadcastAll) {
@@ -73,36 +76,41 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    //run teleport cache
-                    for (Player player : cachedData.cachedTeleport.keySet()) {
-                        if (player.isOnline()) {
-                            player.teleport(cachedData.cachedTeleport.get(player));
-                        }
-                    }
-                    for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
-                        try {
-                            org.bukkit.block.data.BlockData data = blockState.getBlockData();
-                            if (data instanceof org.bukkit.block.data.Powerable) {
-                                blockState.getBlock().setBlockData(data);
-                                blockState.getBlock().getState().update(true, false);
-                                Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.get(blockState));
-                            } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
-                                powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
-                                blockState.setBlockData(powerable);
-                            }
-                        } catch (NoClassDefFoundError e) {
-                            Logger.outdated();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    //clear cache entirely
-                    cachedData.cachedTeleport.clear();
-                    cachedData.cachedRedstoneActivity.clear();
+                    restoreServer();
                 }
 
             }
         }.runTaskTimer(NeoPerformance.getInstance(), 0, getTweakData().getHeartBeatRate());
+    }
+
+    private void restoreServer() {
+        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
+            //run teleport cache
+            for (Player player : cachedData.cachedTeleport.keySet()) {
+                if (player.isOnline()) {
+                    player.teleport(cachedData.cachedTeleport.get(player));
+                }
+            }
+            for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
+                try {
+                    org.bukkit.block.data.BlockData data = blockState.getBlockData();
+                    if (data instanceof org.bukkit.block.data.Powerable) {
+                        blockState.getBlock().setBlockData(data);
+                        blockState.getBlock().getState().update(true, false);
+                    } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
+                        powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
+                        blockState.setBlockData(powerable);
+                    }
+                } catch (NoClassDefFoundError e) {
+                    Logger.outdated();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            //clear cache entirely
+            cachedData.cachedTeleport.clear();
+            cachedData.cachedRedstoneActivity.clear();
+        });
     }
 
     private void setTPS() {
