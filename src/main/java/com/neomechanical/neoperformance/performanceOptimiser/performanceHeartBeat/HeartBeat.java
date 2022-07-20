@@ -9,9 +9,12 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.MessageUtil;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import org.bukkit.Bukkit;
-import org.bukkit.block.BlockState;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
@@ -84,33 +87,54 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     }
 
     private void restoreServer() {
-        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
-            //run teleport cache
-            for (Player player : cachedData.cachedTeleport.keySet()) {
-                if (player.isOnline()) {
-                    player.teleport(cachedData.cachedTeleport.get(player));
-                }
+        //run teleport cache
+        for (Player player : cachedData.cachedTeleport.keySet()) {
+            if (player.isOnline()) {
+                player.teleport(cachedData.cachedTeleport.get(player));
             }
-            for (BlockState blockState : cachedData.cachedRedstoneActivity.keySet()) {
-                try {
-                    org.bukkit.block.data.BlockData data = blockState.getBlockData();
-                    if (data instanceof org.bukkit.block.data.Powerable) {
-                        blockState.getBlock().setBlockData(data);
-                        blockState.getBlock().getState().update(true, false);
-                    } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
-                        powerable.setPower(cachedData.cachedRedstoneActivity.get(blockState));
-                        blockState.setBlockData(powerable);
-                    }
+        }
+        HashMap<Block, Integer> sortedRedstone = new HashMap<>();
+        cachedData.cachedRedstoneActivity.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEachOrdered(x -> sortedRedstone.put(x.getKey(), x.getValue()));
+        Bukkit.broadcastMessage("" + sortedRedstone);
+        for (Block block : sortedRedstone.keySet()) {
+            try {
+                org.bukkit.block.data.BlockData data = block.getBlockData();
+                if (data instanceof org.bukkit.block.data.Powerable powerable) {
+                    powerable.setPowered(sortedRedstone.get(block) > 0);
+                    block.setBlockData(data);
+                    //Run later and set power to 0
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            powerable.setPowered(false);
+                            block.setBlockData(data);
+                        }
+                    }.runTaskLater(NeoPerformance.getInstance(), 1);
+                } else if (data instanceof org.bukkit.block.data.AnaloguePowerable powerable) {
+                    powerable.setPower(sortedRedstone.get(block));
+                    block.setBlockData(powerable);
+                    //Run later and set power to 0
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            powerable.setPower(0);
+                            block.setBlockData(data);
+                        }
+                    }.runTaskLater(NeoPerformance.getInstance(), 1);
+                }
+                sortedRedstone.remove(block);
                 } catch (NoClassDefFoundError e) {
                     Logger.outdated();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
-            //clear cache entirely
-            cachedData.cachedTeleport.clear();
-            cachedData.cachedRedstoneActivity.clear();
-        });
+        //Clear the cache
+        cachedData.cachedRedstoneActivity.clear();
+        cachedData.cachedTeleport.clear();
     }
 
     private void setTPS() {
