@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performanceOptimiser.utils;
+package com.neomechanical.neoperformance.performanceOptimiser.smart.chunks;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.FindOneCallback;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Entity;
 
 import java.util.*;
 
-public class Chunks {
+public class ChunksScanner {
     public static void getChunksWithMostEntities(int totalChunksReturn, final FindOneCallback callback, World... worlds) {
         // Run outside the tick loop
         List<Entity> entities = new ArrayList<>();

@@ -29,6 +29,10 @@ public interface PerformanceConfigurationSettings {
         return NeoPerformance.getDataManager().getCommandData();
     }
 
+    default LagNotifierData getLagNotifierData() {
+        return NeoPerformance.getDataManager().getLagNotifierData();
+    }
+
     default boolean canMobSpawn(EntitySpawnEvent e) {
         List<Entity> list = e.getEntity().getNearbyEntities(getTweakData().getMobCapRadius(), 2, getTweakData().getMobCapRadius());
         int mobCap = getTweakData().getMobCap();

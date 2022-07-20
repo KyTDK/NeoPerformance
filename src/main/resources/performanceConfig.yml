@@ -44,7 +44,14 @@ halt_settings:
   haltBlockPhysics: true
   # Restart server if the server is halted for more than this amount of time in seconds (s) (use -1 to disable)
   haltTimeout: 600
-
+#Lag notifier runs SmartClear and Chunks automatically and notifies admins of significant results
+lag_notifier:
+  #How often should Lag Notifier check for lag, going below 60 may cause lag (use -1 to disable)
+  runInterval: 60
+  #How many entities in a chunk until Lag Notifier tells you about it (use -1 to disable)
+  entitiesInChunkNotify: 500
+  #How large does an entity cluster need to be until it tells you about it (use -1 to disable)
+  clusterSizeNotify: 200
 commands:
   #SmartClear
   #Define cluster size for smartClear, using anything below 10 can be dangerous and

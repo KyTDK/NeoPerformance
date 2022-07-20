@@ -42,10 +42,12 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 if (isServerHalted(null)) {
                     manualHalt[0] = DATA_MANAGER.isManualHalt();
                     if (!halted[0]) {
+                        //A manual halt doesn't constitute emails or notifications
                         if (!manualHalt[0]) {
                             haltStartTime[0] = System.currentTimeMillis();
                             if (getMailData().getUseMailServer()) {
                                 EmailClient emailClient = new EmailClient();
+                                //Is run asynchronously
                                 emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
                                         plugin.getLanguageManager().getString("email_notifications.body", null));
                             }
@@ -63,6 +65,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                         NeoPerformance.getInstance().getServer().shutdown();
                     }
                 } else if (halted[0]) {
+                    //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
                         String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
                         if (broadcastAll) {

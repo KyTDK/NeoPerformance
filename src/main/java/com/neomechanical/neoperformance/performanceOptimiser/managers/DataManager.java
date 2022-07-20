@@ -16,6 +16,7 @@ public class DataManager {
     private VisualData visualData;
     private MailData mailData;
     private CommandData commandData;
+    private LagNotifierData lagNotifierData;
     private boolean isReadyToUnhalt = true;
 
     public DataManager() {
@@ -59,6 +60,15 @@ public class DataManager {
 
     public void setVisualData(VisualData visualData) {
         this.visualData = visualData;
+    }
+
+    //Lag Notifier data
+    public LagNotifierData getLagNotifierData() {
+        return this.lagNotifierData;
+    }
+
+    public void setLagNotifierData(LagNotifierData lagNotifierData) {
+        this.lagNotifierData = lagNotifierData;
     }
 
     //Commands
