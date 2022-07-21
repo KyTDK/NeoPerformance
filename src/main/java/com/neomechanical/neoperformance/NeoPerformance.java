@@ -11,8 +11,8 @@ package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.LanguageManager;
+import com.neomechanical.neoperformance.performanceOptimiser.RegisterOptimiserEvents;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
-import com.neomechanical.neoperformance.performanceOptimiser.registerOptimiserEvents;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import lombok.NonNull;
@@ -78,7 +78,7 @@ public final class NeoPerformance extends JavaPlugin {
         // Plugin startup logic
         setupBStats();
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
-        registerOptimiserEvents.register(this);
+        new RegisterOptimiserEvents().register(this);
         //Commands
         RegisterCommands.register(this);
     }
