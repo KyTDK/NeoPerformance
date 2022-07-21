@@ -1,5 +1,5 @@
 name: NeoPerformance
-version: '1.9.9'
+version: '1.10'
 main: com.neomechanical.neoperformance.NeoPerformance
 load: STARTUP
 authors:

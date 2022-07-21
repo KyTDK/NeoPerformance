@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.9.9</version>
+    <version>1.10</version>
     <build>
         <resources>
             <resource>
@@ -65,16 +65,16 @@
                 <executions>
                     <execution>
                         <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <relocations>
-            <relocation>
-              <pattern>org.bstats</pattern>
-              <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
             </relocation>
           </relocations>
           <artifactSet>

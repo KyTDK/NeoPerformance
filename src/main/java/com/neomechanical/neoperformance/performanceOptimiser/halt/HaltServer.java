@@ -6,7 +6,6 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
@@ -70,16 +69,13 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     //Halt all redstone activity
     @EventHandler()
     public void onRedstone(BlockRedstoneEvent e) {
-        if (!cachedData.cachedRedstoneActivity.isEmpty() && !isServerHalted(null)) {
-            //e.setNewCurrent(e.getOldCurrent());
+        if (!getHaltData().getHaltRedstone()) {
             return;
         }
-        if (isServerHalted(null) && getHaltData().getHaltRedstone()) {
-            Block block = e.getBlock();
-            int newCurrent = e.getNewCurrent();
-            cachedData.cachedRedstoneActivity.put(block.getState(), newCurrent);
-            //Set to 0 to prevent broken circuits
-            e.setNewCurrent(0);
+        //Track all redstone activity
+        cachedData.cachedRedstoneActivity.put(e.getBlock(), e.getNewCurrent());
+        if (isServerHalted(null)) {
+            e.setNewCurrent(e.getOldCurrent());
         }
     }
 

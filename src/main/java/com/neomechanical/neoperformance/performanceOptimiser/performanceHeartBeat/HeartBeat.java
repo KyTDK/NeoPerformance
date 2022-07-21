@@ -8,9 +8,9 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
-import org.bukkit.block.BlockState;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Powerable;
-import org.bukkit.block.data.type.Repeater;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -91,26 +91,20 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        for (BlockState block : cachedData.cachedRedstoneActivity.keySet()) {
+        for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
             try {
                 org.bukkit.block.data.BlockData data = block.getBlockData();
-                if (data instanceof Powerable) {
-                    if (block.getBlock().getBlockData() instanceof Repeater repeater) {
-                        if (repeater.isLocked()) {
-                            return;
-                        }
-                        boolean power = cachedData.cachedRedstoneActivity.get(block) > 0;
-
-                        if (power) {
-                            //Then unpowered
-                            new BukkitRunnable() {
-                                @Override
-                                public void run() {
-                                    setRepeaterPower(repeater, block, false);
-                                }
-                            }.runTaskLater(NeoPerformance.getInstance(), repeater.getDelay() + 2);
-                        }
+                if (data instanceof Powerable powerable) {
+                    if (powerable.isPowered() && cachedData.cachedRedstoneActivity.get(block) < 1) {
+                        powerable.setPowered(false);
                     }
+                    powerable.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
+                    block.setBlockData(powerable);
+                    block.getState().update(false, true);
+                } else if (data instanceof AnaloguePowerable analoguePowerable) {
+                    analoguePowerable.setPower(cachedData.cachedRedstoneActivity.get(block));
+                    block.setBlockData(analoguePowerable);
+                    block.getState().update(false, true);
                 }
             } catch (NoClassDefFoundError e) {
                 Logger.outdated();
@@ -121,12 +115,6 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
         //Clear the cache
         cachedData.cachedRedstoneActivity.clear();
         cachedData.cachedTeleport.clear();
-    }
-
-    private void setRepeaterPower(Repeater repeater, BlockState block, boolean power) {
-        repeater.setPowered(power);
-        block.getBlock().setBlockData(repeater);
-        block.update(true, true);
     }
 
     private void setTPS() {
