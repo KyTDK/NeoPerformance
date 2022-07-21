@@ -75,16 +75,16 @@
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
-            </relocation>
-          </relocations>
-          <artifactSet>
-            <includes>
-              <include>com.sun.mail:javax.mail</include>
-              <include>javax.activation:activation</include>
-              <include>net.kyori</include>
-              <include>org.bstats</include>
-            </includes>
-          </artifactSet>
+                        </relocation>
+                    </relocations>
+                    <artifactSet>
+                        <includes>
+                            <include>com.sun.mail:javax.mail</include>
+                            <include>javax.activation:activation</include>
+                            <include>net.kyori</include>
+                            <include>org.bstats</include>
+                        </includes>
+                    </artifactSet>
         </configuration>
       </plugin>
     </plugins>

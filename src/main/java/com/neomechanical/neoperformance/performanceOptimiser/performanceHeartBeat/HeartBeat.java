@@ -8,6 +8,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Powerable;
@@ -95,17 +96,14 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
             try {
                 org.bukkit.block.data.BlockData data = block.getBlockData();
                 if (data instanceof Powerable powerable) {
-                    if (powerable.isPowered() && cachedData.cachedRedstoneActivity.get(block) < 1) {
-                        powerable.setPowered(false);
-                    }
                     powerable.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
                     block.setBlockData(powerable);
-                    block.getState().update(false, true);
                 } else if (data instanceof AnaloguePowerable analoguePowerable) {
                     analoguePowerable.setPower(cachedData.cachedRedstoneActivity.get(block));
                     block.setBlockData(analoguePowerable);
-                    block.getState().update(false, true);
                 }
+                block.getState().update();
+                Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity.get(block) + "");
             } catch (NoClassDefFoundError e) {
                 Logger.outdated();
             } catch (Exception e) {
