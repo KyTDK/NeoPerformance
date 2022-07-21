@@ -111,11 +111,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
             MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
-        for (int i = 0; i < toClear; i++) {
-            //Get cluster
-            List<Entity> entityList = clusters.get(i);
-            SmartScanNotifier.sendChatData(player, toClear, entityList);
-        }
+            SmartScanNotifier.sendChatData(player, toClear, clusters);
         MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
     }
 }

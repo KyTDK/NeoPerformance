@@ -14,15 +14,16 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class SmartScanNotifier {
-    public static void sendChatData(CommandSender player, int toClear, List<Entity> entityList) {
-        TextComponent.Builder builder = getChatData(player, toClear, entityList);
+    public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
+        TextComponent.Builder builder = getChatData(player, toClear, clusters);
         MessageUtil.sendNeoMM(player, builder.build());
     }
 
-    public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<Entity> entityList) {
+    public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         final TextComponent.Builder builder = Component.text();
         NamedTextColor color;
         for (int i = 0; i < toClear; i++) {
+            List<Entity> entityList = clusters.get(i);
             //Calculate colour to represent severity of cluster
             if (entityList.size() > 100) {
                 color = NamedTextColor.RED;

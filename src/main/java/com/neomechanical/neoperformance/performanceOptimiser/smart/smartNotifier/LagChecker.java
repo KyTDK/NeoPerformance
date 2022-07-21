@@ -2,6 +2,8 @@ package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifie
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,11 +19,16 @@ public class LagChecker implements PerformanceConfigurationSettings {
             public void run() {
                 //Get data
                 List<? extends Player> recipients = Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("neoperformance.smartnotify") || p.isOp()).toList();
-                if (getLagNotifierData().getClusterSizeNotify() > 1) {
-                    LagNotifier.chunkChecker();
+                for (Player recipient : recipients) {
+                    MessageUtil.send(recipient, Messages.MAIN_LAG_REPORT_PREFIX);
+                    MessageUtil.sendMM(recipient, message);
+                    MessageUtil.send(recipient, Messages.MAIN_SUFFIX);
                 }
                 if (getLagNotifierData().getClusterSizeNotify() > 1) {
-                    LagNotifier.entityChecker(getCommandData(), getLagNotifierData().getClusterSizeNotify());
+                    LagNotifier.getChunkData();
+                }
+                if (getLagNotifierData().getClusterSizeNotify() > 1) {
+                    LagNotifier.getClusterData(getCommandData(), getLagNotifierData().getClusterSizeNotify());
                 }
             }
         }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * getLagNotifierData().getRunInterval());

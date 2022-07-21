@@ -1,14 +1,22 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier;
 
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 
 public class LagReport {
-    public static TextComponent.Builder reportBuilder() {
-        return null;
+    static final TextComponent.Builder builder = Component.text();
+
+    private static void sendReport() {
+        TextComponent message = builder.build();
     }
 
-    public static TextComponent.Builder sendReport() {
-        reportBuilder();
-        return null;
+    public LagReport reportBuilder(TextComponent.Builder builder) {
+        return this;
+    }
+
+    private LagReport addData(TextComponent.Builder dataComponent, String dataName) {
+        dataComponent.append(Component.text(dataName));
+        builder.append(dataComponent);
+        return this;
     }
 }
