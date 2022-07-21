@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.utils;
+package com.neomechanical.neoperformance.utils.messages;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import net.kyori.adventure.audience.Audience;
@@ -33,15 +33,14 @@ public final class MessageUtil {
             return msg == null ? null : ChatColor.translateAlternateColorCodes('&', msg);
         }
 
-    static List<String> neoMessageArray = new ArrayList<>();
     static List<Component> neoComponentArray = new ArrayList<>();
 
     public static void sendBaseMessages(List<BaseComponent[]> msg, Player player) {
-        player.sendMessage(color("&7&l&m                   &a&lNeoPerformance&7&l&m                   "));
+        player.sendMessage(color(Messages.MAIN_PREFIX));
         for (BaseComponent[] components : msg) {
             player.spigot().sendMessage(components);
         }
-        player.sendMessage(color("&7&l&m                                                         "));
+        player.sendMessage(color(Messages.MAIN_SUFFIX));
     }
 
     public static void sendMM(CommandSender sendTo, Component parsed) {
@@ -54,21 +53,11 @@ public final class MessageUtil {
         player.sendMessage(parsed);
     }
 
-    public MessageUtil addMessage(String msg) {
-        neoMessageArray.add(msg);
-        return this;
-    }
-
     public static void sendMM(CommandSender sendTo, String msg) {
         var mm = MiniMessage.miniMessage();
         Component parsed = mm.deserialize(msg);
         Audience player = NeoPerformance.adventure().sender(sendTo);
         player.sendMessage(parsed);
-    }
-
-    public MessageUtil neoMessage() {
-        addMessage("&7&l&m                   &a&lNeoPerformance&7&l&m                   ");
-        return this;
     }
 
     public static void sendMMAll(String string) {
@@ -90,12 +79,12 @@ public final class MessageUtil {
     }
 
     public void sendNeoComponentMessage(CommandSender player) {
-        player.sendMessage(color("&7&l&m                   &a&lNeoPerformance&7&l&m                   "));
+        player.sendMessage(color(Messages.MAIN_PREFIX));
         //addComponent("<bold><gray><strikethrough>                                                         ");
         for (Component msg : neoComponentArray) {
             sendMM(player, msg);
         }
-        player.sendMessage(color("&7&l&m                                                         "));
+        player.sendMessage(color(Messages.MAIN_SUFFIX));
         neoComponentArray.clear();
     }
 
@@ -107,7 +96,6 @@ public final class MessageUtil {
     }
 
     public MessageUtil neoComponentMessage() {
-        //addComponent("<bold><gray><strikethrough>                   <reset><green><bold>NeoPerformance<reset><bold><gray><strikethrough>                   ");
         return this;
     }
 }

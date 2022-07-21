@@ -3,7 +3,7 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
-import com.neomechanical.neoperformance.utils.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;

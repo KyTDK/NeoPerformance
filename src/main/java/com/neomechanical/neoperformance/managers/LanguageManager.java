@@ -38,7 +38,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
     }
 
     public String getLanguage() {
-        return currentLanguage;
+        return getVisualData().getLanguage();
     }
 
     public void loadMissingDefaultLanguageFiles() {

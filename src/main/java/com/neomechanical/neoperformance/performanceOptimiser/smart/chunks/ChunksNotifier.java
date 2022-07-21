@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.chunks;
 
-import com.neomechanical.neoperformance.utils.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;

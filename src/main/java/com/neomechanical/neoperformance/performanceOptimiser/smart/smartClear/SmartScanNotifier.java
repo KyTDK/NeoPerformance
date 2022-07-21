@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
-import com.neomechanical.neoperformance.utils.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
