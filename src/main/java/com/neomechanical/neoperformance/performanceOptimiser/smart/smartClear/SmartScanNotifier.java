@@ -16,7 +16,7 @@ import java.util.List;
 public class SmartScanNotifier {
     public static void sendChatData(CommandSender player, int toClear, List<Entity> entityList) {
         TextComponent.Builder builder = getChatData(player, toClear, entityList);
-        MessageUtil.sendMM(player, builder.build());
+        MessageUtil.sendNeoMM(player, builder.build());
     }
 
     public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<Entity> entityList) {

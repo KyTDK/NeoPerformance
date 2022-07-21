@@ -5,7 +5,6 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -35,14 +34,6 @@ public final class MessageUtil {
 
     static List<Component> neoComponentArray = new ArrayList<>();
 
-    public static void sendBaseMessages(List<BaseComponent[]> msg, Player player) {
-        player.sendMessage(color(Messages.MAIN_PREFIX));
-        for (BaseComponent[] components : msg) {
-            player.spigot().sendMessage(components);
-        }
-        player.sendMessage(color(Messages.MAIN_SUFFIX));
-    }
-
     public static void sendMM(CommandSender sendTo, Component parsed) {
         Audience player = NeoPerformance.adventure().sender(sendTo);
         player.sendMessage(parsed);
@@ -58,6 +49,13 @@ public final class MessageUtil {
         Component parsed = mm.deserialize(msg);
         Audience player = NeoPerformance.adventure().sender(sendTo);
         player.sendMessage(parsed);
+    }
+
+    public static void sendNeoMM(CommandSender sendTo, Component parsed) {
+        sendTo.sendMessage(color(Messages.MAIN_PREFIX));
+        Audience player = NeoPerformance.adventure().sender(sendTo);
+        player.sendMessage(parsed);
+        sendTo.sendMessage(color(Messages.MAIN_SUFFIX));
     }
 
     public static void sendMMAll(String string) {

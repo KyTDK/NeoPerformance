@@ -18,7 +18,7 @@ import java.util.List;
 public class ChunksNotifier {
     public static void sendChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
         TextComponent.Builder bc = getChatData(chunks, world, playerAsPlayer);
-        MessageUtil.sendMM(playerAsPlayer, bc.build());
+        MessageUtil.sendNeoMM(playerAsPlayer, bc.build());
     }
 
     public static TextComponent.Builder getChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {

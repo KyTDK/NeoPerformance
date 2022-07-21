@@ -17,13 +17,11 @@ public class LagChecker implements PerformanceConfigurationSettings {
             public void run() {
                 //Get data
                 List<? extends Player> recipients = Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("neoperformance.smartnotify") || p.isOp()).toList();
-                for (Player player : recipients) {
-                    if (getLagNotifierData().getClusterSizeNotify() > 1) {
-                        LagNotifier.chunkChecker(player);
-                    }
-                    if (getLagNotifierData().getClusterSizeNotify() > 1) {
-                        LagNotifier.entityChecker(player, getCommandData(), plugin, false, getLagNotifierData().getClusterSizeNotify());
-                    }
+                if (getLagNotifierData().getClusterSizeNotify() > 1) {
+                    LagNotifier.chunkChecker();
+                }
+                if (getLagNotifierData().getClusterSizeNotify() > 1) {
+                    LagNotifier.entityChecker(getCommandData(), getLagNotifierData().getClusterSizeNotify());
                 }
             }
         }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * getLagNotifierData().getRunInterval());
