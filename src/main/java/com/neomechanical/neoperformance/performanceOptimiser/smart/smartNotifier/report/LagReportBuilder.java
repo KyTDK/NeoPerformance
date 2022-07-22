@@ -1,0 +1,29 @@
+package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.report;
+
+import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
+import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.Messages;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+
+public class LagReportBuilder {
+    static final TextComponent.Builder builder = Component.text();
+
+    public void addData(List<LagData> dataList) {
+        for (LagData data : dataList) {
+            TextComponent.Builder dataComponent = data.getMessageData();
+            dataComponent.append(Component.text(data.getDataName()));
+            builder.append(dataComponent);
+        }
+    }
+
+    public void sendReport(Player player) {
+        TextComponent message = builder.build();
+        MessageUtil.send(player, Messages.MAIN_LAG_REPORT_PREFIX);
+        MessageUtil.sendMM(player, message);
+        MessageUtil.send(player, Messages.MAIN_SUFFIX);
+    }
+}
