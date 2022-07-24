@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -14,14 +15,22 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class SmartScanNotifier {
+    static NeoPerformance plugin = NeoPerformance.getInstance();
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         TextComponent.Builder builder = getChatData(player, toClear, clusters);
+        if (builder == null) {
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            return;
+        }
         MessageUtil.sendNeoMM(player, builder.build());
     }
 
     public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         final TextComponent.Builder builder = Component.text();
         NamedTextColor color;
+        if (clusters.isEmpty()) {
+            return null;
+        }
         for (int i = 0; i < toClear; i++) {
             List<Entity> entityList = clusters.get(i);
             //Calculate colour to represent severity of cluster
