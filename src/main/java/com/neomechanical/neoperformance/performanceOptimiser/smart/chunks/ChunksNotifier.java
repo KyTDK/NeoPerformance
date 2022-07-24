@@ -45,6 +45,10 @@ public class ChunksNotifier {
                 bc.append(Component.text(" - World: ")).decorate(TextDecoration.BOLD);
                 bc.append(Component.text(chunk.getWorld().getName())).color(color).decorate(TextDecoration.BOLD);
             }
+            //Append new line
+            if (chunks.indexOf(chunk) != chunks.size() - 1) {
+                bc.append(Component.newline());
+            }
             bc.clickEvent(ClickEvent.runCommand(
                     "/minecraft:execute in " + chunk.getWorld().getKey()
                             + " run tp " + playerAsPlayer.getName() + " " + location.getX()

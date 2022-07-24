@@ -9,6 +9,7 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Powerable;
@@ -92,18 +93,21 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        for (Block block : cachedData.cachedRedstoneActivity.keySet()) {
+        Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.values());
+        for (Location location : cachedData.cachedRedstoneActivity.keySet()) {
             try {
+                Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.get(location));
+                Block block = location.getBlock();
                 org.bukkit.block.data.BlockData data = block.getBlockData();
                 if (data instanceof Powerable powerable) {
-                    powerable.setPowered(cachedData.cachedRedstoneActivity.get(block) > 0);
+                    powerable.setPowered(cachedData.cachedRedstoneActivity.get(location) > 0);
                     block.setBlockData(powerable);
                 } else if (data instanceof AnaloguePowerable analoguePowerable) {
-                    analoguePowerable.setPower(cachedData.cachedRedstoneActivity.get(block));
+                    Bukkit.broadcastMessage("" + analoguePowerable.getPower());
+                    analoguePowerable.setPower(cachedData.cachedRedstoneActivity.get(location));
                     block.setBlockData(analoguePowerable);
                 }
                 block.getState().update();
-                Bukkit.broadcastMessage(cachedData.cachedRedstoneActivity.get(block) + "");
             } catch (NoClassDefFoundError e) {
                 Logger.outdated();
             } catch (Exception e) {

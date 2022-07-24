@@ -22,8 +22,10 @@ public class LagReportBuilder {
 
     public void sendReport(Player player) {
         TextComponent message = builder.build();
-        MessageUtil.send(player, Messages.MAIN_LAG_REPORT_PREFIX);
-        MessageUtil.sendMM(player, message);
-        MessageUtil.send(player, Messages.MAIN_SUFFIX);
+        if (message.children().size() > 0) {
+            MessageUtil.send(player, Messages.MAIN_LAG_REPORT_PREFIX);
+            MessageUtil.sendMM(player, message);
+            MessageUtil.send(player, Messages.MAIN_SUFFIX);
+        }
     }
 }

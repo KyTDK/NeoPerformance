@@ -17,7 +17,7 @@ public class DataManager {
     private MailData mailData;
     private CommandData commandData;
     private LagNotifierData lagNotifierData;
-    private boolean isReadyToUnhalt = true;
+    private boolean restoringRedstone = false;
 
     public DataManager() {
     }
@@ -100,12 +100,12 @@ public class DataManager {
         }
     }
 
-    public boolean isReadyToUnhalt() {
-        return isReadyToUnhalt;
+    public boolean isRestoringRedstone() {
+        return restoringRedstone;
     }
 
-    public void setReadyToUnhalt(boolean readyToUnhalt) {
-        this.isReadyToUnhalt = readyToUnhalt;
+    public void setRestoringRedstone(boolean restoringRedstone) {
+        this.restoringRedstone = restoringRedstone;
     }
 
     public boolean isBypassed(Player player) {
