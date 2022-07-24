@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.Sm
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScanNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -24,7 +25,11 @@ public class EntityClusterData extends DataGetter implements PerformanceConfigur
 
     @Override
     public LagData get(Player player) {
-        return new LagData(player, "Entity Clusters", SmartScanNotifier.getChatData(player, 1, clusters));
+        TextComponent.Builder builder = SmartScanNotifier.getChatData(player, 1, clusters);
+        if (builder.children().isEmpty()) {
+            return null;
+        }
+        return new LagData(player, "Entity Clusters", builder);
     }
 
     @Override

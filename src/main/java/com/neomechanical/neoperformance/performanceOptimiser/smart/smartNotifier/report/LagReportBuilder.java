@@ -10,12 +10,18 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class LagReportBuilder {
-    static final TextComponent.Builder builder = Component.text();
+    final TextComponent.Builder builder = Component.text();
 
     public void addData(List<LagData> dataList) {
         for (LagData data : dataList) {
+            //Null means there is no data to report
+            if (data == null) {
+                continue;
+            }
             TextComponent.Builder dataComponent = data.getMessageData();
-            dataComponent.append(Component.text(data.getDataName()));
+            builder.append(Component.text("  ")).append(Component.text("[")).append(Component.text(data.getDataName()))
+                    .append(Component.text("]"))
+                    .append(Component.newline());
             builder.append(dataComponent);
         }
     }

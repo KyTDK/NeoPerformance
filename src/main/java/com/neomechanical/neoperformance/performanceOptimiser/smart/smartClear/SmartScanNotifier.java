@@ -18,7 +18,7 @@ public class SmartScanNotifier {
     static NeoPerformance plugin = NeoPerformance.getInstance();
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         TextComponent.Builder builder = getChatData(player, toClear, clusters);
-        if (builder == null) {
+        if (builder.children().isEmpty()) {
             MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
@@ -29,7 +29,7 @@ public class SmartScanNotifier {
         final TextComponent.Builder builder = Component.text();
         NamedTextColor color;
         if (clusters.isEmpty()) {
-            return null;
+            return builder;
         }
         for (int i = 0; i < toClear; i++) {
             List<Entity> entityList = clusters.get(i);
@@ -51,7 +51,7 @@ public class SmartScanNotifier {
             String command = "/minecraft:execute in " + location.getWorld().getKey()
                     + " run tp " + player.getName() + " " + location.getX()
                     + " " + location.getY() + " " + location.getZ();
-            builder.append(Component.text("Found cluster of entities with size " + entityList.size())).color(color);
+            builder.append(Component.text("  Found cluster of entities with size " + entityList.size())).color(color);
             if (player instanceof Player) {
                 builder.append(Component.text(" - Click to teleport"))
                         .clickEvent(
@@ -62,6 +62,9 @@ public class SmartScanNotifier {
                         );
             } else {
                 builder.append(Component.text(" - Location: " + location.getX() + "," + location.getY() + "," + location.getZ()));
+            }
+            if (i < toClear - 1) {
+                builder.append(Component.newline());
             }
         }
         return builder;

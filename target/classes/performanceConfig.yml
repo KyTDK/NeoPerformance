@@ -46,7 +46,7 @@ halt_settings:
   haltTimeout: 600
 #Lag notifier runs SmartClear and Chunks automatically and notifies admins of significant results
 lag_notifier:
-  #How often should Lag Notifier check for lag, going below 60 may cause lag (use -1 to disable)
+  #How often should Lag Notifier check for lag in seconds (s), going below 60 may cause lag (use -1 to disable)
   runInterval: 60
   #How many entities in a chunk until Lag Notifier tells you about it (use -1 to disable)
   entitiesInChunkNotify: 500

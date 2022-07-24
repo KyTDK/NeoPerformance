@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.Chunks
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
@@ -21,6 +22,10 @@ public class ChunkData extends DataGetter implements PerformanceConfigurationSet
 
     @Override
     public LagData get(Player player) {
+        TextComponent.Builder builder = ChunksNotifier.getChatData(chunks, null, player);
+        if (builder.children().isEmpty()) {
+            return null;
+        }
         return new LagData(player, "Chunks", ChunksNotifier.getChatData(chunks, null, player));
     }
 

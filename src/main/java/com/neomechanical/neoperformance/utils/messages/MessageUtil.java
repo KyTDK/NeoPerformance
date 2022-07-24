@@ -35,7 +35,7 @@ public final class MessageUtil {
     static List<Component> neoComponentArray = new ArrayList<>();
 
     public static void send(Player player, String message) {
-        player.sendMessage(message);
+        player.sendMessage(color(message));
     }
 
     public static void sendMM(CommandSender sendTo, Component parsed) {
