@@ -75,7 +75,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
         //Track all redstone activity
         cachedData.cachedRedstoneActivity.put(e.getBlock().getLocation(), e.getNewCurrent());
         if (isServerHalted(null)) {
-            e.setNewCurrent(0);
+            e.setNewCurrent(e.getOldCurrent());
         }
     }
 

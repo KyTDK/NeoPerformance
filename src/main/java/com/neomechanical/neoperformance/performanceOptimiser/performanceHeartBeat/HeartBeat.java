@@ -8,10 +8,11 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -93,21 +94,20 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.values());
         for (Location location : cachedData.cachedRedstoneActivity.keySet()) {
             try {
-                Bukkit.broadcastMessage("" + cachedData.cachedRedstoneActivity.get(location));
                 Block block = location.getBlock();
                 org.bukkit.block.data.BlockData data = block.getBlockData();
                 if (data instanceof Powerable powerable) {
-                    powerable.setPowered(cachedData.cachedRedstoneActivity.get(location) > 0);
+                    powerable.setPowered(powerable.isPowered());
                     block.setBlockData(powerable);
                 } else if (data instanceof AnaloguePowerable analoguePowerable) {
-                    Bukkit.broadcastMessage("" + analoguePowerable.getPower());
-                    analoguePowerable.setPower(cachedData.cachedRedstoneActivity.get(location));
+                    analoguePowerable.setPower(analoguePowerable.getPower());
                     block.setBlockData(analoguePowerable);
                 }
-                block.getState().update();
+                BlockData blockData = block.getBlockData().clone();
+                block.setType(Material.AIR);
+                block.setBlockData(blockData);
             } catch (NoClassDefFoundError e) {
                 Logger.outdated();
             } catch (Exception e) {
