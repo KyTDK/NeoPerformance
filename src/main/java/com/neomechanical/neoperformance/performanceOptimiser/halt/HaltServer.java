@@ -22,7 +22,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
-import org.bukkit.event.world.ChunkLoadEvent;
 
 import java.util.List;
 
@@ -99,17 +98,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             e.setCancelled(true);
         }
     }
-    //End of Halt all redstone activity
-
-    @EventHandler()
-    public void onChunkLoad(ChunkLoadEvent e) {
-        if (isServerHalted(null) && getHaltData().getHaltChunkLoading()) {
-            if (e.getChunk().isLoaded()) {
-                e.getChunk().unload();
-            }
-        }
-    }
-
+    
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltMobSpawning()) {

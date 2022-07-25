@@ -11,7 +11,6 @@ public class HaltData {
     private @NotNull Boolean haltTeleportation;
     private @NotNull Boolean haltExplosions;
     private @NotNull Boolean haltRedstone;
-    private @NotNull Boolean haltChunkLoading;
     private @NotNull Boolean haltMobSpawning;
     private @NotNull Boolean haltInventoryMovement;
     private @NotNull Boolean haltCommandBlock;

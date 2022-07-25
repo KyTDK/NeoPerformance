@@ -27,7 +27,7 @@ public class PerformanceTweaksConfiguration {
         //Set halt data
         getDataSet("halt_settings");
         dataManager.setHaltData(new HaltData(booleans.get("allowJoinWhileHalted"), nums.get("maxSpeed"), booleans.get("haltTeleportation"),
-                booleans.get("haltExplosions"), booleans.get("haltRedstone"), booleans.get("haltChunkLoading"), booleans.get("haltMobSpawning"),
+                booleans.get("haltExplosions"), booleans.get("haltRedstone"), booleans.get("haltMobSpawning"),
                 booleans.get("haltInventoryMovement"), booleans.get("haltCommandBlock"), booleans.get("haltItemDrops"), booleans.get("haltBlockBreaking"),
                 booleans.get("haltProjectiles"), booleans.get("haltEntityBreeding"), booleans.get("haltEntityInteractions"),
                 booleans.get("haltEntityTargeting"), booleans.get("haltVehicleCollisions"), booleans.get("haltBlockPhysics"), nums.get("haltTimeout")));
