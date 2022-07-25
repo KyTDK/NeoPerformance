@@ -27,8 +27,6 @@ halt_settings:
   maxSpeed: -1
   haltExplosions: true
   haltRedstone: true
-  # [haltChunkLoading] Use with caution
-  haltChunkLoading: false
   # [haltMobSpawning] This will also prevent block breaking and item dropping
   haltMobSpawning: true
   haltInventoryMovement: true #Does not affect players, only hoppers and chests
