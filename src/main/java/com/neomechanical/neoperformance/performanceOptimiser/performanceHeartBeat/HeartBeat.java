@@ -9,13 +9,14 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Iterator;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
@@ -94,8 +95,10 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        for (Location location : cachedData.cachedRedstoneActivity.keySet()) {
+        DATA_MANAGER.setRestoringRedstone(true);
+        for (Iterator<Location> locationIterator = cachedData.cachedRedstoneActivity.keySet().iterator(); locationIterator.hasNext(); ) {
             try {
+                Location location = locationIterator.next().clone();
                 Block block = location.getBlock();
                 org.bukkit.block.data.BlockData data = block.getBlockData();
                 if (data instanceof Powerable powerable) {
@@ -106,14 +109,16 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     block.setBlockData(analoguePowerable);
                 }
                 BlockData blockData = block.getBlockData().clone();
-                block.setType(Material.AIR);
+                block.setType(block.getType());
                 block.setBlockData(blockData);
+                block.getState().update(true, true);
             } catch (NoClassDefFoundError e) {
                 Logger.outdated();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
+        DATA_MANAGER.setRestoringRedstone(false);
         //Clear the cache
         cachedData.cachedRedstoneActivity.clear();
         cachedData.cachedTeleport.clear();
