@@ -17,7 +17,7 @@ import java.util.function.BiConsumer;
 public class SmartClearCommand extends SubCommand implements PerformanceConfigurationSettings {
 
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
-    private static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
+    public static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
 
     @Override
     public String getName() {

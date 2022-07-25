@@ -1,6 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.commands.SmartClearCommand;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
@@ -113,5 +114,18 @@ public class SmartScan implements PerformanceConfigurationSettings {
         }
         SmartScanNotifier.sendChatData(player, toClear, clusters);
         MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+
+
+        for (int i = 0; i < toClear; i++) {
+            //Get cluster
+            List<Entity> entityList = clusters.get(i);
+
+            //Get first entity to use for location
+            if (SmartClearCommand.toBeConfirmed.containsKey(player)) {
+                SmartClearCommand.toBeConfirmed.get(player).addAll(entityList);
+            } else {
+                SmartClearCommand.toBeConfirmed.put(player, entityList);
+            }
+        }
     }
 }

@@ -22,6 +22,9 @@ public class ChunkData extends DataGetter implements PerformanceConfigurationSet
 
     @Override
     public LagData get(Player player) {
+        if (chunks.isEmpty() || chunks.get(0).getEntities().length < getLagNotifierData().getEntitiesInChunkNotify()) {
+            return null;
+        }
         TextComponent.Builder builder = ChunksNotifier.getChatData(chunks, null, player);
         if (builder.children().isEmpty()) {
             return null;

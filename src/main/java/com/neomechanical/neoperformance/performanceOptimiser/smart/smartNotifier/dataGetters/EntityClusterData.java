@@ -25,6 +25,9 @@ public class EntityClusterData extends DataGetter implements PerformanceConfigur
 
     @Override
     public LagData get(Player player) {
+        if (clusters.isEmpty() || clusters.get(0).size() < getLagNotifierData().getClusterSizeNotify()) {
+            return null;
+        }
         TextComponent.Builder builder = SmartScanNotifier.getChatData(player, 1, clusters);
         if (builder.children().isEmpty()) {
             return null;
