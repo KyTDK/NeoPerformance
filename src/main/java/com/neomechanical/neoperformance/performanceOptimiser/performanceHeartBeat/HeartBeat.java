@@ -93,7 +93,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        if (cachedData.cachedTeleport.size() > 0) {
+        if (cachedData.cachedRedstoneActivity.size() > 0) {
             DATA_MANAGER.setRestoringRedstone(true);
             for (Location location : cachedData.cachedRedstoneActivity) {
                 try {
