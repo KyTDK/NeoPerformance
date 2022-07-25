@@ -113,8 +113,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
             return;
         }
         SmartScanNotifier.sendChatData(player, toClear, clusters);
-        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
-
 
         for (int i = 0; i < toClear; i++) {
             //Get cluster

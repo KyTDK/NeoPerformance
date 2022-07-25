@@ -151,6 +151,8 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
+            } else {
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
             }
             //Remove from list if not confirmed after 10 seconds
             new BukkitRunnable() {
