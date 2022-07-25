@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.performanceOptimiser.utils;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
+import com.neomechanical.neoperformance.utils.ServerUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +14,9 @@ public interface Tps {
         return HeartBeat.getUpdatedTPS();
     }
     default boolean isServerHalted(@Nullable Player player) {
-        double tps = getTPS();
+        if (ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.RUNNING) {
+            return false;
+        }
         int haltAt = DATA_MANAGER.getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
             return false;
@@ -22,9 +25,6 @@ public interface Tps {
             if (DATA_MANAGER.isBypassed(player)) {
                 return false;
             }
-        }
-        if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.
-            return false;
         }
         if (DATA_MANAGER.isManualHalt()) {
             return true;

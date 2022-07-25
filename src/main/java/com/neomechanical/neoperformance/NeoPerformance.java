@@ -11,8 +11,12 @@ package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.LanguageManager;
-import com.neomechanical.neoperformance.performanceOptimiser.RegisterOptimiserEvents;
+import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
+import com.neomechanical.neoperformance.performanceOptimiser.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
+import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
+import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.LagChecker;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import lombok.NonNull;
@@ -23,7 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
 
-public final class NeoPerformance extends JavaPlugin {
+public final class NeoPerformance extends JavaPlugin implements PerformanceConfigurationSettings {
     private static NeoPerformance instance;
     private static LanguageManager languageManager;
     private static BukkitAudiences adventure;
@@ -78,7 +82,7 @@ public final class NeoPerformance extends JavaPlugin {
         // Plugin startup logic
         setupBStats();
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
-        new RegisterOptimiserEvents().register(this);
+        registerOptimizers();
         //Commands
         RegisterCommands.register(this);
     }
@@ -88,6 +92,16 @@ public final class NeoPerformance extends JavaPlugin {
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> NeoPerformance.getInstance().getLanguageManager().getLanguage()));
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
+    }
+
+    public void registerOptimizers() {
+        //Register ability listeners
+        getServer().getPluginManager().registerEvents(new HaltServer(), this);
+        getServer().getPluginManager().registerEvents(new LagPrevention(), this);
+        new HeartBeat().start();
+        if (!(getLagNotifierData().getRunInterval() < 1)) {
+            new LagChecker().start();
+        }
     }
 
     @Override
