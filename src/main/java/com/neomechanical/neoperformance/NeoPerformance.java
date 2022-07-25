@@ -24,6 +24,7 @@ import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
 
@@ -82,7 +83,12 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
         // Plugin startup logic
         setupBStats();
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
-        registerOptimizers();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                registerOptimizers();
+            }
+        }.runTaskLater(this, 1);
         //Commands
         RegisterCommands.register(this);
     }

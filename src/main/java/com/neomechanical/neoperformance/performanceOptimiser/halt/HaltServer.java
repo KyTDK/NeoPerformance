@@ -4,6 +4,7 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
+import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.block.data.AnaloguePowerable;
@@ -32,10 +33,11 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltTeleportation()) {
-            e.setCancelled(true);
-            if (!cachedData.cachedTeleport.containsKey(e.getPlayer())) {
-                cachedData.cachedTeleport.put(e.getPlayer(), e.getTo());
+            if (NPC.isNpc(e.getPlayer())) {
+                return;
             }
+            e.setCancelled(true);
+            cachedData.cachedTeleport.putIfAbsent(e.getPlayer(), e.getTo());
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarTeleportMessage", null));
         }
     }
@@ -98,10 +100,13 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             e.setCancelled(true);
         }
     }
-    
+
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
         if (isServerHalted(null) && getHaltData().getHaltMobSpawning()) {
+            if (NPC.isNpc(e.getEntity())) {
+                return;
+            }
             e.setCancelled(true);
         }
     }

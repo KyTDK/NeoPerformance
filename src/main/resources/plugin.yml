@@ -1,7 +1,7 @@
 name: NeoPerformance
 version: '${version}'
 main: com.neomechanical.neoperformance.NeoPerformance
-load: STARTUP
+load: POSTWORLD
 authors:
   - NeoDevs
 prefix: NeoPerformance
