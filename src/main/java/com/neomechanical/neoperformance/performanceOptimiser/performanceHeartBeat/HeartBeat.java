@@ -16,8 +16,6 @@ import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Iterator;
-
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
@@ -97,9 +95,8 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
         }
         if (cachedData.cachedTeleport.size() > 0) {
             DATA_MANAGER.setRestoringRedstone(true);
-            for (Iterator<Location> locationIterator = cachedData.cachedRedstoneActivity.keySet().iterator(); locationIterator.hasNext(); ) {
+            for (Location location : cachedData.cachedRedstoneActivity) {
                 try {
-                    Location location = locationIterator.next().clone();
                     Block block = location.getBlock();
                     org.bukkit.block.data.BlockData data = block.getBlockData();
                     if (data instanceof Powerable powerable) {
