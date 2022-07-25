@@ -23,6 +23,9 @@ public class LagReportBuilder {
                     .append(Component.text("]"))
                     .append(Component.newline());
             builder.append(dataComponent);
+            if (dataList.indexOf(data) != dataList.size() - 1) {
+                builder.append(Component.newline());
+            }
         }
     }
 

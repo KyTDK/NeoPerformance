@@ -25,11 +25,12 @@ public class ChunksNotifier {
         TextComponent.Builder bc = Component.text();
         for (Chunk chunk : chunks) {
             NamedTextColor color;
-            if (chunk.getEntities().length >= 1000) {
+            int entitySize = chunk.getEntities().length;
+            if (entitySize >= 1000) {
                 color = NamedTextColor.DARK_RED;
-            } else if (chunk.getEntities().length >= 500) {
+            } else if (entitySize >= 500) {
                 color = NamedTextColor.RED;
-            } else if (chunk.getEntities().length >= 100) {
+            } else if (entitySize >= 100) {
                 color = NamedTextColor.YELLOW;
             } else {
                 color = NamedTextColor.GREEN;
@@ -37,14 +38,15 @@ public class ChunksNotifier {
             Entity entityToLocate = chunk.getEntities()[0];
             Location location = new Location(world, Math.round(entityToLocate.getLocation().getX()), Math.round(entityToLocate.getLocation().getY()),
                     Math.round(entityToLocate.getLocation().getZ()));
-            bc.append(Component.text("  Chunk: ")).decorate(TextDecoration.BOLD)
-                    .append(Component.text(location.getX() + " " + location.getZ())).color(color).decorate(TextDecoration.BOLD)
-                    .append(Component.text(" - Entities: ")).color(color).decorate(TextDecoration.BOLD)
+            bc.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
+                    .append(Component.text(location.getX() + " " + location.getZ()).color(color).decorate(TextDecoration.BOLD))
+                    .append(Component.text(" - Entities: ").color(color).decorate(TextDecoration.BOLD))
                     .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color).decorate(TextDecoration.BOLD));
             if (world == null) {
-                bc.append(Component.text(" - World: ")).decorate(TextDecoration.BOLD);
-                bc.append(Component.text(chunk.getWorld().getName())).color(color).decorate(TextDecoration.BOLD);
+                bc.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
+                bc.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
             }
+            bc.color(color).decorate(TextDecoration.BOLD);
             //Append new line
             if (chunks.indexOf(chunk) != chunks.size() - 1) {
                 bc.append(Component.newline());

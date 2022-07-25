@@ -6,18 +6,21 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.Chunks
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
 import net.kyori.adventure.text.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChunkData extends DataGetter implements PerformanceConfigurationSettings {
-    private static final List<Chunk> chunks = new ArrayList<>();
+    private static List<Chunk> chunks = new ArrayList<>();
 
     @Override
     public void generate() {
-        ChunksScanner.getChunksWithMostEntities(1, chunks::addAll);
+        World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+        ChunksScanner.getChunksWithMostEntities(1, result -> chunks = result, worlds);
     }
 
     @Override
@@ -29,7 +32,7 @@ public class ChunkData extends DataGetter implements PerformanceConfigurationSet
         if (builder.children().isEmpty()) {
             return null;
         }
-        return new LagData(player, "Chunks", ChunksNotifier.getChatData(chunks, null, player));
+        return new LagData(player, "Chunks", builder);
     }
 
     @Override
