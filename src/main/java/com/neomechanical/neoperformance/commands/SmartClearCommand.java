@@ -103,15 +103,13 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
         private boolean all = false;
         private int clusterSize;
         private boolean cancel = false;
-
+        private boolean force = false;
         private SmartClearAccumulator(CommandSender player) {
             this.player = player;
         }
 
         public void force() {
-            if (!toBeConfirmed.containsKey(player)) {
-                SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
-            }
+            force = true;
         }
 
         public void size(int clusterSize) {
@@ -139,6 +137,11 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 MessageUtil.sendMM(player, "<red><bold>Cancelled");
                 cancel = false;
                 return;
+            }
+            //For force
+            if (force) {
+                force = false;
+                SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
             }
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
