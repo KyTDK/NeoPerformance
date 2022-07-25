@@ -95,33 +95,35 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 player.teleport(cachedData.cachedTeleport.get(player));
             }
         }
-        DATA_MANAGER.setRestoringRedstone(true);
-        for (Iterator<Location> locationIterator = cachedData.cachedRedstoneActivity.keySet().iterator(); locationIterator.hasNext(); ) {
-            try {
-                Location location = locationIterator.next().clone();
-                Block block = location.getBlock();
-                org.bukkit.block.data.BlockData data = block.getBlockData();
-                if (data instanceof Powerable powerable) {
-                    powerable.setPowered(powerable.isPowered());
-                    block.setBlockData(powerable);
-                } else if (data instanceof AnaloguePowerable analoguePowerable) {
-                    analoguePowerable.setPower(analoguePowerable.getPower());
-                    block.setBlockData(analoguePowerable);
+        if (cachedData.cachedTeleport.size() > 0) {
+            DATA_MANAGER.setRestoringRedstone(true);
+            for (Iterator<Location> locationIterator = cachedData.cachedRedstoneActivity.keySet().iterator(); locationIterator.hasNext(); ) {
+                try {
+                    Location location = locationIterator.next().clone();
+                    Block block = location.getBlock();
+                    org.bukkit.block.data.BlockData data = block.getBlockData();
+                    if (data instanceof Powerable powerable) {
+                        powerable.setPowered(powerable.isPowered());
+                        block.setBlockData(powerable);
+                    } else if (data instanceof AnaloguePowerable analoguePowerable) {
+                        analoguePowerable.setPower(analoguePowerable.getPower());
+                        block.setBlockData(analoguePowerable);
+                    }
+                    BlockData blockData = block.getBlockData().clone();
+                    block.setType(block.getType());
+                    block.setBlockData(blockData);
+                    block.getState().update(true, true);
+                } catch (NoClassDefFoundError e) {
+                    Logger.outdated();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-                BlockData blockData = block.getBlockData().clone();
-                block.setType(block.getType());
-                block.setBlockData(blockData);
-                block.getState().update(true, true);
-            } catch (NoClassDefFoundError e) {
-                Logger.outdated();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
+            DATA_MANAGER.setRestoringRedstone(false);
+            //Clear the cache
+            cachedData.cachedRedstoneActivity.clear();
+            cachedData.cachedTeleport.clear();
         }
-        DATA_MANAGER.setRestoringRedstone(false);
-        //Clear the cache
-        cachedData.cachedRedstoneActivity.clear();
-        cachedData.cachedTeleport.clear();
     }
 
     private void setTPS() {

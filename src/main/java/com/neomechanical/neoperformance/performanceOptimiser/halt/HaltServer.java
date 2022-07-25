@@ -6,6 +6,9 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.Location;
+import org.bukkit.block.data.AnaloguePowerable;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
@@ -206,6 +209,10 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
+        BlockData blockData = e.getBlock().getBlockData();
+        if (blockData instanceof AnaloguePowerable || blockData instanceof Powerable) {
+            return;
+        }
         if (isServerHalted(null) && getHaltData().getHaltBlockPhysics()) {
             e.setCancelled(true);
         }
