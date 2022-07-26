@@ -27,7 +27,7 @@ public class UpdateChecker implements PerformanceConfigurationSettings {
                 public void run() {
                     new UpdateChecker(NeoPerformance.getInstance(), 103183).getVersion(version -> UpToDate = isUpToDate(NeoPerformance.getInstance().getDescription().getVersion(), version));
                 }
-            }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * 60);
+            }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * 300);
         }
     }
 
