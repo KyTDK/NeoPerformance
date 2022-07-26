@@ -11,7 +11,6 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
@@ -91,17 +90,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
     }
 
     public static void clusterLogic(int clusterSize, List<World> world, CommandData commandData, NeoPerformance plugin, CommandSender player, boolean all) {
-        if (!SmartClearCommand.toBeConfirmed.containsKey(player)) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
-            //Remove from list if not confirmed after 10 seconds
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    SmartClearCommand.toBeConfirmed.remove(player);
-                }
-            }.runTaskLater(plugin, 20L * 10);
-            return;
-        }
         //Message logic and construct entity list
         List<List<Entity>> clusters;
         if (world.isEmpty()) {
@@ -137,5 +125,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 SmartClearCommand.toBeConfirmed.put(player, entityList);
             }
         }
+        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
     }
 }

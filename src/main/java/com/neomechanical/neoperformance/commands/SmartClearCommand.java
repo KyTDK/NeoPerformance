@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -152,6 +153,13 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 toBeConfirmed.remove(player);
                 return;
             }
+            //Remove from list if not confirmed after 10 seconds
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    toBeConfirmed.remove(player);
+                }
+            }.runTaskLater(plugin, 20L * 10);
             SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
         }
     }
