@@ -108,7 +108,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
             toClear = clusters.size();
         }
         //No clusters, show error message and return
-        if (clusters.isEmpty()) {
+        if (clusters.isEmpty() && SmartClearCommand.toBeConfirmed.containsKey(player)) {
             MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
