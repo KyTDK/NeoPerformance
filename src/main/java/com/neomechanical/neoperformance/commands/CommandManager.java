@@ -1,6 +1,7 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import org.bukkit.command.Command;
@@ -15,11 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class CommandManager implements CommandExecutor, TabCompleter, Tps {
+public class CommandManager implements CommandExecutor, TabCompleter, Tps, PerformanceConfigurationSettings {
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
     private final NeoPerformance plugin = NeoPerformance.getInstance();
     private final String parentCommand = "neoperformance";
-    public CommandManager(){
+
+    public CommandManager() {
         subcommands.add(new HaltCommand());
         subcommands.add(new HelpCommand(this));
         subcommands.add(new ReloadCommand());
@@ -56,8 +58,11 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps {
                             .addComponent(plugin.getLanguageManager().getString("main.isServerHalted", null))
                             .addComponent(plugin.getLanguageManager().getString("main.serverTps", null))
                             .addComponent(plugin.getLanguageManager().getString("main.serverHaltsAt", null))
-                            .addComponent(plugin.getLanguageManager().getString("main.playerCount", null))
-                            .sendNeoComponentMessage(sender);
+                            .addComponent(plugin.getLanguageManager().getString("main.playerCount", null));
+                    if (getVisualData().getShowPluginUpdateInMain()) {
+                        messageUtil.addComponent(plugin.getLanguageManager().getString("main.upToDate", null));
+                    }
+                    messageUtil.sendNeoComponentMessage(sender);
                     return true;
                 }
                 }

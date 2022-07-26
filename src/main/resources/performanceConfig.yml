@@ -84,3 +84,5 @@ email_notifications:
     - "example2@gmail.com"
 visual:
   language: en-US
+  # See 'Is Plugin Up To Date' in '/np'
+  showPluginUpdateInMain: true

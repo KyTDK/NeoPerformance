@@ -254,6 +254,7 @@ public class LanguageManager implements PerformanceConfigurationSettings, Tps {
         internalPlaceholderReplacements.put("%SERVERHALTED%", fancyIsServerHalted()); //Player null because we don't care about bypass
         internalPlaceholderReplacements.put("%PLAYERCOUNT%", String.valueOf(Bukkit.getOnlinePlayers().size()));
         internalPlaceholderReplacements.put("%PLAYER%", player == null ? "None" : player.getName());
+        internalPlaceholderReplacements.put("%UPDATESTATUS%", getFancyUpdateStatus());
         return UtilManager.replaceFromMap(initialMessage, internalPlaceholderReplacements);
     }
 

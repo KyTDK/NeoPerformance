@@ -3,6 +3,7 @@ main:
   serverTps: '<gray>  TPS del servidor: %TPS%'
   serverHaltsAt: '<gray>  La actividad se detiene en: %TPSHALT%'
   playerCount: '<gray>  Número de jugadores: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  El complemento está actualizado: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>Los TPS son demasiado bajos, deteniendo la actividad del servidor...'
   serverResumed: '<green><bold>Los TPS han vuelto a la normalidad, reanudando la actividad del servidor...'

@@ -3,9 +3,9 @@ package com.neomechanical.neoperformance.performanceOptimiser.utils;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
+import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
-
 
 public interface Tps {
     DataManager DATA_MANAGER = NeoPerformance.getDataManager();
@@ -60,6 +60,15 @@ public interface Tps {
             return "<red><bold>N/A";
         } else {
             return "<green><bold>" + haltAt;
+        }
+    }
+
+    default String getFancyUpdateStatus() {
+        boolean isUpToDate = UpdateChecker.UpToDate;
+        if (isUpToDate) {
+            return ("<green><bold>true");
+        } else {
+            return ("<red><bold>false");
         }
     }
 }

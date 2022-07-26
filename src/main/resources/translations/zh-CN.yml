@@ -3,6 +3,7 @@ main:
   serverTps: '<gray>  服务器 TPS: %TPS%'
   serverHaltsAt: '<gray>  服务器停止在: %TPSHALT%'
   playerCount: '<gray>  玩家人数：<green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  插件是否是最新的：%UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>TPS 太低，正在停止服务器'
   serverResumed: '<green><bold>TPS 恢复正常，正在恢复服务器'

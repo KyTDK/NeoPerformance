@@ -7,4 +7,5 @@ import org.jetbrains.annotations.NotNull;
 public class VisualData {
     //Visual
     private @NotNull String language;
+    private @NotNull Boolean showPluginUpdateInMain;
 }

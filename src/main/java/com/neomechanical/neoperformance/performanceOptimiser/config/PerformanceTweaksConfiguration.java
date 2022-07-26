@@ -39,7 +39,7 @@ public class PerformanceTweaksConfiguration {
         finishSection();
         //Set visual data
         getDataSet("visual");
-        dataManager.setVisualData(new VisualData(strings.get("language")));
+        dataManager.setVisualData(new VisualData(strings.get("language"), booleans.get("showPluginUpdateInMain")));
         finishSection();
         //Set mail data
         getDataSet("email_notifications");

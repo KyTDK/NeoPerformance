@@ -1,8 +1,9 @@
 main:
-  isServerHalted: '<gray> Le serveur est-il arrêté: %SERVERHALTED%'
-  serverTps: '<gray> Serveur TPS: %TPS%'
-  serverHaltsAt: "<gray> Le serveur s'arrête à: %TPSHALT%"
-  playerCount: '<gray> Nombre de joueurs: <green><bold>%PLAYERCOUNT%'
+  isServerHalted: '<gray>  Le serveur est-il arrêté: %SERVERHALTED%'
+  serverTps: '<gray>  Serveur TPS: %TPS%'
+  serverHaltsAt: "<gray>  Le serveur s'arrête à: %TPSHALT%"
+  playerCount: '<gray>  Nombre de joueurs: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  Le plugin est-il à jour: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>TPS est trop bas, arrêt du serveur'
   serverResumed: '<green><bold>TPS retour à la normale, récupération du serveur'

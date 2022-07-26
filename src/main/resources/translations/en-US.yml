@@ -3,6 +3,7 @@ main:
   serverTps: '<gray>  Server TPS: %TPS%'
   serverHaltsAt: '<gray>  Server halts at: %TPSHALT%'
   playerCount: '<gray>  Player count: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  Is plugin up to date: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>TPS is too low, halting server'
   serverResumed: '<green><bold>TPS back to normal, recovering the server'

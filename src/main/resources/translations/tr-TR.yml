@@ -3,6 +3,7 @@ main:
   serverTps: '<gray>  Sunucu TPS: %TPS%'
   serverHaltsAt: '<gray>  Sunucu şu anda duruyor: %TPSHALT%'
   playerCount: '<gray>  Oyuncu sayısı: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gri>  Eklenti güncel mi: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>TPS çok düşük, sunucu durduruluyor'
   serverResumed: '<green><bold>TPS normale döndü, sunucu kurtarılıyor'

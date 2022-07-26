@@ -105,6 +105,7 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
         getServer().getPluginManager().registerEvents(new HaltServer(), this);
         getServer().getPluginManager().registerEvents(new LagPrevention(), this);
         new HeartBeat().start();
+        new UpdateChecker(this, 103183).start();
         if (!(getLagNotifierData().getRunInterval() < 1)) {
             new LagChecker().start();
         }

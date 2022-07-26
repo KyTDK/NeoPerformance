@@ -3,6 +3,7 @@ main:
   serverTps: '<gray>  ТПС сервера: %TPS%'
   serverHaltsAt: '<gray>  Остановка активности при: %TPSHALT%'
   playerCount: '<gray>  Число игроков: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  Плагин обновлен: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>ТПС слишком низкий. Выполняется остановка активности'
   serverResumed: '<green><bold>ТПС выглядит нормальным. Активность возобновлена'
