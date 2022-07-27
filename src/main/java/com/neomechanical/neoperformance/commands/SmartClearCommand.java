@@ -139,10 +139,9 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 return;
             }
             //For force
-            if (force) {
+            if (force && !toBeConfirmed.containsKey(player)) {
                 force = false;
                 SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
-                return;
             }
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
