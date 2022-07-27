@@ -88,7 +88,7 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
             public void run() {
                 registerOptimizers();
             }
-        }.runTaskLater(this, 1);
+        }.runTask(this);
         //Commands
         RegisterCommands.register(this);
     }
