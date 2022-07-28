@@ -32,8 +32,6 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
 
     public void start() {
         final long[] haltStartTime = new long[1];
-        boolean notifyAdmin = getTweakData().getNotifyAdmin();
-        boolean broadcastAll = getTweakData().getBroadcastHalt();
         final boolean[] halted = {false};
         final boolean[] manualHalt = {false};
         new BukkitRunnable() {
@@ -55,9 +53,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                                         plugin.getLanguageManager().getString("email_notifications.body", null));
                             }
                             String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
-                            if (broadcastAll) {
+                            if (getTweakData().getBroadcastHalt()) {
                                 MessageUtil.sendMMAll(message);
-                            } else if (notifyAdmin) {
+                            } else if (getTweakData().getNotifyAdmin()) {
                                 MessageUtil.sendMMAdmins(message);
                             }
                         }
@@ -71,9 +69,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
                         String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
-                        if (broadcastAll) {
+                        if (getTweakData().getBroadcastHalt()) {
                             MessageUtil.sendMMAll(message);
-                        } else if (notifyAdmin) {
+                        } else if (getTweakData().getNotifyAdmin()) {
                             MessageUtil.sendMMAdmins(message);
                         }
                     }
