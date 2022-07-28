@@ -82,7 +82,6 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
         });
         // Plugin startup logic
         setupBStats();
-        Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -109,6 +108,7 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
         if (!(getLagNotifierData().getRunInterval() < 1)) {
             new LagChecker().start();
         }
+        Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
     }
 
     @Override
