@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.commandManager.SubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -19,27 +20,22 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
     public static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
 
-    @Override
     public String getName() {
         return "smartclear";
     }
 
-    @Override
     public String getDescription() {
         return "Clears excess entities from the server";
     }
 
-    @Override
     public String getSyntax() {
         return "/np smartclear";
     }
 
-    @Override
     public String getPermission() {
         return "neoperformance.smartclear";
     }
 
-    @Override
     public boolean playerOnly() {
         return false;
     }
@@ -80,7 +76,6 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     }
 
 
-    @Override
     public void perform(CommandSender player, String[] args) {
         Stack<String> commandStack = new Stack<>();
         commandStack.addAll(Arrays.asList(args));

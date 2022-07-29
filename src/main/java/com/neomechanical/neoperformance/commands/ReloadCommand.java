@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.commandManager.SubCommand;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
