@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import java.util.List;
 import java.util.Map;
 
-public class ReloadCommand extends SubCommand{
+public class ReloadCommand extends SubCommand {
 
     @Override
     public String getName() {

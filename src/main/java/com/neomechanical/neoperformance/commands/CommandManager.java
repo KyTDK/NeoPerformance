@@ -4,24 +4,23 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.messages.MessageUtil;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CommandManager implements CommandExecutor, TabCompleter, Tps, PerformanceConfigurationSettings {
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private final String parentCommand = "neoperformance";
+    private Command mainCommand;
+    private String errorNotPlayer = "You must be a player to use this command!";
+    private String errorNoPermission = "You do not have permission to use this command!";
+    private String errorCommandNotFound = "Command not found!";
 
-    public CommandManager() {
+    public CommandManager(SubCommand... subcommandsPass) {
+        Collections.addAll(this.subcommands, subcommandsPass);
         subcommands.add(new HaltCommand());
         subcommands.add(new HelpCommand(this));
         subcommands.add(new ReloadCommand());
@@ -30,57 +29,70 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps, Perfo
         subcommands.add(new SmartClearCommand());
     }
 
+    public void registerMainCommand(Command command) {
+        mainCommand = command;
+    }
+
+    public void setErrorNotPlayer(String errorNotPlayer) {
+        this.errorNotPlayer = errorNotPlayer;
+    }
+
+    public void setErrorNoPermission(String errorNoPermission) {
+        this.errorNoPermission = errorNoPermission;
+    }
+
+    public void setErrorCommandNotFound(String errorCommandNotFound) {
+        this.errorCommandNotFound = errorCommandNotFound;
+    }
+
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-            if (args.length > 0) {
-                    for (int i = 0; i < getSubcommands().size(); i++) {
-                        if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
-                            if (getSubcommands().get(i).playerOnly() && !(sender instanceof Player)) {
-                                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
-                                return true;
-                            }
-                            if (sender.hasPermission(getSubcommands().get(i).getPermission())) {
-                                getSubcommands().get(i).perform(sender, args);
-                            } else {
-                                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorNoPermission", null));
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String label, @NotNull String[] args) {
+        if (args.length > 0) {
+            for (int i = 0; i < getSubcommands().size(); i++) {
+                if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
+                    if (getSubcommands().get(i).playerOnly() && !(sender instanceof Player)) {
+                        MessageUtil.sendMM(sender, errorNotPlayer);
+                        return true;
+                    }
+                    if (sender.hasPermission(getSubcommands().get(i).getPermission())) {
+                        getSubcommands().get(i).perform(sender, args);
+                    } else {
+                        MessageUtil.sendMM(sender, errorNoPermission);
                             }
                             return true;
                         }
                     }
                     //If the command is not found, send a message to the player
-                MessageUtil.sendMM(sender, plugin.getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
+            MessageUtil.sendMM(sender, errorCommandNotFound);
                     return true;
                 }
                 else {
-                if (sender.hasPermission(parentCommand + ".admin")) {
-                    MessageUtil messageUtil = new MessageUtil();
-                    messageUtil.neoComponentMessage()
-                            .addComponent(plugin.getLanguageManager().getString("main.isServerHalted", null))
-                            .addComponent(plugin.getLanguageManager().getString("main.serverTps", null))
-                            .addComponent(plugin.getLanguageManager().getString("main.serverHaltsAt", null))
-                            .addComponent(plugin.getLanguageManager().getString("main.playerCount", null));
-                    if (getVisualData().getShowPluginUpdateInMain()) {
-                        messageUtil.addComponent(plugin.getLanguageManager().getString("main.upToDate", null));
-                    }
-                    messageUtil.sendNeoComponentMessage(sender);
-                    return true;
-                }
-                }
+            if (mainCommand.playerOnly() && !(sender instanceof Player)) {
+                MessageUtil.sendMM(sender, errorNotPlayer);
+                return true;
+            }
+            if (sender.hasPermission(mainCommand.getPermission())) {
+                mainCommand.perform(sender, args);
+            } else {
+                MessageUtil.sendMM(sender, errorNoPermission);
+            }
+        }
 
 
         return true;
     }
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull org.bukkit.command.Command command, @NotNull String alias, @NotNull String[] args) {
         List<String> list = new ArrayList<>();
-            for (int i = 0; i < getSubcommands().size(); i++) {
-                SubCommand subCommand = getSubcommands().get(i);
-                if (!sender.hasPermission(subCommand.getPermission())) {
-                    return null;
-                }
-                if (args.length == 1) {
-                    list.add(subCommand.getName());
-                } else if (args.length >= 2) {
-                    if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
+        for (int i = 0; i < getSubcommands().size(); i++) {
+            SubCommand subCommand = getSubcommands().get(i);
+            if (!sender.hasPermission(subCommand.getPermission())) {
+                return null;
+            }
+            if (args.length == 1) {
+                list.add(subCommand.getName());
+            } else if (args.length >= 2) {
+                if (args[0].equalsIgnoreCase(getSubcommands().get(i).getName())) {
                         List<String> suggestions = getSubcommands().get(i).tabSuggestions();
                         Map<String, List<String>> mapSuggestions = getSubcommands().get(i).mapSuggestions();
                         List<String> listArgs = List.of(args);
@@ -98,6 +110,7 @@ public class CommandManager implements CommandExecutor, TabCompleter, Tps, Perfo
         return list;
     }
     public void init(NeoPerformance plugin){
+        String parentCommand = "neoperformance";
         Objects.requireNonNull(plugin.getCommand(parentCommand)).setExecutor(this);
     }
     public ArrayList<SubCommand> getSubcommands(){

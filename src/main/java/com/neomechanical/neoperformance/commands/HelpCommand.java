@@ -8,8 +8,9 @@ import org.bukkit.command.CommandSender;
 import java.util.List;
 import java.util.Map;
 
-public class HelpCommand extends SubCommand{
+public class HelpCommand extends SubCommand {
     private final CommandManager commandManager;
+
     @Override
     public String getName() {
         return "help";

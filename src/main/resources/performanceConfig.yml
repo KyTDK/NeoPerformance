@@ -26,7 +26,7 @@ halt_settings:
   # [maxSpeed] 3.92000381462276 m/s is the terminal velocity of a player in minecraft (use -1 to disable)
   maxSpeed: -1
   haltExplosions: true
-  haltRedstone: true
+  haltRedstone: false
   # [haltMobSpawning] This will also prevent block breaking and item dropping
   haltMobSpawning: true
   haltInventoryMovement: true #Does not affect players, only hoppers and chests
