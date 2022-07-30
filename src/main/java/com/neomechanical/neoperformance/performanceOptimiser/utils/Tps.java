@@ -64,11 +64,13 @@ public interface Tps {
     }
 
     default String getFancyUpdateStatus() {
-        boolean isUpToDate = UpdateChecker.UpToDate;
-        if (isUpToDate) {
-            return ("<green><bold>true");
+        Boolean isUpToDate = UpdateChecker.UpToDate;
+        if (isUpToDate == null) {
+            return "<red><bold>N/A";
+        } else if (isUpToDate) {
+            return "<green><bold>true";
         } else {
-            return ("<red><bold>false");
+            return "<red><bold>false";
         }
     }
 }

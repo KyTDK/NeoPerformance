@@ -6,6 +6,7 @@ import com.neomechanical.neoutils.commandManager.CommandManager;
 public class RegisterCommands {
     public static void register(NeoPerformance plugin) {
         CommandManager commandManager = new CommandManager();
+        commandManager.setAudiences(NeoPerformance.adventure());
         commandManager.registerSubCommand(new BypassCommand());
         commandManager.setErrorNotPlayer(plugin.getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
         commandManager.setErrorNoPermission(plugin.getLanguageManager().getString("commandGeneric.errorNoPermission", null));
