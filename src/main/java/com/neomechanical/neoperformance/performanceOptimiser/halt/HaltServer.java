@@ -12,6 +12,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
@@ -107,6 +108,9 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             if (NPC.isNpc(e.getEntity())) {
                 return;
             }
+            if (e.getEntity() instanceof Item) {
+                return;
+            }
             e.setCancelled(true);
         }
     }
@@ -130,7 +134,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (isServerHalted(e.getPlayer()) && (getHaltData().getHaltMobSpawning() || getHaltData().getHaltItemDrops())) {
+        if (isServerHalted(e.getPlayer()) && getHaltData().getHaltItemDrops()) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
@@ -139,7 +143,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (isServerHalted(e.getPlayer()) && (getHaltData().getHaltMobSpawning() || getHaltData().getHaltBlockBreaking())) {
+        if (isServerHalted(e.getPlayer()) && getHaltData().getHaltBlockBreaking()) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
