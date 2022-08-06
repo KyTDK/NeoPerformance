@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoconfig.NeoConfig;
 import com.neomechanical.neoconfig.menu.ConfigMenu;
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoutils.commandManager.SubCommand;
 import com.neomechanical.neoutils.inventory.InventoryUtil;
 import com.neomechanical.neoutils.inventory.managers.data.InventoryGUI;
@@ -40,7 +40,8 @@ public class ConfigCommand extends SubCommand {
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
-        InventoryGUI inventoryGUI = ConfigMenu.generateMenu(NeoConfig.getInstance());
+        InventoryUtil.init(NeoPerformance.getInstance());
+        InventoryGUI inventoryGUI = new ConfigMenu(NeoPerformance.getInstance()).generateMenu(NeoPerformance.getInstance());
         InventoryUtil.openInventory(playerAsPlayer, inventoryGUI);
     }
 

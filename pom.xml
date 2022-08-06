@@ -73,6 +73,7 @@
                             <include>net.kyori</include>
                             <include>org.bstats</include>
                             <include>com.github.KyTDK:NeoUtils</include>
+                            <include>com.neomechanical:NeoConfig</include>
                             <!--<include>com.neomechanical:NeoUtils</include>-->
                         </includes>
                     </artifactSet>
@@ -184,8 +185,7 @@
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
             <version>1.0.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/libs/NeoConfig-1.0.3.jar</systemPath>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <properties>

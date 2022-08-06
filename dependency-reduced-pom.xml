@@ -84,6 +84,7 @@
                             <include>net.kyori</include>
                             <include>org.bstats</include>
                             <include>com.github.KyTDK:NeoUtils</include>
+                            <include>com.neomechanical:NeoConfig</include>
                         </includes>
                     </artifactSet>
                 </configuration>
