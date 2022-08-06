@@ -3,8 +3,8 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -41,6 +41,8 @@ public class ChunksCommand extends SubCommand {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
+
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
@@ -48,7 +50,7 @@ public class ChunksCommand extends SubCommand {
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
             if (world == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
         }

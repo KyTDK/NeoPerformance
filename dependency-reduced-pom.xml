@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.10.9</version>
+    <version>1.10.10</version>
     <build>
         <resources>
             <resource>
@@ -83,7 +83,7 @@
                             <include>javax.activation:activation</include>
                             <include>net.kyori</include>
                             <include>org.bstats</include>
-                            <include>com.github.KyTDK:NeoUtils</include>
+                            <include>com.neomechanical:NeoUtils</include>
                         </includes>
                     </artifactSet>
                 </configuration>

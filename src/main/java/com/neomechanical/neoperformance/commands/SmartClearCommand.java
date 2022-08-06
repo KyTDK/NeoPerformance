@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -19,6 +19,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
     public static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
+    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     public String getName() {
         return "smartclear";
@@ -68,7 +69,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     private static void size(SmartClearAccumulator accumulator, List<String> arguments) {
         if (arguments.size() == 1) {
             if (Integer.getInteger(arguments.get(0)) != null) {
-                MessageUtil.sendMM(accumulator.player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                messageUtil.sendMM(accumulator.player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             accumulator.size(Integer.parseInt(arguments.get(0)));
@@ -113,7 +114,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
         public void world(String name) {
             if (Bukkit.getWorld(name) == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
             }
             world.add(Bukkit.getWorld(name));
         }
@@ -129,7 +130,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
         public void complete() {
             if (cancel) {
-                MessageUtil.sendMM(player, "<red><bold>Cancelled");
+                messageUtil.sendMM(player, "<red><bold>Cancelled");
                 cancel = false;
                 return;
             }
@@ -143,7 +144,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                 for (Entity e : toBeConfirmed.get(player)) {
                     e.remove();
                 }
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
             }

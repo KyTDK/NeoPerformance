@@ -1,9 +1,10 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.commandManager.CommandManager;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoutils.pages.Pagination;
 import org.bukkit.command.CommandSender;
 
@@ -46,25 +47,25 @@ public class HelpCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender player, String[] args) {
-        MessageUtil messageUtil = new MessageUtil();
+        MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
         messageUtil.neoComponentMessage();
         int page = 1;
         if (args.length == 2) {
             if (Integer.getInteger(args[1]) == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             page = Integer.getInteger(args[1]);
         }
         List<SubCommand> pageList = Pagination.getPage(commandManager.getSubcommands(), page, 10);
         if (pageList == null) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
             return;
         }
         for (SubCommand subCommand : pageList) {
             messageUtil.addComponent("  <gray><bold>" + subCommand.getSyntax() + "</bold> - " + subCommand.getDescription());
         }
-        messageUtil.sendNeoComponentMessage(player);
+        messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }
 
     @Override

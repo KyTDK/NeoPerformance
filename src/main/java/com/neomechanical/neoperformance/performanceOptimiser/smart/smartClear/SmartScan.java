@@ -5,7 +5,7 @@ import com.neomechanical.neoperformance.commands.SmartClearCommand;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class SmartScan implements PerformanceConfigurationSettings {
+    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
@@ -109,7 +110,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
         }
         //No clusters, show error message and return
         if (clusters.isEmpty()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
         SmartScanNotifier.sendChatData(player, toClear, clusters);
@@ -125,6 +126,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 SmartClearCommand.toBeConfirmed.put(player, entityList);
             }
         }
-        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+        messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
     }
 }

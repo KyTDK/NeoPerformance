@@ -5,7 +5,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceC
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
@@ -30,6 +30,7 @@ import java.util.List;
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
@@ -136,7 +137,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onItemDrop(PlayerDropItemEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltItemDrops()) {
             e.setCancelled(true);
-            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
+            messageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
@@ -145,7 +146,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onBlockBreak(BlockBreakEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltBlockBreaking()) {
             e.setCancelled(true);
-            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
+            messageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }

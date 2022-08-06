@@ -1,8 +1,8 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -34,12 +34,14 @@ public class ReloadCommand extends SubCommand {
     public boolean playerOnly() {
         return false;
     }
+
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     @Override
     public void perform(CommandSender player, String[] args) {
         NeoPerformance.reloadTweakDataManager();
-        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("reload.onReload", null));
+        messageUtil.sendMM(player, plugin.getLanguageManager().getString("reload.onReload", null));
     }
 
     @Override

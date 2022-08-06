@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -16,13 +16,14 @@ import java.util.List;
 
 public class SmartScanNotifier {
     static NeoPerformance plugin = NeoPerformance.getInstance();
+    static MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         TextComponent.Builder builder = getChatData(player, toClear, clusters);
         if (builder.children().isEmpty()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
-        MessageUtil.sendNeoMM(player, builder.build());
+        messageUtil.sendMM(player, builder.build());
     }
 
     public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {

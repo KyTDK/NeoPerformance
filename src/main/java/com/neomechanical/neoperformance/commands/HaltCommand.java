@@ -2,8 +2,8 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -36,13 +36,14 @@ public class HaltCommand extends SubCommand implements Tps {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     @Override
     public void perform(CommandSender player, String[] args) {
         DATA_MANAGER.toggleManualHalt();
         if (DATA_MANAGER.isManualHalt()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOn", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOn", null));
         } else {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOff", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOff", null));
         }
     }
 

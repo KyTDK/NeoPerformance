@@ -7,7 +7,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
@@ -21,6 +21,7 @@ import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TP
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin = NeoPerformance.getInstance();
+    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     private static double tps;
 
     public static double getUpdatedTPS() {
@@ -54,9 +55,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             }
                             String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
                             if (getTweakData().getBroadcastHalt()) {
-                                MessageUtil.sendMMAll(message);
+                                messageUtil.sendMMAll(message);
                             } else if (getTweakData().getNotifyAdmin()) {
-                                MessageUtil.sendMMAdmins(message);
+                                messageUtil.sendMMAdmins(message);
                             }
                         }
                     }
@@ -70,9 +71,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     if (!manualHalt[0]) {
                         String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
                         if (getTweakData().getBroadcastHalt()) {
-                            MessageUtil.sendMMAll(message);
+                            messageUtil.sendMMAll(message);
                         } else if (getTweakData().getNotifyAdmin()) {
-                            MessageUtil.sendMMAdmins(message);
+                            messageUtil.sendMMAdmins(message);
                         }
                     }
                     halted[0] = false;

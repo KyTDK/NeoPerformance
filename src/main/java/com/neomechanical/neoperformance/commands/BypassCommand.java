@@ -2,8 +2,8 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
 import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,36 +38,36 @@ public class BypassCommand extends SubCommand implements Tps {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-
+    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     @Override
     public void perform(CommandSender player, String[] args) {
         if (args.length == 1) {
             if (!(player instanceof Player)) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNotPlayer", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNotPlayer", null));
                 return;
             }
             if (DATA_MANAGER.toggleBypass(player)) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassing", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassing", null));
             } else {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassing", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassing", null));
             }
         } else if (args.length == 2) {
             if (!player.hasPermission("neoperformance.bypass.others")) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNoPermissionOthers", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.errorNoPermissionOthers", null));
                 return;
             }
             Player player1 = Bukkit.getPlayer(args[1]);
             if (player1 != null) {
                 if (DATA_MANAGER.toggleBypass(player1)) {
-                    MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassingPlayer", player1));
+                    messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.nowBypassingPlayer", player1));
                 } else {
-                    MessageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassingPlayer", player1));
+                    messageUtil.sendMM(player, plugin.getLanguageManager().getString("bypass.noLongerBypassingPlayer", player1));
                 }
             } else {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorPlayerNotFound", null));
+                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorPlayerNotFound", null));
             }
         } else {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
         }
     }
 

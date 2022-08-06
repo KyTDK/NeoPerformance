@@ -2,8 +2,9 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
-import com.neomechanical.neoperformance.utils.messages.MessageUtil;
+import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.commandManager.Command;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -37,9 +38,9 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
         return false;
     }
 
+    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     @Override
     public void perform(CommandSender player, String[] args) {
-        MessageUtil messageUtil = new MessageUtil();
         messageUtil.neoComponentMessage()
                 .addComponent(plugin.getLanguageManager().getString("main.isServerHalted", null))
                 .addComponent(plugin.getLanguageManager().getString("main.serverTps", null))
@@ -48,7 +49,7 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
         if (getVisualData().getShowPluginUpdateInMain()) {
             messageUtil.addComponent(plugin.getLanguageManager().getString("main.upToDate", null));
         }
-        messageUtil.sendNeoComponentMessage(player);
+        messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }
 
     @Override

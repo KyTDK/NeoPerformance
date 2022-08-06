@@ -72,7 +72,7 @@
                             <include>javax.activation:activation</include>
                             <include>net.kyori</include>
                             <include>org.bstats</include>
-                            <include>com.github.KyTDK:NeoUtils</include>
+                            <include>com.neomechanical:NeoUtils</include>
                         </includes>
                     </artifactSet>
                 </configuration>
@@ -174,9 +174,9 @@
         </dependency>
         <!-- NeoUtils -->
         <dependency>
-            <groupId>com.github.KyTDK</groupId>
+            <groupId>com.neomechanical</groupId>
             <artifactId>NeoUtils</artifactId>
-            <version>1.10.8</version>
+            <version>6.9</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
