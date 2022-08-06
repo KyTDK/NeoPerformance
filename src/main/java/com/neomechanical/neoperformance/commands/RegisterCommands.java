@@ -18,6 +18,7 @@ public class RegisterCommands {
         commandManager.registerSubCommand(new ChunksCommand());
         commandManager.registerSubCommand(new HaltCommand());
         commandManager.registerSubCommand(new SmartClearCommand());
+        commandManager.registerSubCommand(new ConfigCommand());
         commandManager.init(plugin, "neoperformance");
     }
 }

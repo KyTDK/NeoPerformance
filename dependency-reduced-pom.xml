@@ -83,7 +83,7 @@
                             <include>javax.activation:activation</include>
                             <include>net.kyori</include>
                             <include>org.bstats</include>
-                            <include>com.neomechanical:NeoUtils</include>
+                            <include>com.github.KyTDK:NeoUtils</include>
                         </includes>
                     </artifactSet>
                 </configuration>
