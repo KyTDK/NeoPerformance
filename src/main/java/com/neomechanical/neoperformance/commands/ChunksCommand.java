@@ -41,8 +41,6 @@ public class ChunksCommand extends SubCommand {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
-
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
@@ -50,7 +48,7 @@ public class ChunksCommand extends SubCommand {
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
             if (world == null) {
-                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
         }

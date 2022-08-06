@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.report;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.messages.MessageUtil;
@@ -12,7 +11,6 @@ import java.util.List;
 
 public class LagReportBuilder {
     final TextComponent.Builder builder = Component.text();
-    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     public void addData(List<LagData> dataList) {
         for (LagData data : dataList) {
@@ -35,7 +33,7 @@ public class LagReportBuilder {
         TextComponent message = builder.build();
         if (message.children().size() > 0) {
             MessageUtil.send(player, Messages.MAIN_LAG_REPORT_PREFIX);
-            messageUtil.sendMM(player, message);
+            MessageUtil.sendMM(player, message);
             MessageUtil.send(player, Messages.MAIN_SUFFIX);
         }
     }

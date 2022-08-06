@@ -38,7 +38,7 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
         return false;
     }
 
-    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
+    private static final MessageUtil messageUtil = new MessageUtil();
     @Override
     public void perform(CommandSender player, String[] args) {
         messageUtil.neoComponentMessage()

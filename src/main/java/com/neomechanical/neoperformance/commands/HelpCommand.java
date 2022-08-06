@@ -47,19 +47,19 @@ public class HelpCommand extends SubCommand {
 
     @Override
     public void perform(CommandSender player, String[] args) {
-        MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
+        MessageUtil messageUtil = new MessageUtil();
         messageUtil.neoComponentMessage();
         int page = 1;
         if (args.length == 2) {
             if (Integer.getInteger(args[1]) == null) {
-                messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             page = Integer.getInteger(args[1]);
         }
         List<SubCommand> pageList = Pagination.getPage(commandManager.getSubcommands(), page, 10);
         if (pageList == null) {
-            messageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
             return;
         }
         for (SubCommand subCommand : pageList) {

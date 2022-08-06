@@ -36,14 +36,13 @@ public class HaltCommand extends SubCommand implements Tps {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     @Override
     public void perform(CommandSender player, String[] args) {
         DATA_MANAGER.toggleManualHalt();
         if (DATA_MANAGER.isManualHalt()) {
-            messageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOn", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOn", null));
         } else {
-            messageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOff", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("halt.toggleHaltOff", null));
         }
     }
 

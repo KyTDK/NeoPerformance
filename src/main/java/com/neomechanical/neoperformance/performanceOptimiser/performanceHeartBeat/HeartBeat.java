@@ -21,7 +21,6 @@ import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TP
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     private static double tps;
 
     public static double getUpdatedTPS() {
@@ -55,9 +54,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             }
                             String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
                             if (getTweakData().getBroadcastHalt()) {
-                                messageUtil.sendMMAll(message);
+                                MessageUtil.sendMMAll(message);
                             } else if (getTweakData().getNotifyAdmin()) {
-                                messageUtil.sendMMAdmins(message);
+                                MessageUtil.sendMMAdmins(message);
                             }
                         }
                     }
@@ -71,9 +70,9 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     if (!manualHalt[0]) {
                         String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
                         if (getTweakData().getBroadcastHalt()) {
-                            messageUtil.sendMMAll(message);
+                            MessageUtil.sendMMAll(message);
                         } else if (getTweakData().getNotifyAdmin()) {
-                            messageUtil.sendMMAdmins(message);
+                            MessageUtil.sendMMAdmins(message);
                         }
                     }
                     halted[0] = false;

@@ -36,12 +36,11 @@ public class ReloadCommand extends SubCommand {
     }
 
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     @Override
     public void perform(CommandSender player, String[] args) {
         NeoPerformance.reloadTweakDataManager();
-        messageUtil.sendMM(player, plugin.getLanguageManager().getString("reload.onReload", null));
+        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("reload.onReload", null));
     }
 
     @Override

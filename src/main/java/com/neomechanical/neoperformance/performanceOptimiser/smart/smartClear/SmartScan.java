@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class SmartScan implements PerformanceConfigurationSettings {
-    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
@@ -110,7 +109,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
         }
         //No clusters, show error message and return
         if (clusters.isEmpty()) {
-            messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
         SmartScanNotifier.sendChatData(player, toClear, clusters);
@@ -126,6 +125,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 SmartClearCommand.toBeConfirmed.put(player, entityList);
             }
         }
-        messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
     }
 }

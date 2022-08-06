@@ -30,7 +30,6 @@ import java.util.List;
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
     private final NeoPerformance plugin = NeoPerformance.getInstance();
-    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
@@ -137,7 +136,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onItemDrop(PlayerDropItemEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltItemDrops()) {
             e.setCancelled(true);
-            messageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
+            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
@@ -146,7 +145,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onBlockBreak(BlockBreakEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltBlockBreaking()) {
             e.setCancelled(true);
-            messageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
+            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }

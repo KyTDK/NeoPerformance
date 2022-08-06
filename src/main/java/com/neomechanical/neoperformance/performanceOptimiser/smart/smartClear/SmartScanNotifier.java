@@ -16,14 +16,13 @@ import java.util.List;
 
 public class SmartScanNotifier {
     static NeoPerformance plugin = NeoPerformance.getInstance();
-    static MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         TextComponent.Builder builder = getChatData(player, toClear, clusters);
         if (builder.children().isEmpty()) {
-            messageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
-        messageUtil.sendMM(player, builder.build());
+        MessageUtil.sendMM(player, builder.build());
     }
 
     public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {

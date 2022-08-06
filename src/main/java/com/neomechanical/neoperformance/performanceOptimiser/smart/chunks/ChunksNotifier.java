@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.chunks;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -17,10 +16,9 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class ChunksNotifier {
-    private static final MessageUtil messageUtil = new MessageUtil(NeoPerformance.adventure());
     public static void sendChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
         TextComponent.Builder bc = getChatData(chunks, world, playerAsPlayer);
-        messageUtil.sendMM(playerAsPlayer, bc.build());
+        MessageUtil.sendMM(playerAsPlayer, bc.build());
     }
 
     public static TextComponent.Builder getChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
