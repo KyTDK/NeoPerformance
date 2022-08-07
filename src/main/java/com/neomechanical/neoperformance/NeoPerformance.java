@@ -19,6 +19,8 @@ import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBea
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.LagChecker;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
+import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.inventory.InventoryUtil;
 import lombok.NonNull;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
@@ -69,6 +71,8 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
         //set instances
+        NeoUtils.init(this);
+        InventoryUtil.init(NeoPerformance.getInstance());
         // Initialize an audiences instance for the plugin
         dataManager = new DataManager();
         dataManager.loadTweakSettings();
