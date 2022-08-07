@@ -20,17 +20,15 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoutils.NeoUtils;
-import com.neomechanical.neoutils.inventory.InventoryUtil;
 import lombok.NonNull;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
 
-public final class NeoPerformance extends JavaPlugin implements PerformanceConfigurationSettings {
+public final class NeoPerformance extends NeoUtils implements PerformanceConfigurationSettings {
     private static NeoPerformance instance;
     private static LanguageManager languageManager;
     private static BukkitAudiences adventure;
@@ -66,13 +64,10 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
     }
 
     @Override
-    public void onEnable() {
+    public void onPluginEnable() {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
-        //set instances
-        NeoUtils.init(this);
-        InventoryUtil.init(NeoPerformance.getInstance());
         // Initialize an audiences instance for the plugin
         dataManager = new DataManager();
         dataManager.loadTweakSettings();
@@ -116,7 +111,7 @@ public final class NeoPerformance extends JavaPlugin implements PerformanceConfi
     }
 
     @Override
-    public void onDisable() {
+    public void onPluginDisable() {
         // Plugin shutdown logic
         if (adventure != null) {
             adventure.close();

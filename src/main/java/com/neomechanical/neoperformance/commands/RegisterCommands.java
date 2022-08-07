@@ -5,8 +5,7 @@ import com.neomechanical.neoutils.commandManager.CommandManager;
 
 public class RegisterCommands {
     public static void register(NeoPerformance plugin) {
-        CommandManager commandManager = new CommandManager();
-        commandManager.setAudiences(NeoPerformance.adventure());
+        CommandManager commandManager = new CommandManager(plugin, "neoperformance");
         commandManager.registerSubCommand(new BypassCommand());
         commandManager.setErrorNotPlayer(plugin.getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
         commandManager.setErrorNoPermission(plugin.getLanguageManager().getString("commandGeneric.errorNoPermission", null));
@@ -19,6 +18,5 @@ public class RegisterCommands {
         commandManager.registerSubCommand(new HaltCommand());
         commandManager.registerSubCommand(new SmartClearCommand());
         commandManager.registerSubCommand(new ConfigCommand());
-        commandManager.init(plugin, "neoperformance");
     }
 }
