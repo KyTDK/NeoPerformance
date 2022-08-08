@@ -158,7 +158,7 @@
         <dependency>
             <groupId>com.github.KyTDK</groupId>
             <artifactId>NeoUtils</artifactId>
-            <version>1.11.4</version>
+            <version>1.11.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
