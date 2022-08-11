@@ -10,7 +10,7 @@
 package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
-import com.neomechanical.neoperformance.managers.LanguageManager;
+import com.neomechanical.neoperformance.managers.RegisterLanguageManager;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.lagPrevention.LagPrevention;
@@ -30,7 +30,6 @@ import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDa
 
 public final class NeoPerformance extends NeoUtils implements PerformanceConfigurationSettings {
     private static NeoPerformance instance;
-    private static LanguageManager languageManager;
     private static BukkitAudiences adventure;
     private static DataManager dataManager;
     private Metrics metrics;
@@ -52,11 +51,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
 
     public static void reloadTweakDataManager() {
         dataManager.loadTweakSettings();
-        NeoPerformance.getInstance().getLanguageManager().loadLanguageConfig();
-    }
-
-    public LanguageManager getLanguageManager() {
-        return languageManager;
+        getLanguageManager().loadLanguageConfig();
     }
 
     private void setInstance(NeoPerformance instance) {
@@ -72,7 +67,8 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
         dataManager = new DataManager();
         dataManager.loadTweakSettings();
         adventure = BukkitAudiences.create(this);
-        languageManager = new LanguageManager(this);
+        //Set language manager before majority as they depend on its messages.
+        new RegisterLanguageManager().register(this);
         //Check for updates
         new UpdateChecker(this, 103183).getVersion(version -> {
             if (!isUpToDate(this.getDescription().getVersion(), version)) {
@@ -94,7 +90,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
     public void setupBStats() {
         int pluginId = 15711;
         metrics = new Metrics(this, pluginId);
-        metrics.addCustomChart(new SimplePie("Language", () -> NeoPerformance.getInstance().getLanguageManager().getLanguage()));
+        metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
     }
 
