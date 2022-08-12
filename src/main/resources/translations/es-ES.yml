@@ -18,7 +18,7 @@ commandGeneric:
   errorWorldNotFound: '<red><bold>Mundo no encontrado.'
   errorNoPermission: '<red><bold>No tienes permisos para usar ese comando.'
   errorNotPlayer: '<red><bold>Este comando es solo para jugadores.'
-  errorCommandNotFound: '<red><bold>Comando no encontrado, intente /np ayuda'
+  errorCommandNotFound: '<red><bold>Comando no encontrado, intente /np help'
 bypass:
   errorNotPlayer: '<red><bold>Debes ser un jugador para omitirte a ti mismo'
   nowBypassing: '<red><bold>Omitiendo la detencion de actividades del servidor.'
