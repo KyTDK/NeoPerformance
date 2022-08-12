@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+
 public class ChunksCommand extends SubCommand {
     @Override
     public String getName() {
@@ -48,7 +50,7 @@ public class ChunksCommand extends SubCommand {
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
             if (world == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
         }
