@@ -43,3 +43,4 @@ halted:
   onJoin: 'Este servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
   onBlockBreak: '<green>Esta acción ha sido cancelada para evitar la pérdida de datos. El servidor se encuentra actualmente bajo una gran carga, por lo tanto, todos los elementos que se suelten serán destruidos.'
   onItemDrop: '<green>Esta acción ha sido cancelada para evitar la pérdida de datos. El servidor se encuentra actualmente bajo una gran carga, por lo tanto, todos los elementos que se suelten serán destruidos.'
+  onPlayerInteract: '<green>Esta acción ha sido cancelada para evitar la pérdida de datos. El servidor se encuentra actualmente bajo una gran carga, por lo tanto, todos los elementos que se suelten serán destruidos.'

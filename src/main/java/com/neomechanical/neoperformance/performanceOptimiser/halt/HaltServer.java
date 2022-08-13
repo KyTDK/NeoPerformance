@@ -20,6 +20,7 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.List;
 
@@ -149,8 +150,9 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     @EventHandler()
     public void onPlayerInteraction(PlayerInteractEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltPlayerInteractions()) {
+            if (e.getHand() != EquipmentSlot.HAND) return;
             e.setCancelled(true);
-            MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onPlayerInteraction", null));
+            MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onPlayerInteract", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }

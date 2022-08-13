@@ -27,12 +27,12 @@ halt_settings:
   maxSpeed: -1
   haltExplosions: true
   haltRedstone: false
-  # [haltMobSpawning] This will also prevent block breaking and item dropping
   haltMobSpawning: true
   haltInventoryMovement: true #Does not affect players, only hoppers and chests
   haltCommandBlock: true
   haltItemDrops: true
   haltBlockBreaking: true
+  # [haltPlayerInteraction] This will also prevent block placement as that is also a player interaction
   haltPlayerInteractions: false
   haltProjectiles: true
   haltEntityBreeding: false
