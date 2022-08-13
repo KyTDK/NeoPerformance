@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.12</version>
+    <version>1.12.2</version>
     <build>
         <resources>
             <resource>
@@ -82,7 +82,7 @@
                             <include>com.sun.mail:javax.mail</include>
                             <include>javax.activation:activation</include>
                             <include>org.bstats</include>
-                            <include>com.github.KyTDK:NeoUtils</include>
+                            <include>com.neomechanical:NeoUtils</include>
                             <include>com.neomechanical:NeoUtils</include>
                         </includes>
                     </artifactSet>
@@ -134,6 +134,12 @@
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
             <version>1.2.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
