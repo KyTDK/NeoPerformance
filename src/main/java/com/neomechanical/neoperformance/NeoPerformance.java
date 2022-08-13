@@ -20,8 +20,6 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoutils.NeoUtils;
-import lombok.NonNull;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,17 +28,8 @@ import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDa
 
 public final class NeoPerformance extends NeoUtils implements PerformanceConfigurationSettings {
     private static NeoPerformance instance;
-    private static BukkitAudiences adventure;
     private static DataManager dataManager;
     private Metrics metrics;
-
-    public static @NonNull BukkitAudiences adventure() {
-        if (adventure == null) {
-            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
-        }
-        return adventure;
-    }
-
     public static NeoPerformance getInstance() {
         return instance;
     }
@@ -66,7 +55,6 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
         // Initialize an audiences instance for the plugin
         dataManager = new DataManager();
         dataManager.loadTweakSettings();
-        adventure = BukkitAudiences.create(this);
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager().register(this);
         //Check for updates
@@ -109,10 +97,6 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
     @Override
     public void onPluginDisable() {
         // Plugin shutdown logic
-        if (adventure != null) {
-            adventure.close();
-            adventure = null;
-        }
     }
 
     /**
