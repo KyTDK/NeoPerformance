@@ -1,11 +1,12 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
+import com.neomechanical.kyori.adventure.text.Component;
+import com.neomechanical.kyori.adventure.text.TextComponent;
+import com.neomechanical.kyori.adventure.text.event.ClickEvent;
+import com.neomechanical.kyori.adventure.text.event.HoverEvent;
+import com.neomechanical.kyori.adventure.text.format.NamedTextColor;
+import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.messages.MessageUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -22,7 +23,9 @@ public class SmartScanNotifier {
             MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
-        MessageUtil.sendMM(player, builder.build());
+        MessageUtil messageUtil = new MessageUtil();
+        messageUtil.addComponent(builder.build());
+        messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }
 
     public static TextComponent.Builder getChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {

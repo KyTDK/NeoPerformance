@@ -1,12 +1,13 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.chunks;
 
+import com.neomechanical.kyori.adventure.text.Component;
+import com.neomechanical.kyori.adventure.text.TextComponent;
+import com.neomechanical.kyori.adventure.text.event.ClickEvent;
+import com.neomechanical.kyori.adventure.text.event.HoverEvent;
+import com.neomechanical.kyori.adventure.text.format.NamedTextColor;
+import com.neomechanical.kyori.adventure.text.format.TextDecoration;
+import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.messages.MessageUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -18,7 +19,9 @@ import java.util.List;
 public class ChunksNotifier {
     public static void sendChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
         TextComponent.Builder bc = getChatData(chunks, world, playerAsPlayer);
-        MessageUtil.sendMM(playerAsPlayer, bc.build());
+        MessageUtil messageUtil = new MessageUtil();
+        messageUtil.addComponent(bc.build());
+        messageUtil.sendNeoComponentMessage(playerAsPlayer, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }
 
     public static TextComponent.Builder getChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {

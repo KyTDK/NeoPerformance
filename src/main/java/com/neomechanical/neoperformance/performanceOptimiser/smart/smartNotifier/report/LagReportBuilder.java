@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.report;
 
+import com.neomechanical.kyori.adventure.text.Component;
+import com.neomechanical.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.messages.MessageUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.List;

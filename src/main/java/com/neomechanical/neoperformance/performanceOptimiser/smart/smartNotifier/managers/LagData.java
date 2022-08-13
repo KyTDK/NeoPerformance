@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers;
 
+import com.neomechanical.kyori.adventure.text.TextComponent;
 import lombok.Data;
-import net.kyori.adventure.text.TextComponent;
 import org.bukkit.entity.Player;
 
 @Data
