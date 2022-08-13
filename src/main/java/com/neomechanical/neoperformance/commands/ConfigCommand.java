@@ -40,7 +40,7 @@ public class ConfigCommand extends SubCommand {
         Player playerAsPlayer = (Player) player;
         ConfigMenu configMenu = new ConfigMenu(NeoPerformance.getInstance());
         configMenu.onComplete((playerAsAuthor, text) -> NeoPerformance.reload())
-                .permission("neoperformance.config")
+                .permission("neoperformance.config", () -> NeoPerformance.getLanguageManager().getString("commandGeneric.errorNoPermission", null))
                 .open(playerAsPlayer, NeoPerformance.getInstance());
     }
 
