@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.12</version>
+    <version>1.12.1</version>
     <build>
         <plugins>
             <plugin>
@@ -156,15 +156,15 @@
         </dependency>
         <!-- NeoUtils -->
         <dependency>
-            <groupId>com.neomechanical</groupId>
+            <groupId>com.github.KyTDK</groupId>
             <artifactId>NeoUtils</artifactId>
-            <version>6.9</version>
+            <version>1.12.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
