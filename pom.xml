@@ -73,7 +73,7 @@
                             <include>org.bstats</include>
                             <!--<include>com.github.KyTDK:NeoUtils</include>-->
                             <include>com.neomechanical:NeoUtils</include>
-                            <include>com.neomechanical:NeoUtils</include>
+                            <include>com.neomechanical:NeoConfig</include>
                         </includes>
                     </artifactSet>
                 </configuration>
@@ -164,13 +164,8 @@
         <dependency>
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.3</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
         </dependency>
     </dependencies>
     <properties>
