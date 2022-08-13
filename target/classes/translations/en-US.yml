@@ -42,3 +42,4 @@ halted:
   onJoin: 'This server is currently under heavy load. Please try again later.'
   onBlockBreak: '<green>This action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed.'
   onItemDrop: '<green>This action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed.'
+  onPlayerInteract: '<green>This action has been cancelled to prevent data lass. The server is currently under heavy load, consequently, all items that are dropped will be destroyed.'
