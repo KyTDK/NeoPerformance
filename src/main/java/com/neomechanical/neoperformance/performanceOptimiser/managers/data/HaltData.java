@@ -16,6 +16,7 @@ public class HaltData {
     private @NotNull Boolean haltCommandBlock;
     private @NotNull Boolean haltItemDrops;
     private @NotNull Boolean haltBlockBreaking;
+    private @NotNull Boolean haltPlayerInteractions;
     private @NotNull Boolean haltProjectiles;
     private @NotNull Boolean haltEntityBreeding;
     private @NotNull Boolean haltEntityInteractions;

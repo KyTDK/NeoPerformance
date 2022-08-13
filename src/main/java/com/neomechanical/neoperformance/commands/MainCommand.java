@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.commandManager.Command;
@@ -10,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import java.util.List;
 import java.util.Map;
 
-public class MainCommand extends Command implements PerformanceConfigurationSettings {
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
 
+public class MainCommand extends Command implements PerformanceConfigurationSettings {
     @Override
     public String getName() {
         return "neoperformance";
@@ -42,12 +41,12 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
     @Override
     public void perform(CommandSender player, String[] args) {
         messageUtil.neoComponentMessage()
-                .addComponent(plugin.getLanguageManager().getString("main.isServerHalted", null))
-                .addComponent(plugin.getLanguageManager().getString("main.serverTps", null))
-                .addComponent(plugin.getLanguageManager().getString("main.serverHaltsAt", null))
-                .addComponent(plugin.getLanguageManager().getString("main.playerCount", null));
+                .addComponent(getLanguageManager().getString("main.isServerHalted", null))
+                .addComponent(getLanguageManager().getString("main.serverTps", null))
+                .addComponent(getLanguageManager().getString("main.serverHaltsAt", null))
+                .addComponent(getLanguageManager().getString("main.playerCount", null));
         if (getVisualData().getShowPluginUpdateInMain()) {
-            messageUtil.addComponent(plugin.getLanguageManager().getString("main.upToDate", null));
+            messageUtil.addComponent(getLanguageManager().getString("main.upToDate", null));
         }
         messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }

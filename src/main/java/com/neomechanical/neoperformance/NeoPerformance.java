@@ -49,7 +49,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
         return dataManager;
     }
 
-    public static void reloadTweakDataManager() {
+    public static void reload() {
         dataManager.loadTweakSettings();
         getLanguageManager().loadLanguageConfig();
     }

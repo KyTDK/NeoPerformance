@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RegisterLanguageManager implements PerformanceConfigurationSettings, Tps {
     public void register(JavaPlugin plugin) {
         new LanguageManager(plugin)
-                .setLanguageCode(getVisualData().getLanguage())
+                .setLanguageCode(() -> getVisualData().getLanguage())
                 .setLanguageFile("en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "zh-CN.yml")
                 .addInternalPlaceholder("%TPS%", (Player player) -> getFancyTps())
                 .addInternalPlaceholder("%TPSHALT%", (Player player) -> getFancyHaltTps())

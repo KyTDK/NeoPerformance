@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.commands.SmartClearCommand;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
@@ -13,6 +12,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
 
 public class SmartScan implements PerformanceConfigurationSettings {
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
@@ -89,7 +90,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
         return topClusters;
     }
 
-    public static void clusterLogic(int clusterSize, List<World> world, CommandData commandData, NeoPerformance plugin, CommandSender player, boolean all) {
+    public static void clusterLogic(int clusterSize, List<World> world, CommandData commandData, CommandSender player, boolean all) {
         //Message logic and construct entity list
         List<List<Entity>> clusters;
         if (world.isEmpty()) {
@@ -109,7 +110,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
         }
         //No clusters, show error message and return
         if (clusters.isEmpty()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
         SmartScanNotifier.sendChatData(player, toClear, clusters);
@@ -125,6 +126,6 @@ public class SmartScan implements PerformanceConfigurationSettings {
                 SmartClearCommand.toBeConfirmed.put(player, entityList);
             }
         }
-        MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.confirm", null));
+        MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.confirm", null));
     }
 }

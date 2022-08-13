@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performanceOptimiser.halt;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
 import com.neomechanical.neoperformance.utils.ActionBar;
@@ -18,19 +17,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 
 import java.util.List;
 
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
-
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltTeleportation()) {
@@ -39,7 +35,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             }
             e.setCancelled(true);
             cachedData.cachedTeleport.putIfAbsent(e.getPlayer(), e.getTo());
-            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarTeleportMessage", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarTeleportMessage", null));
         }
     }
 
@@ -52,7 +48,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
             }
             if (!canMove(e.getFrom().distance(goTo))) {
                 e.setCancelled(true);
-                new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
+                new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
             }
         }
     }
@@ -136,8 +132,8 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onItemDrop(PlayerDropItemEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltItemDrops()) {
             e.setCancelled(true);
-            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onItemDrop", null));
-            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
+            MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onItemDrop", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
 
@@ -145,8 +141,17 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
     public void onBlockBreak(BlockBreakEvent e) {
         if (isServerHalted(e.getPlayer()) && getHaltData().getHaltBlockBreaking()) {
             e.setCancelled(true);
-            MessageUtil.sendMM(e.getPlayer(), plugin.getLanguageManager().getString("halted.onBlockBreak", null));
-            new ActionBar().SendComponentToPlayer(e.getPlayer(), plugin.getLanguageManager().getString("halted.actionBarMessage", null));
+            MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onBlockBreak", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
+        }
+    }
+
+    @EventHandler()
+    public void onPlayerInteraction(PlayerInteractEvent e) {
+        if (isServerHalted(e.getPlayer()) && getHaltData().getHaltPlayerInteractions()) {
+            e.setCancelled(true);
+            MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onPlayerInteraction", null));
+            new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
         }
     }
 
@@ -222,7 +227,7 @@ public class HaltServer implements Listener, Tps, PerformanceConfigurationSettin
                 return;
             }
             //stop player from joining because lag might be due to too many players
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, plugin.getLanguageManager().getString("halted.onJoin", null));
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, getLanguageManager().getString("halted.onPlayerInteract", null));
         }
     }
 }

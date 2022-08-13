@@ -15,6 +15,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 import java.util.function.BiConsumer;
 
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+
 public class SmartClearCommand extends SubCommand implements PerformanceConfigurationSettings {
 
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
@@ -67,7 +69,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
     private static void size(SmartClearAccumulator accumulator, List<String> arguments) {
         if (arguments.size() == 1) {
             if (Integer.getInteger(arguments.get(0)) != null) {
-                MessageUtil.sendMM(accumulator.player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                MessageUtil.sendMM(accumulator.player, getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             accumulator.size(Integer.parseInt(arguments.get(0)));
@@ -112,7 +114,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
 
         public void world(String name) {
             if (Bukkit.getWorld(name) == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
+                MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
             }
             world.add(Bukkit.getWorld(name));
         }
@@ -135,14 +137,14 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
             //For force
             if (force && !toBeConfirmed.containsKey(player)) {
                 force = false;
-                SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
+                SmartScan.clusterLogic(clusterSize, world, getCommandData(), player, all);
             }
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
                 for (Entity e : toBeConfirmed.get(player)) {
                     e.remove();
                 }
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.cleared", null));
+                MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
             }
@@ -153,7 +155,7 @@ public class SmartClearCommand extends SubCommand implements PerformanceConfigur
                     toBeConfirmed.remove(player);
                 }
             }.runTaskLater(plugin, 20L * 10);
-            SmartScan.clusterLogic(clusterSize, world, getCommandData(), plugin, player, all);
+            SmartScan.clusterLogic(clusterSize, world, getCommandData(), player, all);
         }
     }
 

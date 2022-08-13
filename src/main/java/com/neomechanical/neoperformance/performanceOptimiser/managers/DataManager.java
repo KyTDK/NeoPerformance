@@ -109,6 +109,6 @@ public class DataManager {
     }
 
     public boolean isBypassed(Player player) {
-        return bypassedPlayers.contains(player);
+        return bypassedPlayers.contains(player) || player.hasPermission("neoperformance.bypass.auto");
     }
 }

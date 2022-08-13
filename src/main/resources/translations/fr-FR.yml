@@ -42,3 +42,4 @@ halted:
   onJoin: 'Ce serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'
   onBlockBreak: '<green>Cette action a été annulée pour éviter la perte de données. Le serveur est actuellement sous forte charge, par conséquent, tous les éléments abandonnés seront détruits.'
   onItemDrop: '<green>Cette action a été annulée pour éviter la perte de données. Le serveur est actuellement sous forte charge, par conséquent, tous les éléments abandonnés seront détruits.'
+  onPlayerInteract: '<green>Cette action a été annulée pour éviter la perte de données. Le serveur est actuellement sous forte charge, par conséquent, tous les éléments abandonnés seront détruits.'

@@ -9,9 +9,9 @@ public class RegisterCommands {
     public static void register(NeoPerformance plugin) {
         CommandManager commandManager = new CommandManager(plugin, "neoperformance");
         commandManager.registerSubCommand(new BypassCommand());
-        commandManager.setErrorNotPlayer(getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
-        commandManager.setErrorNoPermission(getLanguageManager().getString("commandGeneric.errorNoPermission", null));
-        commandManager.setErrorCommandNotFound(getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
+        commandManager.setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
+        commandManager.setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null));
+        commandManager.setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
         commandManager.registerMainCommand(new MainCommand());
         commandManager.registerSubCommand(new HelpCommand(commandManager));
         commandManager.registerSubCommand(new ReloadCommand());

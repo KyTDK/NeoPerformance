@@ -17,10 +17,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
     private static double tps;
 
     public static double getUpdatedTPS() {
@@ -49,10 +49,10 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                             if (getMailData().getUseMailServer()) {
                                 EmailClient emailClient = new EmailClient();
                                 //Is run asynchronously
-                                emailClient.sendAsHtml(plugin.getLanguageManager().getString("email_notifications.subject", null),
-                                        plugin.getLanguageManager().getString("email_notifications.body", null));
+                                emailClient.sendAsHtml(getLanguageManager().getString("email_notifications.subject", null),
+                                        getLanguageManager().getString("email_notifications.body", null));
                             }
-                            String message = plugin.getLanguageManager().getString("notify.serverHalted", null);
+                            String message = getLanguageManager().getString("notify.serverHalted", null);
                             if (getTweakData().getBroadcastHalt()) {
                                 MessageUtil.sendMMAll(message);
                             } else if (getTweakData().getNotifyAdmin()) {
@@ -68,7 +68,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 } else if (halted[0]) {
                     //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
-                        String message = plugin.getLanguageManager().getString("notify.serverResumed", null);
+                        String message = getLanguageManager().getString("notify.serverResumed", null);
                         if (getTweakData().getBroadcastHalt()) {
                             MessageUtil.sendMMAll(message);
                         } else if (getTweakData().getNotifyAdmin()) {

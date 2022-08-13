@@ -33,6 +33,7 @@ halt_settings:
   haltCommandBlock: true
   haltItemDrops: true
   haltBlockBreaking: true
+  haltPlayerInteractions: false
   haltProjectiles: true
   haltEntityBreeding: false
   haltEntityInteractions: true

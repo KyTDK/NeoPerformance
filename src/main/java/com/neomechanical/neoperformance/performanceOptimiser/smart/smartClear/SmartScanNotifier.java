@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -14,12 +13,13 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+
 public class SmartScanNotifier {
-    static NeoPerformance plugin = NeoPerformance.getInstance();
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {
         TextComponent.Builder builder = getChatData(player, toClear, clusters);
         if (builder.children().isEmpty()) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("smartClear.noEntities", null));
+            MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.noEntities", null));
             return;
         }
         MessageUtil.sendMM(player, builder.build());

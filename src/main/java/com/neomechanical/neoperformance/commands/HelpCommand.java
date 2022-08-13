@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.commandManager.CommandManager;
 import com.neomechanical.neoutils.commandManager.SubCommand;
@@ -10,6 +9,8 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
 
 public class HelpCommand extends SubCommand {
     private final CommandManager commandManager;
@@ -43,8 +44,6 @@ public class HelpCommand extends SubCommand {
         this.commandManager = commandManager;
     }
 
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
-
     @Override
     public void perform(CommandSender player, String[] args) {
         MessageUtil messageUtil = new MessageUtil();
@@ -52,14 +51,14 @@ public class HelpCommand extends SubCommand {
         int page = 1;
         if (args.length == 2) {
             if (Integer.getInteger(args[1]) == null) {
-                MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+                MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
                 return;
             }
             page = Integer.getInteger(args[1]);
         }
         List<SubCommand> pageList = Pagination.getPage(commandManager.getSubcommands(), page, 10);
         if (pageList == null) {
-            MessageUtil.sendMM(player, plugin.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
             return;
         }
         for (SubCommand subCommand : pageList) {

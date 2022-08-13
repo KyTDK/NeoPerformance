@@ -39,7 +39,7 @@ public class ConfigCommand extends SubCommand {
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
         ConfigMenu configMenu = new ConfigMenu(NeoPerformance.getInstance());
-        configMenu.onComplete((playerAsAuthor, text) -> NeoPerformance.reloadTweakDataManager())
+        configMenu.onComplete((playerAsAuthor, text) -> NeoPerformance.reload())
                 .permission("neoperformance.config")
                 .open(playerAsPlayer, NeoPerformance.getInstance());
     }
