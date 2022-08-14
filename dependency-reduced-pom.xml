@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.12.4</version>
+    <version>1.12.5</version>
     <build>
         <resources>
             <resource>
@@ -21,16 +21,17 @@
                     <execution>
                         <id>remap-obf</id>
                         <phase>package</phase>
-            <goals>
-              <goal>remap</goal>
-            </goals>
-            <configuration>
-              <srgIn>org.spigotmc:minecraft-server:1.19.2-R0.1-SNAPSHOT:txt:maps-mojang</srgIn>
-              <reverse>true</reverse>
-              <remappedDependencies>org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT:jar:remapped-mojang</remappedDependencies>
-              <remappedArtifactAttached>true</remappedArtifactAttached>
-              <remappedClassifierName>remapped-obf</remappedClassifierName>
-            </configuration>
+                        <goals>
+                            <goal>remap</goal>
+                        </goals>
+                        <configuration>
+                            <srgIn>org.spigotmc:minecraft-server:1.19.2-R0.1-SNAPSHOT:txt:maps-mojang</srgIn>
+                            <reverse>true</reverse>
+                            <remappedDependencies>org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT:jar:remapped-mojang
+                            </remappedDependencies>
+                            <remappedArtifactAttached>true</remappedArtifactAttached>
+                            <remappedClassifierName>remapped-obf</remappedClassifierName>
+                        </configuration>
           </execution>
           <execution>
             <id>remap-spigot</id>
