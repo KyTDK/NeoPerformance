@@ -4,23 +4,23 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
-    <version>1.12.2</version>
+    <version>1.12.4</version>
     <build>
         <resources>
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
             </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>net.md-5</groupId>
-        <artifactId>specialsource-maven-plugin</artifactId>
-        <version>1.2.3</version>
-        <executions>
-          <execution>
-            <id>remap-obf</id>
-            <phase>package</phase>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>net.md-5</groupId>
+                <artifactId>specialsource-maven-plugin</artifactId>
+                <version>1.2.3</version>
+                <executions>
+                    <execution>
+                        <id>remap-obf</id>
+                        <phase>package</phase>
             <goals>
               <goal>remap</goal>
             </goals>
