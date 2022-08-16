@@ -1,0 +1,45 @@
+main:
+  isServerHalted: '<gray>  Ist der Server angehalten: %SERVERHALTED%'
+  serverTps: '<gray>  Server TPS: %TPS%'
+  serverHaltsAt: '<gray>  Server hält an bei: %TPSHALT%'
+  playerCount: '<gray>  Spielerzahl: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  Ist das Plugin aktuell: %UPDATESTATUS%'
+notify:
+  serverHalted: '<red><bold>TPS ist zu niedrig, Server wird angehalten'
+  serverResumed: '<green><bold>TPS wieder normal, Wiederherstellung des Servers'
+email_notifications:
+  subject: 'TPS ist zu niedrig, Server wird angehalten'
+  body: "Der Server wurde angehalten, weil der TPS zu niedrig ist.\nDer TPS liegt derzeit bei %TPS% und der TPS-Schwellenwert ist %TPSHALT%.\n Der Server wird in 10 Minuten neu gestartet, wenn er sich nicht erholt."
+#Befehle
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Spieler nicht gefunden'
+  errorInvalidSyntax: '<red><bold>Ungültige Syntax - geben Sie "/np help" ein, um Hilfe zu erhalten'
+  errorWorldNotFound: '<red><bold>Welt nicht gefunden'
+  errorNoPermission: '<red><bold>Du hast keine Berechtigung diesen Befehl zu verwenden'
+  errorNotPlayer: '<red><bold>Dieser Befehl ist nur für Spieler bestimmt'
+  errorCommandNotFound: '<red><bold>Befehl nicht gefunden, versuche /np help'
+bypass:
+  errorNotPlayer: '<red><bold>Du musst ein Spieler sein, um dich selbst zu umgehen'
+  nowBypassing: '<red><bold>Halt wird jetzt umgangen'
+  noLongerBypassing: '<green><bold>Stopp wird nicht mehr umgangen'
+  nowBypassingPlayer: '<red><bold>Umgehung von Halt für %PLAYER% jetzt'
+  noLongerBypassingPlayer: '<green><bold>Stopp wird für %PLAYER% nicht mehr umgangen'
+  errorNoPermissionOthers: '<red><bold>Du hast keine Berechtigung, andere Spieler zu umgehen'
+halt:
+  toggleHaltOn: '<red><bold>Server wurde angehalten'
+  toggleHaltOff: '<green><bold>Server wurde fortgesetzt'
+reload:
+  onReload: '<green><bold>Konfigurationsdatei neu geladen'
+smartClear:
+  confirm: "<red><bold>Befehl erneut eingeben, um das Löschen des Clusters zu bestätigen"
+  cleared: "<green><bold>Cluster gelöscht"
+  noEntities: "<red><bold>Keine Entitäten gelöscht"
+
+#Halten Sie verwandte Nachrichten an
+halted:
+  actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'
+  actionBarTeleportMessage: '<red>Server ist derzeit stark ausgelastet. Sie werden für einen Moment teleportiert.'
+  onJoin: 'Dieser Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'
+  onBlockBreak: '<green>Diese Aktion wurde abgebrochen, um Datenverlust zu vermeiden. Der Server ist derzeit stark ausgelastet, daher werden alle gedroppten Items zerstört.'
+  onItemDrop: '<green>Diese Aktion wurde abgebrochen, um Datenverlust zu vermeiden. Der Server ist derzeit stark ausgelastet, daher werden alle gedroppten Items zerstört.'
+  onPlayerInteract: '<green>Diese Aktion wurde abgebrochen, um Datenverlust zu vermeiden. Der Server ist derzeit stark ausgelastet, daher werden alle gedroppten Items zerstört.'

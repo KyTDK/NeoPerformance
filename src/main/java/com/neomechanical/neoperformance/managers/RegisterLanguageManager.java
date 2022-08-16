@@ -11,7 +11,7 @@ public class RegisterLanguageManager implements PerformanceConfigurationSettings
     public void register(JavaPlugin plugin) {
         new LanguageManager(plugin)
                 .setLanguageCode(() -> getVisualData().getLanguage())
-                .setLanguageFile("en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "zh-CN.yml")
+                .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "zh-CN.yml")
                 .addInternalPlaceholder("%TPS%", (Player player) -> getFancyTps())
                 .addInternalPlaceholder("%TPSHALT%", (Player player) -> getFancyHaltTps())
                 .addInternalPlaceholder("%SERVERHALTED%", (Player player) -> fancyIsServerHalted())
