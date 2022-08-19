@@ -66,7 +66,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
         //Check for updates
         new UpdateChecker(this, 103183).getVersion(version -> {
             if (!isUpToDate(this.getDescription().getVersion(), version)) {
-                Logger.info("NeoPerformance v" + version + " is out. Download it at: https://www.spigotmc.org/resources/neoperformance-an-essential-for-any-server.103183/");
+                Logger.info("NeoPerformance v" + version + " is out. Download it at: https://www.spigotmc.org/resources/neoperformance.103183/");
             }
         });
         // Plugin startup logic
