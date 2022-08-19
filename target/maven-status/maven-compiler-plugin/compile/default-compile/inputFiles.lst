@@ -27,7 +27,6 @@
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/managers/data/VisualData.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/config/ConfigFile.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/LagChecker.java
-/home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/commands/HelpCommand.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/config/PerformanceTweaksConfiguration.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/dataGetters/EntityClusterData.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/halt/HaltServer.java
