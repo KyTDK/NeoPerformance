@@ -16,8 +16,8 @@ import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
 
 public class HeartBeat implements Tps, PerformanceConfigurationSettings {
     private final CachedData cachedData = HaltServer.cachedData;

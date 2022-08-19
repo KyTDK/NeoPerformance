@@ -2,14 +2,14 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.utils.messages.Messages;
-import com.neomechanical.neoutils.commandManager.Command;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class MainCommand extends Command implements PerformanceConfigurationSettings {
     @Override

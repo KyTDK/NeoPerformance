@@ -20,6 +20,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.languages.LanguageManager;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,12 +31,17 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
     private static NeoPerformance instance;
     private static DataManager dataManager;
     private Metrics metrics;
+
     public static NeoPerformance getInstance() {
         return instance;
     }
 
     public static DataManager getDataManager() {
         return dataManager;
+    }
+
+    public static LanguageManager getLanguageManager() {
+        return NeoUtils.getManagers().getLanguageManager();
     }
 
     public static void reload() {
@@ -72,7 +78,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
             }
         }.runTask(this);
         //Commands
-        RegisterCommands.register(this);
+        RegisterCommands.register();
     }
 
     public void setupBStats() {

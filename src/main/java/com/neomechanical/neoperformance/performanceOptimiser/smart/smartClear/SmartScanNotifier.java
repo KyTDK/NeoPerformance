@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class SmartScanNotifier {
     public static void sendChatData(CommandSender player, int toClear, List<List<Entity>> clusters) {

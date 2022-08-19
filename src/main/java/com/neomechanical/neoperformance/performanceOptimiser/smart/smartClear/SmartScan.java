@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class SmartScan implements PerformanceConfigurationSettings {
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {

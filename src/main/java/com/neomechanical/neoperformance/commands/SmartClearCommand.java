@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -15,12 +15,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class SmartClearCommand extends SubCommand implements PerformanceConfigurationSettings {
+public class SmartClearCommand extends Command implements PerformanceConfigurationSettings {
 
     private static final NeoPerformance plugin = NeoPerformance.getInstance();
     public static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
+
     public String getName() {
         return "smartclear";
     }

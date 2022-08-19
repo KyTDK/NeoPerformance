@@ -1,9 +1,8 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -14,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class ChunksCommand extends SubCommand {
+public class ChunksCommand extends Command {
     @Override
     public String getName() {
         return "chunks";
@@ -41,8 +40,6 @@ public class ChunksCommand extends SubCommand {
     public boolean playerOnly() {
         return true;
     }
-
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;

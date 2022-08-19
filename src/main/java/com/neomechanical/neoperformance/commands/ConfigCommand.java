@@ -2,14 +2,14 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoconfig.menu.ConfigMenu;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Map;
 
-public class ConfigCommand extends SubCommand {
+public class ConfigCommand extends Command {
     @Override
     public String getName() {
         return "config";

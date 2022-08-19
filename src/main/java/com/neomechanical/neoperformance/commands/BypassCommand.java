@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class BypassCommand extends SubCommand implements Tps {
+public class BypassCommand extends Command implements Tps {
     @Override
     public String getName() {
         return "bypass";

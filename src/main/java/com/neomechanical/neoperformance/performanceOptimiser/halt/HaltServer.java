@@ -24,7 +24,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.List;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class HaltServer implements Listener, Tps, PerformanceConfigurationSettings {
     public static final CachedData cachedData = new CachedData();

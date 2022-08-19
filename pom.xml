@@ -164,7 +164,7 @@
         <dependency>
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
-            <version>1.4</version>
+            <version>1.4.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

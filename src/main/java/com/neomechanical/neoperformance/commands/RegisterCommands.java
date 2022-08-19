@@ -1,24 +1,26 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoutils.commandManager.CommandManager;
+import com.neomechanical.neoperformance.utils.messages.Messages;
+import com.neomechanical.neoutils.commands.CommandBuilder;
+import com.neomechanical.neoutils.commands.easyCommands.EasyHelpCommand;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class RegisterCommands {
-    public static void register(NeoPerformance plugin) {
-        CommandManager commandManager = new CommandManager(plugin, "neoperformance");
-        commandManager.registerSubCommand(new BypassCommand());
-        commandManager.setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
-        commandManager.setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null));
-        commandManager.setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
-        commandManager.registerMainCommand(new MainCommand());
-        commandManager.registerSubCommand(new HelpCommand(commandManager));
-        commandManager.registerSubCommand(new ReloadCommand());
-        commandManager.registerSubCommand(new BypassCommand());
-        commandManager.registerSubCommand(new ChunksCommand());
-        commandManager.registerSubCommand(new HaltCommand());
-        commandManager.registerSubCommand(new SmartClearCommand());
-        commandManager.registerSubCommand(new ConfigCommand());
+    public static void register() {
+        new CommandBuilder(new MainCommand())
+                .setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null))
+                .setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null))
+                .setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null))
+                .addSubcommand(new EasyHelpCommand("nc", "/nc help", "See the help menu",
+                        "neoperformance.help", false, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX))
+                .addSubcommand(new ReloadCommand())
+                .addSubcommand(new BypassCommand())
+                .addSubcommand(new BypassCommand())
+                .addSubcommand(new ChunksCommand())
+                .addSubcommand(new HaltCommand())
+                .addSubcommand(new SmartClearCommand())
+                .addSubcommand(new ConfigCommand())
+                .register();
     }
 }

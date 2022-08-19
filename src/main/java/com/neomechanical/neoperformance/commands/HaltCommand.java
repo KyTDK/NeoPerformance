@@ -1,16 +1,16 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class HaltCommand extends SubCommand implements Tps {
+public class HaltCommand extends Command implements Tps {
     @Override
     public String getName() {
         return "halt";
