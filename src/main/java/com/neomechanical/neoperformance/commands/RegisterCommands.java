@@ -12,7 +12,8 @@ public class RegisterCommands {
                 .setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null))
                 .setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null))
                 .setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null))
-                .addSubcommand(new EasyHelpCommand("nc", "/nc help", "See the help menu",
+                .setAliases("np", "performance")
+                .addSubcommand(new EasyHelpCommand("neoperformance", "/np help", "See the help menu",
                         "neoperformance.help", false, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX))
                 .addSubcommand(new ReloadCommand())
                 .addSubcommand(new BypassCommand())
