@@ -38,7 +38,7 @@ public class ChunksCommand extends Command {
 
     @Override
     public boolean playerOnly() {
-        return true;
+        return false;
     }
     @Override
     public void perform(CommandSender player, String[] args) {

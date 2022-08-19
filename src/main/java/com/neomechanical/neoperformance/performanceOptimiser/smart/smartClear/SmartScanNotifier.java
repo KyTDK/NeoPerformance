@@ -54,9 +54,10 @@ public class SmartScanNotifier {
             String command = "/minecraft:execute in " + location.getWorld().getKey()
                     + " run tp " + player.getName() + " " + location.getX()
                     + " " + location.getY() + " " + location.getZ();
-            builder.append(Component.text("  Found cluster of entities with size " + entityList.size())).color(color);
+            TextComponent.Builder message = Component.text();
+            message.append(Component.text("  Found cluster of entities with size " + entityList.size())).color(color);
             if (player instanceof Player) {
-                builder.append(Component.text(" - Click to teleport"))
+                message.append(Component.text(" - Click to teleport"))
                         .clickEvent(
                                 ClickEvent.runCommand(command))
                         .hoverEvent(
@@ -64,11 +65,12 @@ public class SmartScanNotifier {
                                 )
                         );
             } else {
-                builder.append(Component.text(" - Location: " + location.getX() + "," + location.getY() + "," + location.getZ()));
+                message.append(Component.text(" - Location: " + location.getX() + "," + location.getY() + "," + location.getZ()));
             }
             if (i < toClear - 1) {
-                builder.append(Component.newline());
+                message.append(Component.newline());
             }
+            builder.append(message);
         }
         return builder;
     }
