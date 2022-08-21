@@ -8,6 +8,7 @@
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/NeoPerformance.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/commands/HaltCommand.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartClear/SmartScanNotifier.java
+/home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/utils/PerformanceConfigurationSettingsUtils.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/halt/CachedData.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/report/LagReportBuilder.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/utils/UtilManager.java
@@ -36,7 +37,7 @@
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/managers/RegisterLanguageManager.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/managers/data/MailData.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/report/LagReport.java
-/home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/utils/Tps.java
+/home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/utils/TpsUtils.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/managers/data/CommandData.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/utils/NPC.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/chunks/ChunksScanner.java
@@ -47,6 +48,5 @@
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/commands/ReloadCommand.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/DataGetter.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/utils/updates/UpdateChecker.java
-/home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/config/PerformanceConfigurationSettings.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/utils/config/KeyBuilder.java
 /home/kyan/Documents/GitHub/NeoPerformance/src/main/java/com/neomechanical/neoperformance/performanceOptimiser/managers/DataManager.java

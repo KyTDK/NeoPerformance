@@ -21,7 +21,6 @@ com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/LagChe
 com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/managers/LagData.class
 com/neomechanical/neoperformance/utils/resources/Memory.class
 com/neomechanical/neoperformance/utils/mail/EmailClient.class
-com/neomechanical/neoperformance/performanceOptimiser/config/PerformanceConfigurationSettings.class
 com/neomechanical/neoperformance/utils/config/KeyBuilder.class
 com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/dataGetters/EntityClusterData.class
 com/neomechanical/neoperformance/utils/updates/IsUpToDate.class
@@ -35,6 +34,8 @@ com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/report
 com/neomechanical/neoperformance/performanceOptimiser/managers/data/LagNotifierData.class
 com/neomechanical/neoperformance/performanceOptimiser/halt/CachedData.class
 com/neomechanical/neoperformance/performanceOptimiser/managers/DataManager.class
+com/neomechanical/neoperformance/performanceOptimiser/utils/PerformanceConfigurationSettingsUtils.class
+com/neomechanical/neoperformance/performanceOptimiser/utils/TpsUtils.class
 com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/DataGetter.class
 com/neomechanical/neoperformance/performanceOptimiser/managers/data/TweakData.class
 com/neomechanical/neoperformance/performanceOptimiser/config/PerformanceConfigCore.class
@@ -47,7 +48,6 @@ com/neomechanical/neoperformance/utils/NPC.class
 com/neomechanical/neoperformance/utils/messages/Messages.class
 com/neomechanical/neoperformance/utils/updates/UpdateChecker$1.class
 com/neomechanical/neoperformance/performanceOptimiser/smart/chunks/ChunksNotifier.class
-com/neomechanical/neoperformance/performanceOptimiser/utils/Tps.class
 com/neomechanical/neoperformance/performanceOptimiser/managers/data/CommandData.class
 com/neomechanical/neoperformance/commands/ChunksCommand.class
 com/neomechanical/neoperformance/performanceOptimiser/smart/smartNotifier/LagChecker$1.class
