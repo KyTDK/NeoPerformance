@@ -2,7 +2,6 @@ package com.neomechanical.neoperformance.commands;
 
 import com.google.common.collect.ImmutableMap;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
 import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
@@ -17,9 +16,14 @@ import java.util.function.BiConsumer;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class SmartClearCommand extends Command implements PerformanceConfigurationSettings {
+public class SmartClearCommand extends Command {
 
-    private static final NeoPerformance plugin = NeoPerformance.getInstance();
+    private final NeoPerformance plugin;
+
+    public SmartClearCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     public static final HashMap<CommandSender, List<Entity>> toBeConfirmed = new HashMap<>();
 
     public String getName() {
@@ -138,7 +142,7 @@ public class SmartClearCommand extends Command implements PerformanceConfigurati
             //For force
             if (force && !toBeConfirmed.containsKey(player)) {
                 force = false;
-                SmartScan.clusterLogic(clusterSize, world, getCommandData(), player, all);
+                SmartScan.clusterLogic(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
             }
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
@@ -156,7 +160,7 @@ public class SmartClearCommand extends Command implements PerformanceConfigurati
                     toBeConfirmed.remove(player);
                 }
             }.runTaskLater(plugin, 20L * 10);
-            SmartScan.clusterLogic(clusterSize, world, getCommandData(), player, all);
+            SmartScan.clusterLogic(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
         }
     }
 

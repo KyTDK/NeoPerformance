@@ -11,7 +11,6 @@ package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.RegisterLanguageManager;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
@@ -27,30 +26,36 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
 
-public final class NeoPerformance extends NeoUtils implements PerformanceConfigurationSettings {
+public final class NeoPerformance extends NeoUtils {
     private static NeoPerformance instance;
-    private static DataManager dataManager;
+    private DataManager dataManager;
     private Metrics metrics;
+    private HeartBeat heartBeat;
 
+    @Deprecated
     public static NeoPerformance getInstance() {
         return instance;
-    }
-
-    public static DataManager getDataManager() {
-        return dataManager;
     }
 
     public static LanguageManager getLanguageManager() {
         return NeoUtils.getManagers().getLanguageManager();
     }
 
-    public static void reload() {
-        dataManager.loadTweakSettings();
-        getLanguageManager().loadLanguageConfig();
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
     private void setInstance(NeoPerformance instance) {
         NeoPerformance.instance = instance;
+    }
+
+    public void reload() {
+        dataManager.loadTweakSettings(this);
+        getLanguageManager().loadLanguageConfig();
+    }
+
+    public HeartBeat getHeartBeat() {
+        return heartBeat;
     }
 
     @Override
@@ -60,9 +65,9 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
         ////////////////////////////////////////////////////////////////////////////////////////
         // Initialize an audiences instance for the plugin
         dataManager = new DataManager();
-        dataManager.loadTweakSettings();
+        dataManager.loadTweakSettings(this);
         //Set language manager before majority as they depend on its messages.
-        new RegisterLanguageManager().register(this);
+        new RegisterLanguageManager(this).register();
         //Check for updates
         new UpdateChecker(this, 103183).getVersion(version -> {
             if (!isUpToDate(this.getDescription().getVersion(), version)) {
@@ -78,7 +83,7 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
             }
         }.runTask(this);
         //Commands
-        RegisterCommands.register();
+        new RegisterCommands(this).register();
     }
 
     public void setupBStats() {
@@ -90,12 +95,13 @@ public final class NeoPerformance extends NeoUtils implements PerformanceConfigu
 
     public void registerOptimizers() {
         //Register ability listeners
-        getServer().getPluginManager().registerEvents(new HaltServer(), this);
-        getServer().getPluginManager().registerEvents(new LagPrevention(), this);
-        new HeartBeat().start();
+        getServer().getPluginManager().registerEvents(new HaltServer(this), this);
+        getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
+        heartBeat = new HeartBeat(this);
+        heartBeat.start();
         new UpdateChecker(this, 103183).start();
-        if (!(getLagNotifierData().getRunInterval() < 1)) {
-            new LagChecker().start();
+        if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
+            new LagChecker(this).start();
         }
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
     }

@@ -1,38 +1,40 @@
 package com.neomechanical.neoperformance.performanceOptimiser.utils;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
-import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
-public interface Tps {
-    DataManager DATA_MANAGER = NeoPerformance.getDataManager();
-    default double getTPS() {
-        return HeartBeat.getUpdatedTPS();
+public class TpsUtils {
+    private TpsUtils() {
+
     }
-    default boolean isServerHalted(@Nullable Player player) {
-        if (getTPS() == 0) {
+
+    public static double getTPS(NeoPerformance plugin) {
+        return plugin.getHeartBeat().getUpdatedTPS();
+    }
+
+    public static boolean isServerHalted(double tps, @Nullable Player player, NeoPerformance plugin) {
+        if (tps == 0) {
             return false;
         }
-        int haltAt = DATA_MANAGER.getTweakData().getTpsHaltAt();
+        int haltAt = plugin.getDataManager().getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
             return false;
         }
         if (player != null) {
-            if (DATA_MANAGER.isBypassed(player)) {
+            if (plugin.getDataManager().isBypassed(player)) {
                 return false;
             }
         }
-        if (DATA_MANAGER.isManualHalt()) {
+        if (plugin.getDataManager().isManualHalt()) {
             return true;
         }
-        return getTPS() <= haltAt;
+        return tps <= haltAt;
     }
 
-    default String getFancyTps() {
-        double tps = getTPS();
+    public static String getFancyTps(NeoPerformance plugin) {
+        double tps = getTPS(plugin);
         tps = (double) Math.round(tps * 100) / 100;
         if (tps >= 18) {
             return "<green><bold>" + tps;
@@ -47,15 +49,15 @@ public interface Tps {
         }
     }
 
-    default String fancyIsServerHalted() {
-        if (isServerHalted(null)) {
+    public static String fancyIsServerHalted(double tps, NeoPerformance plugin) {
+        if (isServerHalted(tps, null, plugin)) {
             return "<red><bold>true";
         }
         return "<green><bold>false";
     }
 
-    default String getFancyHaltTps() {
-        int haltAt = NeoPerformance.getDataManager().getTweakData().getTpsHaltAt();
+    public static String getFancyHaltTps(NeoPerformance plugin) {
+        int haltAt = plugin.getDataManager().getTweakData().getTpsHaltAt();
         if (haltAt == -1) {
             return "<red><bold>N/A";
         } else {
@@ -63,7 +65,7 @@ public interface Tps {
         }
     }
 
-    default String getFancyUpdateStatus() {
+    public static String getFancyUpdateStatus() {
         Boolean isUpToDate = UpdateChecker.UpToDate;
         if (isUpToDate == null) {
             return "<red><bold>N/A";

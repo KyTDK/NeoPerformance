@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
@@ -12,7 +12,9 @@ import java.util.Map;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class BypassCommand extends Command implements Tps {
+public class BypassCommand extends Command {
+    private final NeoPerformance plugin;
+
     @Override
     public String getName() {
         return "bypass";
@@ -37,6 +39,11 @@ public class BypassCommand extends Command implements Tps {
     public boolean playerOnly() {
         return false;
     }
+
+    public BypassCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
         if (args.length == 1) {
@@ -44,7 +51,7 @@ public class BypassCommand extends Command implements Tps {
                 MessageUtil.sendMM(player, getLanguageManager().getString("bypass.errorNotPlayer", null));
                 return;
             }
-            if (DATA_MANAGER.toggleBypass(player)) {
+            if (plugin.getDataManager().toggleBypass(player)) {
                 MessageUtil.sendMM(player, getLanguageManager().getString("bypass.nowBypassing", null));
             } else {
                 MessageUtil.sendMM(player, getLanguageManager().getString("bypass.noLongerBypassing", null));
@@ -56,7 +63,7 @@ public class BypassCommand extends Command implements Tps {
             }
             Player player1 = Bukkit.getPlayer(args[1]);
             if (player1 != null) {
-                if (DATA_MANAGER.toggleBypass(player1)) {
+                if (plugin.getDataManager().toggleBypass(player1)) {
                     MessageUtil.sendMM(player, getLanguageManager().getString("bypass.nowBypassingPlayer", player1));
                 } else {
                     MessageUtil.sendMM(player, getLanguageManager().getString("bypass.noLongerBypassingPlayer", player1));

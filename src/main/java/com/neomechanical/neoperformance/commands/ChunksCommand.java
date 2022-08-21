@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.commands;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
 import com.neomechanical.neoutils.commands.Command;
@@ -16,6 +17,7 @@ import java.util.Map;
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class ChunksCommand extends Command {
+    private final NeoPerformance plugin;
     @Override
     public String getName() {
         return "chunks";
@@ -40,6 +42,11 @@ public class ChunksCommand extends Command {
     public boolean playerOnly() {
         return false;
     }
+
+    public ChunksCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
@@ -53,10 +60,10 @@ public class ChunksCommand extends Command {
         }
         if (world == null) {
             World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
-            ChunksScanner.getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
         } else {
             World finalWorld = world;
-            ChunksScanner.getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, playerAsPlayer), world);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, playerAsPlayer), world);
         }
     }
 

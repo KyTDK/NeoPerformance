@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigCommand extends Command {
+    private final NeoPerformance plugin;
+
     @Override
     public String getName() {
         return "config";
@@ -35,13 +37,17 @@ public class ConfigCommand extends Command {
         return true;
     }
 
+    public ConfigCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
-        ConfigMenu configMenu = new ConfigMenu(NeoPerformance.getInstance());
-        configMenu.onComplete((playerAsAuthor, text) -> NeoPerformance.reload())
+        ConfigMenu configMenu = new ConfigMenu(plugin);
+        configMenu.onComplete((playerAsAuthor, text) -> plugin.reload())
                 .permission("neoperformance.config", () -> NeoPerformance.getLanguageManager().getString("commandGeneric.errorNoPermission", null))
-                .open(playerAsPlayer, NeoPerformance.getInstance());
+                .open(playerAsPlayer, plugin);
     }
 
     @Override

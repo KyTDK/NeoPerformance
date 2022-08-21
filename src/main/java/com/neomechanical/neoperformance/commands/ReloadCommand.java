@@ -11,7 +11,7 @@ import java.util.Map;
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class ReloadCommand extends Command {
-
+    private final NeoPerformance plugin;
     @Override
     public String getName() {
         return "reload";
@@ -36,9 +36,14 @@ public class ReloadCommand extends Command {
     public boolean playerOnly() {
         return false;
     }
+
+    public ReloadCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
-        NeoPerformance.reload();
+        plugin.reload();
         MessageUtil.sendMM(player, getLanguageManager().getString("reload.onReload", null));
     }
 

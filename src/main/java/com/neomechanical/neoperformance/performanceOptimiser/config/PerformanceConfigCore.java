@@ -10,9 +10,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class PerformanceConfigCore implements ConfigFile {
-    private static final NeoPerformance plugin = NeoPerformance.getInstance();
-    private static final File f = new File(plugin.getDataFolder(),"performanceConfig.yml");
-    public static FileConfiguration config = YamlConfiguration.loadConfiguration(f);
+    private final NeoPerformance plugin;
+    private final File f;
+    public FileConfiguration config;
+
+    public PerformanceConfigCore(NeoPerformance plugin) {
+        this.plugin = plugin;
+        f = new File(plugin.getDataFolder(), "performanceConfig.yml");
+        config = YamlConfiguration.loadConfiguration(f);
+    }
+
     public FileConfiguration createConfig() {
         if (!f.exists()) {
             plugin.saveResource(getName(), false);

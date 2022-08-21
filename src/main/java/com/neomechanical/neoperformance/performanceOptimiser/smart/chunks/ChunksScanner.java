@@ -10,14 +10,20 @@ import org.bukkit.entity.Entity;
 import java.util.*;
 
 public class ChunksScanner {
-    public static void getChunksWithMostEntities(int totalChunksReturn, final FindOneCallback callback, World... worlds) {
+    private final NeoPerformance plugin;
+
+    public ChunksScanner(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
+    public void getChunksWithMostEntities(int totalChunksReturn, final FindOneCallback callback, World... worlds) {
         // Run outside the tick loop
         List<Entity> entities = new ArrayList<>();
 
         for (World world : worlds) {
             entities.addAll(world.getEntities());
         }
-        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             //arrange entities in descending order of chunk count
             LinkedHashMap<Chunk, Integer> chunkCounts = new LinkedHashMap<>();
             for (Entity entity : entities) {

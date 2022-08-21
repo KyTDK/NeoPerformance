@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.dataGetters;
 
 import com.neomechanical.kyori.adventure.text.TextComponent;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScanNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
@@ -14,18 +14,23 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityClusterData extends DataGetter implements PerformanceConfigurationSettings {
+public class EntityClusterData extends DataGetter {
+    private final DataManager dataManager;
     private static List<List<Entity>> clusters = new ArrayList<>();
 
+    public EntityClusterData(DataManager dataManager) {
+        this.dataManager = dataManager;
+    }
 
     @Override
     public void generate() {
-        clusters = SmartScan.scan(10, getLagNotifierData().getClusterSizeNotify(), getCommandData(), Bukkit.getWorlds().toArray(World[]::new));
+        clusters = SmartScan.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
+                dataManager.getCommandData(), Bukkit.getWorlds().toArray(World[]::new));
     }
 
     @Override
     public LagData get(Player player) {
-        if (clusters.isEmpty() || clusters.get(0).size() < getLagNotifierData().getClusterSizeNotify()) {
+        if (clusters.isEmpty() || clusters.get(0).size() < dataManager.getLagNotifierData().getClusterSizeNotify()) {
             return null;
         }
         TextComponent.Builder builder = SmartScanNotifier.getChatData(player, 1, clusters);
@@ -37,6 +42,6 @@ public class EntityClusterData extends DataGetter implements PerformanceConfigur
 
     @Override
     public Integer getNotifySize() {
-        return getLagNotifierData().getClusterSizeNotify();
+        return dataManager.getLagNotifierData().getClusterSizeNotify();
     }
 }

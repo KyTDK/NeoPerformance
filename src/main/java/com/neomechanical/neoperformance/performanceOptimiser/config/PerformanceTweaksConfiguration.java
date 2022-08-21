@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.config;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.*;
 import com.neomechanical.neoperformance.utils.Logger;
@@ -10,16 +11,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PerformanceTweaksConfiguration {
+    private final NeoPerformance plugin;
     FileConfiguration config = null;
     HashMap<String, Boolean> booleans = new HashMap<>();
     HashMap<String, String> strings = new HashMap<>();
     HashMap<String, String[]> stringsArrays = new HashMap<>();
     HashMap<String, Integer> nums = new HashMap<>();
 
+    public PerformanceTweaksConfiguration(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     public void loadTweakSettings(DataManager dataManager) {
         //Performance Tweak Settings
         if (config == null) {
-            PerformanceConfigCore configUnit = new PerformanceConfigCore();
+            PerformanceConfigCore configUnit = new PerformanceConfigCore(plugin);
             config = configUnit.createConfig();
         }
         //Config updater

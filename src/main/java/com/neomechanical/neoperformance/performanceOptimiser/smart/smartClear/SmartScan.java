@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
 import com.neomechanical.neoperformance.commands.SmartClearCommand;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoutils.messages.MessageUtil;
@@ -15,7 +14,7 @@ import java.util.*;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class SmartScan implements PerformanceConfigurationSettings {
+public class SmartScan {
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();

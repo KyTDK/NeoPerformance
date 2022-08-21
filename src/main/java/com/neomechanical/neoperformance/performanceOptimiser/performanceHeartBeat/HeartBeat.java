@@ -1,10 +1,9 @@
 package com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.CachedData;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
-import com.neomechanical.neoperformance.performanceOptimiser.utils.Tps;
+import com.neomechanical.neoperformance.performanceOptimiser.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoutils.messages.MessageUtil;
@@ -19,11 +18,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
-public class HeartBeat implements Tps, PerformanceConfigurationSettings {
+public class HeartBeat {
     private final CachedData cachedData = HaltServer.cachedData;
-    private static double tps;
+    private final NeoPerformance plugin;
+    private double tps;
 
-    public static double getUpdatedTPS() {
+    public HeartBeat(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
+    public double getUpdatedTPS() {
         if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.
             tps = 20;
         }
@@ -40,38 +44,38 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 //set the tps every second
                 setTPS();
                 //check if the server is halted
-                if (isServerHalted(null)) {
-                    manualHalt[0] = DATA_MANAGER.isManualHalt();
+                if (TpsUtils.isServerHalted(plugin.getHeartBeat().getUpdatedTPS(), null, plugin)) {
+                    manualHalt[0] = plugin.getDataManager().isManualHalt();
                     if (!halted[0]) {
                         //A manual halt doesn't constitute emails or notifications
                         if (!manualHalt[0]) {
                             haltStartTime[0] = System.currentTimeMillis();
-                            if (getMailData().getUseMailServer()) {
-                                EmailClient emailClient = new EmailClient();
+                            if (plugin.getDataManager().getMailData().getUseMailServer()) {
+                                EmailClient emailClient = new EmailClient(plugin.getDataManager());
                                 //Is run asynchronously
                                 emailClient.sendAsHtml(getLanguageManager().getString("email_notifications.subject", null),
                                         getLanguageManager().getString("email_notifications.body", null));
                             }
                             String message = getLanguageManager().getString("notify.serverHalted", null);
-                            if (getTweakData().getBroadcastHalt()) {
+                            if (plugin.getDataManager().getTweakData().getBroadcastHalt()) {
                                 MessageUtil.sendMMAll(message);
-                            } else if (getTweakData().getNotifyAdmin()) {
+                            } else if (plugin.getDataManager().getTweakData().getNotifyAdmin()) {
                                 MessageUtil.sendMMAdmins(message);
                             }
                         }
                     }
                     halted[0] = true;
-                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * getHaltData().getHaltTimeout())) {
+                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * plugin.getDataManager().getHaltData().getHaltTimeout())) {
                         //after 10 minutes of the server being halted, reboot the server
-                        NeoPerformance.getInstance().getServer().shutdown();
+                        plugin.getServer().shutdown();
                     }
                 } else if (halted[0]) {
                     //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
                         String message = getLanguageManager().getString("notify.serverResumed", null);
-                        if (getTweakData().getBroadcastHalt()) {
+                        if (plugin.getDataManager().getTweakData().getBroadcastHalt()) {
                             MessageUtil.sendMMAll(message);
-                        } else if (getTweakData().getNotifyAdmin()) {
+                        } else if (plugin.getDataManager().getTweakData().getNotifyAdmin()) {
                             MessageUtil.sendMMAdmins(message);
                         }
                     }
@@ -81,7 +85,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                 }
 
             }
-        }.runTaskTimer(NeoPerformance.getInstance(), 0, getTweakData().getHeartBeatRate());
+        }.runTaskTimer(plugin, 0, plugin.getDataManager().getTweakData().getHeartBeatRate());
     }
 
     private void restoreServer() {
@@ -92,7 +96,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
             }
         }
         if (cachedData.cachedRedstoneActivity.size() > 0) {
-            DATA_MANAGER.setRestoringRedstone(true);
+            plugin.getDataManager().setRestoringRedstone(true);
             for (Location location : cachedData.cachedRedstoneActivity) {
                 try {
                     Block block = location.getBlock();
@@ -114,7 +118,7 @@ public class HeartBeat implements Tps, PerformanceConfigurationSettings {
                     throw new RuntimeException(e);
                 }
             }
-            DATA_MANAGER.setRestoringRedstone(false);
+            plugin.getDataManager().setRestoringRedstone(false);
             //Clear the cache
             cachedData.cachedRedstoneActivity.clear();
             cachedData.cachedTeleport.clear();

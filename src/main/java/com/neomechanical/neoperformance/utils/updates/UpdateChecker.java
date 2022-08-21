@@ -1,9 +1,8 @@
 package com.neomechanical.neoperformance.utils.updates;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
@@ -15,25 +14,27 @@ import java.util.function.Consumer;
 import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
 
 // From: https://www.spigotmc.org/wiki/creating-an-update-checker-that-checks-for-updates
-public class UpdateChecker implements PerformanceConfigurationSettings {
+public class UpdateChecker {
     public static Boolean UpToDate;
-    private final JavaPlugin plugin;
+    private final NeoPerformance plugin;
     private final int resourceId;
+    private final DataManager dataManager;
+
+    public UpdateChecker(NeoPerformance plugin, int resourceId) {
+        this.plugin = plugin;
+        this.resourceId = resourceId;
+        this.dataManager = plugin.getDataManager();
+    }
 
     public void start() {
-        if (getVisualData().getShowPluginUpdateInMain()) {
+        if (dataManager.getVisualData().getShowPluginUpdateInMain()) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    new UpdateChecker(NeoPerformance.getInstance(), 103183).getVersion(version -> UpToDate = isUpToDate(NeoPerformance.getInstance().getDescription().getVersion(), version));
+                    new UpdateChecker(plugin, 103183).getVersion(version -> UpToDate = isUpToDate(plugin.getDescription().getVersion(), version));
                 }
-            }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * 300);
+            }.runTaskTimer(plugin, 0, 20L * 300);
         }
-    }
-
-    public UpdateChecker(JavaPlugin plugin, int resourceId) {
-        this.plugin = plugin;
-        this.resourceId = resourceId;
     }
 
     public void getVersion(final Consumer<String> consumer) {
