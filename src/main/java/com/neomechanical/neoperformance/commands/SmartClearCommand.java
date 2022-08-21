@@ -166,7 +166,7 @@ public class SmartClearCommand extends Command {
 
     @Override
     public List<String> tabSuggestions() {
-        return PROCESSORS.keySet().stream().toList();
+        return new ArrayList<>(PROCESSORS.keySet());
     }
 
     @Override

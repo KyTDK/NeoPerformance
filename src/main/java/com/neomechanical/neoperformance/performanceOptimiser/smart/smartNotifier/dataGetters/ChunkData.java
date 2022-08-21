@@ -24,7 +24,7 @@ public class ChunkData extends DataGetter {
 
     @Override
     public void generate() {
-        World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+        World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
         new ChunksScanner(plugin).getChunksWithMostEntities(1, result -> chunks = result, worlds);
     }
 

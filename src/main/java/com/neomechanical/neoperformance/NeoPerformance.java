@@ -18,19 +18,22 @@ import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBea
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.LagChecker;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
+import com.neomechanical.neoperformance.versions.legacy.HeartBeat.HeartBeatWrapper;
+import com.neomechanical.neoperformance.versions.legacy.HeartBeat.HeartBeat_LEGACY;
 import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoutils.languages.LanguageManager;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static com.neomechanical.neoperformance.utils.updates.IsUpToDate.isUpToDate;
+import static com.neomechanical.neoutils.updates.IsUpToDate.isUpToDate;
 
 public final class NeoPerformance extends NeoUtils {
     private static NeoPerformance instance;
     private DataManager dataManager;
     private Metrics metrics;
-
+    public String sversion;
     @Deprecated
     public static NeoPerformance getInstance() {
         return instance;
@@ -48,9 +51,9 @@ public final class NeoPerformance extends NeoUtils {
         NeoPerformance.instance = instance;
     }
 
-    private HeartBeat heartBeat;
+    private HeartBeatWrapper heartBeat;
 
-    public HeartBeat getHeartBeat() {
+    public HeartBeatWrapper getHeartBeat() {
         return heartBeat;
     }
 
@@ -67,8 +70,9 @@ public final class NeoPerformance extends NeoUtils {
         // Start heart beat, can't live without it.
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
-        heartBeat = new HeartBeat(this, dataManager);
-        heartBeat.start();
+        if (!setupManager()) {
+            NeoUtils.getFancyLogger().fatal("Plugin failed to start due to an unrecognised server version.");
+        }
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager(this).register();
         //Check for updates
@@ -105,6 +109,22 @@ public final class NeoPerformance extends NeoUtils {
             new LagChecker(this).start();
         }
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
+    }
+
+    private boolean setupManager() {
+        sversion = "N/A";
+        try {
+            sversion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        if (!isUpToDate(sversion, "v1_10_R3")) {
+            heartBeat = new HeartBeat_LEGACY(this, dataManager);
+        } else {
+            heartBeat = new HeartBeat(this, dataManager);
+        }
+        heartBeat.start();
+        return heartBeat != null;
     }
 
     @Override

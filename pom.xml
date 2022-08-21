@@ -6,6 +6,10 @@
     <groupId>com.neoperformance</groupId>
     <artifactId>NeoPerformance</artifactId>
     <version>1.12.8</version>
+    <properties>
+        <java.version>8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -50,8 +54,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>8</source>
+                    <target>8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -64,6 +68,14 @@
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.neomechanical.neoconfig</pattern>
+                            <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.neomechanical.neoutils</pattern>
+                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>
                         </relocation>
                     </relocations>
                     <artifactSet>
@@ -164,15 +176,8 @@
         <dependency>
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
-            <version>1.4.1</version>
+            <version>1.5</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
-
 </project>

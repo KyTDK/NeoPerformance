@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LagChecker {
     private final NeoPerformance plugin;
@@ -24,13 +25,13 @@ public class LagChecker {
                 //Generate data
                 LagDataManager lagDataManager = new LagDataManager(plugin);
                 lagDataManager.generateAll();
-                List<? extends Player> recipients = Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("neoperformance.smartnotify") || p.isOp()).toList();
+                List<? extends Player> recipients = Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("neoperformance.smartnotify") || p.isOp()).collect(Collectors.toList());
                 for (Player recipient : recipients) {
                     LagReportBuilder lagReportBuilder = new LagReport().reportBuilder();
                     lagReportBuilder.addData(lagDataManager.getAllLagData(recipient));
                     lagReportBuilder.sendReport(recipient);
                 }
             }
-        }.runTaskTimer(NeoPerformance.getInstance(), 0, 20L * plugin.getDataManager().getLagNotifierData().getRunInterval());
+        }.runTaskTimer(plugin, 0, 20L * plugin.getDataManager().getLagNotifierData().getRunInterval());
     }
 }

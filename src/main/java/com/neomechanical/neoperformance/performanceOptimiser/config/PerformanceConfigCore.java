@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collections;
 
 public class PerformanceConfigCore implements ConfigFile {
     private final NeoPerformance plugin;
@@ -26,7 +26,7 @@ public class PerformanceConfigCore implements ConfigFile {
         }
 //The config needs to exist before using the updater
         try {
-            ConfigUpdater.update(plugin, "performanceConfig.yml", f, List.of(""));
+            ConfigUpdater.update(plugin, "performanceConfig.yml", f, Collections.singletonList(""));
         } catch (IOException e) {
             e.printStackTrace();
         }

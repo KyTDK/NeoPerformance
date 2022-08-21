@@ -25,7 +25,7 @@ public class EntityClusterData extends DataGetter {
     @Override
     public void generate() {
         clusters = SmartScan.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
-                dataManager.getCommandData(), Bukkit.getWorlds().toArray(World[]::new));
+                dataManager.getCommandData(), Bukkit.getWorlds().toArray(new World[0]));
     }
 
     @Override

@@ -59,7 +59,7 @@ public class ChunksCommand extends Command {
             }
         }
         if (world == null) {
-            World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+            World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
             new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
         } else {
             World finalWorld = world;

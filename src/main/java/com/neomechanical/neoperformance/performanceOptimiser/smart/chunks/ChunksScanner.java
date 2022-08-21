@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ChunksScanner {
     private final NeoPerformance plugin;
@@ -42,7 +43,7 @@ public class ChunksScanner {
                 int max = Collections.max(chunkCounts.values());
                 Chunk chunk = chunkCounts.entrySet().stream()
                         .filter(entry -> entry.getValue() == max)
-                        .map(Map.Entry::getKey).toList().get(0);
+                        .map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
                 chunkCounts.remove(chunk);
                 topChunks.add(chunk);
             }

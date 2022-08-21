@@ -1,31 +1,26 @@
-package com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat;
+package com.neomechanical.neoperformance.versions.legacy.HeartBeat;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.CachedData;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.TpsUtils;
+import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import com.neomechanical.neoperformance.versions.legacy.HeartBeat.HeartBeatWrapper;
 import com.neomechanical.neoutils.messages.MessageUtil;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.AnaloguePowerable;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TPSReflection.getRecentTpsRefl;
 
-public class HeartBeat implements HeartBeatWrapper {
+public class HeartBeat_LEGACY implements HeartBeatWrapper {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin;
     private final DataManager dataManager;
     private double tps;
 
-    public HeartBeat(NeoPerformance plugin, DataManager dataManager) {
+    public HeartBeat_LEGACY(NeoPerformance plugin, DataManager dataManager) {
         this.plugin = plugin;
         this.dataManager = dataManager;
     }
@@ -99,29 +94,8 @@ public class HeartBeat implements HeartBeatWrapper {
             }
         }
         if (cachedData.cachedRedstoneActivity.size() > 0) {
-            dataManager.setRestoringRedstone(true);
-            for (Location location : cachedData.cachedRedstoneActivity) {
-                try {
-                    Block block = location.getBlock();
-                    BlockData data = block.getBlockData();
-                    if (data instanceof Powerable) {
-                        Powerable powerable = (Powerable) data;
-                        powerable.setPowered(powerable.isPowered());
-                        block.setBlockData(powerable);
-                    } else if (data instanceof AnaloguePowerable) {
-                        AnaloguePowerable analoguePowerable = (AnaloguePowerable) data;
-                        analoguePowerable.setPower(analoguePowerable.getPower());
-                        block.setBlockData(analoguePowerable);
-                    }
-                    BlockData blockData = block.getBlockData().clone();
-                    block.setType(block.getType());
-                    block.setBlockData(blockData);
-                    block.getState().update(true, true);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            dataManager.setRestoringRedstone(false);
+            Logger.warn("You are using a version of minecraft that does not support redstone activity. " +
+                    "Please update to the latest version of minecraft.");
             //Clear the cache
             cachedData.cachedRedstoneActivity.clear();
             cachedData.cachedTeleport.clear();

@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
@@ -82,7 +83,7 @@ public class SmartScan {
             int max = Collections.max(cluster.values());
             List<Entity> cluster1 = cluster.entrySet().stream()
                     .filter(entry -> entry.getValue() == max)
-                    .map(Map.Entry::getKey).toList().get(0);
+                    .map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
             cluster.remove(cluster1);
             topClusters.add(cluster1);
         }
@@ -94,11 +95,11 @@ public class SmartScan {
         List<List<Entity>> clusters;
         if (world.isEmpty()) {
             //Scan for all world
-            World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+            World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
             clusters = SmartScan.scan(10, clusterSize, commandData, worlds);
 
         } else {
-            World[] worldsList = world.toArray(World[]::new);
+            World[] worldsList = world.toArray(new World[0]);
             //Scan for individual world
             clusters = SmartScan.scan(10, clusterSize, commandData, worldsList);
         }

@@ -49,9 +49,9 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
         <configuration>
-          <source>16</source>
-          <target>16</target>
-          <encoding>UTF-8</encoding>
+            <source>8</source>
+            <target>8</target>
+            <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>
@@ -66,12 +66,20 @@
           </execution>
         </executions>
         <configuration>
-          <relocations>
-            <relocation>
-              <pattern>org.bstats</pattern>
-              <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
-            </relocation>
-          </relocations>
+            <relocations>
+                <relocation>
+                    <pattern>org.bstats</pattern>
+                    <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
+                </relocation>
+                <relocation>
+                    <pattern>com.neomechanical.neoconfig</pattern>
+                    <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>
+                </relocation>
+                <relocation>
+                    <pattern>com.neomechanical.neoutils</pattern>
+                    <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>
+                </relocation>
+            </relocations>
           <artifactSet>
             <includes>
               <include>com.sun.mail:javax.mail</include>
@@ -127,9 +135,7 @@
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
+      <java.version>8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 </project>
