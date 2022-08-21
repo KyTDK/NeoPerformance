@@ -22,7 +22,7 @@ public class RegisterLanguageManager {
                 .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "zh-CN.yml")
                 .addInternalPlaceholder("%TPS%", (Player player) -> TpsUtils.getFancyTps(plugin))
                 .addInternalPlaceholder("%TPSHALT%", (Player player) -> TpsUtils.getFancyHaltTps(plugin))
-                .addInternalPlaceholder("%SERVERHALTED%", (Player player) -> TpsUtils.fancyIsServerHalted(plugin.getHeartBeat().getUpdatedTPS(), plugin))
+                .addInternalPlaceholder("%SERVERHALTED%", (Player player) -> TpsUtils.fancyIsServerHalted(TpsUtils.getTPS(plugin), plugin))
                 .addInternalPlaceholder("%PLAYERCOUNT%", (Player player) -> String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .addInternalPlaceholder("%PLAYER%", (Player player) -> player == null ? "None" : player.getName())
                 .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus())

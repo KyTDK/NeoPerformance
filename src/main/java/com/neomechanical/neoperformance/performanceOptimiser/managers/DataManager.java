@@ -19,7 +19,6 @@ public class DataManager {
     private CommandData commandData;
     private LagNotifierData lagNotifierData;
     private boolean restoringRedstone = false;
-
     public void loadTweakSettings(NeoPerformance plugin) {
         new PerformanceTweaksConfiguration(plugin).loadTweakSettings(this);
     }

@@ -30,7 +30,6 @@ public final class NeoPerformance extends NeoUtils {
     private static NeoPerformance instance;
     private DataManager dataManager;
     private Metrics metrics;
-    private HeartBeat heartBeat;
 
     @Deprecated
     public static NeoPerformance getInstance() {
@@ -49,13 +48,15 @@ public final class NeoPerformance extends NeoUtils {
         NeoPerformance.instance = instance;
     }
 
-    public void reload() {
-        dataManager.loadTweakSettings(this);
-        getLanguageManager().loadLanguageConfig();
-    }
+    private HeartBeat heartBeat;
 
     public HeartBeat getHeartBeat() {
         return heartBeat;
+    }
+
+    public void reload() {
+        dataManager.loadTweakSettings(this);
+        getLanguageManager().loadLanguageConfig();
     }
 
     @Override
@@ -63,9 +64,11 @@ public final class NeoPerformance extends NeoUtils {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
-        // Initialize an audiences instance for the plugin
+        // Start heart beat, can't live without it.
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
+        heartBeat = new HeartBeat(this, dataManager);
+        heartBeat.start();
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager(this).register();
         //Check for updates
@@ -97,8 +100,6 @@ public final class NeoPerformance extends NeoUtils {
         //Register ability listeners
         getServer().getPluginManager().registerEvents(new HaltServer(this), this);
         getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
-        heartBeat = new HeartBeat(this);
-        heartBeat.start();
         new UpdateChecker(this, 103183).start();
         if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
             new LagChecker(this).start();

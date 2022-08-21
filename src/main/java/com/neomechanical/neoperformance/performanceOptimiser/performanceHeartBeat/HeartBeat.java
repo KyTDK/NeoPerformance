@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBe
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.CachedData;
 import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
@@ -21,10 +22,12 @@ import static com.neomechanical.neoperformance.performanceOptimiser.utils.tps.TP
 public class HeartBeat {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin;
+    private final DataManager dataManager;
     private double tps;
 
-    public HeartBeat(NeoPerformance plugin) {
+    public HeartBeat(NeoPerformance plugin, DataManager dataManager) {
         this.plugin = plugin;
+        this.dataManager = dataManager;
     }
 
     public double getUpdatedTPS() {
@@ -44,28 +47,28 @@ public class HeartBeat {
                 //set the tps every second
                 setTPS();
                 //check if the server is halted
-                if (TpsUtils.isServerHalted(plugin.getHeartBeat().getUpdatedTPS(), null, plugin)) {
-                    manualHalt[0] = plugin.getDataManager().isManualHalt();
+                if (TpsUtils.isServerHalted(getUpdatedTPS(), null, plugin)) {
+                    manualHalt[0] = dataManager.isManualHalt();
                     if (!halted[0]) {
                         //A manual halt doesn't constitute emails or notifications
                         if (!manualHalt[0]) {
                             haltStartTime[0] = System.currentTimeMillis();
-                            if (plugin.getDataManager().getMailData().getUseMailServer()) {
-                                EmailClient emailClient = new EmailClient(plugin.getDataManager());
+                            if (dataManager.getMailData().getUseMailServer()) {
+                                EmailClient emailClient = new EmailClient(dataManager);
                                 //Is run asynchronously
                                 emailClient.sendAsHtml(getLanguageManager().getString("email_notifications.subject", null),
                                         getLanguageManager().getString("email_notifications.body", null));
                             }
                             String message = getLanguageManager().getString("notify.serverHalted", null);
-                            if (plugin.getDataManager().getTweakData().getBroadcastHalt()) {
+                            if (dataManager.getTweakData().getBroadcastHalt()) {
                                 MessageUtil.sendMMAll(message);
-                            } else if (plugin.getDataManager().getTweakData().getNotifyAdmin()) {
+                            } else if (dataManager.getTweakData().getNotifyAdmin()) {
                                 MessageUtil.sendMMAdmins(message);
                             }
                         }
                     }
                     halted[0] = true;
-                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * plugin.getDataManager().getHaltData().getHaltTimeout())) {
+                    if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * dataManager.getHaltData().getHaltTimeout())) {
                         //after 10 minutes of the server being halted, reboot the server
                         plugin.getServer().shutdown();
                     }
@@ -73,9 +76,9 @@ public class HeartBeat {
                     //Again, a manual halt doesn't require notifications
                     if (!manualHalt[0]) {
                         String message = getLanguageManager().getString("notify.serverResumed", null);
-                        if (plugin.getDataManager().getTweakData().getBroadcastHalt()) {
+                        if (dataManager.getTweakData().getBroadcastHalt()) {
                             MessageUtil.sendMMAll(message);
-                        } else if (plugin.getDataManager().getTweakData().getNotifyAdmin()) {
+                        } else if (dataManager.getTweakData().getNotifyAdmin()) {
                             MessageUtil.sendMMAdmins(message);
                         }
                     }
@@ -85,7 +88,7 @@ public class HeartBeat {
                 }
 
             }
-        }.runTaskTimer(plugin, 0, plugin.getDataManager().getTweakData().getHeartBeatRate());
+        }.runTaskTimer(plugin, 0, dataManager.getTweakData().getHeartBeatRate());
     }
 
     private void restoreServer() {
@@ -96,7 +99,7 @@ public class HeartBeat {
             }
         }
         if (cachedData.cachedRedstoneActivity.size() > 0) {
-            plugin.getDataManager().setRestoringRedstone(true);
+            dataManager.setRestoringRedstone(true);
             for (Location location : cachedData.cachedRedstoneActivity) {
                 try {
                     Block block = location.getBlock();
@@ -118,7 +121,7 @@ public class HeartBeat {
                     throw new RuntimeException(e);
                 }
             }
-            plugin.getDataManager().setRestoringRedstone(false);
+            dataManager.setRestoringRedstone(false);
             //Clear the cache
             cachedData.cachedRedstoneActivity.clear();
             cachedData.cachedTeleport.clear();
