@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.managers;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceTweaksConfiguration;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.*;
 import org.bukkit.command.CommandSender;
@@ -18,12 +19,8 @@ public class DataManager {
     private CommandData commandData;
     private LagNotifierData lagNotifierData;
     private boolean restoringRedstone = false;
-
-    public DataManager() {
-    }
-
-    public void loadTweakSettings() {
-        new PerformanceTweaksConfiguration().loadTweakSettings(this);
+    public void loadTweakSettings(NeoPerformance plugin) {
+        new PerformanceTweaksConfiguration(plugin).loadTweakSettings(this);
     }
 
     //Tweak data

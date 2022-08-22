@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.utils.mail;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import org.bukkit.Bukkit;
 
 import javax.activation.DataHandler;
@@ -15,12 +15,20 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Properties;
 
-public class EmailClient implements PerformanceConfigurationSettings {
-    private final String outgoingHost = getMailData().getOutgoingHost();
-    private final String senderEmail = getMailData().getSenderEmail();
-    private final String[] recipients = getMailData().getRecipients();
-    private final String senderPassword = getMailData().getSenderPassword();
-    private final int outgoingPort = getMailData().getOutgoingPort();
+public class EmailClient {
+    private final String outgoingHost;
+    private final String senderEmail;
+    private final String[] recipients;
+    private final String senderPassword;
+    private final int outgoingPort;
+
+    public EmailClient(DataManager dataManager) {
+        outgoingHost = dataManager.getMailData().getOutgoingHost();
+        senderEmail = dataManager.getMailData().getSenderEmail();
+        recipients = dataManager.getMailData().getRecipients();
+        senderPassword = dataManager.getMailData().getSenderPassword();
+        outgoingPort = dataManager.getMailData().getOutgoingPort();
+    }
 
     public void sendAsHtml(String title, String html) {
         Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
@@ -69,20 +77,19 @@ public class EmailClient implements PerformanceConfigurationSettings {
     private void collect(BufferedReader in, Message msg, String body)
             throws MessagingException, IOException {
         String subject = msg.getSubject();
-        StringBuffer sb = new StringBuffer();
-        sb.append("<HTML>\n");
-        sb.append("<HEAD>\n");
-        sb.append("<TITLE>\n");
-        sb.append(subject + "\n");
-        sb.append("</TITLE>\n");
-        sb.append("</HEAD>\n");
-        sb.append("<BODY>\n");
-        sb.append("<H1>" + subject + "</H1>" + "\n");
-        sb.append("<P>\n");
-        sb.append(body + "\n");
-        sb.append("</P>\n");
-        sb.append("</BODY>\n");
-        sb.append("</HTML>\n");
-        msg.setDataHandler(new DataHandler(new ByteArrayDataSource(sb.toString(), "text/html")));
+        String sb = "<HTML>\n" +
+                "<HEAD>\n" +
+                "<TITLE>\n" +
+                subject + "\n" +
+                "</TITLE>\n" +
+                "</HEAD>\n" +
+                "<BODY>\n" +
+                "<H1>" + subject + "</H1>" + "\n" +
+                "<P>\n" +
+                body + "\n" +
+                "</P>\n" +
+                "</BODY>\n" +
+                "</HTML>\n";
+        msg.setDataHandler(new DataHandler(new ByteArrayDataSource(sb, "text/html")));
     }
 }

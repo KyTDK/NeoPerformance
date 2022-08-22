@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
 import com.neomechanical.neoperformance.commands.SmartClearCommand;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoutils.messages.MessageUtil;
@@ -12,10 +11,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class SmartScan implements PerformanceConfigurationSettings {
+public class SmartScan {
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
@@ -83,7 +83,7 @@ public class SmartScan implements PerformanceConfigurationSettings {
             int max = Collections.max(cluster.values());
             List<Entity> cluster1 = cluster.entrySet().stream()
                     .filter(entry -> entry.getValue() == max)
-                    .map(Map.Entry::getKey).toList().get(0);
+                    .map(Map.Entry::getKey).collect(Collectors.toList()).get(0);
             cluster.remove(cluster1);
             topClusters.add(cluster1);
         }
@@ -95,11 +95,11 @@ public class SmartScan implements PerformanceConfigurationSettings {
         List<List<Entity>> clusters;
         if (world.isEmpty()) {
             //Scan for all world
-            World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
+            World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
             clusters = SmartScan.scan(10, clusterSize, commandData, worlds);
 
         } else {
-            World[] worldsList = world.toArray(World[]::new);
+            World[] worldsList = world.toArray(new World[0]);
             //Scan for individual world
             clusters = SmartScan.scan(10, clusterSize, commandData, worldsList);
         }

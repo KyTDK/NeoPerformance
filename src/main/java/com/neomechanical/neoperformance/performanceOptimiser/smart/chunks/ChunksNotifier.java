@@ -38,27 +38,32 @@ public class ChunksNotifier {
             } else {
                 color = NamedTextColor.GREEN;
             }
+            TextComponent.Builder message = Component.text();
             Entity entityToLocate = chunk.getEntities()[0];
             Location location = new Location(world, Math.round(entityToLocate.getLocation().getX()), Math.round(entityToLocate.getLocation().getY()),
                     Math.round(entityToLocate.getLocation().getZ()));
-            bc.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
+            message.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
                     .append(Component.text(location.getX() + " " + location.getZ()).color(color).decorate(TextDecoration.BOLD))
                     .append(Component.text(" - Entities: ").color(color).decorate(TextDecoration.BOLD))
                     .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color).decorate(TextDecoration.BOLD));
             if (world == null) {
-                bc.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
-                bc.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
+                message.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
+                message.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
             }
-            bc.color(color).decorate(TextDecoration.BOLD);
+            message.color(color).decorate(TextDecoration.BOLD);
             //Append new line
             if (chunks.indexOf(chunk) != chunks.size() - 1) {
-                bc.append(Component.newline());
+                message.append(Component.newline());
             }
-            bc.clickEvent(ClickEvent.runCommand(
+            if (playerAsPlayer instanceof Player) {
+
+            }
+            message.clickEvent(ClickEvent.runCommand(
                     "/minecraft:execute in " + chunk.getWorld().getKey()
                             + " run tp " + playerAsPlayer.getName() + " " + location.getX()
                             + " " + location.getY() + " " + location.getZ()));
-            bc.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
+            message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
+            bc.append(message);
         }
         return bc;
     }

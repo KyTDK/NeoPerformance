@@ -3,7 +3,7 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class ChunksCommand extends SubCommand {
+public class ChunksCommand extends Command {
+    private final NeoPerformance plugin;
     @Override
     public String getName() {
         return "chunks";
@@ -39,10 +40,13 @@ public class ChunksCommand extends SubCommand {
 
     @Override
     public boolean playerOnly() {
-        return true;
+        return false;
     }
 
-    private final NeoPerformance plugin = NeoPerformance.getInstance();
+    public ChunksCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
@@ -55,11 +59,11 @@ public class ChunksCommand extends SubCommand {
             }
         }
         if (world == null) {
-            World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
-            ChunksScanner.getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
+            World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
         } else {
             World finalWorld = world;
-            ChunksScanner.getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, playerAsPlayer), world);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, playerAsPlayer), world);
         }
     }
 

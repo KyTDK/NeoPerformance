@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.dataGetters;
 
 import com.neomechanical.kyori.adventure.text.TextComponent;
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
@@ -14,18 +14,23 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChunkData extends DataGetter implements PerformanceConfigurationSettings {
+public class ChunkData extends DataGetter {
     private static List<Chunk> chunks = new ArrayList<>();
+    private final NeoPerformance plugin;
+
+    public ChunkData(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public void generate() {
-        World[] worlds = Bukkit.getWorlds().toArray(World[]::new);
-        ChunksScanner.getChunksWithMostEntities(1, result -> chunks = result, worlds);
+        World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
+        new ChunksScanner(plugin).getChunksWithMostEntities(1, result -> chunks = result, worlds);
     }
 
     @Override
     public LagData get(Player player) {
-        if (chunks.isEmpty() || chunks.get(0).getEntities().length < getLagNotifierData().getEntitiesInChunkNotify()) {
+        if (chunks.isEmpty() || chunks.get(0).getEntities().length < plugin.getDataManager().getLagNotifierData().getEntitiesInChunkNotify()) {
             return null;
         }
         TextComponent.Builder builder = ChunksNotifier.getChatData(chunks, null, player);
@@ -37,6 +42,6 @@ public class ChunkData extends DataGetter implements PerformanceConfigurationSet
 
     @Override
     public Integer getNotifySize() {
-        return getLagNotifierData().getEntitiesInChunkNotify();
+        return plugin.getDataManager().getLagNotifierData().getEntitiesInChunkNotify();
     }
 }

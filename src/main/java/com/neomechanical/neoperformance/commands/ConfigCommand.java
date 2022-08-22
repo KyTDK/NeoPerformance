@@ -2,14 +2,16 @@ package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoconfig.menu.ConfigMenu;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoutils.commandManager.SubCommand;
+import com.neomechanical.neoutils.commands.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Map;
 
-public class ConfigCommand extends SubCommand {
+public class ConfigCommand extends Command {
+    private final NeoPerformance plugin;
+
     @Override
     public String getName() {
         return "config";
@@ -35,13 +37,17 @@ public class ConfigCommand extends SubCommand {
         return true;
     }
 
+    public ConfigCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public void perform(CommandSender player, String[] args) {
         Player playerAsPlayer = (Player) player;
-        ConfigMenu configMenu = new ConfigMenu(NeoPerformance.getInstance());
-        configMenu.onComplete((playerAsAuthor, text) -> NeoPerformance.reload())
+        ConfigMenu configMenu = new ConfigMenu(plugin);
+        configMenu.onComplete((playerAsAuthor, text) -> plugin.reload())
                 .permission("neoperformance.config", () -> NeoPerformance.getLanguageManager().getString("commandGeneric.errorNoPermission", null))
-                .open(playerAsPlayer, NeoPerformance.getInstance());
+                .open(playerAsPlayer, plugin);
     }
 
     @Override

@@ -1,17 +1,19 @@
 package com.neomechanical.neoperformance.commands;
 
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.utils.messages.Messages;
-import com.neomechanical.neoutils.commandManager.Command;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
-public class MainCommand extends Command implements PerformanceConfigurationSettings {
+public class MainCommand extends Command {
+    private final NeoPerformance plugin;
+
     @Override
     public String getName() {
         return "neoperformance";
@@ -37,7 +39,12 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
         return false;
     }
 
+    public MainCommand(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
     private static final MessageUtil messageUtil = new MessageUtil();
+
     @Override
     public void perform(CommandSender player, String[] args) {
         messageUtil.neoComponentMessage()
@@ -45,7 +52,7 @@ public class MainCommand extends Command implements PerformanceConfigurationSett
                 .addComponent(getLanguageManager().getString("main.serverTps", null))
                 .addComponent(getLanguageManager().getString("main.serverHaltsAt", null))
                 .addComponent(getLanguageManager().getString("main.playerCount", null));
-        if (getVisualData().getShowPluginUpdateInMain()) {
+        if (plugin.getDataManager().getVisualData().getShowPluginUpdateInMain()) {
             messageUtil.addComponent(getLanguageManager().getString("main.upToDate", null));
         }
         messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);

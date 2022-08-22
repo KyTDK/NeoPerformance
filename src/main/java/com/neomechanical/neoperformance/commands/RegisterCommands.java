@@ -1,24 +1,33 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoutils.commandManager.CommandManager;
+import com.neomechanical.neoperformance.utils.messages.Messages;
+import com.neomechanical.neoutils.commands.CommandBuilder;
+import com.neomechanical.neoutils.commands.easyCommands.EasyHelpCommand;
 
-import static com.neomechanical.neoutils.NeoUtils.getLanguageManager;
+import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class RegisterCommands {
-    public static void register(NeoPerformance plugin) {
-        CommandManager commandManager = new CommandManager(plugin, "neoperformance");
-        commandManager.registerSubCommand(new BypassCommand());
-        commandManager.setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null));
-        commandManager.setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null));
-        commandManager.setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null));
-        commandManager.registerMainCommand(new MainCommand());
-        commandManager.registerSubCommand(new HelpCommand(commandManager));
-        commandManager.registerSubCommand(new ReloadCommand());
-        commandManager.registerSubCommand(new BypassCommand());
-        commandManager.registerSubCommand(new ChunksCommand());
-        commandManager.registerSubCommand(new HaltCommand());
-        commandManager.registerSubCommand(new SmartClearCommand());
-        commandManager.registerSubCommand(new ConfigCommand());
+    private final NeoPerformance plugin;
+
+    public RegisterCommands(NeoPerformance plugin) {
+        this.plugin = plugin;
+    }
+
+    public void register() {
+        new CommandBuilder(plugin, new MainCommand(plugin))
+                .setErrorNotPlayer(() -> getLanguageManager().getString("commandGeneric.errorNotPlayer", null))
+                .setErrorNoPermission(() -> getLanguageManager().getString("commandGeneric.errorNoPermission", null))
+                .setErrorCommandNotFound(() -> getLanguageManager().getString("commandGeneric.errorCommandNotFound", null))
+                .setAliases("np", "performance")
+                .addSubcommand(new EasyHelpCommand("neoperformance", "/np help", "See the help menu",
+                        "neoperformance.help", false, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX))
+                .addSubcommand(new ReloadCommand(plugin))
+                .addSubcommand(new BypassCommand(plugin))
+                .addSubcommand(new ChunksCommand(plugin))
+                .addSubcommand(new HaltCommand(plugin))
+                .addSubcommand(new SmartClearCommand(plugin))
+                .addSubcommand(new ConfigCommand(plugin))
+                .register();
     }
 }

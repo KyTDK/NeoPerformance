@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers;
 
-import com.neomechanical.neoperformance.performanceOptimiser.config.PerformanceConfigurationSettings;
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.dataGetters.ChunkData;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.dataGetters.EntityClusterData;
@@ -9,12 +9,12 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LagDataManager implements PerformanceConfigurationSettings {
+public class LagDataManager {
     List<DataGetter> dataGetters = new ArrayList<>();
 
-    public LagDataManager() {
-        dataGetters.add(new ChunkData());
-        dataGetters.add(new EntityClusterData());
+    public LagDataManager(NeoPerformance plugin) {
+        dataGetters.add(new ChunkData(plugin));
+        dataGetters.add(new EntityClusterData(plugin.getDataManager()));
     }
 
     public void generateAll() {
