@@ -71,7 +71,7 @@ public final class NeoPerformance extends NeoUtils {
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
         if (!setupManager()) {
-            NeoUtils.getFancyLogger().fatal("Plugin failed to start due to an unrecognised server version.");
+            NeoUtils.getInstance().getFancyLogger().fatal("Plugin failed to start due to an unrecognised server version.");
         }
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager(this).register();
