@@ -1,9 +1,0 @@
-name: NeoPerformance
-version: '1.12.8'
-main: com.neomechanical.neoperformance.NeoPerformance
-load: POSTWORLD
-authors:
-  - NeoDevs
-prefix: NeoPerformance
-api-version: 1.13
-default-permission: op

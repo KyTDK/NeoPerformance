@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.neomechanical</groupId>
+        <artifactId>NeoPerformance-parent</artifactId>
+        <version>1.13</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>NeoPerformance-LEGACY</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.neomechanical</groupId>
+            <artifactId>NeoPerformance-abstraction</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--This adds the Spigot API artifact to the build -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
