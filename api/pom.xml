@@ -34,7 +34,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
         <dependency>
@@ -99,41 +99,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <relocations>
-                        <relocation>
-                            <pattern>org.bstats</pattern>
-                            <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>com.neomechanical.neoconfig</pattern>
-                            <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>com.neomechanical.neoutils</pattern>
-                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <artifactSet>
-                        <includes>
-                            <include>com.sun.mail:javax.mail</include>
-                            <include>javax.activation:activation</include>
-                            <include>org.bstats</include>
-                            <!--<include>com.github.KyTDK:NeoUtils</include>-->
-                            <include>com.neomechanical:NeoUtils</include>
-                            <include>com.neomechanical:NeoConfig</include>
-                        </includes>
-                    </artifactSet>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <resources>

@@ -6,7 +6,9 @@ import com.neomechanical.kyori.adventure.text.event.ClickEvent;
 import com.neomechanical.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoperformance.utils.messages.Messages;
+import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.version.worlds.IWorldNMS;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -51,7 +53,8 @@ public class SmartScanNotifier {
                 continue;
             }
             //Command to review cluster
-            String command = "/minecraft:execute in " + location.getWorld().getKey()
+            IWorldNMS worldNMS = (IWorldNMS) NeoUtils.getInternalVersions().get("worlds");
+            String command = "/minecraft:execute in " + worldNMS.getWorldNamespaceKey(location.getWorld())
                     + " run tp " + player.getName() + " " + location.getX()
                     + " " + location.getY() + " " + location.getZ();
             TextComponent.Builder message = Component.text();

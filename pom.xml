@@ -29,13 +29,39 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+                <!--                <configuration>-->
+                <!--                    <relocations>-->
+                <!--                        <relocation>-->
+                <!--                            <pattern>org.bstats</pattern>-->
+                <!--                            <shadedPattern>com.neomechanical.neoperformance</shadedPattern>-->
+                <!--                        </relocation>-->
+                <!--                        <relocation>-->
+                <!--                            <pattern>com.neomechanical.neoconfig</pattern>-->
+                <!--                            <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>-->
+                <!--                        </relocation>-->
+                <!--                        <relocation>-->
+                <!--                            <pattern>com.neomechanical.neoutils</pattern>-->
+                <!--                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>-->
+                <!--                        </relocation>-->
+                <!--                    </relocations>-->
+                <!--                </configuration>-->
+            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>api/src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
     <dependencies>
         <dependency>
