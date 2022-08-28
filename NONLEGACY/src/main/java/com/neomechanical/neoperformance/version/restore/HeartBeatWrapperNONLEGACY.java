@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.version.restore;
 
-import com.neomechanical.neoperformance.performanceOptimiser.halt.CachedData;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
+import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
@@ -9,19 +8,21 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 
-public class WrapperNONLEGACY implements HeartBeatWrapper {
+import java.util.LinkedHashMap;
+import java.util.List;
+
+public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
 
     @Override
-    public void restoreServer(CachedData cachedData, DataManager dataManager) {
+    public void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity) {
         //run teleport cache
-        for (Player player : cachedData.cachedTeleport.keySet()) {
+        for (Player player : cachedTeleport.keySet()) {
             if (player.isOnline()) {
-                player.teleport(cachedData.cachedTeleport.get(player));
+                player.teleport(cachedTeleport.get(player));
             }
         }
-        if (cachedData.cachedRedstoneActivity.size() > 0) {
-            dataManager.setRestoringRedstone(true);
-            for (Location location : cachedData.cachedRedstoneActivity) {
+        if (cachedRedstoneActivity.size() > 0) {
+            for (Location location : cachedRedstoneActivity) {
                 try {
                     Block block = location.getBlock();
                     BlockData data = block.getBlockData();
@@ -42,10 +43,6 @@ public class WrapperNONLEGACY implements HeartBeatWrapper {
                     throw new RuntimeException(e);
                 }
             }
-            dataManager.setRestoringRedstone(false);
-            //Clear the cache
-            cachedData.cachedRedstoneActivity.clear();
-            cachedData.cachedTeleport.clear();
         }
     }
 }

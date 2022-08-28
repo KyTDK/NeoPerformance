@@ -35,7 +35,6 @@ halt_settings:
   # [haltPlayerInteraction] This will also prevent block placement as that is also a player interaction
   haltPlayerInteractions: false
   haltProjectiles: true
-  haltEntityBreeding: false
   haltEntityInteractions: true
   # [haltEntityTargeting] Some lag machines may stop working if this is set to true
   haltEntityTargeting: true

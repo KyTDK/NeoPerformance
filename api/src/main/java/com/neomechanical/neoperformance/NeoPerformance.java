@@ -18,14 +18,17 @@ import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBea
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.LagChecker;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
-import com.neomechanical.neoperformance.version.restore.HeartBeatWrapper;
+import com.neomechanical.neoperformance.version.halt.HaltWrapperLEGACY;
+import com.neomechanical.neoperformance.version.halt.HaltWrapperNONLEGACY;
+import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
+import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
+import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperLEGACY;
+import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperNONLEGACY;
 import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoutils.languages.LanguageManager;
 import com.neomechanical.neoutils.version.VersionMatcher;
 import com.neomechanical.neoutils.version.VersionWrapper;
 import com.neomechanical.neoutils.version.Versioning;
-import com.neomechanical.neoutils.version.items.WrapperLEGACY;
-import com.neomechanical.neoutils.version.items.WrapperNONLEGACY;
 import com.neomechanical.neoutils.version.versions.Versions;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -76,13 +79,19 @@ public final class NeoPerformance extends NeoUtils {
         dataManager.loadTweakSettings(this);
         //Register versions
         new Versioning.VersioningBuilder("heartbeat")
-                .addClass(Versions.vLEGACY.toString(), new WrapperLEGACY())
-                .addClass(Versions.vNONLEGACY.toString(), new WrapperNONLEGACY())
+                .addClass(Versions.vLEGACY.toString(), new HeartBeatWrapperLEGACY())
+                .addClass(Versions.vNONLEGACY.toString(), new HeartBeatWrapperNONLEGACY())
+                .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
+                .build()
+                .register();
+        new Versioning.VersioningBuilder("halt")
+                .addClass(Versions.vLEGACY.toString(), new HaltWrapperLEGACY())
+                .addClass(Versions.vNONLEGACY.toString(), new HaltWrapperNONLEGACY())
                 .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
                 .build()
                 .register();
         Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
-        heartBeat = new HeartBeat(this, dataManager, (HeartBeatWrapper) mappedVersions.get("heartbeat"));
+        heartBeat = new HeartBeat(this, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
         heartBeat.start();
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager(this).register();
@@ -97,7 +106,7 @@ public final class NeoPerformance extends NeoUtils {
         new BukkitRunnable() {
             @Override
             public void run() {
-                registerOptimizers();
+                registerOptimizers((IHaltWrapper) mappedVersions.get("halt"));
             }
         }.runTask(this);
         //Commands
@@ -111,9 +120,9 @@ public final class NeoPerformance extends NeoUtils {
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
     }
 
-    public void registerOptimizers() {
+    public void registerOptimizers(IHaltWrapper iHaltWrapper) {
         //Register ability listeners
-        getServer().getPluginManager().registerEvents(new HaltServer(this), this);
+        getServer().getPluginManager().registerEvents(new HaltServer(this, iHaltWrapper), this);
         getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
         new UpdateChecker(this, 103183).start();
         if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
@@ -121,6 +130,7 @@ public final class NeoPerformance extends NeoUtils {
         }
         Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
     }
+
     @Override
     public void onPluginDisable() {
         // Plugin shutdown logic

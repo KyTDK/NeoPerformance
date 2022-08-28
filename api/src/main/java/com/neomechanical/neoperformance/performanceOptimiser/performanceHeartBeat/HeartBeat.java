@@ -6,7 +6,7 @@ import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
 import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
 import com.neomechanical.neoperformance.performanceOptimiser.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import com.neomechanical.neoperformance.version.restore.HeartBeatWrapper;
+import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -17,13 +17,13 @@ public class HeartBeat {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin;
     private final DataManager dataManager;
-    private final HeartBeatWrapper heartBeatWrapper;
+    private final IHeartBeat iHeartBeat;
     private double tps;
 
-    public HeartBeat(NeoPerformance plugin, DataManager dataManager, HeartBeatWrapper heartBeatWrapper) {
+    public HeartBeat(NeoPerformance plugin, DataManager dataManager, IHeartBeat iHeartBeat) {
         this.plugin = plugin;
         this.dataManager = dataManager;
-        this.heartBeatWrapper = heartBeatWrapper;
+        this.iHeartBeat = iHeartBeat;
     }
 
     public double getUpdatedTPS() {
@@ -80,7 +80,7 @@ public class HeartBeat {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    heartBeatWrapper.restoreServer(cachedData, dataManager);
+                    iHeartBeat.restoreServer(cachedData.cachedTeleport, cachedData.cachedRedstoneActivity);
                 }
 
             }

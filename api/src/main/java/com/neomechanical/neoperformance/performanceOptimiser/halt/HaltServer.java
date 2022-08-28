@@ -6,11 +6,9 @@ import com.neomechanical.neoperformance.performanceOptimiser.utils.PerformanceCo
 import com.neomechanical.neoperformance.performanceOptimiser.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
+import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Location;
-import org.bukkit.block.data.AnaloguePowerable;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -22,7 +20,6 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.List;
 
@@ -32,10 +29,12 @@ public class HaltServer implements Listener {
     public static final CachedData cachedData = new CachedData();
     private final NeoPerformance plugin;
     private final DataManager dataManager;
+    private final IHaltWrapper iHaltWrapper;
 
-    public HaltServer(NeoPerformance plugin) {
+    public HaltServer(NeoPerformance plugin, IHaltWrapper iHaltWrapper) {
         this.plugin = plugin;
         this.dataManager = plugin.getDataManager();
+        this.iHaltWrapper = iHaltWrapper;
     }
 
     @EventHandler()
@@ -132,9 +131,7 @@ public class HaltServer implements Listener {
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltCommandBlock()) {
-            if (!e.getSender().getName().equals("CONSOLE")) {
-                e.setCancelled(true);
-            }
+            iHaltWrapper.onServerCommand(e);
         }
     }
 
@@ -159,8 +156,7 @@ public class HaltServer implements Listener {
     @EventHandler()
     public void onPlayerInteraction(PlayerInteractEvent e) {
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && dataManager.getHaltData().getHaltPlayerInteractions()) {
-            if (e.getHand() != EquipmentSlot.HAND) return;
-            e.setCancelled(true);
+            iHaltWrapper.onPlayerInteraction(e);
             MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onPlayerInteract", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
         }
@@ -169,7 +165,7 @@ public class HaltServer implements Listener {
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltProjectiles()) {
-            e.setCancelled(true);
+            iHaltWrapper.onProjectile(e);
         }
     }
 
@@ -186,13 +182,6 @@ public class HaltServer implements Listener {
                     }
                 }
             }
-        }
-    }
-
-    @EventHandler()
-    public void onEntityBread(EntityBreedEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltEntityBreeding()) {
-            e.setCancelled(true);
         }
     }
 
@@ -223,12 +212,8 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        BlockData blockData = e.getBlock().getBlockData();
-        if (blockData instanceof AnaloguePowerable || blockData instanceof Powerable) {
-            return;
-        }
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltBlockPhysics()) {
-            e.setCancelled(true);
+            iHaltWrapper.blockPhysics(e);
         }
     }
     @EventHandler()
