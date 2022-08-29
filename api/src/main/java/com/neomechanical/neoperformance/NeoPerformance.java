@@ -79,14 +79,14 @@ public final class NeoPerformance extends NeoUtils {
         dataManager.loadTweakSettings(this);
         //Register versions
         new Versioning.VersioningBuilder("heartbeat")
-                .addClass(Versions.vLEGACY.toString(), new HeartBeatWrapperLEGACY())
-                .addClass(Versions.vNONLEGACY.toString(), new HeartBeatWrapperNONLEGACY())
+                .addClass(Versions.vLEGACY.toString(), HeartBeatWrapperLEGACY.class)
+                .addClass(Versions.vNONLEGACY.toString(), HeartBeatWrapperNONLEGACY.class)
                 .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
                 .build()
                 .register();
         new Versioning.VersioningBuilder("halt")
-                .addClass(Versions.vLEGACY.toString(), new HaltWrapperLEGACY())
-                .addClass(Versions.vNONLEGACY.toString(), new HaltWrapperNONLEGACY())
+                .addClass(Versions.vLEGACY.toString(), HaltWrapperLEGACY.class)
+                .addClass(Versions.vNONLEGACY.toString(), HaltWrapperNONLEGACY.class)
                 .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
                 .build()
                 .register();
