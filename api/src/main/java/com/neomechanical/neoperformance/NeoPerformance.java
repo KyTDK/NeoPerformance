@@ -81,13 +81,13 @@ public final class NeoPerformance extends NeoUtils {
         new Versioning.VersioningBuilder("heartbeat")
                 .addClass(Versions.vLEGACY.toString(), HeartBeatWrapperLEGACY.class)
                 .addClass(Versions.vNONLEGACY.toString(), HeartBeatWrapperNONLEGACY.class)
-                .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
+                .setLegacyFunction((ver) -> !isUpToDate(ver, Versions.v1_13_R1.toString()))
                 .build()
                 .register();
         new Versioning.VersioningBuilder("halt")
                 .addClass(Versions.vLEGACY.toString(), HaltWrapperLEGACY.class)
                 .addClass(Versions.vNONLEGACY.toString(), HaltWrapperNONLEGACY.class)
-                .setLegacyFunction((ver) -> !isUpToDate(ver, "1_12_R1"))
+                .setLegacyFunction((ver) -> !isUpToDate(ver, Versions.v1_13_R1.toString()))
                 .build()
                 .register();
         Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();

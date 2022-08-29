@@ -44,30 +44,14 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!--                <configuration>-->
-                <!--                    <relocations>-->
-                <!--                        <relocation>-->
-                <!--                            <pattern>org.bstats</pattern>-->
-                <!--                            <shadedPattern>com.neomechanical.neoperformance</shadedPattern>-->
-                <!--                        </relocation>-->
-                <!--                        <relocation>-->
-                <!--                            <pattern>com.neomechanical.neoconfig</pattern>-->
-                <!--                            <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>-->
-                <!--                        </relocation>-->
-                <!--                        <relocation>-->
-                <!--                            <pattern>com.neomechanical.neoutils</pattern>-->
-                <!--                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>-->
-                <!--                        </relocation>-->
-                <!--                    </relocations>-->
-                <!--                </configuration>-->
             </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
             <groupId>com.neomechanical</groupId>
-            <artifactId>NeoUtils</artifactId>
-            <version>6.9</version>
+            <artifactId>NeoConfig</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
 </project>
