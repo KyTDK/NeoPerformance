@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.commands;
+package com.neomechanical.neoperformance.commands.chunks;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
@@ -8,7 +8,6 @@ import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,6 @@ public class ChunksCommand extends Command {
 
     @Override
     public void perform(CommandSender player, String[] args) {
-        Player playerAsPlayer = (Player) player;
         World world = null;
         if (args.length == 2) {
             world = Bukkit.getWorld(args[1]);
@@ -57,13 +55,16 @@ public class ChunksCommand extends Command {
                 MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
+        } else {
+            //Command to replace execute for clickable text
+            ChunkTeleport.teleportToChunk(args);
         }
         if (world == null) {
             World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
-            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, playerAsPlayer), worlds);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, null, player), worlds);
         } else {
             World finalWorld = world;
-            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, playerAsPlayer), world);
+            new ChunksScanner(plugin).getChunksWithMostEntities(10, result -> ChunksNotifier.sendChatData(result, finalWorld, player), world);
         }
     }
 

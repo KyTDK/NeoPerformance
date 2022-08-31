@@ -7,26 +7,25 @@ import com.neomechanical.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.kyori.adventure.text.format.TextDecoration;
 import com.neomechanical.neoperformance.utils.messages.Messages;
-import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoutils.messages.MessageUtil;
-import com.neomechanical.neoutils.version.worlds.IWorldNMS;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public class ChunksNotifier {
-    public static void sendChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
-        TextComponent.Builder bc = getChatData(chunks, world, playerAsPlayer);
+    public static void sendChatData(List<Chunk> chunks, World world, CommandSender player) {
+        TextComponent.Builder bc = getChatData(chunks, world, player);
         MessageUtil messageUtil = new MessageUtil();
         messageUtil.addComponent(bc.build());
-        messageUtil.sendNeoComponentMessage(playerAsPlayer, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
+        messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);
     }
 
-    public static TextComponent.Builder getChatData(List<Chunk> chunks, World world, Player playerAsPlayer) {
+    public static TextComponent.Builder getChatData(List<Chunk> chunks, World world, CommandSender player) {
         TextComponent.Builder bc = Component.text();
         for (Chunk chunk : chunks) {
             NamedTextColor color;
@@ -57,12 +56,13 @@ public class ChunksNotifier {
             if (chunks.indexOf(chunk) != chunks.size() - 1) {
                 message.append(Component.newline());
             }
-            IWorldNMS worldNMS = (IWorldNMS) NeoUtils.getInternalVersions().get("worlds");
-            message.clickEvent(ClickEvent.runCommand(
-                    "/minecraft:execute in " + worldNMS.getWorldNamespaceKey(chunk.getWorld())
-                            + " run tp " + playerAsPlayer.getName() + " " + location.getX()
-                            + " " + location.getY() + " " + location.getZ()));
-            message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
+            if (player instanceof Player) {
+                message.clickEvent(ClickEvent.runCommand(
+                        "/np chunks " + chunk.getWorld().getName()
+                                + " " + location.getX()
+                                + " " + location.getY() + " " + location.getZ() + " " + player.getName()));
+                message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
+            }
             bc.append(message);
         }
         return bc;

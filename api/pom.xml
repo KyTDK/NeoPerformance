@@ -100,6 +100,11 @@
             <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.neomechanical</groupId>
+            <artifactId>NeoConfig</artifactId>
+            <version>1.5</version>
+        </dependency>
         <!-- bStats -->
         <dependency>
             <groupId>org.bstats</groupId>
