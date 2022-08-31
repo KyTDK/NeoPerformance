@@ -40,30 +40,33 @@ public class ChunksNotifier {
                 color = NamedTextColor.GREEN;
             }
             TextComponent.Builder message = Component.text();
-            Entity entityToLocate = chunk.getEntities()[0];
-            Location location = new Location(world, Math.round(entityToLocate.getLocation().getX()), Math.round(entityToLocate.getLocation().getY()),
-                    Math.round(entityToLocate.getLocation().getZ()));
-            message.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
-                    .append(Component.text(location.getX() + " " + location.getZ()).color(color).decorate(TextDecoration.BOLD))
-                    .append(Component.text(" - Entities: ").color(color).decorate(TextDecoration.BOLD))
-                    .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color).decorate(TextDecoration.BOLD));
-            if (world == null) {
-                message.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
-                message.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
+            Entity[] entities = chunk.getEntities();
+            if (entities.length > 0) {
+                Entity entityToLocate = entities[0];
+                Location location = new Location(world, Math.round(entityToLocate.getLocation().getX()), Math.round(entityToLocate.getLocation().getY()),
+                        Math.round(entityToLocate.getLocation().getZ()));
+                message.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
+                        .append(Component.text(location.getX() + " " + location.getZ()).color(color).decorate(TextDecoration.BOLD))
+                        .append(Component.text(" - Entities: ").color(color).decorate(TextDecoration.BOLD))
+                        .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color).decorate(TextDecoration.BOLD));
+                if (world == null) {
+                    message.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
+                    message.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
+                }
+                message.color(color).decorate(TextDecoration.BOLD);
+                //Append new line
+                if (chunks.indexOf(chunk) != chunks.size() - 1) {
+                    message.append(Component.newline());
+                }
+                if (player instanceof Player) {
+                    message.clickEvent(ClickEvent.runCommand(
+                            "/np chunks " + chunk.getWorld().getName()
+                                    + " " + location.getX()
+                                    + " " + location.getY() + " " + location.getZ() + " " + player.getName()));
+                    message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
+                }
+                bc.append(message);
             }
-            message.color(color).decorate(TextDecoration.BOLD);
-            //Append new line
-            if (chunks.indexOf(chunk) != chunks.size() - 1) {
-                message.append(Component.newline());
-            }
-            if (player instanceof Player) {
-                message.clickEvent(ClickEvent.runCommand(
-                        "/np chunks " + chunk.getWorld().getName()
-                                + " " + location.getX()
-                                + " " + location.getY() + " " + location.getZ() + " " + player.getName()));
-                message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
-            }
-            bc.append(message);
         }
         return bc;
     }
