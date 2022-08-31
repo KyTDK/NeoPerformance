@@ -46,6 +46,7 @@ public class ConfigCommand extends Command {
         Player playerAsPlayer = (Player) player;
         ConfigMenu configMenu = new ConfigMenu(plugin);
         configMenu.onComplete((playerAsAuthor, text) -> plugin.reload())
+                .setPluginEditing(plugin)
                 .permission("neoperformance.config", () -> NeoPerformance.getLanguageManager().getString("commandGeneric.errorNoPermission", null))
                 .open(playerAsPlayer);
     }
