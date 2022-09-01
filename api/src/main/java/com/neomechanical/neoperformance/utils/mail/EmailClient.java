@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.utils.mail;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import org.bukkit.Bukkit;
 
 import javax.activation.DataHandler;

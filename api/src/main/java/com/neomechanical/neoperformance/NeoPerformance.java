@@ -10,12 +10,14 @@
 package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoperformance.commands.RegisterCommands;
+import com.neomechanical.neoperformance.managers.DataHandler;
 import com.neomechanical.neoperformance.managers.RegisterLanguageManager;
-import com.neomechanical.neoperformance.performanceOptimiser.halt.HaltServer;
-import com.neomechanical.neoperformance.performanceOptimiser.lagPrevention.LagPrevention;
-import com.neomechanical.neoperformance.performanceOptimiser.managers.DataManager;
-import com.neomechanical.neoperformance.performanceOptimiser.performanceHeartBeat.HeartBeat;
-import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.LagChecker;
+import com.neomechanical.neoperformance.performance.halt.HaltServer;
+import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
+import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
+import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
+import com.neomechanical.neoperformance.performance.smart.smartNotifier.LagChecker;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoperformance.version.halt.HaltWrapperLEGACY;
@@ -64,6 +66,12 @@ public final class NeoPerformance extends NeoUtils {
         return heartBeat;
     }
 
+    private DataHandler dataHandler;
+
+    public DataHandler getDataHandler() {
+        return dataHandler;
+    }
+
     public void reload() {
         dataManager.loadTweakSettings(this);
         getLanguageManager().loadLanguageConfig();
@@ -77,6 +85,8 @@ public final class NeoPerformance extends NeoUtils {
         // Start heart beat, can't live without it.
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
+        //Set pojos
+        dataHandler = new DataHandler(this);
         //Register versions
         new Versioning.VersioningBuilder("heartbeat")
                 .addClass(Versions.vLEGACY.toString(), HeartBeatWrapperLEGACY.class)
@@ -90,6 +100,7 @@ public final class NeoPerformance extends NeoUtils {
                 .setLegacyFunction((ver) -> !isUpToDate(ver, Versions.v1_13_R1.toString()))
                 .build()
                 .register();
+        new RegisterHaltActions(this).registerActions();
         Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
         heartBeat = new HeartBeat(this, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
         heartBeat.start();

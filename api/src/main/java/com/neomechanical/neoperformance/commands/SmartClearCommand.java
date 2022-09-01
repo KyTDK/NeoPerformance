@@ -2,7 +2,8 @@ package com.neomechanical.neoperformance.commands;
 
 import com.google.common.collect.ImmutableMap;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear.SmartScan;
+import com.neomechanical.neoperformance.performance.smart.smartClear.SmartClear;
+import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScan;
 import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
@@ -139,6 +140,10 @@ public class SmartClearCommand extends Command {
                 cancel = false;
                 return;
             }
+            //Set clusterSize to default if not set
+            if (clusterSize < 1) {
+                clusterSize = plugin.getDataManager().getCommandData().getDefaultClusterSize();
+            }
             //For force
             if (force && !toBeConfirmed.containsKey(player)) {
                 force = false;
@@ -146,9 +151,7 @@ public class SmartClearCommand extends Command {
             }
             if (toBeConfirmed.containsKey(player)) {
                 //Remove
-                for (Entity e : toBeConfirmed.get(player)) {
-                    e.remove();
-                }
+                SmartClear.exterminate(toBeConfirmed.get(player));
                 MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
@@ -176,7 +179,6 @@ public class SmartClearCommand extends Command {
         for (World world : Bukkit.getWorlds()) {
             worldNames.add(world.getName());
         }
-        //must have space in the map, otherwise it will be suggested it before you press space.
         suggestions.put("-world", worldNames);
         return suggestions;
     }
