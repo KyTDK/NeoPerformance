@@ -1,12 +1,12 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartClear;
 
-import com.neomechanical.kyori.adventure.text.Component;
-import com.neomechanical.kyori.adventure.text.TextComponent;
-import com.neomechanical.kyori.adventure.text.event.ClickEvent;
-import com.neomechanical.kyori.adventure.text.event.HoverEvent;
-import com.neomechanical.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.kyori.adventure.text.Component;
+import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoutils.kyori.adventure.text.event.ClickEvent;
+import com.neomechanical.neoutils.kyori.adventure.text.event.HoverEvent;
+import com.neomechanical.neoutils.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoutils.version.worlds.IWorldNMS;
 import org.bukkit.Location;

@@ -1,11 +1,11 @@
 package com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.dataGetters;
 
-import com.neomechanical.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.chunks.ChunksScanner;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performanceOptimiser.smart.smartNotifier.managers.LagData;
+import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
