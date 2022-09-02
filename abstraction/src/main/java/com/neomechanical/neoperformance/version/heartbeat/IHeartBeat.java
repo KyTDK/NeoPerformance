@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.version.heartbeat;
 
-import com.neomechanical.neoutils.version.VersionWrapper;
+import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

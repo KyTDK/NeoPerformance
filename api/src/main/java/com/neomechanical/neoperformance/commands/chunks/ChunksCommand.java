@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.commands.chunks;
 
+import com.neomechanical.neoconfig.neoutils.commands.Command;
+import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performance.smart.chunks.ChunksScanner;
-import com.neomechanical.neoutils.commands.Command;
-import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;

@@ -1,9 +1,9 @@
 package com.neomechanical.neoperformance.managers;
 
+import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
-import com.neomechanical.neoutils.languages.LanguageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import static com.neomechanical.neoutils.updates.IsUpToDate.isUpToDate;
+import static com.neomechanical.neoconfig.neoutils.updates.IsUpToDate.isUpToDate;
 
 // From: https://www.spigotmc.org/wiki/creating-an-update-checker-that-checks-for-updates
 public class UpdateChecker {
