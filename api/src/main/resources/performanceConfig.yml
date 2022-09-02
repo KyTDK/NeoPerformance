@@ -51,6 +51,7 @@ lag_notifier:
   #How large does an entity cluster need to be until it tells you about it (use -1 to disable)
   clusterSizeNotify: 200
 #Current halt actions are: smartclear
+#Remove all actions and leave one with name 'null' to disable
 halt_actions:
   - smartclear
 commands:

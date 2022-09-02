@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.performance.performanceHeartBeat;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.CachedData;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
+import com.neomechanical.neoperformance.performance.haltActions.HaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
@@ -50,9 +51,8 @@ public class HeartBeat {
                         //A manual halt doesn't constitute emails or notifications
                         if (!manualHalt[0]) {
                             //Run halt actions
-                            for (String actionName : dataManager.getHaltActionData().getHaltActions()) {
-                                plugin.getDataHandler().getHaltActionPojo().getHaltActionMap().get(actionName.toLowerCase()).accept(tps);
-                            }
+                            HaltActions.runHaltActions(tps);
+                            //Set halt time
                             haltStartTime[0] = System.currentTimeMillis();
                             if (dataManager.getMailData().getUseMailServer()) {
                                 EmailClient emailClient = new EmailClient(dataManager);
