@@ -74,6 +74,8 @@ public class HeartBeat {
                     halted[0] = false;
                     haltStartTime[0] = 0;
                     iHeartBeat.restoreServer(cachedData.cachedTeleport, cachedData.cachedRedstoneActivity);
+                    cachedData.cachedRedstoneActivity.clear();
+                    cachedData.cachedTeleport.clear();
                 }
 
             }

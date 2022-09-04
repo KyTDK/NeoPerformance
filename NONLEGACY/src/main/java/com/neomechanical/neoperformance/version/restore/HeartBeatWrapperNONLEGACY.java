@@ -8,6 +8,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -22,8 +23,9 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
             }
         }
         if (cachedRedstoneActivity.size() > 0) {
-            for (Location location : cachedRedstoneActivity) {
+            for (Iterator<Location> iterator = cachedRedstoneActivity.iterator(); iterator.hasNext(); ) {
                 try {
+                    Location location = iterator.next();
                     Block block = location.getBlock();
                     BlockData data = block.getBlockData();
                     if (data instanceof Powerable) {
