@@ -55,9 +55,10 @@ public class ChunksCommand extends Command {
                 MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
-        } else {
+        } else if (args.length == 6) {
             //Command to replace execute for clickable text
             ChunkTeleport.teleportToChunk(args);
+            return;
         }
         if (world == null) {
             World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
