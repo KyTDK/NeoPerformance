@@ -11,6 +11,7 @@ package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
+import com.neomechanical.neoconfig.neoutils.server.ServerUtils;
 import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
 import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import com.neomechanical.neoconfig.neoutils.version.Versioning;
@@ -66,9 +67,9 @@ public final class NeoPerformance extends NeoUtils {
         return heartBeat;
     }
 
-    private DataHandler dataHandler;
+    private static DataHandler dataHandler;
 
-    public DataHandler getDataHandler() {
+    public DataHandler getPerformanceDataHandler() {
         return dataHandler;
     }
 
@@ -101,9 +102,12 @@ public final class NeoPerformance extends NeoUtils {
                 .build()
                 .register();
         new RegisterHaltActions(this).registerActions();
-        Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
-        heartBeat = new HeartBeat(this, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
-        heartBeat.start();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                registerOptimizers(NeoPerformance.this);
+            }
+        }.runTask(this);
         //Set language manager before majority as they depend on its messages.
         new RegisterLanguageManager(this).register();
         //Check for updates
@@ -114,12 +118,6 @@ public final class NeoPerformance extends NeoUtils {
         });
         // Plugin startup logic
         setupBStats();
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                registerOptimizers((IHaltWrapper) mappedVersions.get("halt"));
-            }
-        }.runTask(this);
         //Commands
         new RegisterCommands(this).register();
     }
@@ -131,15 +129,30 @@ public final class NeoPerformance extends NeoUtils {
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
     }
 
-    public void registerOptimizers(IHaltWrapper iHaltWrapper) {
+    public void registerOptimizers(NeoPerformance plugin) {
         //Register ability listeners
-        getServer().getPluginManager().registerEvents(new HaltServer(this, iHaltWrapper), this);
-        getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
-        new UpdateChecker(this, 103183).start();
-        if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
-            new LagChecker(this).start();
+        if (ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.UNKNOWN &&
+                ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.STARTUP) {
+            Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
+            IHaltWrapper iHaltWrapper = (IHaltWrapper) mappedVersions.get("halt");
+            heartBeat = new HeartBeat(this, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
+            heartBeat.start();
+            getServer().getPluginManager().registerEvents(new HaltServer(this, iHaltWrapper), this);
+            getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
+            new UpdateChecker(this, 103183).start();
+            if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
+                new LagChecker(this).start();
+            }
+            Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
+        } else {
+            //If the server is still starting, then schedule to retry registering optimizers in 5 seconds
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    registerOptimizers(plugin);
+                }
+            }.runTaskLater(plugin, 20 * 5);
         }
-        Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
     }
 
     @Override

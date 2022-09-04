@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: '<red><bold>您没有使用此命令的权限'
   errorNotPlayer: '<red><bold>此命令仅供玩家使用'
   errorCommandNotFound: '<red><bold>找不到命令，尝试 /np help'
+  errorPluginStillStarting: '<red><bold>未能执行操作，因为服务器仍在启动'
 bypass:
   errorNotPlayer: '<red><bold>你必须是玩家才能绕过自己'
   nowBypassing: '<red><bold>现在绕过停止'

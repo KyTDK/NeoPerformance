@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: '<red><bold>Du hast keine Berechtigung diesen Befehl zu verwenden'
   errorNotPlayer: '<red><bold>Dieser Befehl ist nur für Spieler bestimmt'
   errorCommandNotFound: '<red><bold>Befehl nicht gefunden, versuche /np help'
+  errorPluginStillStarting: '<red><bold>Fehler beim Ausführen des Vorgangs, da der Server noch gestartet wird'
 bypass:
   errorNotPlayer: '<red><bold>Du musst ein Spieler sein, um dich selbst zu umgehen'
   nowBypassing: '<red><bold>Halt wird jetzt umgangen'

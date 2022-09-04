@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: "<red><bold>Vous n'êtes pas autorisé à utiliser cette commande"
   errorNotPlayer: '<red><bold>Cette commande est réservée aux joueurs'
   errorCommandNotFound: '<red><bold>Commande introuvable, essayez /np help'
+  errorPluginStillStarting: "<red><bold>Échec de l'exécution de l'opération car le serveur démarre toujours"
 bypass:
   errorNotPlayer: '<red><bold>Vous devez être un joueur pour vous contourner'
   nowBypassing: "<red><bold>Maintenant, contournement de l'arrêt"

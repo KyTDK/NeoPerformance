@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: '<red><bold>You do not have permission to use this command'
   errorNotPlayer: '<red><bold>This command is for players only'
   errorCommandNotFound: '<red><bold>Command not found, try /np help'
+  errorPluginStillStarting: '<red><bold>Failed to execute operation because the server is still starting'
 bypass:
   errorNotPlayer: '<red><bold>You must be a player to bypass yourself'
   nowBypassing: '<red><bold>Now bypassing halt'

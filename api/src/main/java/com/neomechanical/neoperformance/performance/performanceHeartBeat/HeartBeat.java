@@ -7,7 +7,6 @@ import com.neomechanical.neoperformance.performance.halt.HaltServer;
 import com.neomechanical.neoperformance.performance.haltActions.HaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
-import com.neomechanical.neoperformance.utils.mail.EmailClient;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -26,7 +25,6 @@ public class HeartBeat {
         this.dataManager = dataManager;
         this.iHeartBeat = iHeartBeat;
     }
-
     public double getUpdatedTPS() {
         if (tps <= 0) { //0 normally means the server is still starting, so we'll just return 20 as a default value as the server can continue to load without interruptions.
             tps = 20;
@@ -48,24 +46,14 @@ public class HeartBeat {
                     manualHalt[0] = dataManager.isManualHalt();
                     if (!halted[0]) {
                         //Check if it's NOT a manual halt
-                        //A manual halt doesn't constitute emails or notifications
+                        //A manual halt doesn't constitute emails, notifications
                         if (!manualHalt[0]) {
                             //Run halt actions
                             HaltActions.runHaltActions(tps);
                             //Set halt time
                             haltStartTime[0] = System.currentTimeMillis();
-                            if (dataManager.getMailData().getUseMailServer()) {
-                                EmailClient emailClient = new EmailClient(dataManager);
-                                //Is run asynchronously
-                                emailClient.sendAsHtml(getLanguageManager().getString("email_notifications.subject", null),
-                                        getLanguageManager().getString("email_notifications.body", null));
-                            }
-                            String message = getLanguageManager().getString("notify.serverHalted", null);
-                            if (dataManager.getTweakData().getBroadcastHalt()) {
-                                MessageUtil.sendMMAll(message);
-                            } else if (dataManager.getTweakData().getNotifyAdmin()) {
-                                MessageUtil.sendMMAdmins(message);
-                            }
+                            //Halt notifications
+                            HaltNotifier.notify(dataManager);
                         }
                     }
                     halted[0] = true;

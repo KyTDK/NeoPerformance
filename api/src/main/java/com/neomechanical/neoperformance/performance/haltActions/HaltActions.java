@@ -15,9 +15,9 @@ public class HaltActions {
 
     public HaltActions(NeoPerformance plugin) {
         HaltActions.plugin = plugin;
-        this.haltActionPojo = plugin.getDataHandler().getHaltActionPojo();
+        this.haltActionPojo = plugin.getPerformanceDataHandler().getHaltActionPojo();
         dataManager = plugin.getDataManager();
-        dataHandler = plugin.getDataHandler();
+        dataHandler = plugin.getPerformanceDataHandler();
     }
 
     public HaltActions registerHaltAction(String name, Consumer<Double> actionConsumer) {

@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: '<red><bold>У вас нет разрешения на использование этой команды'
   errorNotPlayer: '<red><bold>Эта команда только для игроков'
   errorCommandNotFound: '<red><bold>Команда не найдена, попробуйте /np help'
+  errorPluginStillStarting: '<red><bold>Не удалось выполнить операцию, так как сервер все еще запускается'
 bypass:
   errorNotPlayer: '<red><bold>Вы должны быть игроком, чтобы выдать байпасс самому себе'
   nowBypassing: '<red><bold>Теперь вы обходите запреты остановки активности'

@@ -18,6 +18,7 @@ commandGeneric:
   errorNoPermission: '<red><bold>Bu komutu kullanma izniniz yok'
   errorNotPlayer: '<red><bold>Bu komut sadece oyuncular içindir'
   errorCommandNotFound: '<red><bold>Komut bulunamadı, /np yardımını deneyin'
+  errorPluginStillStarting: '<red><bold>Sunucu hala başlatıldığı için işlem yürütülemedi'
 bypass:
   errorNotPlayer: '<red><bold>Kendini geçmek için oyuncu olmalısın'
   nowBypassing: '<red><bold>Şimdi durmayı atlayarak'
