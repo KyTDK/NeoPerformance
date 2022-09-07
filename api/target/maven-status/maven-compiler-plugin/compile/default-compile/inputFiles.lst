@@ -1,10 +1,10 @@
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/UtilManager.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/config/ConfigUpdater.java
+/home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/register/StartRegistering.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/CommandData.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/MailData.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/lagPrevention/LagPrevention.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/config/ConfigFile.java
-/home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/managers/RegisterLanguageManager.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/LagChecker.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/chunks/ChunksNotifier.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/LagNotifierData.java

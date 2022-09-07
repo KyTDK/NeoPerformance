@@ -2,15 +2,14 @@ com/neomechanical/neoperformance/commands/RegisterCommands.class
 com/neomechanical/neoperformance/performance/managers/data/HaltActionData.class
 com/neomechanical/neoperformance/performance/managers/data/TweakData.class
 com/neomechanical/neoperformance/commands/ConfigCommand.class
-com/neomechanical/neoperformance/managers/RegisterLanguageManager.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReport.class
 com/neomechanical/neoperformance/utils/updates/UpdateChecker.class
 com/neomechanical/neoperformance/commands/SmartClearCommand$SmartClearAccumulator.class
-com/neomechanical/neoperformance/NeoPerformance$2.class
 com/neomechanical/neoperformance/utils/mail/EmailClient$1.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/DataGetter.class
 com/neomechanical/neoperformance/commands/HaltCommand.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartScan.class
+com/neomechanical/neoperformance/register/StartRegistering$1.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/dataGetters/ChunkData.class
 com/neomechanical/neoperformance/performance/haltActions/HaltActions.class
 com/neomechanical/neoperformance/performance/smart/chunks/ChunksScanner.class
@@ -49,6 +48,7 @@ com/neomechanical/neoperformance/utils/UtilManager.class
 com/neomechanical/neoperformance/performance/config/ConfigFile.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartScanNotifier.class
 com/neomechanical/neoperformance/utils/config/ConfigUpdater.class
+com/neomechanical/neoperformance/register/StartRegistering.class
 com/neomechanical/neoperformance/managers/DataHandler.class
 com/neomechanical/neoperformance/utils/Logger.class
 com/neomechanical/neoperformance/utils/NPC.class
