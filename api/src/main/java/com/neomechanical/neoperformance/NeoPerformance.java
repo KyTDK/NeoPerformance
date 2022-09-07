@@ -11,33 +11,23 @@ package com.neomechanical.neoperformance;
 
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
-import com.neomechanical.neoconfig.neoutils.server.ServerUtils;
-import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
-import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import com.neomechanical.neoconfig.neoutils.version.Versioning;
 import com.neomechanical.neoconfig.neoutils.version.versions.Versions;
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.DataHandler;
-import com.neomechanical.neoperformance.managers.RegisterLanguageManager;
-import com.neomechanical.neoperformance.performance.halt.HaltServer;
 import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
-import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
-import com.neomechanical.neoperformance.performance.smart.smartNotifier.LagChecker;
+import com.neomechanical.neoperformance.register.StartRegistering;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoperformance.version.halt.HaltWrapperLEGACY;
 import com.neomechanical.neoperformance.version.halt.HaltWrapperNONLEGACY;
-import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
-import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperLEGACY;
 import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperNONLEGACY;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Map;
 
 import static com.neomechanical.neoconfig.neoutils.updates.IsUpToDate.isUpToDate;
 
@@ -65,6 +55,10 @@ public final class NeoPerformance extends NeoUtils {
 
     public HeartBeat getHeartBeat() {
         return heartBeat;
+    }
+
+    public void setHeartBeat(HeartBeat heartBeat) {
+        this.heartBeat = heartBeat;
     }
 
     private static DataHandler dataHandler;
@@ -102,14 +96,15 @@ public final class NeoPerformance extends NeoUtils {
                 .build()
                 .register();
         new RegisterHaltActions(this).registerActions();
+        StartRegistering startRegistering = new StartRegistering(this);
         new BukkitRunnable() {
             @Override
             public void run() {
-                registerOptimizers(NeoPerformance.this);
+                startRegistering.registerOptimizers();
             }
         }.runTask(this);
         //Set language manager before majority as they depend on its messages.
-        new RegisterLanguageManager(this).register();
+        startRegistering.registerLanguageManager();
         //Check for updates
         new UpdateChecker(this, 103183).getVersion(version -> {
             if (!isUpToDate(this.getDescription().getVersion(), version)) {
@@ -127,32 +122,6 @@ public final class NeoPerformance extends NeoUtils {
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
-    }
-
-    public void registerOptimizers(NeoPerformance plugin) {
-        //Register ability listeners
-        if (ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.UNKNOWN &&
-                ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.STARTUP) {
-            Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
-            IHaltWrapper iHaltWrapper = (IHaltWrapper) mappedVersions.get("halt");
-            heartBeat = new HeartBeat(this, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
-            heartBeat.start();
-            getServer().getPluginManager().registerEvents(new HaltServer(this, iHaltWrapper), this);
-            getServer().getPluginManager().registerEvents(new LagPrevention(this), this);
-            new UpdateChecker(this, 103183).start();
-            if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
-                new LagChecker(this).start();
-            }
-            Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");
-        } else {
-            //If the server is still starting, then schedule to retry registering optimizers in 5 seconds
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    registerOptimizers(plugin);
-                }
-            }.runTaskLater(plugin, 20 * 5);
-        }
     }
 
     @Override
