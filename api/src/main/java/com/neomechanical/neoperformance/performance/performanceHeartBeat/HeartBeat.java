@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performance.performanceHeartBeat;
 
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.CachedData;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
@@ -8,6 +7,7 @@ import com.neomechanical.neoperformance.performance.haltActions.HaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;

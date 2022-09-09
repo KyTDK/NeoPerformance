@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performance.halt;
 
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.PerformanceConfigurationSettingsUtils;
@@ -8,6 +7,7 @@ import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
