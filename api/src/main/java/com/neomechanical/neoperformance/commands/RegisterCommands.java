@@ -29,6 +29,7 @@ public class RegisterCommands {
                 .addSubcommand(new HaltCommand(plugin))
                 .addSubcommand(new SmartClearCommand(plugin))
                 .addSubcommand(new ConfigCommand(plugin))
+                .addSubcommand(new SmartReportCommand(plugin))
                 .register();
     }
 }
