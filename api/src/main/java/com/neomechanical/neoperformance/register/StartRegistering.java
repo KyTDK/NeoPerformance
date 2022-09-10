@@ -1,5 +1,9 @@
 package com.neomechanical.neoperformance.register;
 
+import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
+import com.neomechanical.neoconfig.neoutils.server.ServerUtils;
+import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
+import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
 import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
@@ -11,17 +15,13 @@ import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
 import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
-import com.neomechanical.neoutils.languages.LanguageManager;
-import com.neomechanical.neoutils.server.ServerUtils;
-import com.neomechanical.neoutils.version.VersionMatcher;
-import com.neomechanical.neoutils.version.VersionWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
 
-import static com.neomechanical.neoutils.NeoUtils.getManagers;
+import static com.neomechanical.neoconfig.neoutils.NeoUtils.getManagers;
 import static org.bukkit.Bukkit.getServer;
 
 public class StartRegistering {

@@ -1,9 +1,9 @@
 package com.neomechanical.neoperformance.performance.smart.smartClear;
 
+import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.commands.SmartClearCommand;
 import com.neomechanical.neoperformance.performance.managers.data.CommandData;
 import com.neomechanical.neoperformance.utils.NPC;
-import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;

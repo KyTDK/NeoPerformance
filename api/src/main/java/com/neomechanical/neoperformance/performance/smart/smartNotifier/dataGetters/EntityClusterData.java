@@ -1,11 +1,11 @@
 package com.neomechanical.neoperformance.performance.smart.smartNotifier.dataGetters;
 
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScan;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScanNotifier;
 import com.neomechanical.neoperformance.performance.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performance.smart.smartNotifier.managers.LagData;
-import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;

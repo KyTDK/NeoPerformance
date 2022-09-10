@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.version.halt;
 
-import com.neomechanical.neoutils.version.VersionWrapper;
+import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;

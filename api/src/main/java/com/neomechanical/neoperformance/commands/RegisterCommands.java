@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.commands;
 
+import com.neomechanical.neoconfig.neoutils.commands.CommandBuilder;
+import com.neomechanical.neoconfig.neoutils.commands.easyCommands.EasyHelpCommand;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.commands.chunks.ChunksCommand;
 import com.neomechanical.neoperformance.utils.messages.Messages;
-import com.neomechanical.neoutils.commands.CommandBuilder;
-import com.neomechanical.neoutils.commands.easyCommands.EasyHelpCommand;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 

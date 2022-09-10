@@ -1,11 +1,11 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.google.common.collect.ImmutableMap;
+import com.neomechanical.neoconfig.neoutils.commands.Command;
+import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartClear;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScan;
-import com.neomechanical.neoutils.commands.Command;
-import com.neomechanical.neoutils.messages.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;

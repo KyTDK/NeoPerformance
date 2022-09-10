@@ -1,8 +1,8 @@
 package com.neomechanical.neoperformance.utils.config;
 
 import com.google.common.base.Preconditions;
+import com.neomechanical.neoconfig.neoutils.config.KeyBuilder;
 import com.neomechanical.neoperformance.utils.Logger;
-import com.neomechanical.neoutils.config.KeyBuilder;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

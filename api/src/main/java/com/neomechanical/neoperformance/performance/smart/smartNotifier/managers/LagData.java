@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.smart.smartNotifier.managers;
 
-import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import lombok.Data;
 import org.bukkit.entity.Player;
 

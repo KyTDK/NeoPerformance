@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performance.performanceHeartBeat;
 
+import com.neomechanical.neoconfig.neoutils.ServerMetrics;
+import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoconfig.neoutils.server.ServerInfo;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
-import com.neomechanical.neoutils.ServerMetrics;
-import com.neomechanical.neoutils.messages.MessageUtil;
-import com.neomechanical.neoutils.server.ServerInfo;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
