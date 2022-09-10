@@ -9,7 +9,6 @@ public class PlayersToPerformanceGrading implements IGradingSubject {
         int playerCount = Bukkit.getOnlinePlayers().size();
         long freeMemory = Runtime.getRuntime().freeMemory() / 1048576; //in MB
         //Memory to playerCount ratio
-        Bukkit.broadcastMessage(String.valueOf(freeMemory / playerCount));
         long ratio = freeMemory / playerCount;
         int grade;
         if (ratio >= 75) {

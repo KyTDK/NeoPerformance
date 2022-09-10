@@ -54,27 +54,27 @@ public class Grading {
     public static String getFancyGrade(Grade grade) {
         switch (grade) {
             case APlus:
-                return "<dark_green>" + grade + "</color>";
+                return "<dark_green><bold>" + grade;
             case A:
-                return "<colour:#1bff17>" + grade + "</color>";
+                return "<color:#1bff17><bold>" + grade;
             case ANeg:
-                return "<color:#62ff00>" + grade + "</color>";
+                return "<color:#62ff00><bold>" + grade;
             case BPlus:
-                return "<color:#91ff00>" + grade + "</color>";
+                return "<color:#91ff00><bold>" + grade;
             case B:
-                return "<color:#aeff00>" + grade + "</color>";
+                return "<color:#aeff00><bold>" + grade;
             case CPlus:
-                return "<color:#ccff00>" + grade + "</color>";
+                return "<color:#ccff00><bold>" + grade;
             case C:
-                return "<color:#e5ff00>" + grade + "</color>";
+                return "<color:#e5ff00><bold>" + grade;
             case DPlus:
-                return "<color:#f6ff00>" + grade + "</color>";
+                return "<color:#f6ff00><bold>" + grade;
             case D:
-                return "<color:#fff200>" + grade + "</color>";
+                return "<color:#fff200><bold>" + grade;
             case E:
-                return "<color:#ffc400>" + grade + "</color>";
+                return "<color:#ffc400><bold>" + grade;
             case F:
-                return "<red>" + grade + "</color>";
+                return "<red>" + grade;
             default:
                 return "grade";
         }

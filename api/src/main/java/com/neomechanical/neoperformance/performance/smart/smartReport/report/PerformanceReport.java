@@ -2,6 +2,9 @@ package com.neomechanical.neoperformance.performance.smart.smartReport.report;
 
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradeData;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
@@ -32,14 +35,24 @@ public class PerformanceReport {
 
         public PerformanceReportBuilder addGrades(List<IGradingSubject> gradingSubjects) {
             int gradeValues = 0;
-            //Set overall grading
+            //Calculate overall grading
             for (IGradingSubject gradingSubject : gradingSubjects) {
                 gradeValues += gradingSubject.performGrading().getGradeValue();
             }
-            textComponentBuilder.append(Component.text("Overall grading: " + Grading.getFancyGrade(gradeValues / gradingSubjects.size()))).append(Component.newline());
+            //Append overall grading
+            textComponentBuilder.append(Component.text("Overall grading: ")
+                    .color(NamedTextColor.GRAY)
+                    .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(gradeValues / gradingSubjects.size())).decorate(TextDecoration.UNDERLINED))
+                    .append(Component.newline()));
+            //Display individual subjects
             for (IGradingSubject gradingSubject : gradingSubjects) {
                 GradeData gradeData = gradingSubject.performGrading();
-                textComponentBuilder.append(Component.text(gradeData.getGradeSubject() + ": " + Grading.getFancyGrade(gradeData.getGradeValue())).append(Component.newline()));
+                textComponentBuilder.append(Component.text(gradeData.getGradeSubject() + ": ")
+                        .color(NamedTextColor.GRAY)
+                        .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(gradeData.getGradeValue()))));
+                if (gradingSubjects.indexOf(gradingSubject) != gradingSubjects.size() - 1) {
+                    textComponentBuilder.append(Component.newline());
+                }
             }
             return this;
         }
