@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performance.config;
+package com.neomechanical.neoperformance.config;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.utils.config.ConfigUpdater;

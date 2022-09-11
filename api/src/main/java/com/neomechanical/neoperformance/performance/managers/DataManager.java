@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performance.managers;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performance.config.PerformanceTweaksConfiguration;
+import com.neomechanical.neoperformance.config.PerformanceTweaksConfiguration;
 import com.neomechanical.neoperformance.performance.managers.data.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
