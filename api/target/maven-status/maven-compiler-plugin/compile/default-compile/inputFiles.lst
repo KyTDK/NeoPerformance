@@ -11,6 +11,7 @@
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/LagChecker.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/chunks/ChunksNotifier.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/LagNotifierData.java
+/home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/utils/CPU.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/HaltCommand.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/chunks/ChunksScanner.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/ActionBar.java
@@ -50,6 +51,7 @@
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/TweakData.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/chunks/ChunkTeleport.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/utils/tps/TPSReflection.java
+/home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/CPUUsageGrading.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/ConfigCommand.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/resources/Memory.java
 /home/kyan/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReport.java

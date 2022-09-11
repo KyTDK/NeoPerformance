@@ -66,9 +66,11 @@ com/neomechanical/neoperformance/utils/updates/UpdateChecker$1.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/PlayersToPerformanceGrading.class
 com/neomechanical/neoperformance/performance/managers/DataManager.class
 com/neomechanical/neoperformance/performance/utils/TpsUtils.class
+com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/CPUUsageGrading.class
 com/neomechanical/neoperformance/performance/FindOneCallback.class
 com/neomechanical/neoperformance/performance/halt/CachedData.class
 com/neomechanical/neoperformance/performance/halt/HaltServer.class
+com/neomechanical/neoperformance/performance/smart/smartReport/utils/CPU.class
 com/neomechanical/neoperformance/commands/chunks/ChunkTeleport.class
 com/neomechanical/neoperformance/commands/chunks/ChunksCommand.class
 com/neomechanical/neoperformance/performance/smart/smartReport/Grade.class

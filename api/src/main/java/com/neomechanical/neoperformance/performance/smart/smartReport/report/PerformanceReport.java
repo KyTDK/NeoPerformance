@@ -48,13 +48,13 @@ public class PerformanceReport {
             //Append overall grading
             textComponentBuilder.append(Component.text("Overall grading: ")
                     .color(NamedTextColor.GRAY)
-                    .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(gradeValues / gradingSubjects.size())).decorate(TextDecoration.UNDERLINED))
-                    .append(Component.newline()));
+                    .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(gradeValues / gradingSubjects.size())).decorate(TextDecoration.UNDERLINED)));
             return this;
         }
 
         public PerformanceReportBuilder addExtraInformation(Component information) {
-            textComponentBuilder.append(information).append(Component.newline());
+            textComponentBuilder.append(Component.newline());
+            textComponentBuilder.append(information);
             return this;
         }
 
