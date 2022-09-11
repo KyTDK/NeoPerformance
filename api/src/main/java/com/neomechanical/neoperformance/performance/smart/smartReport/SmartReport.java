@@ -1,6 +1,8 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport;
 
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEvent;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
 import com.neomechanical.neoconfig.neoutils.server.resources.DataSize;
@@ -20,29 +22,35 @@ public class SmartReport {
         this.plugin = plugin;
     }
 
-    public PerformanceReport getPerformanceReport() {
+    public PerformanceReport getPerformanceReportOverview() {
         //Generate data
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
         Runtime runtime = Runtime.getRuntime();
-        Component usedMemory = Component.text("Used memory: ")
-                .color(NamedTextColor.GRAY)
+        Component usedMemory = Component.empty()
+                .append(Component.text("Used memory: ").color(NamedTextColor.GRAY))
                 .append(Component.text((DataSize.ofBytes(runtime.totalMemory() - runtime.freeMemory()).toMegabytes()) + " MB").decorate(TextDecoration.BOLD));
-        Component freeMemory = Component.text("Free memory: ")
-                .color(NamedTextColor.GRAY)
+        Component freeMemory = Component.empty()
+                .append(Component.text("Free memory: ").color(NamedTextColor.GRAY))
                 .append(Component.text(DataSize.ofBytes(runtime.freeMemory()).toMegabytes() + " MB").decorate(TextDecoration.BOLD));
-        Component maxMemory = Component.text("Max memory: ")
-                .color(NamedTextColor.GRAY)
+        Component maxMemory = Component.empty()
+                .append(Component.text("Max memory: ").color(NamedTextColor.GRAY))
                 .append(Component.text(DataSize.ofBytes(runtime.maxMemory()).toGigabytes() + " GB").decorate(TextDecoration.BOLD));
-        Component availableProcessors = Component.text("Available processors: ")
-                .color(NamedTextColor.GRAY)
+        Component availableProcessors = Component.empty()
+                .append(Component.text("Available processors: ").color(NamedTextColor.GRAY))
                 .append(Component.text(runtime.availableProcessors()).decorate(TextDecoration.BOLD));
-        Component cpuJvmLoad = Component.text("JVM CPU load: ")
-                .color(NamedTextColor.GRAY)
+        Component cpuJvmLoad = Component.empty()
+                .append(Component.text("JVM CPU load: ").color(NamedTextColor.GRAY))
                 .append(Component.text(new DecimalFormat("###.##").format(CPU.getProcessCpuLoad() * 100) + "%").decorate(TextDecoration.BOLD));
-        Component cpuSystemLoad = Component.text("System CPU load: ")
-                .color(NamedTextColor.GRAY)
+        Component cpuSystemLoad = Component.empty()
+                .append(Component.text("System CPU load: ").color(NamedTextColor.GRAY))
                 .append(Component.text(new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100) + "%").decorate(TextDecoration.BOLD));
+        Component notice = Component.empty()
+                .append(Component.text("Click to view individual subjects"))
+                .decorate(TextDecoration.ITALIC)
+                .decorate(TextDecoration.UNDERLINED)
+                .clickEvent(ClickEvent.runCommand("/np report subjects"))
+                .hoverEvent(HoverEvent.showText(Component.text("Type /np report subjects to view individual gradings")));
         return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
                 .setOverallGrade()
                 .addExtraInformation(Component.text("[Memory]"))
@@ -53,7 +61,14 @@ public class SmartReport {
                 .addExtraInformation(availableProcessors)
                 .addExtraInformation(cpuJvmLoad)
                 .addExtraInformation(cpuSystemLoad)
-                .addExtraInformation(Component.text("[Grading subjects]").append(Component.newline()))
+                .addExtraInformation(notice)
+                .build();
+    }
+
+    public PerformanceReport getPerformanceReportSubjects() {
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
+        List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
+        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
                 .addIndividualGradeSection()
                 .build();
     }

@@ -6,6 +6,7 @@ import com.neomechanical.neoperformance.performance.smart.smartReport.SmartRepor
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -42,13 +43,19 @@ public class SmartReportCommand extends Command {
     }
 
     @Override
-    public void perform(CommandSender commandSender, String[] strings) {
-        new SmartReport(plugin).getPerformanceReport().sendReport((Player) commandSender);
+    public void perform(CommandSender commandSender, String[] args) {
+        if (args.length == 2) {
+            if (args[1].equalsIgnoreCase("subjects")) {
+                new SmartReport(plugin).getPerformanceReportSubjects().sendReport((Player) commandSender);
+                return;
+            }
+        }
+        new SmartReport(plugin).getPerformanceReportOverview().sendReport((Player) commandSender);
     }
 
     @Override
     public List<String> tabSuggestions() {
-        return null;
+        return Collections.singletonList("subjects");
     }
 
     @Override
