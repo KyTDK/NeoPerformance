@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.performance.utils;
 import com.neomechanical.neoperformance.performance.managers.data.HaltData;
 import com.neomechanical.neoperformance.performance.managers.data.TweakData;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
@@ -15,7 +16,7 @@ public class PerformanceConfigurationSettingsUtils {
     public static boolean canMobSpawn(TweakData tweakData, EntitySpawnEvent e) {
         List<Entity> list = e.getEntity().getNearbyEntities(tweakData.getMobCapRadius(), 2, tweakData.getMobCapRadius());
         int mobCap = tweakData.getMobCap();
-        if (mobCap == -1) {
+        if (mobCap == -1 || e.getEntity() instanceof Item) {
             return true;
         }
         return list.size() <= tweakData.getMobCap();
