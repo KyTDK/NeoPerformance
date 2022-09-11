@@ -32,8 +32,14 @@ public class PerformanceReport {
 
     public static class PerformanceReportBuilder {
         private final TextComponent.Builder textComponentBuilder = Component.text();
+        private final List<IGradingSubject> gradingSubjects;
 
-        public PerformanceReportBuilder addGrades(List<IGradingSubject> gradingSubjects) {
+        public PerformanceReportBuilder(List<IGradingSubject> gradingSubjects) {
+            this.gradingSubjects = gradingSubjects;
+        }
+
+        public PerformanceReportBuilder setOverallGrade() {
+            //Calculate Overall Grade
             int gradeValues = 0;
             //Calculate overall grading
             for (IGradingSubject gradingSubject : gradingSubjects) {
@@ -44,6 +50,15 @@ public class PerformanceReport {
                     .color(NamedTextColor.GRAY)
                     .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(gradeValues / gradingSubjects.size())).decorate(TextDecoration.UNDERLINED))
                     .append(Component.newline()));
+            return this;
+        }
+
+        public PerformanceReportBuilder addExtraInformation(Component information) {
+            textComponentBuilder.append(information).append(Component.newline());
+            return this;
+        }
+
+        public PerformanceReportBuilder addIndividualGradeSection() {
             //Display individual subjects
             for (IGradingSubject gradingSubject : gradingSubjects) {
                 GradeData gradeData = gradingSubject.performGrading();
