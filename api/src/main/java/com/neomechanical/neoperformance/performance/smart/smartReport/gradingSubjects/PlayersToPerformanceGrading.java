@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 public class PlayersToPerformanceGrading implements IGradingSubject {
     @Override
     public GradeData performGrading() {
-        int playerCount = Bukkit.getOnlinePlayers().size();
+        int playerCount = Bukkit.getOnlinePlayers().size() == 0 ? 1 : Bukkit.getOnlinePlayers().size();
         long freeMemory = Runtime.getRuntime().maxMemory() / 1048576; //in MB
         //Memory to playerCount ratio
         long ratio = freeMemory / playerCount;

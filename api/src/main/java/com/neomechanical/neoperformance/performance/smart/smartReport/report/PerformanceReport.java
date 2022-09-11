@@ -10,7 +10,7 @@ import com.neomechanical.neoperformance.performance.smart.smartReport.grading.Gr
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.utils.messages.Messages;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
@@ -21,12 +21,12 @@ public class PerformanceReport {
         this.textComponentBuilder = builder.textComponentBuilder;
     }
 
-    public void sendReport(Player player) {
+    public void sendReport(CommandSender player) {
         TextComponent message = textComponentBuilder.build();
         if (message.children().size() > 0) {
-            MessageUtil.send(player, Messages.MAIN_PERFORMANCE_REPORT_PREFIX);
+            player.sendMessage(MessageUtil.color(Messages.MAIN_PERFORMANCE_REPORT_PREFIX));
             MessageUtil.sendMM(player, message);
-            MessageUtil.send(player, Messages.MAIN_SUFFIX);
+            player.sendMessage(MessageUtil.color(Messages.MAIN_SUFFIX));
         }
     }
 

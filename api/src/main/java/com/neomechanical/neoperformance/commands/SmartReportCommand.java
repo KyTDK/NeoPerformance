@@ -4,7 +4,6 @@ import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReport;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,11 +45,11 @@ public class SmartReportCommand extends Command {
     public void perform(CommandSender commandSender, String[] args) {
         if (args.length == 2) {
             if (args[1].equalsIgnoreCase("subjects")) {
-                new SmartReport(plugin).getPerformanceReportSubjects().sendReport((Player) commandSender);
+                new SmartReport(plugin).getPerformanceReportSubjects().sendReport(commandSender);
                 return;
             }
         }
-        new SmartReport(plugin).getPerformanceReportOverview().sendReport((Player) commandSender);
+        new SmartReport(plugin).getPerformanceReportOverview().sendReport(commandSender);
     }
 
     @Override
