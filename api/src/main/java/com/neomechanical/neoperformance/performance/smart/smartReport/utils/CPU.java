@@ -27,4 +27,9 @@ public class CPU {
         }
         return systemLoad;
     }
+
+    public static int availableProcessors() {
+        Runtime runtime = Runtime.getRuntime();
+        return runtime.availableProcessors();
+    }
 }

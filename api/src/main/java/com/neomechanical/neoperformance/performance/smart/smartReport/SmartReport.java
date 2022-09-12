@@ -5,12 +5,12 @@ import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEven
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
-import com.neomechanical.neoconfig.neoutils.server.resources.DataSize;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.report.PerformanceReport;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.CPU;
+import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Memory;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -26,19 +26,18 @@ public class SmartReport {
         //Generate data
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
-        Runtime runtime = Runtime.getRuntime();
         Component usedMemory = Component.empty()
                 .append(Component.text("Used memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text((DataSize.ofBytes(runtime.totalMemory() - runtime.freeMemory()).toMegabytes()) + " MB").decorate(TextDecoration.BOLD));
+                .append(Component.text(Memory.usedMemory() + " MB").decorate(TextDecoration.BOLD));
         Component freeMemory = Component.empty()
                 .append(Component.text("Free memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text(DataSize.ofBytes(runtime.freeMemory()).toMegabytes() + " MB").decorate(TextDecoration.BOLD));
+                .append(Component.text(Memory.freeMemory() + " MB").decorate(TextDecoration.BOLD));
         Component maxMemory = Component.empty()
                 .append(Component.text("Max memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text(DataSize.ofBytes(runtime.maxMemory()).toGigabytes() + " GB").decorate(TextDecoration.BOLD));
+                .append(Component.text(Memory.maxMemory() + " GB").decorate(TextDecoration.BOLD));
         Component availableProcessors = Component.empty()
                 .append(Component.text("Available processors: ").color(NamedTextColor.GRAY))
-                .append(Component.text(runtime.availableProcessors()).decorate(TextDecoration.BOLD));
+                .append(Component.text(CPU.availableProcessors()).decorate(TextDecoration.BOLD));
         Component cpuJvmLoad = Component.empty()
                 .append(Component.text("JVM CPU load: ").color(NamedTextColor.GRAY))
                 .append(Component.text(new DecimalFormat("###.##").format(CPU.getProcessCpuLoad() * 100) + "%").decorate(TextDecoration.BOLD));

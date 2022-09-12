@@ -36,6 +36,8 @@ smartClear:
   confirm: "<red><bold>Type command again to confirm cluster deletion"
   cleared: "<green><bold>Cluster deleted"
   noEntities: "<red><bold>No entities deleted"
+smartReport:
+
 #Halt related messages
 halted:
   actionBarMessage: '<red>Server is currently under heavy load. Please try again later.'
