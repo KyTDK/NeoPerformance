@@ -48,6 +48,7 @@ public class MainCommand extends Command {
     @Override
     public void perform(CommandSender player, String[] args) {
         messageUtil.neoComponentMessage()
+                .addComponent(getLanguageManager().getString("main.serverGrade", null))
                 .addComponent(getLanguageManager().getString("main.isServerHalted", null))
                 .addComponent(getLanguageManager().getString("main.serverTps", null))
                 .addComponent(getLanguageManager().getString("main.serverHaltsAt", null))

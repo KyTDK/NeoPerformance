@@ -51,7 +51,7 @@ public class SmartReport {
                 .decorate(TextDecoration.UNDERLINED)
                 .clickEvent(ClickEvent.runCommand("/np report subjects"))
                 .hoverEvent(HoverEvent.showText(Component.text("Type /np report subjects to view individual gradings")));
-        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
+        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects, plugin)
                 .setOverallGrade()
                 .addExtraInformation(Component.text("[Memory]"))
                 .addExtraInformation(usedMemory)
@@ -68,7 +68,7 @@ public class SmartReport {
     public PerformanceReport getPerformanceReportSubjects() {
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
-        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
+        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects, plugin)
                 .addIndividualGradeSection()
                 .build();
     }

@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Niveau du serveur: %SERVERGRADE%'
   isServerHalted: '<gray>  Le serveur est-il arrêté: %SERVERHALTED%'
   serverTps: '<gray>  Serveur TPS: %TPS%'
   serverHaltsAt: "<gray>  Le serveur s'arrête à: %TPSHALT%"

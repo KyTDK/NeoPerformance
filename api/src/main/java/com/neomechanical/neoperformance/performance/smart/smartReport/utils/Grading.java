@@ -1,6 +1,11 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport.utils;
 
+import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.Grade;
+import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
+import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
+
+import java.util.List;
 
 public class Grading {
     private Grading() {
@@ -83,5 +88,17 @@ public class Grading {
     public static String getFancyGrade(int gradeValue) {
         Grade grade = getGrade(gradeValue);
         return getFancyGrade(grade);
+    }
+    public static Grade getServerGrade(NeoPerformance plugin) {
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
+        List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
+        //Calculate Overall Grade
+        int gradeValues = 0;
+        //Calculate overall grading
+        for (IGradingSubject gradingSubject : gradingSubjects) {
+            gradeValues += gradingSubject.performGrading().getGradeValue();
+        }
+        //Return the average
+        return Grading.getGrade(gradeValues / gradingSubjects.size());
     }
 }

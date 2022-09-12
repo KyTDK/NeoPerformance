@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  服务器等级: %SERVERGRADE%'
   isServerHalted: '<gray>  服务器是否已停止：%SERVERHALTED%'
   serverTps: '<gray>  服务器 TPS: %TPS%'
   serverHaltsAt: '<gray>  服务器停止在: %TPSHALT%'

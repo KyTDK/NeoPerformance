@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Servergrad: %SERVERGRADE%'
   isServerHalted: '<gray>  Ist der Server angehalten: %SERVERHALTED%'
   serverTps: '<gray>  Server TPS: %TPS%'
   serverHaltsAt: '<gray>  Server hält an bei: %TPSHALT%'

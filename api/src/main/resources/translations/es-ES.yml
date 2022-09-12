@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Grado del servidor: %SERVERGRADE%'
   isServerHalted: '<gray>  Actividad detenida: %SERVERHALTED%'
   serverTps: '<gray>  TPS del servidor: %TPS%'
   serverHaltsAt: '<gray>  La actividad se detiene en: %TPSHALT%'
@@ -10,7 +11,6 @@ notify:
 email_notifications:
   subject: 'Los TPS son demasiado bajos, deteniendo el servidor...'
   body: "El servidor se detuvo porque los TPS eran demasiado bajos.\nLos TPS están actualmente en %TPS% y el umbral de TPS es %TPSHALT%.\nEl servidor se reiniciará en 10 minutos si no se recupera."
-
 # Comandos
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Jugador no encontrado'

@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Sunucu notu: %SERVERGRADE%'
   isServerHalted: '<gray>  Sunucu durduruldu: %SERVERHALTED%'
   serverTps: '<gray>  Sunucu TPS: %TPS%'
   serverHaltsAt: '<gray>  Sunucu şu anda duruyor: %TPSHALT%'

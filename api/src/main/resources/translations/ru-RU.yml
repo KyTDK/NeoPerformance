@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Уровень сервера: %SERVERGRADE%'
   isServerHalted: '<gray>  Отключена ли активность: %SERVERHALTED%'
   serverTps: '<gray>  ТПС сервера: %TPS%'
   serverHaltsAt: '<gray>  Остановка активности при: %TPSHALT%'
