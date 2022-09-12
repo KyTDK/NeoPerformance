@@ -36,7 +36,6 @@ smartClear:
   confirm: "<red><bold>Befehl erneut eingeben, um das Löschen des Clusters zu bestätigen"
   cleared: "<green><bold>Cluster gelöscht"
   noEntities: "<red><bold>Keine Entitäten gelöscht"
-
 #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'

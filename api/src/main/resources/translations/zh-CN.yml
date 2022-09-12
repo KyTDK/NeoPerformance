@@ -35,8 +35,7 @@ reload:
 smartClear:
   confirm: "<red><bold>再次输入命令以确认集群删除"
   cleared: '<green><bold>集群已删除'
-
-  #Halt 相关消息
+#Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'
   actionBarTeleportMessage: '<red>服务器当前负载很重。你会被瞬间传送。'

@@ -36,7 +36,6 @@ smartClear:
   confirm: "<red><bold>Küme silme işlemini onaylamak için komutu tekrar yazın"
   cleared: "<green><bold>Küme silindi"
   noEntities: "<red><bold>Hiçbir varlık silinmedi"
-
 #İlgili mesajları durdur
 halted:
   actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'

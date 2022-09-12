@@ -36,7 +36,6 @@ smartClear:
   confirm: "<red><bold>Tapez à nouveau la commande pour confirmer la suppression du cluster"
   cleared: "<green><bold>Groupe supprimé"
   noEntities: "<red><bold>Aucune entité supprimée"
-
 #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'
