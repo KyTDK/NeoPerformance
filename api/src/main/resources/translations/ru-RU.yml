@@ -36,6 +36,18 @@ smartClear:
   confirm: '<red><bold>Введите команду еще раз, чтобы подтвердить отчистку'
   cleared: '<green><bold>Существа отчищены'
   noEntities: '<red><bold>Ни одно существо ни удалено'
+smartReport:
+  serverGrade: "<gray>Общая оценка: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Память]"
+  usedMemory: "<gray>Используемая память: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Свободная память: <white><bold>%FREEMEMORY% МБ"
+  maxMemory: "<gray>Максимальная память: <white><bold>%MAXMEMORY% ГБ"
+  cpuTitle: "[ЦП]"
+  availableProcessors: "<gray>Доступные процессоры: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>Загрузка ЦП JVM: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>Загрузка ЦП системы: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Нажмите, чтобы просмотреть отдельные темы"
+  noticeHover: "Введите /np сообщить о предметах, чтобы просмотреть индивидуальные оценки"
 #сообщения при остановке активности
 halted:
   actionBarMessage: '<red>В настоящее время сервер перегружен. Пожалуйста, повторите попытку позже.'

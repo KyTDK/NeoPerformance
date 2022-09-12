@@ -36,6 +36,18 @@ smartClear:
   confirm: "<red><bold>Escriba el comando nuevamente para confirmar la eliminación del clúster"
   cleared: "<green><bold>Clúster eliminado"
   noEntities: "<red><bold>No se eliminaron entidades"
+smartReport:
+  serverGrade: "<gray>Calificación general: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Memoria]"
+  usedMemory: "<gray>Memoria usada: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Memoria libre: <white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>Memoria máxima: <white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>Procesadores disponibles: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>Carga de CPU de JVM: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>Carga de la CPU del sistema: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Haga clic para ver temas individuales"
+  noticeHover: "Escriba /np temas del informe para ver las calificaciones individuales"
 # Mensajes relacionados a la detencion de actividades
 halted:
   actionBarMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'

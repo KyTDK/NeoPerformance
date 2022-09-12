@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  服务器等级: %SERVERGRADE%'
   isServerHalted: '<gray>  服务器是否已停止：%SERVERHALTED%'
   serverTps: '<gray>  服务器 TPS: %TPS%'
   serverHaltsAt: '<gray>  服务器停止在: %TPSHALT%'
@@ -34,8 +35,19 @@ reload:
 smartClear:
   confirm: "<red><bold>再次输入命令以确认集群删除"
   cleared: '<green><bold>集群已删除'
-
-  #Halt 相关消息
+smartReport:
+  serverGrade: "<gray>总体评分：<white><bold>%OVERALLGRADE%"
+  memoryTitle: "[内存]"
+  usedMemory: "<gray>已用内存：<white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>可用内存：<white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>最大内存：<white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>可用处理器: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>JVM CPU 负载: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>系统 CPU 负载: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>点击查看个别主题"
+  noticeHover: "输入 /np 报告主题以查看个人评分"
+#Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'
   actionBarTeleportMessage: '<red>服务器当前负载很重。你会被瞬间传送。'

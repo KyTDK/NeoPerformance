@@ -10,6 +10,7 @@ import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
 import com.neomechanical.neoperformance.performance.smart.smartNotifier.LagChecker;
+import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReportPlaceholders;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.Logger;
@@ -35,7 +36,7 @@ public class StartRegistering {
     }
 
     public void registerLanguageManager() {
-        new LanguageManager(plugin)
+        LanguageManager languageManager = new LanguageManager(plugin)
                 .setLanguageCode(() -> dataManager.getVisualData().getLanguage())
                 .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "ru-RU.yml", "zh-CN.yml")
                 .addInternalPlaceholder("%SERVERGRADE%", (Player player) -> Grading.getFancyGrade(Grading.getServerGrade(plugin)))
@@ -44,8 +45,10 @@ public class StartRegistering {
                 .addInternalPlaceholder("%SERVERHALTED%", (Player player) -> TpsUtils.fancyIsServerHalted(TpsUtils.getTPS(plugin), plugin))
                 .addInternalPlaceholder("%PLAYERCOUNT%", (Player player) -> String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .addInternalPlaceholder("%PLAYER%", (Player player) -> player == null ? "None" : player.getName())
-                .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus())
-                .set();
+                .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus());
+        //Add smart report placeholders
+        new SmartReportPlaceholders(languageManager).addPlaceholders(plugin);
+        languageManager.set();
     }
 
     public void registerOptimizers() {

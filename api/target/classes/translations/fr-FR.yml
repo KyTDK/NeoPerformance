@@ -1,4 +1,5 @@
 main:
+  serverGrade: '<gray>  Niveau du serveur: %SERVERGRADE%'
   isServerHalted: '<gray>  Le serveur est-il arrêté: %SERVERHALTED%'
   serverTps: '<gray>  Serveur TPS: %TPS%'
   serverHaltsAt: "<gray>  Le serveur s'arrête à: %TPSHALT%"
@@ -35,7 +36,18 @@ smartClear:
   confirm: "<red><bold>Tapez à nouveau la commande pour confirmer la suppression du cluster"
   cleared: "<green><bold>Groupe supprimé"
   noEntities: "<red><bold>Aucune entité supprimée"
-
+smartReport:
+  serverGrade: "<gray>Note globale: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Mémoire]"
+  usedMemory: "<gray>Mémoire utilisée: <white><bold>%USEDMEMORY% Mo"
+  freeMemory: "<gray>Mémoire libre: <white><bold>%FREEMEMORY% Mo"
+  maxMemory: "<gray>Mémoire maximale: <white><bold>%MAXMEMORY% Go"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>Processeurs disponibles: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>Charge du processeur JVM: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>Charge du processeur système: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Cliquez pour afficher les sujets individuels"
+  noticeHover: "Tapez /np signaler les sujets pour afficher les notes individuelles"
 #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'

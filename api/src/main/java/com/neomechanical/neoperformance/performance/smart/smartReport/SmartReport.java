@@ -1,18 +1,16 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport;
 
+import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
+import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
+import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.report.PerformanceReport;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.CPU;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Memory;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class SmartReport {
@@ -26,37 +24,25 @@ public class SmartReport {
         //Generate data
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
-        Component usedMemory = Component.empty()
-                .append(Component.text("Used memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text(Memory.usedMemory() + " MB").decorate(TextDecoration.BOLD));
-        Component freeMemory = Component.empty()
-                .append(Component.text("Free memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text(Memory.freeMemory() + " MB").decorate(TextDecoration.BOLD));
-        Component maxMemory = Component.empty()
-                .append(Component.text("Max memory: ").color(NamedTextColor.GRAY))
-                .append(Component.text(Memory.maxMemory() + " GB").decorate(TextDecoration.BOLD));
-        Component availableProcessors = Component.empty()
-                .append(Component.text("Available processors: ").color(NamedTextColor.GRAY))
-                .append(Component.text(CPU.availableProcessors()).decorate(TextDecoration.BOLD));
-        Component cpuJvmLoad = Component.empty()
-                .append(Component.text("JVM CPU load: ").color(NamedTextColor.GRAY))
-                .append(Component.text(new DecimalFormat("###.##").format(CPU.getProcessCpuLoad() * 100) + "%").decorate(TextDecoration.BOLD));
-        Component cpuSystemLoad = Component.empty()
-                .append(Component.text("System CPU load: ").color(NamedTextColor.GRAY))
-                .append(Component.text(new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100) + "%").decorate(TextDecoration.BOLD));
+        LanguageManager languageManager = NeoUtils.getManagers().getLanguageManager();
+        Component serverGrade = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.serverGrade", null));
+        Component usedMemory = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.usedMemory", null));
+        Component freeMemory = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.freeMemory", null));
+        Component maxMemory = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.maxMemory", null));
+        Component availableProcessors = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.availableProcessors", null));
+        Component cpuJvmLoad = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.cpuJvmLoad", null));
+        Component cpuSystemLoad = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.cpuSystemLoad", null));
         Component notice = Component.empty()
-                .append(Component.text("Click to view individual subjects"))
-                .decorate(TextDecoration.ITALIC)
-                .decorate(TextDecoration.UNDERLINED)
+                .append(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.notice", null)))
                 .clickEvent(ClickEvent.runCommand("/np report subjects"))
-                .hoverEvent(HoverEvent.showText(Component.text("Type /np report subjects to view individual gradings")));
-        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects, plugin)
-                .setOverallGrade()
-                .addExtraInformation(Component.text("[Memory]"))
+                .hoverEvent(HoverEvent.showText(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.noticeHover", null))));
+        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
+                .addHeader(serverGrade)
+                .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.memoryTitle", null)))
                 .addExtraInformation(usedMemory)
                 .addExtraInformation(freeMemory)
                 .addExtraInformation(maxMemory)
-                .addExtraInformation(Component.text("[CPU]"))
+                .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.cpuTitle", null)))
                 .addExtraInformation(availableProcessors)
                 .addExtraInformation(cpuJvmLoad)
                 .addExtraInformation(cpuSystemLoad)
@@ -67,7 +53,7 @@ public class SmartReport {
     public PerformanceReport getPerformanceReportSubjects() {
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
-        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects, plugin)
+        return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
                 .addIndividualGradeSection()
                 .build();
     }

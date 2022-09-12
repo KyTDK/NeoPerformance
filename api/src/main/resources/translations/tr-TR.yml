@@ -36,6 +36,18 @@ smartClear:
   confirm: "<red><bold>Küme silme işlemini onaylamak için komutu tekrar yazın"
   cleared: "<green><bold>Küme silindi"
   noEntities: "<red><bold>Hiçbir varlık silinmedi"
+smartReport:
+  serverGrade: "<gray>Genel not verme: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Bellek]"
+  kullanılmışMemory: "<gri>Kullanılan bellek: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Boş bellek: <white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>Maks. bellek: <white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  mevcut İşlemciler: "<gray>Kullanılabilir işlemciler: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>JVM CPU yükü: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>Sistem CPU yükü: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Tek tek konuları görüntülemek için tıklayın"
+  noticeHover: "Bireysel notları görüntülemek için /np rapor konularını yazın"
 #İlgili mesajları durdur
 halted:
   actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'

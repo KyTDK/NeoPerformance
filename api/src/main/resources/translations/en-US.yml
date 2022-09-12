@@ -37,7 +37,17 @@ smartClear:
   cleared: "<green><bold>Cluster deleted"
   noEntities: "<red><bold>No entities deleted"
 smartReport:
-
+  serverGrade: "<gray>Overall grading: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Memory]"
+  usedMemory: "<gray>Used memory: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Free memory: <white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>Max memory: <white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>Available processors: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>JVM CPU load: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>System CPU load: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Click to view individual subjects"
+  noticeHover: "Type /np report subjects to view individual gradings"
 #Halt related messages
 halted:
   actionBarMessage: '<red>Server is currently under heavy load. Please try again later.'

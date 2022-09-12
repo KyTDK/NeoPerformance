@@ -36,6 +36,18 @@ smartClear:
   confirm: "<red><bold>Befehl erneut eingeben, um das Löschen des Clusters zu bestätigen"
   cleared: "<green><bold>Cluster gelöscht"
   noEntities: "<red><bold>Keine Entitäten gelöscht"
+smartReport:
+  serverGrade: "<gray>Gesamtnote: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Erinnerung]"
+  usedMemory: "<gray>Verwendeter Speicher: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Freier Speicher: <white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>Max. Arbeitsspeicher: <white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>Verfügbare Prozessoren: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>JVM-CPU-Last: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>System-CPU-Last: <white><bold>%CPUSYSTEMLOAD%%"
+  notice: "<u><bold>Klicken, um einzelne Themen anzuzeigen"
+  noticeHover: "Geben Sie /np report subjects ein, um einzelne Noten anzuzeigen"
 #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'

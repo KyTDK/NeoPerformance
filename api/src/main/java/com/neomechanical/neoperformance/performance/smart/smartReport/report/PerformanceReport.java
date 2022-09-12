@@ -3,10 +3,8 @@ package com.neomechanical.neoperformance.performance.smart.smartReport.report;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
-import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradeData;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
@@ -34,18 +32,13 @@ public class PerformanceReport {
     public static class PerformanceReportBuilder {
         private final TextComponent.Builder textComponentBuilder = Component.text();
         private final List<IGradingSubject> gradingSubjects;
-        private final NeoPerformance plugin;
 
-        public PerformanceReportBuilder(List<IGradingSubject> gradingSubjects, NeoPerformance plugin) {
+        public PerformanceReportBuilder(List<IGradingSubject> gradingSubjects) {
             this.gradingSubjects = gradingSubjects;
-            this.plugin = plugin;
         }
 
-        public PerformanceReportBuilder setOverallGrade() {
-            //Append overall grading
-            textComponentBuilder.append(Component.text("Overall grading: ")
-                    .color(NamedTextColor.GRAY)
-                    .append(MiniMessage.miniMessage().deserialize(Grading.getFancyGrade(Grading.getServerGrade(plugin)))).decorate(TextDecoration.UNDERLINED));
+        public PerformanceReportBuilder addHeader(Component information) {
+            textComponentBuilder.append(information);
             return this;
         }
 
