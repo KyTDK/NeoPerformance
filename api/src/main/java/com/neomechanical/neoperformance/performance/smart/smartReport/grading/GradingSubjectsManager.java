@@ -17,7 +17,7 @@ public class GradingSubjectsManager {
     public GradingSubjectsManager(NeoPerformance plugin) {
         gradingSubjects.add(new TpsGrading(plugin));
         gradingSubjects.add(new PlayersToPerformanceGrading());
-        gradingSubjects.add(new CPUUsageGrading());
+        gradingSubjects.add(new CPUUsageGrading(plugin));
         if (SparkUtils.isInstalled(plugin)) {
             gradingSubjects.add(new SparkMSPTGrading());
         }

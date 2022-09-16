@@ -7,6 +7,14 @@ public class SparkUtils {
         return SparkRetrievers.MSTP();
     }
 
+    public static double CPUSystem() {
+        return SparkRetrievers.CPUSystem();
+    }
+
+    public static double CPUProcess() {
+        return SparkRetrievers.CPUProcess();
+    }
+
     public static boolean isInstalled(NeoPerformance plugin) {
         return plugin.getDataManager().getSparkData().isInstalled();
     }

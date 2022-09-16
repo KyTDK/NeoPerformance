@@ -26,8 +26,8 @@ public class SmartReportPlaceholders {
                 .addInternalPlaceholder("%MAXMEMORY%", (Player player) -> String.valueOf(Memory.maxMemory()))
                 //Add cpu placeholders
                 .addInternalPlaceholder("%AVAILABLEPROCESSORS%", (Player player) -> String.valueOf(CPU.availableProcessors()))
-                .addInternalPlaceholder("%CPUPROCESSLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getProcessCpuLoad() * 100))
-                .addInternalPlaceholder("%CPUSYSTEMLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100));
+                .addInternalPlaceholder("%CPUPROCESSLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getProcessCpuLoad(plugin) * 100))
+                .addInternalPlaceholder("%CPUSYSTEMLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getSystemCpuLoad(plugin) * 100));
         //Add spark placeholders
         if (SparkUtils.isInstalled(plugin)) {
             languageManager.addInternalPlaceholder("%MSPTMINUTEAVERAGE%", (Player player) -> new DecimalFormat("###.##").format(SparkUtils.MSTP()));
