@@ -49,8 +49,8 @@ smartReport:
   otherTitle: "[Andere]"
   msptAverage: "<gray>MSPT-Minutendurchschnitt: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Klicken, um einzelne Themen anzuzeigen"
-  noticeHover: "Geben Sie /np report subjects ein, um einzelne Noten anzuzeigen"
-#Halten Sie verwandte Nachrichten an
+  noticeHover: "Geben Sie /np report subjects ein, um einzelne Bewertungen anzuzeigen"
+  #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'
   actionBarTeleportMessage: '<red>Server ist derzeit stark ausgelastet. Sie werden für einen Moment teleportiert.'
