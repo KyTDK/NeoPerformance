@@ -6,7 +6,7 @@ import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSub
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.PlayersToPerformanceGrading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.TpsGrading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.dependent.SparkMSTPGrading;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.SparkUtils;
+import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,9 @@ public class GradingSubjectsManager {
         gradingSubjects.add(new TpsGrading(plugin));
         gradingSubjects.add(new PlayersToPerformanceGrading());
         gradingSubjects.add(new CPUUsageGrading());
-        SparkUtils.runIfEnabled(() -> gradingSubjects.add(new SparkMSTPGrading()));
+        if (SparkUtils.isInstalled(plugin)) {
+            gradingSubjects.add(new SparkMSTPGrading());
+        }
     }
 
     public List<IGradingSubject> getAllGrades() {

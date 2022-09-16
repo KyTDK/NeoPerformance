@@ -10,7 +10,7 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.report.PerformanceReport;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.SparkUtils;
+import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 
 import java.util.List;
 
@@ -49,9 +49,11 @@ public class SmartReport {
                 .addExtraInformation(availableProcessors)
                 .addExtraInformation(cpuJvmLoad)
                 .addExtraInformation(cpuSystemLoad);
-        SparkUtils.runIfEnabled(() -> performanceReport
-                .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.otherTitle", null)))
-                .addExtraInformation(mstpMinuteAverage));
+        if (SparkUtils.isInstalled(plugin)) {
+            performanceReport
+                    .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.otherTitle", null)))
+                    .addExtraInformation(mstpMinuteAverage);
+        }
         performanceReport.addExtraInformation(notice);
         return performanceReport.build();
     }

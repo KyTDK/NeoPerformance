@@ -2,7 +2,7 @@ package com.neomechanical.neoperformance.performance.smart.smartReport.gradingSu
 
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradeData;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.SparkUtils;
+import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 
 public class SparkMSTPGrading implements IGradingSubject {
     @Override

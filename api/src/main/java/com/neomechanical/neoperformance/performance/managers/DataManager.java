@@ -3,6 +3,8 @@ package com.neomechanical.neoperformance.performance.managers;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.config.PerformanceTweaksConfiguration;
 import com.neomechanical.neoperformance.performance.managers.data.*;
+import com.neomechanical.neoperformance.performance.smart.smartReport.relatedManagers.SparkData;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,10 +21,21 @@ public class DataManager {
     private CommandData commandData;
     private LagNotifierData lagNotifierData;
     private HaltActionData haltActionData;
+    private final SparkData sparkData;
     private boolean restoringRedstone = false;
+
+    public DataManager() {
+        sparkData = new SparkData(Bukkit.getPluginManager().getPlugin("spark") != null);
+    }
+
     public void loadTweakSettings(NeoPerformance plugin) {
         new PerformanceTweaksConfiguration(plugin).loadTweakSettings(this);
     }
+
+    public SparkData getSparkData() {
+        return sparkData;
+    }
+
     //Tweak data
     public TweakData getTweakData() {
         return this.tweakData;
