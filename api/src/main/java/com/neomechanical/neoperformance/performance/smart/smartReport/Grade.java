@@ -11,16 +11,11 @@ public enum Grade {
     DPlus("D+"),
     D("D"),
     E("E"),
-    F("F"),
-    UNKNOWN("UNKNOWN");
+    F("F");
     private final String grade;
 
     Grade(String grade) {
         this.grade = grade;
-    }
-
-    public String getGrade() {
-        return grade;
     }
 
     @Override
