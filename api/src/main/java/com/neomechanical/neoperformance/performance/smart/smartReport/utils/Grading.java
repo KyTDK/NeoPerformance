@@ -51,7 +51,7 @@ public class Grading {
         } else if (gradeValue >= 0) {
             grade = Grade.F;
         } else {
-            grade = Grade.UNKNOWN;
+            grade = Grade.F;
         }
         return grade;
     }

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class EntityClusterData extends DataGetter {
     private final DataManager dataManager;
-    private static List<List<Entity>> clusters = new ArrayList<>();
+    private List<List<Entity>> clusters = new ArrayList<>();
 
     public EntityClusterData(DataManager dataManager) {
         this.dataManager = dataManager;

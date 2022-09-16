@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChunkData extends DataGetter {
-    private static List<Chunk> chunks = new ArrayList<>();
+    private List<Chunk> chunks = new ArrayList<>();
     private final NeoPerformance plugin;
 
     public ChunkData(NeoPerformance plugin) {
