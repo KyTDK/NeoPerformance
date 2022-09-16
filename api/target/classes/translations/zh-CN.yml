@@ -45,6 +45,8 @@ smartReport:
   availableProcessors: "<gray>可用处理器: <white><bold>%AVAILABLEPROCESSORS%"
   cpuJvmLoad: "<gray>JVM CPU 负载: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>系统 CPU 负载: <white><bold>%CPUSYSTEMLOAD%%"
+  otherTitle: "[其他]"
+  mstpAverage: "<gray>MSTP 分钟平均值：<white><bold>%MSTPMINUTEAVERAGE%"
   notice: "<u><bold>点击查看个别主题"
   noticeHover: "输入 /np 报告主题以查看个人评分"
 #Halt 相关消息
