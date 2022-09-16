@@ -48,7 +48,7 @@ smartReport:
   otherTitle: "[其他]"
   msptAverage: "<gray>MSPT 分钟平均值：<white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>点击查看个别主题"
-  noticeHover: "输入 /np 报告主题以查看个人评分"
+  noticeHover: "输入 /np report subjects 以查看个人评分"
 #Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'

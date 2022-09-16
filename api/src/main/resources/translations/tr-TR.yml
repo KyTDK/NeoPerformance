@@ -4,7 +4,7 @@ main:
   serverTps: '<gray>  Sunucu TPS: %TPS%'
   serverHaltsAt: '<gray>  Sunucu şu anda duruyor: %TPSHALT%'
   playerCount: '<gray>  Oyuncu sayısı: <green><bold>%PLAYERCOUNT%'
-  upToDate: '<gri>  Eklenti güncel mi: %UPDATESTATUS%'
+  upToDate: '<gray>  Eklenti güncel mi: %UPDATESTATUS%'
 notify:
   serverHalted: '<red><bold>TPS çok düşük, sunucu durduruluyor'
   serverResumed: '<green><bold>TPS normale döndü, sunucu kurtarılıyor'
@@ -49,8 +49,8 @@ smartReport:
   otherTitle: "[Diğer]"
   msptAverage: "<gray>MSPT dakika ortalaması: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Tek tek konuları görüntülemek için tıklayın"
-  noticeHover: "Bireysel notları görüntülemek için /np rapor konularını yazın"
-#İlgili mesajları durdur
+  noticeHover: "Bireysel derecelendirmeleri görüntülemek için /np report subjects yazın"
+  #İlgili mesajları durdur
 halted:
   actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'
   actionBarTeleportMessage: '<red>Sunucu şu anda ağır yük altında. Bir anlığına ışınlanacaksınız.'

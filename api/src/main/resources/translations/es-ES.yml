@@ -49,8 +49,8 @@ smartReport:
   otherTitle: "[Otro]"
   msptAverage: "<gray>Promedio de minutos de MSPT: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Haga clic para ver temas individuales"
-  noticeHover: "Escriba /np temas del informe para ver las calificaciones individuales"
-# Mensajes relacionados a la detencion de actividades
+  noticeHover: "Escriba /np report subjects para ver calificaciones individuales"
+  #Mensajes relacionados a la detencion de actividades
 halted:
   actionBarMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
   actionBarTeleportMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Serás teletransportado momentáneamente.'
