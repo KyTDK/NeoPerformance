@@ -47,7 +47,7 @@ smartReport:
   cpuJvmLoad: "<gray>Carga de CPU de JVM: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>Carga de la CPU del sistema: <white><bold>%CPUSYSTEMLOAD%%"
   otherTitle: "[Otro]"
-  mstpAverage: "<gray>Promedio de minutos de MSTP: <white><bold>%MSTPMINUTEAVERAGE%"
+  msptAverage: "<gray>Promedio de minutos de MSPT: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Haga clic para ver temas individuales"
   noticeHover: "Escriba /np temas del informe para ver las calificaciones individuales"
 # Mensajes relacionados a la detencion de actividades

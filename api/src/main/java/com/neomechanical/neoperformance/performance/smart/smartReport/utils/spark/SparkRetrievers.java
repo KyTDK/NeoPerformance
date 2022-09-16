@@ -9,7 +9,7 @@ public class SparkRetrievers {
         // Get the MSPT statistic (will be null on platforms that don't support measurement!)
         me.lucko.spark.api.statistic.types.GenericStatistic<me.lucko.spark.api.statistic.misc.DoubleAverageInfo, me.lucko.spark.api.statistic.StatisticWindow.MillisPerTick> mspt = spark.mspt();
         if (mspt == null) {
-            NeoUtils.getInstance().getFancyLogger().warn("This platform does not support MSTP measurement");
+            NeoUtils.getInstance().getFancyLogger().warn("This platform does not support MSPT measurement");
             return 0;
         }
         // Retrieve the averages in the last minute

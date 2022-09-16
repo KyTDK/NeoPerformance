@@ -47,7 +47,7 @@ smartReport:
   cpuJvmLoad: "<gray>JVM CPU load: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>System CPU load: <white><bold>%CPUSYSTEMLOAD%%"
   otherTitle: "[Other]"
-  mstpAverage: "<gray>MSTP minute average: <white><bold>%MSTPMINUTEAVERAGE%"
+  msptAverage: "<gray>MSPT minute average: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Click to view individual subjects"
   noticeHover: "Type /np report subjects to view individual gradings"
 #Halt related messages

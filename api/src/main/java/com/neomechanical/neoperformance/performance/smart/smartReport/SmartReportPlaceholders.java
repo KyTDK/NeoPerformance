@@ -30,7 +30,7 @@ public class SmartReportPlaceholders {
                 .addInternalPlaceholder("%CPUSYSTEMLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100));
         //Add spark placeholders
         if (SparkUtils.isInstalled(plugin)) {
-            languageManager.addInternalPlaceholder("%MSTPMINUTEAVERAGE%", (Player player) -> new DecimalFormat("###.##").format(SparkUtils.MSTP()));
+            languageManager.addInternalPlaceholder("%MSPTMINUTEAVERAGE%", (Player player) -> new DecimalFormat("###.##").format(SparkUtils.MSTP()));
         }
     }
 }

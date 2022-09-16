@@ -33,7 +33,7 @@ public class SmartReport {
         Component availableProcessors = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.availableProcessors", null));
         Component cpuJvmLoad = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.cpuJvmLoad", null));
         Component cpuSystemLoad = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.cpuSystemLoad", null));
-        Component mstpMinuteAverage = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.mstpAverage", null));
+        Component msptMinuteAverage = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.msptAverage", null));
         Component notice = Component.empty()
                 .append(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.notice", null)))
                 .clickEvent(ClickEvent.runCommand("/np report subjects"))
@@ -52,7 +52,7 @@ public class SmartReport {
         if (SparkUtils.isInstalled(plugin)) {
             performanceReport
                     .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.otherTitle", null)))
-                    .addExtraInformation(mstpMinuteAverage);
+                    .addExtraInformation(msptMinuteAverage);
         }
         performanceReport.addExtraInformation(notice);
         return performanceReport.build();

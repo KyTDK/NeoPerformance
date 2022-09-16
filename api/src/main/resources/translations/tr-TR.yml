@@ -47,7 +47,7 @@ smartReport:
   cpuJvmLoad: "<gray>JVM CPU yükü: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>Sistem CPU yükü: <white><bold>%CPUSYSTEMLOAD%%"
   otherTitle: "[Diğer]"
-  mstpAverage: "<gray>MSTP dakika ortalaması: <white><bold>%MSTPMINUTEAVERAGE%"
+  msptAverage: "<gray>MSPT dakika ortalaması: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Tek tek konuları görüntülemek için tıklayın"
   noticeHover: "Bireysel notları görüntülemek için /np rapor konularını yazın"
 #İlgili mesajları durdur
