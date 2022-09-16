@@ -46,6 +46,8 @@ smartReport:
   availableProcessors: "<gray>Доступные процессоры: <white><bold>%AVAILABLEPROCESSORS%"
   cpuJvmLoad: "<gray>Загрузка ЦП JVM: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>Загрузка ЦП системы: <white><bold>%CPUSYSTEMLOAD%%"
+  otherTitle: "[Другое]"
+  mstpAverage: "<gray>средняя минута MSTP: <white><bold>%MSTPMINUTEAVERAGE%"
   notice: "<u><bold>Нажмите, чтобы просмотреть отдельные темы"
   noticeHover: "Введите /np сообщить о предметах, чтобы просмотреть индивидуальные оценки"
 #сообщения при остановке активности

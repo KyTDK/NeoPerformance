@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.CPU;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Memory;
+import com.neomechanical.neoperformance.performance.smart.smartReport.utils.SparkUtils;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
@@ -27,5 +28,7 @@ public class SmartReportPlaceholders {
                 .addInternalPlaceholder("%AVAILABLEPROCESSORS%", (Player player) -> String.valueOf(CPU.availableProcessors()))
                 .addInternalPlaceholder("%CPUPROCESSLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getProcessCpuLoad() * 100))
                 .addInternalPlaceholder("%CPUSYSTEMLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100));
+        //Add spark placeholders
+        SparkUtils.runIfEnabled(() -> languageManager.addInternalPlaceholder("%MSTPMINUTEAVERAGE%", (Player player) -> new DecimalFormat("###.##").format(SparkUtils.MSTP())));
     }
 }

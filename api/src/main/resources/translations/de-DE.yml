@@ -46,6 +46,8 @@ smartReport:
   availableProcessors: "<gray>Verfügbare Prozessoren: <white><bold>%AVAILABLEPROCESSORS%"
   cpuJvmLoad: "<gray>JVM-CPU-Last: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>System-CPU-Last: <white><bold>%CPUSYSTEMLOAD%%"
+  otherTitle: "[Andere]"
+  mstpAverage: "<gray>MSTP-Minutendurchschnitt: <white><bold>%MSTPMINUTEAVERAGE%"
   notice: "<u><bold>Klicken, um einzelne Themen anzuzeigen"
   noticeHover: "Geben Sie /np report subjects ein, um einzelne Noten anzuzeigen"
 #Halten Sie verwandte Nachrichten an
