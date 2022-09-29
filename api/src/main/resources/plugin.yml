@@ -6,4 +6,5 @@ authors:
   - NeoDevs
 prefix: NeoPerformance
 api-version: 1.13
+softdepend: [ spark ]
 default-permission: op
