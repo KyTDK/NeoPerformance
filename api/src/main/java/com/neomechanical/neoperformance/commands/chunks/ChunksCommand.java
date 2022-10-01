@@ -44,6 +44,7 @@ public class ChunksCommand extends Command {
 
     public ChunksCommand(NeoPerformance plugin) {
         this.plugin = plugin;
+        super.addSubcommand(new ChunkTeleportCommand());
     }
 
     @Override
@@ -55,10 +56,6 @@ public class ChunksCommand extends Command {
                 MessageUtil.sendMM(player, getLanguageManager().getString("commandGeneric.errorWorldNotFound", null));
                 return;
             }
-        } else if (args.length == 6) {
-            //Command to replace execute for clickable text
-            ChunkTeleport.teleportToChunk(args);
-            return;
         }
         if (world == null) {
             World[] worlds = Bukkit.getWorlds().toArray(new World[0]);

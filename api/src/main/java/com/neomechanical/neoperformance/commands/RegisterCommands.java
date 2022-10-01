@@ -4,6 +4,7 @@ import com.neomechanical.neoconfig.neoutils.commands.CommandBuilder;
 import com.neomechanical.neoconfig.neoutils.commands.easyCommands.EasyHelpCommand;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.commands.chunks.ChunksCommand;
+import com.neomechanical.neoperformance.commands.scheduling.ScheduleCommand;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
@@ -30,6 +31,7 @@ public class RegisterCommands {
                 .addSubcommand(new SmartClearCommand(plugin))
                 .addSubcommand(new ConfigCommand(plugin))
                 .addSubcommand(new SmartReportCommand(plugin))
+                .addSubcommand(new ScheduleCommand())
                 .register();
     }
 }

@@ -43,10 +43,10 @@ public class MainCommand extends Command {
         this.plugin = plugin;
     }
 
-    private static final MessageUtil messageUtil = new MessageUtil();
 
     @Override
     public void perform(CommandSender player, String[] args) {
+        MessageUtil messageUtil = new MessageUtil();
         messageUtil.neoComponentMessage()
                 .addComponent(getLanguageManager().getString("main.serverGrade", null))
                 .addComponent(getLanguageManager().getString("main.isServerHalted", null))

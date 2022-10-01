@@ -43,7 +43,7 @@ smartReport:
   freeMemory: "<gray>Boş bellek: <white><bold>%FREEMEMORY% MB"
   maxMemory: "<gray>Maks. bellek: <white><bold>%MAXMEMORY% GB"
   cpuTitle: "[CPU]"
-  mevcut İşlemciler: "<gray>Kullanılabilir işlemciler: <white><bold>%AVAILABLEPROCESSORS%"
+  availableProcessors: "<gray>Kullanılabilir işlemciler: <white><bold>%AVAILABLEPROCESSORS%"
   cpuJvmLoad: "<gray>JVM CPU yükü: <white><bold>%CPUPROCESSLOAD%%"
   cpuSystemLoad: "<gray>Sistem CPU yükü: <white><bold>%CPUSYSTEMLOAD%%"
   otherTitle: "[Diğer]"

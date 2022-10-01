@@ -7,6 +7,7 @@ import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEven
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoperformance.commands.chunks.ChunkTeleportCommand;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -60,7 +61,7 @@ public class ChunksNotifier {
                 }
                 if (player instanceof Player) {
                     message.clickEvent(ClickEvent.runCommand(
-                            "/np chunks " + chunk.getWorld().getName()
+                            "/np chunks " + new ChunkTeleportCommand().getName() + " " + chunk.getWorld().getName()
                                     + " " + location.getX()
                                     + " " + location.getY() + " " + location.getZ() + " " + player.getName()));
                     message.hoverEvent(HoverEvent.showText(Component.text("Click to teleport to chunk")));
