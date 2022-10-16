@@ -80,7 +80,7 @@ public final class NeoPerformance extends NeoUtils {
         // Start heart beat, can't live without it.
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
-        //Set pojos
+        //Set POJOs
         dataHandler = new DataHandler(this);
         //Register versions
         new Versioning.VersioningBuilder("heartbeat")

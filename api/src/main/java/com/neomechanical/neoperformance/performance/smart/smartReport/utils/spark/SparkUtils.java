@@ -3,8 +3,8 @@ package com.neomechanical.neoperformance.performance.smart.smartReport.utils.spa
 import com.neomechanical.neoperformance.NeoPerformance;
 
 public class SparkUtils {
-    public static double MSTP() {
-        return SparkRetrievers.MSTP();
+    public static double MSPT() {
+        return SparkRetrievers.MSPT();
     }
 
     public static double CPUSystem() {
