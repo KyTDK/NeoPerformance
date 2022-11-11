@@ -27,6 +27,9 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
                 try {
                     Location location = iterator.next();
                     Block block = location.getBlock();
+                    if (!block.getChunk().isLoaded()) {
+                        continue;
+                    }
                     BlockData data = block.getBlockData();
                     if (data instanceof Powerable) {
                         Powerable powerable = (Powerable) data;

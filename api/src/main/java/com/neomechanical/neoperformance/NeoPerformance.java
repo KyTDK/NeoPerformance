@@ -27,11 +27,12 @@ import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperLEGACY;
 import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperNONLEGACY;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.neomechanical.neoconfig.neoutils.updates.IsUpToDate.isUpToDate;
 
-public final class NeoPerformance extends NeoUtils {
+public final class NeoPerformance extends JavaPlugin {
     private static NeoPerformance instance;
     private DataManager dataManager;
     private Metrics metrics;
@@ -40,7 +41,7 @@ public final class NeoPerformance extends NeoUtils {
     }
 
     public static LanguageManager getLanguageManager() {
-        return NeoUtils.getManagers().getLanguageManager();
+        return NeoUtils.getNeoUtilities().getManagers().getLanguageManager();
     }
 
     public DataManager getDataManager() {
@@ -73,7 +74,7 @@ public final class NeoPerformance extends NeoUtils {
     }
 
     @Override
-    public void onPluginEnable() {
+    public void onEnable() {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);//This must always be first, as it sets the instance of the plugin//
         ////////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +126,7 @@ public final class NeoPerformance extends NeoUtils {
     }
 
     @Override
-    public void onPluginDisable() {
+    public void onDisable() {
         // Plugin shutdown logic
     }
 
