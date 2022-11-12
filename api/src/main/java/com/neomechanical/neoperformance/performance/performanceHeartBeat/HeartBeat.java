@@ -8,7 +8,11 @@ import com.neomechanical.neoperformance.performance.haltActions.HaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performance.utils.tps.TPSReflection.getRecentTpsRefl;
@@ -73,13 +77,16 @@ public class HeartBeat {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    dataManager.setRestoringRedstone(true);
-                    iHeartBeat.restoreServer(cachedData.cachedTeleport, cachedData.cachedRedstoneActivity);
-                    cachedData.cachedRedstoneActivity.clear();
-                    cachedData.cachedTeleport.clear();
-                    dataManager.setRestoringRedstone(false);
+                    if (!dataManager.isRestoringRedstone()) {
+                        dataManager.setRestoringRedstone(true);
+                        iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new ArrayList<>(cachedData.cachedRedstoneActivity), () -> {
+                            HaltServer.cachedData.cachedRedstoneActivity.clear();
+                            HaltServer.cachedData.cachedTeleport.clear();
+                            plugin.getDataManager().setRestoringRedstone(false);
+                            Bukkit.broadcastMessage("restored");
+                        });
+                    }
                 }
-
             }
         }.runTaskTimer(plugin, 0, dataManager.getTweakData().getHeartBeatRate());
     }

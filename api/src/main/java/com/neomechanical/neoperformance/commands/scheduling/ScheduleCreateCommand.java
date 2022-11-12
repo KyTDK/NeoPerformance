@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ScheduleCreateCommand extends Command {
-    Flags flags = new Flags();
     @Override
     public String getName() {
         return "create";
@@ -37,18 +36,18 @@ public class ScheduleCreateCommand extends Command {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
+        Flags flags = new Flags();
         //DO LOGIC
         Map<String, List<String>> accumulatedFlagMap = flags
                 .addFlag("-test", (sender, args) -> Bukkit.broadcastMessage(args.toString()))
                 .addFlag("-dude", (sender, args) -> Bukkit.broadcastMessage(args.toString()))
                 .addFlag("-cool", (sender, args) -> Bukkit.broadcastMessage(args.toString()))
                 .parseFlags(commandSender, strings);
-        Bukkit.broadcastMessage(accumulatedFlagMap.toString());
     }
 
     @Override
     public List<String> tabSuggestions() {
-        return flags.tabSuggestions();
+        return null;
     }
 
     @Override

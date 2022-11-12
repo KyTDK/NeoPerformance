@@ -25,7 +25,7 @@ public class SmartReport {
         //Generate data
         GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
-        LanguageManager languageManager = NeoUtils.getManagers().getLanguageManager();
+        LanguageManager languageManager = NeoUtils.getNeoUtilities().getManagers().getLanguageManager();
         Component serverGrade = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.serverGrade", null));
         Component usedMemory = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.usedMemory", null));
         Component freeMemory = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.freeMemory", null));

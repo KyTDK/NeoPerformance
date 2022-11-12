@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performance.haltActions;
 
+import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.managers.DataHandler;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
@@ -8,13 +9,11 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class HaltActions {
-    private static NeoPerformance plugin;
     private final HaltActionPojo haltActionPojo;
     private static DataManager dataManager;
     private static DataHandler dataHandler;
 
     public HaltActions(NeoPerformance plugin) {
-        HaltActions.plugin = plugin;
         this.haltActionPojo = plugin.getPerformanceDataHandler().getHaltActionPojo();
         dataManager = plugin.getDataManager();
         dataHandler = plugin.getPerformanceDataHandler();
@@ -35,7 +34,7 @@ public class HaltActions {
             if (actionMap.containsKey(actionName.toLowerCase())) {
                 actionMap.get(actionName.toLowerCase()).accept(tps);
             } else if (!actionName.equals("null")) {
-                plugin.getFancyLogger().warn(actionName + " is not a halt action");
+                NeoUtils.getNeoUtilities().getFancyLogger().warn(actionName + " is not a halt action");
             }
         }
     }

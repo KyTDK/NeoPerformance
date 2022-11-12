@@ -8,5 +8,5 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface IHeartBeat extends VersionWrapper {
-    void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity);
+    void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity, Runnable afterFunction);
 }

@@ -12,7 +12,7 @@ public class ActionBar {
     public void SendComponentToPlayer(Player player, String string) {
         MiniMessage mm = MiniMessage.miniMessage();
         Component parsed = mm.deserialize(string);
-        Audience audience = NeoUtils.getAdventure().player(player);
+        Audience audience = NeoUtils.getNeoUtilities().getAdventure().player(player);
         audience.sendActionBar(parsed);
     }
 }

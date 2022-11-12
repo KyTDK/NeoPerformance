@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HeartBeatWrapperLEGACY implements IHeartBeat {
     @Override
-    public void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity) {
+    public void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity, Runnable afterFunction) {
         //run teleport cache
         for (Player player : cachedTeleport.keySet()) {
             if (player.isOnline()) {
@@ -18,7 +18,8 @@ public class HeartBeatWrapperLEGACY implements IHeartBeat {
             }
         }
         if (cachedRedstoneActivity.size() > 0) {
-            NeoUtils.getInstance().getFancyLogger().warn("Redstone restoration was attempted, however, this feature isn't supported on your minecraft version");
+            NeoUtils.getNeoUtilities().getFancyLogger().warn("Redstone restoration was attempted, however, this feature isn't supported on your minecraft version");
         }
+        afterFunction.run();
     }
 }

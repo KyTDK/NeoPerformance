@@ -53,7 +53,7 @@ public class SmartScanNotifier {
                 continue;
             }
             //Command to review cluster
-            IWorldNMS worldNMS = (IWorldNMS) NeoUtils.getInternalVersions().get("worlds");
+            IWorldNMS worldNMS = (IWorldNMS) NeoUtils.getNeoUtilities().getInternalVersions().get("worlds");
             TextComponent.Builder message = Component.text();
             message.append(Component.text("  Found cluster of entities with size " + entityList.size())).color(color);
             if (player instanceof Player) {

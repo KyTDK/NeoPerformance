@@ -3,12 +3,11 @@ package com.neomechanical.neoperformance.performance.halt;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 public class CachedData {
-    public List<Location> cachedRedstoneActivity = new ArrayList<>();
+    public LinkedHashSet<Location> cachedRedstoneActivity = new LinkedHashSet<>();
     public LinkedHashMap<Player, Location> cachedTeleport = new LinkedHashMap<>();
 
 }

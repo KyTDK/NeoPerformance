@@ -76,7 +76,7 @@ public final class NeoPerformance extends JavaPlugin {
     @Override
     public void onEnable() {
         ////////////////////////////////////////////////////////////////////////////////////////
-        setInstance(this);//This must always be first, as it sets the instance of the plugin//
+        setInstance(this);// This must always be first, as it sets the instance of the plugin //
         ////////////////////////////////////////////////////////////////////////////////////////
         // Start heart beat, can't live without it.
         dataManager = new DataManager();
