@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.register;
 
+import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoconfig.neoutils.server.ServerUtils;
 import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
@@ -23,7 +24,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
 
-import static com.neomechanical.neoconfig.neoutils.NeoUtils.getManagers;
 import static org.bukkit.Bukkit.getServer;
 
 public class StartRegistering {
@@ -55,7 +55,7 @@ public class StartRegistering {
         //Register ability listeners
         if (ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.UNKNOWN &&
                 ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.STARTUP) {
-            Map<String, VersionWrapper> mappedVersions = new VersionMatcher(getManagers().getVersionManager()).matchAll();
+            Map<String, VersionWrapper> mappedVersions = new VersionMatcher(NeoUtils.getNeoUtilities().getManagers().getVersionManager()).matchAll();
             IHaltWrapper iHaltWrapper = (IHaltWrapper) mappedVersions.get("halt");
             HeartBeat heartBeat = new HeartBeat(plugin, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
             heartBeat.start();
