@@ -8,7 +8,6 @@ import com.neomechanical.neoperformance.performance.haltActions.HaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -83,7 +82,6 @@ public class HeartBeat {
                             HaltServer.cachedData.cachedRedstoneActivity.clear();
                             HaltServer.cachedData.cachedTeleport.clear();
                             plugin.getDataManager().setRestoringRedstone(false);
-                            Bukkit.broadcastMessage("restored");
                         });
                     }
                 }

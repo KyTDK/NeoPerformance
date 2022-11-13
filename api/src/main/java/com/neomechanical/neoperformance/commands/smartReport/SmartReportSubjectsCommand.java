@@ -1,18 +1,14 @@
-package com.neomechanical.neoperformance.commands;
+package com.neomechanical.neoperformance.commands.smartReport;
 
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReport;
 import org.bukkit.command.CommandSender;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-public class SmartReportCommand extends Command {
+public class SmartReportSubjectsCommand extends Command {
     private final NeoPerformance plugin;
 
-    public SmartReportCommand(NeoPerformance plugin) {
+    public SmartReportSubjectsCommand(NeoPerformance plugin) {
         this.plugin = plugin;
     }
 
@@ -33,7 +29,7 @@ public class SmartReportCommand extends Command {
 
     @Override
     public String getPermission() {
-        return "neoperformance.report";
+        return "neoperformance.report.subjects";
     }
 
     @Override
@@ -43,22 +39,6 @@ public class SmartReportCommand extends Command {
 
     @Override
     public void perform(CommandSender commandSender, String[] args) {
-        if (args.length == 2) {
-            if (args[1].equalsIgnoreCase("subjects")) {
-                new SmartReport(plugin).getPerformanceReportSubjects().sendReport(commandSender);
-                return;
-            }
-        }
-        new SmartReport(plugin).getPerformanceReportOverview().sendReport(commandSender);
-    }
-
-    @Override
-    public List<String> tabSuggestions() {
-        return Collections.singletonList("subjects");
-    }
-
-    @Override
-    public Map<String, List<String>> mapSuggestions() {
-        return null;
+        new SmartReport(plugin).getPerformanceReportSubjects().sendReport(commandSender);
     }
 }

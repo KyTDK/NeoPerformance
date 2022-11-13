@@ -28,48 +28,46 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
                 player.teleport(playerLocationEntry.getValue());
             }
         }
-        if (cachedRedstoneActivity.size() > 0) {
-            //Chunk redstone restoration
-            Stack<List<Location>> redstoneStack = new Stack<>();
-            redstoneStack.addAll(Lists.partition(cachedRedstoneActivity, 100));
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (redstoneStack.isEmpty()) {
-                        afterFunction.run();
-                        cancel();
-                        return;
-                    } else {
-                        Bukkit.broadcastMessage(String.valueOf(redstoneStack.size()));
-                    }
-                    List<Location> batch = redstoneStack.pop();
-                    for (Location location : batch) {
-                        try {
-                            Block block = location.getBlock();
-                            if (!block.getChunk().isLoaded()) {
-                                continue;
-                            }
-                            BlockData data = block.getBlockData();
-                            if (data instanceof Powerable) {
-                                Powerable powerable = (Powerable) data;
-                                powerable.setPowered(powerable.isPowered());
-                                block.setBlockData(powerable);
-                            } else if (data instanceof AnaloguePowerable) {
-                                AnaloguePowerable analoguePowerable = (AnaloguePowerable) data;
-                                analoguePowerable.setPower(analoguePowerable.getPower());
-                                block.setBlockData(analoguePowerable);
-                            }
-                            BlockData blockData = block.getBlockData().clone();
-                            //Update block
-                            block.setType(block.getType());
-                            block.setBlockData(blockData);
-                            block.getState().update(true, true);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+        //Chunk redstone restoration
+        Stack<List<Location>> redstoneStack = new Stack<>();
+        redstoneStack.addAll(Lists.partition(cachedRedstoneActivity, 100));
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (redstoneStack.isEmpty()) {
+                    afterFunction.run();
+                    cancel();
+                    return;
+                } else {
+                    Bukkit.broadcastMessage(String.valueOf(redstoneStack.size()));
+                }
+                List<Location> batch = redstoneStack.pop();
+                for (Location location : batch) {
+                    try {
+                        Block block = location.getBlock();
+                        if (!block.getChunk().isLoaded()) {
+                            continue;
                         }
+                        BlockData data = block.getBlockData();
+                        if (data instanceof Powerable) {
+                            Powerable powerable = (Powerable) data;
+                            powerable.setPowered(powerable.isPowered());
+                            block.setBlockData(powerable);
+                        } else if (data instanceof AnaloguePowerable) {
+                            AnaloguePowerable analoguePowerable = (AnaloguePowerable) data;
+                            analoguePowerable.setPower(analoguePowerable.getPower());
+                            block.setBlockData(analoguePowerable);
+                        }
+                        BlockData blockData = block.getBlockData().clone();
+                        //Update block
+                        block.setType(block.getType());
+                        block.setBlockData(blockData);
+                        block.getState().update(true, true);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 }
-            }.runTaskTimer(NeoUtils.getInstance(), 0, 1);
-        }
+            }
+        }.runTaskTimer(NeoUtils.getInstance(), 0, 1);
     }
 }
