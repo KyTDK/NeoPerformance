@@ -14,7 +14,7 @@ public class SmartReportSubjectsCommand extends Command {
 
     @Override
     public String getName() {
-        return "report";
+        return "subjects";
     }
 
     @Override
