@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.config;
 
+import com.neomechanical.neoconfig.neoutils.config.ConfigManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.managers.data.*;
@@ -25,8 +26,8 @@ public class PerformanceTweaksConfiguration {
     public void loadTweakSettings(DataManager dataManager) {
         //Performance Tweak Settings
         if (config == null) {
-            PerformanceConfigCore configUnit = new PerformanceConfigCore(plugin);
-            config = configUnit.createConfig();
+            ConfigManager configManager = new ConfigManager(plugin, "performanceConfig.yml");
+            config = configManager.getConfig();
         }
         //Config updater
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

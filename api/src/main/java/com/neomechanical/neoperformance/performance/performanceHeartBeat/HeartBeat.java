@@ -76,18 +76,21 @@ public class HeartBeat {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    if (!dataManager.isRestoringRedstone()) {
-                        dataManager.setRestoringRedstone(true);
-                        iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new ArrayList<>(cachedData.cachedRedstoneActivity), () -> {
-                            HaltServer.cachedData.cachedRedstoneActivity.clear();
-                            HaltServer.cachedData.cachedTeleport.clear();
-                            plugin.getDataManager().setRestoringRedstone(false);
-                        });
-                    }
+                    dataManager.setRestoringRedstone(true);
+                    restoreServer();
                 }
             }
         }.runTaskTimer(plugin, 0, dataManager.getTweakData().getHeartBeatRate());
     }
+
+    public void restoreServer() {
+        iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new ArrayList<>(cachedData.cachedRedstoneActivity), () -> {
+            HaltServer.cachedData.cachedRedstoneActivity.clear();
+            HaltServer.cachedData.cachedTeleport.clear();
+            plugin.getDataManager().setRestoringRedstone(false);
+        });
+    }
+
     private void setTPS() {
         tps = getRecentTpsRefl()[0];
     }
