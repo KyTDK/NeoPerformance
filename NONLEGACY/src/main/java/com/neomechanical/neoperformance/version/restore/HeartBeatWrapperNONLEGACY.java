@@ -3,7 +3,6 @@ package com.neomechanical.neoperformance.version.restore;
 import com.google.common.collect.Lists;
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.AnaloguePowerable;
@@ -38,8 +37,6 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
                     afterFunction.run();
                     cancel();
                     return;
-                } else {
-                    Bukkit.broadcastMessage(String.valueOf(redstoneStack.size()));
                 }
                 List<Location> batch = redstoneStack.pop();
                 for (Location location : batch) {
