@@ -5,6 +5,7 @@ import com.neomechanical.neoconfig.neoutils.inventory.InventoryUtil;
 import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryGUI;
 import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryItem;
 import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
+import com.neomechanical.neoperformance.performance.smart.smartSchedule.IntervalSchedule;
 import com.neomechanical.neoperformance.performance.smart.smartSchedule.TimeDateSchedule;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import org.bukkit.Material;
@@ -44,16 +45,22 @@ public class ScheduleCommand extends Command {
     public void perform(CommandSender commandSender, String[] strings) {
         Player player = (Player) commandSender;
         TimeDateSchedule timeDateSchedule = new TimeDateSchedule();
+        IntervalSchedule intervalSchedule = new IntervalSchedule();
         InventoryGUI inventoryGUI = InventoryUtil.createInventoryGUI(null, 27, "Scheduling");
         //First layer - Run at a date/time or at intervals
         //For date/time create an anvil gui to set time and date and create buttons to cycle time and date.
         //For intervals create an anvil gui to set intervals, such as second, minute, hour, day and cycle buttons
-        InventoryItem inventoryItem = new InventoryItem.InventoryItemBuilder(()->ItemUtil.createItem(Material.WATCH, "Date/Time"))
-                .setAction((inventoryClickEvent)->timeDateSchedule.getInventory()
+        inventoryGUI.setItem(3, new InventoryItem.InventoryItemBuilder(() ->
+                ItemUtil.createItem(Material.WATCH, "Date/Time"))
+                    .setAction((inventoryClickEvent) -> timeDateSchedule.getInventory()
                         .open((Player) inventoryClickEvent.getWhoClicked()))
-                .build();
+                .build());
+        inventoryGUI.setItem(5, new InventoryItem.InventoryItemBuilder(() ->
+                ItemUtil.createItem(Material.COMPASS, "Interval"))
+                .setAction((inventoryClickEvent) -> intervalSchedule.getInventory()
+                        .open((Player) inventoryClickEvent.getWhoClicked()))
+                .build());
         inventoryGUI.open(player);
-        inventoryGUI.setItem(4, inventoryItem);
 
     }
 
