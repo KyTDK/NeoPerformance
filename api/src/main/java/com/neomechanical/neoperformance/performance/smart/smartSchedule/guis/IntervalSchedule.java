@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performance.smart.smartSchedule;
+package com.neomechanical.neoperformance.performance.smart.smartSchedule.guis;
 
 import com.neomechanical.neoconfig.neoutils.inventory.InventoryUtil;
 import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryGUI;
