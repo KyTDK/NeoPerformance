@@ -6,10 +6,10 @@ import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryIte
 import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
 import com.neomechanical.neoperformance.performance.smart.smartSchedule.data.TimeDateData;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TimeDateSchedule {
     private InventoryGUI inventoryGUI;
@@ -21,20 +21,45 @@ public class TimeDateSchedule {
                 .setAction((event) -> {})
                 .build());
         inventoryGUI.setItem(4, new InventoryItem.InventoryItemBuilder(
-                ()-> ItemUtil.createItem(Material.IRON_BLOCK, "Hour"))
-                .setAction((event) -> timeDateData.setHours(scroll(event)))
+                ()-> ItemUtil.createItem(Material.IRON_BLOCK, 1, "Hour",
+                        new ArrayList<>(Collections.singletonList("Hours: " + timeDateData.getHours()))))
+                .setAction((event) -> {
+                    if (timeDateData.getHours()>=12) {
+                        timeDateData.setHours(1);
+                        return;
+                    }
+                    timeDateData.setHours(timeDateData.getHours()+1);
+                    timeDateData.setHours(scroll(event));
+                })
                 .build());
         inventoryGUI.setItem(5, new InventoryItem.InventoryItemBuilder(
                 ()-> ItemUtil.createItem(Material.IRON_BLOCK, "Minute"))
-                .setAction((event) -> timeDateData.setHours(scroll(event)))
+                .setAction((event) -> {
+                    if (timeDateData.getMinutes()>=60){
+                        timeDateData.setMinutes(0);
+                        return;
+                    }
+                    timeDateData.setMinutes(timeDateData.getMinutes()+1);
+                    timeDateData.setHours(scroll(event));
+                })
                 .build());
         inventoryGUI.setItem(6, new InventoryItem.InventoryItemBuilder(
                 ()-> ItemUtil.createItem(Material.IRON_BLOCK, "Second"))
-                .setAction((event) -> timeDateData.setHours(scroll(event)))
+                .setAction((event) -> {
+                    if (timeDateData.getSeconds()>=60) {
+                        timeDateData.setSeconds(0);
+                        return;
+                    }
+                    timeDateData.setSeconds(timeDateData.getSeconds()+1);
+                    timeDateData.setHours(scroll(event));
+                })
                 .build());
         inventoryGUI.setItem(8, new InventoryItem.InventoryItemBuilder(
                 ()-> ItemUtil.createItem(Material.GLOWSTONE_DUST, "AM"))
-                .setAction((event) -> timeDateData.setHours(scroll(event)))
+                .setAction((event) -> {
+                    timeDateData.setPM(!timeDateData.isPM());
+                    timeDateData.setHours(scroll(event));
+                })
                 .build());
         return inventoryGUI;
     }
