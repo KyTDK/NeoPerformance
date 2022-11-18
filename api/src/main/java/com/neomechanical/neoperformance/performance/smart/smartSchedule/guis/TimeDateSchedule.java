@@ -29,44 +29,41 @@ public class TimeDateSchedule {
                         return;
                     }
                     timeDateData.setHours(timeDateData.getHours()+1);
-                    timeDateData.setHours(scroll(event));
+                    inventoryGUI.update();
                 })
                 .build());
         inventoryGUI.setItem(5, new InventoryItem.InventoryItemBuilder(
-                ()-> ItemUtil.createItem(Material.IRON_BLOCK, "Minute"))
+                ()-> ItemUtil.createItem(Material.IRON_BLOCK, 1, "Minute",
+                        new ArrayList<>(Collections.singletonList("Minutes: " + timeDateData.getMinutes()))))
                 .setAction((event) -> {
                     if (timeDateData.getMinutes()>=60){
                         timeDateData.setMinutes(0);
                         return;
                     }
                     timeDateData.setMinutes(timeDateData.getMinutes()+1);
-                    timeDateData.setHours(scroll(event));
+                    inventoryGUI.update();
                 })
                 .build());
         inventoryGUI.setItem(6, new InventoryItem.InventoryItemBuilder(
-                ()-> ItemUtil.createItem(Material.IRON_BLOCK, "Second"))
+                ()-> ItemUtil.createItem(Material.IRON_BLOCK, 1, "Second",
+                        new ArrayList<>(Collections.singletonList("Seconds: " + timeDateData.getSeconds()))))
                 .setAction((event) -> {
                     if (timeDateData.getSeconds()>=60) {
                         timeDateData.setSeconds(0);
                         return;
                     }
                     timeDateData.setSeconds(timeDateData.getSeconds()+1);
-                    timeDateData.setHours(scroll(event));
+                    inventoryGUI.update();
                 })
                 .build());
         inventoryGUI.setItem(8, new InventoryItem.InventoryItemBuilder(
-                ()-> ItemUtil.createItem(Material.GLOWSTONE_DUST, "AM"))
+                ()-> ItemUtil.createItem(Material.GLOWSTONE_DUST, 1, "AM/PM",
+                            new ArrayList<>(Collections.singletonList(timeDateData.isPM() ? "PM" : "AM"))))
                 .setAction((event) -> {
                     timeDateData.setPM(!timeDateData.isPM());
-                    timeDateData.setHours(scroll(event));
+                    inventoryGUI.update();
                 })
                 .build());
         return inventoryGUI;
-    }
-    private int scroll(InventoryClickEvent event) {
-        int currentValue = 0;
-
-        inventoryGUI.update();
-        return currentValue;
     }
 }
