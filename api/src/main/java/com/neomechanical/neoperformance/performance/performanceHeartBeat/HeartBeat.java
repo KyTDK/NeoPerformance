@@ -76,7 +76,6 @@ public class HeartBeat {
                     }
                     halted[0] = false;
                     haltStartTime[0] = 0;
-                    dataManager.setRestoringRedstone(true);
                     restoreServer();
                 }
             }
@@ -87,7 +86,6 @@ public class HeartBeat {
         iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new ArrayList<>(cachedData.cachedRedstoneActivity), () -> {
             HaltServer.cachedData.cachedRedstoneActivity.clear();
             HaltServer.cachedData.cachedTeleport.clear();
-            plugin.getDataManager().setRestoringRedstone(false);
         });
     }
 

@@ -22,8 +22,6 @@ public class DataManager {
     private LagNotifierData lagNotifierData;
     private HaltActionData haltActionData;
     private final SparkData sparkData;
-    private boolean restoringRedstone = false;
-
     public DataManager() {
         sparkData = new SparkData(Bukkit.getPluginManager().getPlugin("spark") != null);
     }
@@ -117,14 +115,6 @@ public class DataManager {
             bypassedPlayers.add(player);
             return true;
         }
-    }
-
-    public boolean isRestoringRedstone() {
-        return restoringRedstone;
-    }
-
-    public void setRestoringRedstone(boolean restoringRedstone) {
-        this.restoringRedstone = restoringRedstone;
     }
 
     public boolean isBypassed(Player player) {

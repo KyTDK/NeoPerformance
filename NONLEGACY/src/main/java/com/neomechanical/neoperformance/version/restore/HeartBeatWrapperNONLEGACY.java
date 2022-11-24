@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
@@ -47,19 +47,18 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
                         }
                         BlockData data = block.getBlockData();
                         if (data instanceof Powerable) {
-                            Powerable powerable = (Powerable) data;
-                            powerable.setPowered(powerable.isPowered());
-                            block.setBlockData(powerable);
-                        } else if (data instanceof AnaloguePowerable) {
-                            AnaloguePowerable analoguePowerable = (AnaloguePowerable) data;
-                            analoguePowerable.setPower(analoguePowerable.getPower());
-                            block.setBlockData(analoguePowerable);
+                            if (block.getType().equals(Material.OBSERVER)) {
+                                Powerable powerable = (Powerable) data;
+                                powerable.setPowered(!powerable.isPowered());
+                                block.setBlockData(powerable);
+                            }
+
                         }
+
                         BlockData blockData = block.getBlockData().clone();
                         //Update block
-                        block.setType(block.getType());
+                        block.setType(block.getType(), true);
                         block.setBlockData(blockData);
-                        block.getState().update(true, true);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

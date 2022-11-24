@@ -83,11 +83,9 @@ public class HaltServer implements Listener {
         if (!dataManager.getHaltData().getHaltRedstone()) {
             return;
         }
-        if (plugin.getDataManager().isRestoringRedstone()) {
-            return;
-        }
         //Track all redstone activity
         cachedData.cachedRedstoneActivity.add(e.getBlock().getLocation());
+        //Halt activity
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin)) {
             e.setNewCurrent(e.getOldCurrent());
         }
