@@ -49,7 +49,7 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
                         if (data instanceof Powerable) {
                             if (block.getType().equals(Material.OBSERVER)) {
                                 Powerable powerable = (Powerable) data;
-                                powerable.setPowered(!powerable.isPowered());
+                                powerable.setPowered(false);
                                 block.setBlockData(powerable);
                             }
 
