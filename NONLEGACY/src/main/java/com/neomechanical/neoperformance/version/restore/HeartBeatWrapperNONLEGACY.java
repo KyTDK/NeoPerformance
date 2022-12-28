@@ -4,22 +4,17 @@ import com.google.common.collect.Lists;
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
-
     @Override
-    public void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, List<Location> cachedRedstoneActivity, Runnable afterFunction) {
+    public void restoreServer(LinkedHashMap<Player, Location> cachedTeleport, LinkedHashMap<Location, BlockState> cachedRedstoneActivity) {
         //run teleport cache
         for (Map.Entry<Player, Location> playerLocationEntry : cachedTeleport.entrySet()) {
             Player player = playerLocationEntry.getKey();
@@ -28,37 +23,30 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
             }
         }
         //Chunk redstone restoration
-        Stack<List<Location>> redstoneStack = new Stack<>();
-        redstoneStack.addAll(Lists.partition(cachedRedstoneActivity, 100));
+        Stack<List<Map.Entry<Location, BlockState>>> redstoneStack = new Stack<>();
+        redstoneStack.addAll(Lists.partition(new ArrayList<>(cachedRedstoneActivity.entrySet()), 100));
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (redstoneStack.isEmpty()) {
-                    afterFunction.run();
                     cancel();
                     return;
                 }
-                List<Location> batch = redstoneStack.pop();
-                for (Location location : batch) {
+                List<Map.Entry<Location, BlockState>> batch = redstoneStack.pop();
+                for (Map.Entry<Location, BlockState> entry : batch) {
                     try {
-                        Block block = location.getBlock();
+                        Block block = entry.getKey().getBlock();
+                        BlockState blockState = entry.getValue();
                         if (!block.getChunk().isLoaded()) {
                             continue;
                         }
-                        BlockData data = block.getBlockData();
-                        if (data instanceof Powerable) {
-                            if (block.getType().equals(Material.OBSERVER)) {
-                                Powerable powerable = (Powerable) data;
-                                powerable.setPowered(false);
-                                block.setBlockData(powerable);
-                            }
-
-                        }
-
-                        BlockData blockData = block.getBlockData().clone();
+                        BlockData blockData = blockState.getBlockData().clone();
                         //Update block
-                        block.setType(block.getType(), true);
+                        block.setType(blockState.getType());
                         block.setBlockData(blockData);
+                        blockState.update(true, true);
+                        //or
+                        //block.getState().update(true, true);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -67,3 +55,4 @@ public class HeartBeatWrapperNONLEGACY implements IHeartBeat {
         }.runTaskTimer(NeoUtils.getInstance(), 0, 1);
     }
 }
+

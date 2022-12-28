@@ -10,7 +10,6 @@ import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
@@ -20,7 +19,7 @@ public class HeartBeat {
     private final CachedData cachedData = HaltServer.cachedData;
     private final NeoPerformance plugin;
     private final DataManager dataManager;
-    private final IHeartBeat iHeartBeat;
+    public final IHeartBeat iHeartBeat;
     private double tps;
 
     public HeartBeat(NeoPerformance plugin, DataManager dataManager, IHeartBeat iHeartBeat) {
@@ -83,10 +82,9 @@ public class HeartBeat {
     }
 
     public void restoreServer() {
-        iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new ArrayList<>(cachedData.cachedRedstoneActivity), () -> {
-            HaltServer.cachedData.cachedRedstoneActivity.clear();
-            HaltServer.cachedData.cachedTeleport.clear();
-        });
+        iHeartBeat.restoreServer(new LinkedHashMap<>(cachedData.cachedTeleport), new LinkedHashMap<>(cachedData.cachedRedstoneActivity));
+        HaltServer.cachedData.cachedRedstoneActivity.clear();
+        HaltServer.cachedData.cachedTeleport.clear();
     }
 
     private void setTPS() {

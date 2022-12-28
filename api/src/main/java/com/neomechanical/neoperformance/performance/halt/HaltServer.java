@@ -9,6 +9,7 @@ import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
 import org.bukkit.Location;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -78,16 +79,19 @@ public class HaltServer implements Listener {
     }
 
     //Halt all redstone activity
-    @EventHandler()
+    @EventHandler
     public void onRedstone(BlockRedstoneEvent e) {
         if (!dataManager.getHaltData().getHaltRedstone()) {
             return;
         }
-        //Track all redstone activity
-        cachedData.cachedRedstoneActivity.add(e.getBlock().getLocation());
-        //Halt activity
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin)) {
             e.setNewCurrent(e.getOldCurrent());
+        }
+        if (e.getNewCurrent() != 0) {
+            BlockState originalState = e.getBlock().getState();
+            cachedData.cachedRedstoneActivity.put(e.getBlock().getLocation(), originalState);
+        } else {
+            cachedData.cachedRedstoneActivity.remove(e.getBlock().getLocation());
         }
     }
 

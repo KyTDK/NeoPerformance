@@ -127,7 +127,6 @@ public final class NeoPerformance extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getHeartBeat().restoreServer();
     }
 
     /**
