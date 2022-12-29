@@ -124,7 +124,7 @@ public final class NeoPerformance extends JavaPlugin {
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
-        metrics.addCustomChart(new SimplePie("current_server_tps", () -> String.valueOf(TpsUtils.getTPS(this))));
+        metrics.addCustomChart(new SimplePie("current_server_tps", () -> String.valueOf((double) Math.round(TpsUtils.getTPS(this) * 100) / 100)));
     }
 
     @Override
