@@ -18,6 +18,7 @@ import com.neomechanical.neoperformance.managers.DataHandler;
 import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
+import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.register.StartRegistering;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
@@ -123,6 +124,7 @@ public final class NeoPerformance extends JavaPlugin {
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
         metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
+        metrics.addCustomChart(new SimplePie("current_server_tps", () -> String.valueOf(TpsUtils.getTPS(this))));
     }
 
     @Override
