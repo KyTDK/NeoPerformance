@@ -15,7 +15,7 @@
     <parent>
         <groupId>com.neomechanical</groupId>
         <artifactId>NeoPerformance-parent</artifactId>
-        <version>1.14.4</version>
+        <version>1.14.5</version>
     </parent>
 
     <artifactId>NeoPerformance-abstraction</artifactId>

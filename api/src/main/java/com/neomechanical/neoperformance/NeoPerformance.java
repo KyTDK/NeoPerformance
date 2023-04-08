@@ -79,7 +79,6 @@ public final class NeoPerformance extends JavaPlugin {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);// This must always be first, as it sets the instance of the plugin //
         ////////////////////////////////////////////////////////////////////////////////////////
-        // Start heart beat, can't live without it.
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
         //Set POJOs
