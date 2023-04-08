@@ -1,13 +1,11 @@
 package com.neomechanical.neoperformance.performance.smart.smartClear;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
-import com.neomechanical.neoconfig.neoutils.version.worlds.IWorldNMS;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -53,7 +51,6 @@ public class SmartScanNotifier {
                 continue;
             }
             //Command to review cluster
-            IWorldNMS worldNMS = (IWorldNMS) NeoUtils.getNeoUtilities().getInternalVersions().get("worlds");
             TextComponent.Builder message = Component.text();
             message.append(Component.text("  Found cluster of entities with size " + entityList.size())).color(color);
             if (player instanceof Player) {
