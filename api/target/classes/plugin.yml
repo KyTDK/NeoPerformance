@@ -1,5 +1,5 @@
 name: NeoPerformance
-version: '1.14.4'
+version: '1.14.5'
 main: com.neomechanical.neoperformance.NeoPerformance
 load: POSTWORLD
 authors:
