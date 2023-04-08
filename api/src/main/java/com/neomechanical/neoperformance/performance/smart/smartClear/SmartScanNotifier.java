@@ -60,7 +60,7 @@ public class SmartScanNotifier {
                 message.append(Component.text(" - Click to teleport"))
                         .clickEvent(
                                 ClickEvent.runCommand(
-                                        "/np chunks " + location.getWorld().getName()
+                                        "/np chunks tp " + location.getWorld().getName()
                                                 + " " + location.getX()
                                                 + " " + location.getY() + " " + location.getZ() + " " + player.getName()))
                         .hoverEvent(
