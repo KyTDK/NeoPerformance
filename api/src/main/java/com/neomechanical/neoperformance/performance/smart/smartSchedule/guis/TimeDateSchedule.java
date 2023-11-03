@@ -6,7 +6,6 @@ import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryIte
 import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
 import com.neomechanical.neoperformance.performance.smart.smartSchedule.data.TimeDateData;
 import org.bukkit.Material;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
