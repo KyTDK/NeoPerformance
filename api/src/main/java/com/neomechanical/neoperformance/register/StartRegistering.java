@@ -56,11 +56,10 @@ public class StartRegistering {
         if (ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.UNKNOWN &&
                 ServerUtils.getLifePhase() != ServerUtils.ServerLifePhase.STARTUP) {
             Map<String, VersionWrapper> mappedVersions = new VersionMatcher(NeoUtils.getNeoUtilities().getManagers().getVersionManager()).matchAll();
-            IHaltWrapper iHaltWrapper = (IHaltWrapper) mappedVersions.get("halt");
             HeartBeat heartBeat = new HeartBeat(plugin, dataManager, (IHeartBeat) mappedVersions.get("heartbeat"));
             heartBeat.start();
             plugin.setHeartBeat(heartBeat);
-            getServer().getPluginManager().registerEvents(new HaltServer(plugin, iHaltWrapper), plugin);
+            getServer().getPluginManager().registerEvents(new HaltServer(plugin, (IHaltWrapper) mappedVersions.get("halt")), plugin);
             getServer().getPluginManager().registerEvents(new LagPrevention(plugin), plugin);
             new UpdateChecker(plugin, 103183).start();
             if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {

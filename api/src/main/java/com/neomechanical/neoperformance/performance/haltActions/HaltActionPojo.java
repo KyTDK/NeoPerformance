@@ -1,9 +1,12 @@
 package com.neomechanical.neoperformance.performance.haltActions;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+@Getter
 public class HaltActionPojo {
     private final Map<String, Consumer<Double>> haltActionMap = new HashMap<>();
 
@@ -11,7 +14,4 @@ public class HaltActionPojo {
         haltActionMap.put(name, actionConsumer);
     }
 
-    public Map<String, Consumer<Double>> getHaltActionMap() {
-        return haltActionMap;
-    }
 }
