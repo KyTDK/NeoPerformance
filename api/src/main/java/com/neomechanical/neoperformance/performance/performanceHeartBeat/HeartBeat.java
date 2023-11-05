@@ -44,10 +44,6 @@ public class HeartBeat {
         //Set halt time
         haltStartTime[0] = System.currentTimeMillis();
         halted[0] = true;
-        if (!manualHalt[0] && (System.currentTimeMillis() - haltStartTime[0] >= 1000L * dataManager.getHaltData().getHaltTimeout())) {
-            //after 10 minutes of the server being halted, reboot the server
-            plugin.getServer().shutdown();
-        }
     }
 
     private void onResume(boolean[] manualHalt, long[] haltStartTime, boolean[] halted) {
