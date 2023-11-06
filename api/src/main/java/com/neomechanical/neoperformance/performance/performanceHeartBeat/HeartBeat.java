@@ -11,6 +11,8 @@ import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.LinkedHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performance.utils.tps.TPSReflection.getRecentTpsRefl;
@@ -34,48 +36,39 @@ public class HeartBeat {
         return tps;
     }
 
-    private void onHalt(boolean[] manualHalt, long[] haltStartTime, boolean[] halted) {
-        manualHalt[0] = dataManager.isManualHalt();
-        if (!manualHalt[0]) { //If not manual halt, then notify
-            HaltNotifier.notify(dataManager);
-        }
-        //Run halt actions
-        HaltActions.runHaltActions(tps);
-        //Set halt time
-        haltStartTime[0] = System.currentTimeMillis();
-        halted[0] = true;
-    }
-
-    private void onResume(boolean[] manualHalt, long[] haltStartTime, boolean[] halted) {
-        //Again, a manual halt doesn't require notifications
-        if (!manualHalt[0]) {
-            String message = getLanguageManager().getString("notify.serverResumed", null);
-            if (dataManager.getTweakData().getBroadcastHalt()) {
-                MessageUtil.sendMMAll(message);
-            } else if (dataManager.getTweakData().getNotifyAdmin()) {
-                MessageUtil.sendMMAdmins(message);
-            }
-        }
-        halted[0] = false;
-        haltStartTime[0] = 0;
-        restoreServer();
-    }
-
     public void start() {
-        final long[] haltStartTime = new long[1];
-        final boolean[] halted = {false};
-        final boolean[] manualHalt = {false};
+        AtomicLong haltStartTime = new AtomicLong(0);
+        AtomicBoolean previouslyHalted = new AtomicBoolean(false);
+        AtomicBoolean manualHalt = new AtomicBoolean(false);
+
         new BukkitRunnable() {
             @Override
             public void run() {
-                //set the tps every second
                 setTPS();
-                //if the server is halted
-                if (TpsUtils.isServerHalted(getUpdatedTPS(), null, plugin) && !halted[0]) {//If server is halted and was previously not halted
-                    onHalt(manualHalt, haltStartTime, halted);
-                } else if (halted[0]) {
-                    onResume(manualHalt, haltStartTime, halted);
+
+                boolean isCurrentlyHalted = TpsUtils.isServerHalted(getUpdatedTPS(), null, plugin);
+
+                if (isCurrentlyHalted && !previouslyHalted.get()) {
+                    manualHalt.set(dataManager.isManualHalt());
+                    if (!manualHalt.get()) {
+                        HaltNotifier.notify(dataManager);
+                    }
+                    HaltActions.runHaltActions(tps);
+                    haltStartTime.set(System.currentTimeMillis());
+                } else if (!isCurrentlyHalted && previouslyHalted.get()) {
+                    if (!manualHalt.get()) {
+                        String message = getLanguageManager().getString("notify.serverResumed", null);
+                        if (dataManager.getTweakData().getBroadcastHalt()) {
+                            MessageUtil.sendMMAll(message);
+                        } else if (dataManager.getTweakData().getNotifyAdmin()) {
+                            MessageUtil.sendMMAdmins(message);
+                        }
+                    }
+                    haltStartTime.set(0);
+                    restoreServer();
                 }
+
+                previouslyHalted.set(isCurrentlyHalted);
             }
         }.runTaskTimer(plugin, 0, dataManager.getTweakData().getHeartBeatRate());
     }
