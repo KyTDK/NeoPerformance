@@ -58,7 +58,7 @@ If the plugin fails to prevent lag, NeoPerformance will enable halt mode, stoppi
 - [ ] Add schedulers for more effective lag management.
 - [ ] Enhance the SmartClear feature for better entity management.
 - [ ] Optimize server cleanup and lag detection algorithms.
-- [ ] Ensure compatibility with a;; Minecraft versions.
+- [ ] Ensure compatibility with all Minecraft versions.
 
 Feel free to contribute to NeoPerformance by forking the repository and submitting pull requests. Your help is greatly appreciated in making Minecraft servers lag-free and enjoyable for players!
 
