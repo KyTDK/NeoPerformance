@@ -7,6 +7,6 @@ import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spar
 public class SparkMSPTGrading implements IGradingSubject {
     @Override
     public GradeData performGrading() {
-        return new GradeData("MSPT minute average", (int) ((5 / SparkUtils.MSPT()) * 100));
+        return new GradeData("MSPT minute average", (int) ((50 / SparkUtils.MSPT()) * 100));
     }
 }
