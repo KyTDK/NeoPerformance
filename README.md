@@ -1,2 +1,2 @@
 # NeoPerformance
-Latest builds at [src/api/target](src/api/target)
+Latest builds at [api/target](api/target)
