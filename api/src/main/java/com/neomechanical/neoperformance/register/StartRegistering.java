@@ -38,7 +38,7 @@ public class StartRegistering {
     public void registerLanguageManager() {
         LanguageManager languageManager = new LanguageManager(plugin)
                 .setLanguageCode(() -> dataManager.getVisualData().getLanguage())
-                .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "ru-RU.yml", "zh-CN.yml", "pt-BR.yml")
+                .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "ru-RU.yml", "zh-CN.yml", "pt-BR.yml", "pt-PT.yml")
                 .addInternalPlaceholder("%SERVERGRADE%", (Player player) -> Grading.getFancyGrade(Grading.getServerGrade(plugin)))
                 .addInternalPlaceholder("%TPS%", (Player player) -> TpsUtils.getFancyTps(plugin))
                 .addInternalPlaceholder("%TPSHALT%", (Player player) -> TpsUtils.getFancyHaltTps(plugin))
