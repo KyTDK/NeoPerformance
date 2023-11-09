@@ -1,0 +1,60 @@
+main:
+  serverGrade: '<gray>  Classificação do servidor: %SERVERGRADE%'
+  isServerHalted: '<gray>  O servidor está parado: %SERVERHALTED%'
+  serverTps: '<gray>  TPS do servidor: %TPS%'
+  serverHaltsAt: '<gray>  Servidor para em: %TPSHALT%'
+  playerCount: '<gray>  Contagem de jogadores: <green><bold>%PLAYERCOUNT%'
+  upToDate: '<gray>  O plugin está atualizado: %UPDATESTATUS%'
+notify:
+  serverHalted: '<red><bold>TPS está muito baixo, parando o servidor'
+  serverResumed: '<green><bold>TPS voltou ao normal, recuperando o servidor'
+email_notifications:
+  subject: 'TPS está muito baixo, parando o servidor'
+  body: "O servidor parou porque o TPS está muito baixo.\nO TPS está atualmente em %TPS% e o limite de TPS é %TPSHALT%.\nO servidor será reiniciado em 10 minutos se não se recuperar."
+#commands
+commandGeneric:
+  errorPlayerNotFound: '<red><bold>Jogador não encontrado'
+  errorInvalidSyntax: '<red><bold>Sintaxe inválida - digite "/np ajuda" para obter ajuda'
+  errorWorldNotFound: '<red><bold>Mundo não encontrado'
+  errorNoPermission: '<red><bold>Você não tem permissão para usar este comando'
+  errorNotPlayer: '<red><bold>Este comando é apenas para jogadores'
+  errorCommandNotFound: '<red><bold>Comando não encontrado, tente /np ajuda'
+  errorPluginStillStarting: '<red><bold>Falha ao executar a operação porque o servidor ainda está iniciando'
+bypass:
+  errorNotPlayer: '<red><bold>Você deve ser um jogador para se ignorar'
+  nowBypassing: '<red><bold>Agora ignorando a parada'
+  noLongerBypassing: '<green><bold>Não está mais ignorando a parada'
+  nowBypassingPlayer: '<red><bold>Agora ignorando a parada para %PLAYER%'
+  noLongerBypassingPlayer: '<green><bold>Não está mais ignorando a parada para %PLAYER%'
+  errorNoPermissionOthers: '<red><bold>Você não tem permissão para ignorar outros jogadores'
+halt:
+  toggleHaltOn: '<red><bold>O servidor foi parado'
+  toggleHaltOff: '<green><bold>O servidor foi retomado'
+reload:
+  onReload: '<green><bold>Arquivo de configuração recarregado'
+smartClear:
+  confirm: "<red><bold>Digite o comando novamente para confirmar a exclusão do cluster"
+  cleared: "<green><bold>Cluster excluído"
+  noEntities: "<red><bold>Nenhuma entidade foi excluída"
+smartReport:
+  serverGrade: "<gray>Classificação geral: <white><bold>%OVERALLGRADE%"
+  memoryTitle: "[Memória]"
+  usedMemory: "<gray>Memória usada: <white><bold>%USEDMEMORY% MB"
+  freeMemory: "<gray>Memória livre: <white><bold>%FREEMEMORY% MB"
+  maxMemory: "<gray>Memória máxima: <white><bold>%MAXMEMORY% GB"
+  cpuTitle: "[CPU]"
+  availableProcessors: "<gray>Processadores disponíveis: <white><bold>%AVAILABLEPROCESSORS%"
+  cpuJvmLoad: "<gray>Carga de CPU JVM: <white><bold>%CPUPROCESSLOAD%%"
+  cpuSystemLoad: "<gray>Carga de CPU do sistema: <white><bold>%CPUSYSTEMLOAD%%"
+  otherTitle: "[Outros]"
+  msptAverage: "<gray>Média de MSPT de um minuto: <white><bold>%MSPTMINUTEAVERAGE%"
+  notice: "<u><bold>Clique para ver assuntos individuais"
+  noticeHover: "Digite /np relatório assuntos para ver classificações individuais"
+#Mensagens relacionadas à parada
+halted:
+  actionBarMessage: '<red>O servidor está sobrecarregado no momento. Tente novamente mais tarde.'
+  actionBarTeleportMessage: '<red>O servidor está sobrecarregado no momento. Você será teleportado em breve.'
+  onJoin: 'Este servidor está sobrecarregado no momento. Tente novamente mais tarde.'
+  onBlockBreak: '<green>Esta ação foi cancelada para evitar perda de dados. O servidor está sobrecarregado; portanto, todos os itens que forem jogados serão destruídos.'
+  onItemDrop: '<green>Esta ação foi cancelada para evitar perda de dados. O servidor está sobrecarregado; portanto, todos os itens que forem jogados serão destruídos.'
+  onPlayerInteract: '<green>Esta ação foi cancelada para evitar perda de dados. O servidor está sobrecarregado; portanto, todos os itens que forem jogados serão destruídos.'
