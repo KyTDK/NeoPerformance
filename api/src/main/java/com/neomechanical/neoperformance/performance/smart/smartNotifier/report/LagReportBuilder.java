@@ -31,7 +31,7 @@ public class LagReportBuilder {
 
     public void sendReport(Player player) {
         TextComponent message = builder.build();
-        if (message.children().size() > 0) {
+        if (!message.children().isEmpty()) {
             MessageUtil.send(player, Messages.MAIN_LAG_REPORT_PREFIX);
             MessageUtil.sendMM(player, message);
             MessageUtil.send(player, Messages.MAIN_SUFFIX);

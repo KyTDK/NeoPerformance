@@ -128,6 +128,5 @@ public class SmartScan {
                 SmartClearCommand.toBeConfirmed.put(player, entityList);
             }
         }
-        MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.confirm", null));
     }
 }

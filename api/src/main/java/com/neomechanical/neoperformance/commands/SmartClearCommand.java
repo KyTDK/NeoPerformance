@@ -144,17 +144,15 @@ public class SmartClearCommand extends Command {
             if (clusterSize < 1) {
                 clusterSize = plugin.getDataManager().getCommandData().getDefaultClusterSize();
             }
-            //For force
-            if (force && !toBeConfirmed.containsKey(player)) {
-                force = false;
-                SmartScan.clusterLogic(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
-            }
-            if (toBeConfirmed.containsKey(player)) {
+            if (toBeConfirmed.containsKey(player) || force) { //If user is in toBeConfirmed or specified force
                 //Remove
                 SmartClear.exterminate(toBeConfirmed.get(player));
+                force = false;
                 MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
+            } else {
+                MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.confirm", null));
             }
             //Remove from list if not confirmed after 10 seconds
             new BukkitRunnable() {
