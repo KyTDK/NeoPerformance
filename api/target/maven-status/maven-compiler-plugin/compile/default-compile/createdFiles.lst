@@ -66,6 +66,7 @@ com/neomechanical/neoperformance/commands/ReloadCommand.class
 com/neomechanical/neoperformance/performance/managers/data/LagNotifierData.class
 com/neomechanical/neoperformance/performance/managers/data/VisualData.class
 com/neomechanical/neoperformance/performance/managers/data/MailData.class
+com/neomechanical/neoperformance/performance/smart/smartClear/SmartScanner.class
 com/neomechanical/neoperformance/performance/smart/smartSchedule/utils/ScheduleTranslation.class
 com/neomechanical/neoperformance/performance/smart/smartReport/SmartReportPlaceholders.class
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.class

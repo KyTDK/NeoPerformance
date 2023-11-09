@@ -2,8 +2,8 @@ package com.neomechanical.neoperformance.performance.smart.smartNotifier.dataGet
 
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
-import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScan;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScanNotifier;
+import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScanner;
 import com.neomechanical.neoperformance.performance.smart.smartNotifier.DataGetter;
 import com.neomechanical.neoperformance.performance.smart.smartNotifier.managers.LagData;
 import org.bukkit.Bukkit;
@@ -24,7 +24,7 @@ public class EntityClusterData extends DataGetter {
 
     @Override
     public void generate() {
-        clusters = SmartScan.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
+        clusters = SmartScanner.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
                 dataManager.getCommandData(), Bukkit.getWorlds().toArray(new World[0]));
     }
 

@@ -6,6 +6,8 @@ import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartClear;
 import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScan;
+import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScanNotifier;
+import com.neomechanical.neoperformance.performance.smart.smartClear.SmartScanner;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -144,15 +146,17 @@ public class SmartClearCommand extends Command {
             if (clusterSize < 1) {
                 clusterSize = plugin.getDataManager().getCommandData().getDefaultClusterSize();
             }
-            if (toBeConfirmed.containsKey(player) || force) { //If user is in toBeConfirmed or specified force
+            //For force
+            if (force && !toBeConfirmed.containsKey(player)) {
+                force = false;
+                SmartScanner.scan(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
+            }
+            if (toBeConfirmed.containsKey(player)) {
                 //Remove
                 SmartClear.exterminate(toBeConfirmed.get(player));
-                force = false;
                 MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.cleared", null));
                 toBeConfirmed.remove(player);
                 return;
-            } else {
-                MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.confirm", null));
             }
             //Remove from list if not confirmed after 10 seconds
             new BukkitRunnable() {
@@ -161,7 +165,32 @@ public class SmartClearCommand extends Command {
                     toBeConfirmed.remove(player);
                 }
             }.runTaskLater(plugin, 20L * 10);
-            SmartScan.clusterLogic(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
+
+            //Scan for clusters of entities
+            SmartScan smartScan = SmartScanner.scan(clusterSize, world, plugin.getDataManager().getCommandData(), player, all);
+
+            //No clusters, show error message and return
+            if (smartScan.getClusters().isEmpty()) {
+                MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.noEntities", null));
+                return;
+            }
+
+            //Add entities to be cleared to list
+            for (int i = 0; i < smartScan.getToClear(); i++) {
+                //Get cluster
+                List<Entity> entityList = smartScan.getClusters().get(i);
+
+                //Get first entity to use for location
+                if (SmartClearCommand.toBeConfirmed.containsKey(player)) {
+                    SmartClearCommand.toBeConfirmed.get(player).addAll(entityList);
+                } else {
+                    SmartClearCommand.toBeConfirmed.put(player, entityList);
+                }
+            }
+
+            //Send Smartclear message
+            SmartScanNotifier.sendChatData(player, smartScan.getToClear(), smartScan.getClusters());
+            MessageUtil.sendMM(player, getLanguageManager().getString("smartClear.confirm", null));
         }
     }
 

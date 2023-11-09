@@ -16,7 +16,7 @@ public class SmartClear {
 
     public static void scanThenExterminate() {
         World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
-        List<List<Entity>> clusters = SmartScan.scan(-1,
+        List<List<Entity>> clusters = SmartScanner.scan(-1,
                 -1,
                 NeoPerformance.getInstance().getDataManager().getCommandData(),
                 worlds);

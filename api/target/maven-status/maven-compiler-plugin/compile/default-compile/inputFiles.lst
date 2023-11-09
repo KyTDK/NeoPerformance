@@ -41,6 +41,7 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/performanceHeartBeat/HaltNotifier.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/utils/PerformanceConfigurationSettingsUtils.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartClear/SmartScanner.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/managers/data/HaltActionData.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/SmartReportPlaceholders.java
