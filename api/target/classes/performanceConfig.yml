@@ -41,7 +41,7 @@ halt_settings:
   haltVehicleCollisions: true
   haltBlockPhysics: true
   # Restart server if the server is halted for more than this amount of time in seconds (s) (use -1 to disable)
-  haltTimeout: 600
+  haltTimeout: -1
 #Lag notifier runs SmartClear and Chunks automatically and notifies admins of significant results
 lag_notifier:
   #How often should Lag Notifier check for lag in seconds (s), going below 60 may cause lag (use -1 to disable)

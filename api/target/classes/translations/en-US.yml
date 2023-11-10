@@ -9,8 +9,11 @@ notify:
   serverHalted: '<red><bold>TPS is too low, halting server'
   serverResumed: '<green><bold>TPS back to normal, recovering the server'
 email_notifications:
-  subject: 'TPS is too low, halting server'
-  body: "The server has halted because the TPS is too low.\nThe TPS is currently at %TPS% and the TPS threshold is %TPSHALT%.\n The server will restart in 10 minutes if it doesn't recover"
+  subject_halted: 'TPS is too low, halting server'
+  body_halted: "The server has halted because the TPS is too low.\nThe TPS is currently at %TPS% and the TPS threshold is %TPSHALT%."
+  subject_resumed: 'TPS back to normal, recovering the server'
+  body_resumed: "The server has been restored and now has a tps of %TPS%"
+
 #commands
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Player not found'
