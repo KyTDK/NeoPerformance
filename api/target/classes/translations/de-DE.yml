@@ -9,8 +9,10 @@ notify:
   serverHalted: '<red><bold>TPS ist zu niedrig, Server wird angehalten'
   serverResumed: '<green><bold>TPS wieder normal, Wiederherstellung des Servers'
 email_notifications:
-  subject: 'TPS ist zu niedrig, Server wird angehalten'
-  body: "Der Server wurde angehalten, weil der TPS zu niedrig ist.\nDer TPS liegt derzeit bei %TPS% und der TPS-Schwellenwert ist %TPSHALT%.\n Der Server wird in 10 Minuten neu gestartet, wenn er sich nicht erholt."
+  subject_halted: 'TPS ist zu niedrig, Server wird angehalten'
+  body_halted: "Der Server wurde angehalten, weil der TPS zu niedrig ist.\nDer TPS liegt derzeit bei %TPS% und der TPS-Schwellenwert ist %TPSHALT%."
+  subject_resumed: 'TPS ist wieder normal und der Server wird wiederhergestellt'
+  body_resumed: "Der Server wurde wiederhergestellt und verfügt nun über eine TPS von %TPS%"
 #Befehle
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Spieler nicht gefunden'
