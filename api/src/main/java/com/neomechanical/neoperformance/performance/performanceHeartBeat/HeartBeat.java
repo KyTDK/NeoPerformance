@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performance.performanceHeartBeat;
 
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.CachedData;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
@@ -14,7 +13,6 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 import static com.neomechanical.neoperformance.performance.utils.tps.TPSReflection.getRecentTpsRefl;
 
 public class HeartBeat {
@@ -51,18 +49,13 @@ public class HeartBeat {
                 if (isCurrentlyHalted && !previouslyHalted.get()) {
                     manualHalt.set(dataManager.isManualHalt());
                     if (!manualHalt.get()) {
-                        HaltNotifier.notify(dataManager);
+                        HaltNotifier.notifyHalted(dataManager);
                     }
                     HaltActions.runHaltActions(tps);
                     haltStartTime.set(System.currentTimeMillis());
                 } else if (!isCurrentlyHalted && previouslyHalted.get()) {
                     if (!manualHalt.get()) {
-                        String message = getLanguageManager().getString("notify.serverResumed", null);
-                        if (dataManager.getTweakData().getBroadcastHalt()) {
-                            MessageUtil.sendMMAll(message);
-                        } else if (dataManager.getTweakData().getNotifyAdmin()) {
-                            MessageUtil.sendMMAdmins(message);
-                        }
+                        HaltNotifier.notifyResumed(dataManager);
                     }
                     haltStartTime.set(0);
                     restoreServer();

@@ -9,8 +9,10 @@ notify:
   serverHalted: '<red><bold>TPS çok düşük, sunucu durduruluyor'
   serverResumed: '<green><bold>TPS normale döndü, sunucu kurtarılıyor'
 email_notifications:
-  subject: 'TPS çok düşük, sunucu durduruluyor'
-  body: "TPS çok düşük olduğu için sunucu durdu.\nTPS şu anda %TPS%'de ve TPS eşiği %TPSHALT%.\n İyileşmezse sunucu 10 dakika içinde yeniden başlatılacak"
+  subject_halted: 'TPS çok düşük, sunucu durduruluyor'
+  body_halted: "TPS çok düşük olduğu için sunucu durdu.\nTPS şu anda %TPS%'de ve TPS eşiği %TPSHALT%."
+  subject_resumed: 'TPS normale döndü, sunucu kurtarılıyor'
+  body_resumed: "Sunucu geri yüklendi ve artık %TPS% tps'ye sahip"
 #komutlar
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Oyuncu bulunamadı'

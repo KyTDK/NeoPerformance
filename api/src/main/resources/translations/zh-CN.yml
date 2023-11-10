@@ -9,8 +9,10 @@ notify:
   serverHalted: '<red><bold>TPS 太低，正在停止服务器'
   serverResumed: '<green><bold>TPS 恢复正常，正在恢复服务器'
 email_notifications:
-  subject: 'TPS 太低，正在停止服务器'
-  body: "由于 TPS 太低，服务器已停止。\nTPS 当前为 %TPS%，TPS 阈值为 %TPSHALT%。\n 如果服务器未恢复，将在 10 分钟后重新启动"
+  subject_halted: 'TPS 太低，正在停止服务器'
+  body_halted: "由于 TPS 太低，服务器已停止。\nTPS 当前为 %TPS%，TPS 阈值为 %TPSHALT%。"
+  subject_resumed: 'TPS恢复正常，服务器恢复'
+  body_resumed: "服务器已恢复，现在 tps 为 %TPS%"
   #命令
 commandGeneric:
   errorPlayerNotFound: '<red><bold>玩家未找到'

@@ -9,8 +9,10 @@ notify:
   serverHalted: '<red><bold>TPS está muito baixo, parando o servidor'
   serverResumed: '<green><bold>TPS voltou ao normal, recuperando o servidor'
 email_notifications:
-  subject: 'TPS está muito baixo, parando o servidor'
-  body: "O servidor parou porque o TPS está muito baixo.\nO TPS está atualmente em %TPS% e o limite de TPS é %TPSHALT%.\nO servidor será reiniciado em 10 minutos se não se recuperar."
+  subject_halted: 'TPS está muito baixo, parando o servidor'
+  body_halted: "O servidor parou porque o TPS está muito baixo.\nO TPS está atualmente em %TPS% e o limite de TPS é %TPSHALT%."
+  subject_resumed: 'TPS volta ao normal, recuperando o servidor'
+  body_resumed: "O servidor foi restaurado e agora tem um tps de %TPS%"
 #commands
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Jogador não encontrado'
