@@ -24,7 +24,6 @@ public class LagChecker {
             public void run() {
                 //Generate data
                 LagDataManager lagDataManager = new LagDataManager(plugin);
-                lagDataManager.generateAll();
                 List<? extends Player> recipients = Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("neoperformance.smartnotify") || p.isOp()).collect(Collectors.toList());
                 for (Player recipient : recipients) {
                     LagReportBuilder lagReportBuilder = new LagReport().reportBuilder();

@@ -84,8 +84,6 @@ public class PerformanceTweaksConfiguration {
             } else {
                 if (value == null) {
                     Logger.warn("Null value for " + confSection);
-                } else if (value.getClass() == null) {
-                    Logger.warn("Null class for " + confSection);
                 } else {
                     Logger.warn("Unknown type for " + confSection + ": " + value.getClass());
                 }

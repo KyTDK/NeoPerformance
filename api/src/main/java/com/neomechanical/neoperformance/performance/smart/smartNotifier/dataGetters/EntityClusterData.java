@@ -11,25 +11,21 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class EntityClusterData extends DataGetter {
     private final DataManager dataManager;
-    private List<List<Entity>> clusters = new ArrayList<>();
-
     public EntityClusterData(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
     @Override
-    public void generate() {
+    public CompletableFuture<LagData> get(Player player) {
+        CompletableFuture<LagData> future = new CompletableFuture<>();
+        List<List<Entity>> clusters;
         clusters = SmartScanner.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
                 dataManager.getCommandData(), Bukkit.getWorlds().toArray(new World[0]));
-    }
-
-    @Override
-    public LagData get(Player player) {
         if (clusters.isEmpty() || clusters.get(0).size() < dataManager.getLagNotifierData().getClusterSizeNotify()) {
             return null;
         }
@@ -37,11 +33,8 @@ public class EntityClusterData extends DataGetter {
         if (builder.children().isEmpty()) {
             return null;
         }
-        return new LagData(player, "Entity Clusters", builder);
-    }
+        future.complete(new LagData(player, "Entity Clusters", builder));
+        return future;
 
-    @Override
-    public Integer getNotifySize() {
-        return dataManager.getLagNotifierData().getClusterSizeNotify();
     }
 }

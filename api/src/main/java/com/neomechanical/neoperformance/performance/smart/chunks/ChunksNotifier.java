@@ -5,7 +5,6 @@ import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.TextDecoration;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.commands.chunks.ChunkTeleportCommand;
 import com.neomechanical.neoperformance.utils.messages.Messages;
@@ -46,15 +45,15 @@ public class ChunksNotifier {
                 Entity entityToLocate = entities[0];
                 Location location = new Location(world, Math.round(entityToLocate.getLocation().getX()), Math.round(entityToLocate.getLocation().getY()),
                         Math.round(entityToLocate.getLocation().getZ()));
-                message.append(Component.text("  Chunk: ").color(color).decorate(TextDecoration.BOLD))
-                        .append(Component.text(location.getX() + " " + location.getZ()).color(color).decorate(TextDecoration.BOLD))
-                        .append(Component.text(" - Entities: ").color(color).decorate(TextDecoration.BOLD))
-                        .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color).decorate(TextDecoration.BOLD));
+                message.append(Component.text("  Chunk: ").color(color))
+                        .append(Component.text(location.getX() + " " + location.getZ()).color(color)
+                                .append(Component.text(" - Entities: ").color(color))
+                                .append(Component.text(String.valueOf(chunk.getEntities().length)).color(color)));
                 if (world == null) {
-                    message.append(Component.text(" - World: ").color(color).decorate(TextDecoration.BOLD));
-                    message.append(Component.text(chunk.getWorld().getName()).color(color).decorate(TextDecoration.BOLD));
+                    message.append(Component.text(" - World: ").color(color));
+                    message.append(Component.text(chunk.getWorld().getName()).color(color));
                 }
-                message.color(color).decorate(TextDecoration.BOLD);
+                message.color(color);
                 //Append new line
                 if (chunks.indexOf(chunk) != chunks.size() - 1) {
                     message.append(Component.newline());

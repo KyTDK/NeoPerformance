@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class LagDataManager {
     List<DataGetter> dataGetters = new ArrayList<>();
@@ -17,19 +19,28 @@ public class LagDataManager {
         dataGetters.add(new EntityClusterData(plugin.getDataManager()));
     }
 
-    public void generateAll() {
+    public CompletableFuture<List<LagData>> getAllLagData(Player player) {
+        // Create a list to store individual CompletableFuture instances
+        List<CompletableFuture<LagData>> futureList = new ArrayList<>();
+
+        // Iterate through the dataGetters and add each CompletableFuture to the list
         for (DataGetter dataGetter : dataGetters) {
-            if (dataGetter.getNotifySize() > 0) {
-                dataGetter.generate();
-            }
+            CompletableFuture<LagData> individualFuture = dataGetter.get(player);
+            futureList.add(individualFuture);
         }
+
+        // Use CompletableFuture.allOf to combine all individual CompletableFutures into a single CompletableFuture<Void>
+        CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(
+                futureList.toArray(new CompletableFuture[0])
+        );
+
+        // Use thenApply to get the results of all individual CompletableFutures
+
+        return allOfFuture.thenApply(
+                v -> futureList.stream()
+                        .map(CompletableFuture::join) // Get the result of each CompletableFuture
+                        .collect(Collectors.toList())
+        );
     }
 
-    public List<LagData> getAllLagData(Player player) {
-        List<LagData> lagDataList = new ArrayList<>();
-        for (DataGetter dataGetter : dataGetters) {
-            lagDataList.add(dataGetter.get(player));
-        }
-        return lagDataList;
-    }
 }
