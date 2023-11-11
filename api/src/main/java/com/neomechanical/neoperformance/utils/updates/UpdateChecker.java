@@ -27,7 +27,7 @@ public class UpdateChecker {
     }
 
     public void start() {
-        if (dataManager.getVisualData().getShowPluginUpdateInMain()) {
+        if (dataManager.getPerformanceConfig().getVisual().isShowPluginUpdateInMain()) {
             new BukkitRunnable() {
                 @Override
                 public void run() {

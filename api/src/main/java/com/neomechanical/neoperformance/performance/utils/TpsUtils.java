@@ -18,7 +18,7 @@ public class TpsUtils {
         if (tps == 0) {
             return false;
         }
-        int haltAt = plugin.getDataManager().getTweakData().getTpsHaltAt();
+        int haltAt = plugin.getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getTpsHaltAt();
         if (haltAt == -1) {
             return false;
         }
@@ -57,7 +57,7 @@ public class TpsUtils {
     }
 
     public static String getFancyHaltTps(NeoPerformance plugin) {
-        int haltAt = plugin.getDataManager().getTweakData().getTpsHaltAt();
+        int haltAt = plugin.getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getTpsHaltAt();
         if (haltAt == -1) {
             return "<red><bold>N/A";
         } else {

@@ -26,6 +26,7 @@ import com.neomechanical.neoperformance.version.halt.HaltWrapperLEGACY;
 import com.neomechanical.neoperformance.version.halt.HaltWrapperNONLEGACY;
 import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperLEGACY;
 import com.neomechanical.neoperformance.version.restore.HeartBeatWrapperNONLEGACY;
+import lombok.Getter;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,30 +35,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import static com.neomechanical.neoconfig.neoutils.updates.IsUpToDate.isUpToDate;
 
 public final class NeoPerformance extends JavaPlugin {
+    @Getter
     private static NeoPerformance instance;
+    @Getter
     private DataManager dataManager;
     private Metrics metrics;
-    public static NeoPerformance getInstance() {
-        return instance;
-    }
 
     public static LanguageManager getLanguageManager() {
         return NeoUtils.getNeoUtilities().getManagers().getLanguageManager();
-    }
-
-    public DataManager getDataManager() {
-        return dataManager;
     }
 
     private void setInstance(NeoPerformance instance) {
         NeoPerformance.instance = instance;
     }
 
+    @Getter
     private HeartBeat heartBeat;
-
-    public HeartBeat getHeartBeat() {
-        return heartBeat;
-    }
 
     public void setHeartBeat(HeartBeat heartBeat) {
         this.heartBeat = heartBeat;
@@ -82,7 +75,7 @@ public final class NeoPerformance extends JavaPlugin {
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
         //Set POJOs
-        dataHandler = new DataHandler(this);
+        dataHandler = new DataHandler();
         //Register versions
         new Versioning.VersioningBuilder("heartbeat")
                 .addClass(Versions.vLEGACY.toString(), HeartBeatWrapperLEGACY.class)
@@ -122,7 +115,7 @@ public final class NeoPerformance extends JavaPlugin {
         int pluginId = 15711;
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
-        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getTweakData().getTpsHaltAt())));
+        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getTpsHaltAt())));
         metrics.addCustomChart(new SimplePie("current_server_tps", () -> String.valueOf((double) Math.round(TpsUtils.getTPS(this) * 100) / 100)));
     }
 

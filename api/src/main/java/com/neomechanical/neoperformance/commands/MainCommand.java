@@ -53,7 +53,7 @@ public class MainCommand extends Command {
                 .addComponent(getLanguageManager().getString("main.serverTps", null))
                 .addComponent(getLanguageManager().getString("main.serverHaltsAt", null))
                 .addComponent(getLanguageManager().getString("main.playerCount", null));
-        if (plugin.getDataManager().getVisualData().getShowPluginUpdateInMain()) {
+        if (plugin.getDataManager().getPerformanceConfig().getVisual().isShowPluginUpdateInMain()) {
             messageUtil.addComponent(getLanguageManager().getString("main.upToDate", null));
         }
         messageUtil.sendNeoComponentMessage(player, Messages.MAIN_PREFIX, Messages.MAIN_SUFFIX);

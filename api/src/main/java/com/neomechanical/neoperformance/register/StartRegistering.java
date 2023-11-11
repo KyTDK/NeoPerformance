@@ -37,7 +37,7 @@ public class StartRegistering {
 
     public void registerLanguageManager() {
         LanguageManager languageManager = new LanguageManager(plugin)
-                .setLanguageCode(() -> dataManager.getVisualData().getLanguage())
+                .setLanguageCode(() -> dataManager.getPerformanceConfig().getVisual().getLanguage())
                 .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "ru-RU.yml", "zh-CN.yml", "pt-BR.yml", "pt-PT.yml")
                 .addInternalPlaceholder("%SERVERGRADE%", (Player player) -> Grading.getFancyGrade(Grading.getServerGrade(plugin)))
                 .addInternalPlaceholder("%TPS%", (Player player) -> TpsUtils.getFancyTps(plugin))
@@ -62,7 +62,7 @@ public class StartRegistering {
             getServer().getPluginManager().registerEvents(new HaltServer(plugin, (IHaltWrapper) mappedVersions.get("halt")), plugin);
             getServer().getPluginManager().registerEvents(new LagPrevention(plugin), plugin);
             new UpdateChecker(plugin, 103183).start();
-            if (!(dataManager.getLagNotifierData().getRunInterval() < 1)) {
+            if (!(dataManager.getPerformanceConfig().getLagNotifier().getLagNotifierRunInterval() < 1)) {
                 new LagChecker(plugin).start();
             }
             Logger.info("NeoPerformance (By KyTDK) is enabled and using bStats!");

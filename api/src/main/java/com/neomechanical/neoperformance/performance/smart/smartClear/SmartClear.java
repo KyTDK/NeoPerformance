@@ -18,7 +18,7 @@ public class SmartClear {
         World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
         List<List<Entity>> clusters = SmartScanner.scan(-1,
                 -1,
-                NeoPerformance.getInstance().getDataManager().getCommandData(),
+                NeoPerformance.getInstance().getDataManager().getPerformanceConfig(),
                 worlds);
         //For every cluster remove every entity
         for (List<Entity> cluster : clusters) {

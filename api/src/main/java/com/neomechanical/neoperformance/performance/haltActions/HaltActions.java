@@ -30,7 +30,7 @@ public class HaltActions {
 
     public static void runHaltActions(double tps) {
         Map<String, Consumer<Double>> actionMap = dataHandler.getHaltActionPojo().getHaltActionMap();
-        for (String actionName : dataManager.getHaltActionData().getHaltActions()) {
+        for (String actionName : dataManager.getPerformanceConfig().getHaltActions()) {
             if (actionMap.containsKey(actionName.toLowerCase())) {
                 actionMap.get(actionName.toLowerCase()).accept(tps);
             } else if (!actionName.equals("null")) {

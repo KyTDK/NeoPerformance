@@ -16,21 +16,33 @@ public class LagReportBuilder {
     public void addData(CompletableFuture<List<LagData>> dataListFuture) {
         builderCompletableFuture = dataListFuture.thenApply(dataList -> {
             TextComponent.Builder builder = Component.text();
-            for (LagData data : dataList) {
+            int dataSize = dataList.size();
+
+            for (int i = 0; i < dataSize; i++) {
+                LagData data = dataList.get(i);
+
                 // Null means there is no data to report
                 if (data == null) {
                     return builder; // Return original builder unchanged
                 }
+
                 TextComponent.Builder dataComponent = data.getMessageData();
                 builder.append(Component.text("  ")).append(Component.text("[")).append(Component.text(data.getDataName()))
                         .append(Component.text("]"))
                         .append(Component.newline());
+
                 builder.append(dataComponent);
-                builder.append(Component.newline());
+
+                // Add newline only if it's not the last iteration
+                if (i < dataSize - 1) {
+                    builder.append(Component.newline());
+                }
             }
+
             return builder;
         });
     }
+
 
     public void sendReport(Player player) {
         builderCompletableFuture.thenApply(builder -> {

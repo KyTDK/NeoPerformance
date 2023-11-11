@@ -23,11 +23,11 @@ public class EmailClient {
     private final int outgoingPort;
 
     public EmailClient(DataManager dataManager) {
-        outgoingHost = dataManager.getMailData().getOutgoingHost();
-        senderEmail = dataManager.getMailData().getSenderEmail();
-        recipients = dataManager.getMailData().getRecipients();
-        senderPassword = dataManager.getMailData().getSenderPassword();
-        outgoingPort = dataManager.getMailData().getOutgoingPort();
+        outgoingHost = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerHost();
+        senderEmail = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerUsername();
+        recipients = dataManager.getPerformanceConfig().getEmailNotifications().getRecipients().toArray(new String[0]);
+        senderPassword = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerPassword();
+        outgoingPort = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerPort();
     }
 
     public void sendAsHtml(String title, String html) {

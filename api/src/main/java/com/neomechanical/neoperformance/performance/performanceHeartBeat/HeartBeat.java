@@ -63,7 +63,7 @@ public class HeartBeat {
 
                 previouslyHalted.set(isCurrentlyHalted);
             }
-        }.runTaskTimer(plugin, 0, dataManager.getTweakData().getHeartBeatRate());
+        }.runTaskTimer(plugin, 0, dataManager.getPerformanceConfig().getPerformanceTweakSettings().getHeartBeatRate());
     }
 
     public void restoreServer() {

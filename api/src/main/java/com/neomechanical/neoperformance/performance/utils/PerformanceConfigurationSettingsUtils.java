@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.performance.utils;
 
-import com.neomechanical.neoperformance.performance.managers.data.HaltData;
-import com.neomechanical.neoperformance.performance.managers.data.TweakData;
+import com.neomechanical.neoperformance.config.PerformanceConfig;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -13,26 +12,26 @@ public class PerformanceConfigurationSettingsUtils {
     private PerformanceConfigurationSettingsUtils() {
     }
 
-    public static boolean canMobSpawn(TweakData tweakData, EntitySpawnEvent e) {
-        List<Entity> list = e.getEntity().getNearbyEntities(tweakData.getMobCapRadius(), 2, tweakData.getMobCapRadius());
-        int mobCap = tweakData.getMobCap();
+    public static boolean canMobSpawn(PerformanceConfig performanceConfig, EntitySpawnEvent e) {
+        List<Entity> list = e.getEntity().getNearbyEntities(performanceConfig.getPerformanceTweakSettings().getMobCapRadius(), 2, performanceConfig.getPerformanceTweakSettings().getMobCapRadius());
+        int mobCap = performanceConfig.getPerformanceTweakSettings().getMobCap();
         if (mobCap == -1 || e.getEntity() instanceof Item) {
             return true;
         }
-        return list.size() <= tweakData.getMobCap();
+        return list.size() <= performanceConfig.getPerformanceTweakSettings().getMobCap();
     }
 
-    public static boolean canMove(HaltData haltData, double instantaneousSpeed) {
-        int maxSpeed = haltData.getMaxSpeed();
+    public static boolean canMove(PerformanceConfig performanceConfig, double instantaneousSpeed) {
+        double maxSpeed = performanceConfig.getHaltSettings().getMaxSpeed();
         if (maxSpeed == -1) {
             return true;
         }
         return instantaneousSpeed < maxSpeed;
     }
 
-    public static boolean canExplode(TweakData tweakData, EntityExplodeEvent entityExplodeEvent) {
+    public static boolean canExplode(PerformanceConfig performanceConfig, EntityExplodeEvent entityExplodeEvent) {
         //Get the list of explosives nearby the explosion
-        int tntHalt = tweakData.getExplosionCap();
+        int tntHalt = performanceConfig.getPerformanceTweakSettings().getExplosionCap();
         if (tntHalt == -1) {
             return true;
         }

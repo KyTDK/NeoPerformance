@@ -24,9 +24,9 @@ public class EntityClusterData extends DataGetter {
     public CompletableFuture<LagData> get(Player player) {
         CompletableFuture<LagData> future = new CompletableFuture<>();
         List<List<Entity>> clusters;
-        clusters = SmartScanner.scan(10, dataManager.getLagNotifierData().getClusterSizeNotify(),
-                dataManager.getCommandData(), Bukkit.getWorlds().toArray(new World[0]));
-        if (clusters.isEmpty() || clusters.get(0).size() < dataManager.getLagNotifierData().getClusterSizeNotify()) {
+        clusters = SmartScanner.scan(10, dataManager.getPerformanceConfig().getLagNotifier().getClusterSizeNotify(),
+                dataManager.getPerformanceConfig(), Bukkit.getWorlds().toArray(new World[0]));
+        if (clusters.isEmpty() || clusters.get(0).size() < dataManager.getPerformanceConfig().getLagNotifier().getClusterSizeNotify()) {
             return null;
         }
         TextComponent.Builder builder = SmartScanNotifier.getChatData(player, 1, clusters);

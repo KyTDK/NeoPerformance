@@ -31,6 +31,6 @@ public class LagChecker {
                     lagReportBuilder.sendReport(recipient);
                 }
             }
-        }.runTaskTimer(plugin, 0, 20L * plugin.getDataManager().getLagNotifierData().getRunInterval());
+        }.runTaskTimer(plugin, 0, 20L * plugin.getDataManager().getPerformanceConfig().getLagNotifier().getLagNotifierRunInterval());
     }
 }

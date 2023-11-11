@@ -1,10 +1,9 @@
 package com.neomechanical.neoperformance.performance.smart.smartClear;
 
-import com.neomechanical.neoperformance.performance.managers.data.CommandData;
+import com.neomechanical.neoperformance.config.PerformanceConfig;
 import com.neomechanical.neoperformance.utils.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -12,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class SmartScanner {
-    public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, CommandData commandData, World... worlds) {
+    public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, PerformanceConfig performanceConfig, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
         for (World world : worlds) {
@@ -24,7 +23,7 @@ public class SmartScanner {
         List<Entity> toRemove = new ArrayList<>();
 
         if (clusterSize < 1) {
-            clusterSize = commandData.getDefaultClusterSize();
+            clusterSize = performanceConfig.getCommands().getDefaultClusterSize();
         }
 
         while (iterator.hasNext()) {
@@ -50,7 +49,7 @@ public class SmartScanner {
                     if (NPC.isNpc(e)) {
                         toRemove.add(e);
                     }
-                    for (String s : commandData.getSmartClearExcludeEntities()) {
+                    for (String s : performanceConfig.getCommands().getSmartClearExcludeEntities()) {
                         if (e.getType().name().replaceAll("_", " ").equalsIgnoreCase(s.replaceAll("_", " "))) {
                             toRemove.add(e);
                             break;
@@ -86,7 +85,7 @@ public class SmartScanner {
         return topClusters;
     }
 
-    public static SmartScan scan(int clusterSize, List<World> world, CommandData commandData, CommandSender player, boolean all) {
+    public static SmartScan scan(int clusterSize, List<World> world, PerformanceConfig performanceConfig, boolean all) {
         //Message logic and construct entity list
 
         //If clusterSize is less than 1, use default size
@@ -94,12 +93,12 @@ public class SmartScanner {
         if (world.isEmpty()) {
             //Scan for all world
             World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
-            clusters = SmartScanner.scan(10, clusterSize, commandData, worlds);
+            clusters = SmartScanner.scan(10, clusterSize, performanceConfig, worlds);
 
         } else {
             World[] worldsList = world.toArray(new World[0]);
             //Scan for individual world
-            clusters = SmartScanner.scan(10, clusterSize, commandData, worldsList);
+            clusters = SmartScanner.scan(10, clusterSize, performanceConfig, worldsList);
         }
         //One removes the largest cluster only
         int toClear = 1;

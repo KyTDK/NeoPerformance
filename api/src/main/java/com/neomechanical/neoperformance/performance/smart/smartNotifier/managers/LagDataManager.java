@@ -7,6 +7,7 @@ import com.neomechanical.neoperformance.performance.smart.smartNotifier.dataGett
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -26,7 +27,14 @@ public class LagDataManager {
         // Iterate through the dataGetters and add each CompletableFuture to the list
         for (DataGetter dataGetter : dataGetters) {
             CompletableFuture<LagData> individualFuture = dataGetter.get(player);
-            futureList.add(individualFuture);
+            if (individualFuture != null) {
+                futureList.add(individualFuture);
+            }
+        }
+
+        // Check if the list is empty
+        if (futureList.isEmpty()) {
+            return CompletableFuture.completedFuture(Collections.emptyList());
         }
 
         // Use CompletableFuture.allOf to combine all individual CompletableFutures into a single CompletableFuture<Void>
@@ -35,12 +43,12 @@ public class LagDataManager {
         );
 
         // Use thenApply to get the results of all individual CompletableFutures
-
         return allOfFuture.thenApply(
                 v -> futureList.stream()
                         .map(CompletableFuture::join) // Get the result of each CompletableFuture
                         .collect(Collectors.toList())
         );
     }
+
 
 }

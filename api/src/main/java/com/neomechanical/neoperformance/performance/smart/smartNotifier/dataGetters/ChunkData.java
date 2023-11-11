@@ -32,7 +32,7 @@ public class ChunkData extends DataGetter {
         return chunksFuture.thenCompose(chunks -> {
             CompletableFuture<LagData> lagDataFuture = new CompletableFuture<>();
 
-            if (chunks.isEmpty() || chunks.get(0).getEntities().length < plugin.getDataManager().getLagNotifierData().getEntitiesInChunkNotify()) {
+            if (chunks.isEmpty() || chunks.get(0).getEntities().length < plugin.getDataManager().getPerformanceConfig().getLagNotifier().getEntitiesInChunkNotify()) {
                 lagDataFuture.completeExceptionally(new RuntimeException("No data to report"));
             } else {
                 TextComponent.Builder builder = ChunksNotifier.getChatData(chunks, null, player);

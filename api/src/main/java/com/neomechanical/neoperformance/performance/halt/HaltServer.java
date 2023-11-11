@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.performance.halt;
 
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.config.PerformanceConfig;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.PerformanceConfigurationSettingsUtils;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
@@ -29,18 +30,19 @@ import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager
 public class HaltServer implements Listener {
     public static final CachedData cachedData = new CachedData();
     private final NeoPerformance plugin;
-    private final DataManager dataManager;
     private final IHaltWrapper iHaltWrapper;
+    private final PerformanceConfig performanceConfig;
 
     public HaltServer(NeoPerformance plugin, IHaltWrapper iHaltWrapper) {
         this.plugin = plugin;
-        this.dataManager = plugin.getDataManager();
+        DataManager dataManager = plugin.getDataManager();
+        this.performanceConfig = dataManager.getPerformanceConfig();
         this.iHaltWrapper = iHaltWrapper;
     }
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && dataManager.getHaltData().getHaltTeleportation()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && performanceConfig.getHaltSettings().isHaltTeleportation()) {
             if (NPC.isNpc(e.getPlayer())) {
                 return;
             }
@@ -57,7 +59,7 @@ public class HaltServer implements Listener {
             if (goTo == null) {
                 return;
             }
-            if (!PerformanceConfigurationSettingsUtils.canMove(dataManager.getHaltData(), e.getFrom().distance(goTo))) {
+            if (!PerformanceConfigurationSettingsUtils.canMove(performanceConfig, e.getFrom().distance(goTo))) {
                 e.setCancelled(true);
                 new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
             }
@@ -66,7 +68,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltExplosions()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltExplosions()) {
             List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
             //remove all entities that explode
             e.setCancelled(true);
@@ -81,7 +83,7 @@ public class HaltServer implements Listener {
     //Halt all redstone activity
     @EventHandler
     public void onRedstone(BlockRedstoneEvent e) {
-        if (!dataManager.getHaltData().getHaltRedstone()) {
+        if (!performanceConfig.getHaltSettings().isHaltRedstone()) {
             return;
         }
         if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin)) {
@@ -97,7 +99,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPistonExtend(BlockPistonExtendEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltRedstone()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltRedstone()) {
             e.setCancelled(true);
         }
     }
@@ -105,14 +107,14 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPistonRetract(BlockPistonRetractEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltRedstone()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltRedstone()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltMobSpawning()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltMobSpawning()) {
             if (NPC.isNpc(e.getEntity())) {
                 return;
             }
@@ -125,21 +127,21 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onItemMove(InventoryMoveItemEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltInventoryMovement()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltInventoryMovement()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltCommandBlock()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltCommandBlock()) {
             iHaltWrapper.onServerCommand(e);
         }
     }
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && dataManager.getHaltData().getHaltItemDrops()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && performanceConfig.getHaltSettings().isHaltItemDrops()) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onItemDrop", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
@@ -148,7 +150,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && dataManager.getHaltData().getHaltBlockBreaking()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && performanceConfig.getHaltSettings().isHaltBlockBreaking()) {
             e.setCancelled(true);
             MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onBlockBreak", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
@@ -157,7 +159,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPlayerInteraction(PlayerInteractEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && dataManager.getHaltData().getHaltPlayerInteractions()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), e.getPlayer(), plugin) && performanceConfig.getHaltSettings().isHaltPlayerInteractions()) {
             iHaltWrapper.onPlayerInteraction(e);
             MessageUtil.sendMM(e.getPlayer(), getLanguageManager().getString("halted.onPlayerInteract", null));
             new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
@@ -166,14 +168,14 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltProjectiles()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltProjectiles()) {
             iHaltWrapper.onProjectile(e);
         }
     }
 
     @EventHandler()
     public void onProjectile(ProjectileLaunchEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltProjectiles()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltProjectiles()) {
             e.setCancelled(true);
             if (e.getEntity().getShooter() instanceof Creature) {
                 List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
@@ -189,14 +191,14 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onEntityInteract(EntityInteractEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltEntityInteractions()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltEntityInteractions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityTarget(EntityTargetEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltEntityTargeting()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltEntityTargeting()) {
             e.setCancelled(true);
             List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
             if (entities.size() >= 10) {
@@ -207,20 +209,20 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltVehicleCollisions()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltVehicleCollisions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && dataManager.getHaltData().getHaltBlockPhysics()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && performanceConfig.getHaltSettings().isHaltBlockPhysics()) {
             iHaltWrapper.blockPhysics(e);
         }
     }
     @EventHandler()
     public void onPlayerJoin(PlayerLoginEvent e) {
-        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && !dataManager.getHaltData().getAllowJoinWhileHalted()) {
+        if (TpsUtils.isServerHalted(TpsUtils.getTPS(plugin), null, plugin) && !performanceConfig.getHaltSettings().isAllowJoinWhileHalted()) {
             if (e.getPlayer().hasPermission("neoperformance.bypass")) {
                 return;
             }

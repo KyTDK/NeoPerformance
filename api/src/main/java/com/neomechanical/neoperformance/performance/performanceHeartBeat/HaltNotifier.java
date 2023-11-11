@@ -19,7 +19,7 @@ public class HaltNotifier {
             return;
         }
 
-        if (dataManager.getMailData().getUseMailServer()) {
+        if (dataManager.getPerformanceConfig().getEmailNotifications().isUseMailServer()) {
             sendEmailNotification(dataManager);
         }
 
@@ -28,15 +28,15 @@ public class HaltNotifier {
         //Log to console
         NeoUtils.getNeoUtilities().getFancyLogger().fancyLog(message, true);
 
-        if (dataManager.getTweakData().getBroadcastHalt()) {
+        if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isBroadcastHalt()) {
             MessageUtil.sendMMAll(message);
-        } else if (dataManager.getTweakData().getNotifyAdmin()) {
+        } else if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isNotifyAdmin()) {
             MessageUtil.sendMMAdmins(message);
         }
     }
 
     protected static void notifyResumed(DataManager dataManager) {
-        if (dataManager.getMailData().getUseMailServer()) {
+        if (dataManager.getPerformanceConfig().getEmailNotifications().isUseMailServer()) {
             sendEmailNotification(dataManager);
         }
 
@@ -45,9 +45,9 @@ public class HaltNotifier {
         //Log to console
         NeoUtils.getNeoUtilities().getFancyLogger().fancyLog(message, true);
 
-        if (dataManager.getTweakData().getBroadcastHalt()) {
+        if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isBroadcastHalt()) {
             MessageUtil.sendMMAll(message);
-        } else if (dataManager.getTweakData().getNotifyAdmin()) {
+        } else if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isNotifyAdmin()) {
             MessageUtil.sendMMAdmins(message);
         }
     }
