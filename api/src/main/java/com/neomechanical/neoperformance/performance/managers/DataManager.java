@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.performance.managers;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.config.PerformanceConfig;
 import com.neomechanical.neoperformance.config.PerformanceTweaksConfiguration;
+import com.neomechanical.neoperformance.integrations.HookIntegrations;
 import com.neomechanical.neoperformance.performance.smart.smartReport.relatedManagers.SparkData;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -14,6 +15,8 @@ import java.util.List;
 
 public class DataManager {
     @Getter
+    private final HookIntegrations hookIntegrations;
+    @Getter
     private final SparkData sparkData;
     private final List<CommandSender> bypassedPlayers = new ArrayList<>();
     @Getter
@@ -23,6 +26,7 @@ public class DataManager {
 
     public DataManager() {
         sparkData = new SparkData(Bukkit.getPluginManager().getPlugin("spark") != null);
+        hookIntegrations = new HookIntegrations();
     }
 
     public void loadTweakSettings(NeoPerformance plugin) {

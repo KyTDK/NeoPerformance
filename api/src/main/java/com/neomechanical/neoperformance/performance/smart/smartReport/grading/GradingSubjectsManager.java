@@ -1,12 +1,12 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport.grading;
 
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.integrations.spark.SparkUtils;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.CPUUsageGrading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.PlayersToPerformanceGrading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.TpsGrading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.dependent.SparkMSPTGrading;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 
 import java.util.ArrayList;
 import java.util.List;

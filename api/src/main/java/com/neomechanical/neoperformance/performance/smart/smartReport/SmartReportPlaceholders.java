@@ -2,10 +2,10 @@ package com.neomechanical.neoperformance.performance.smart.smartReport;
 
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.integrations.spark.SparkUtils;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.CPU;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Memory;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;

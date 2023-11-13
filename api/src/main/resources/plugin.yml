@@ -6,5 +6,5 @@ authors:
   - NeoDevs
 prefix: NeoPerformance
 api-version: 1.13
-softdepend: [ spark ]
+softdepend: [ spark, DiscordSRV ]
 default-permission: op

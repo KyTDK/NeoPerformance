@@ -1,10 +1,10 @@
 name: NeoPerformance
-version: '1.14.10'
+version: '1.15'
 main: com.neomechanical.neoperformance.NeoPerformance
 load: POSTWORLD
 authors:
   - NeoDevs
 prefix: NeoPerformance
 api-version: 1.13
-softdepend: [ spark ]
+softdepend: [ spark, DiscordSRV ]
 default-permission: op

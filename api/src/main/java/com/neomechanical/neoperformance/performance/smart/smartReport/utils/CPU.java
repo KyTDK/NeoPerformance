@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport.utils;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
+import com.neomechanical.neoperformance.integrations.spark.SparkUtils;
 import com.sun.management.OperatingSystemMXBean;
 
 import java.lang.management.ManagementFactory;

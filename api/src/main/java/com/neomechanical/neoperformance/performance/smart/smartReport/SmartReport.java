@@ -7,10 +7,10 @@ import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEven
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.integrations.spark.SparkUtils;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.report.PerformanceReport;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark.SparkUtils;
 
 import java.util.List;
 

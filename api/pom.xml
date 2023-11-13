@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.neomechanical</groupId>
         <artifactId>NeoPerformance-parent</artifactId>
-        <version>1.14.10</version>
+        <version>1.15</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>NeoPerformance</artifactId>
@@ -113,6 +113,12 @@
             <version>0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.discordsrv</groupId>
+            <artifactId>discordsrv</artifactId>
+            <version>1.26.2</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -126,6 +132,10 @@
         <repository>
             <id>Maven.playpro.com</id>
             <url>https://maven.playpro.com</url>
+        </repository>
+        <repository>
+            <id>Scarsz-Nexus</id>
+            <url>https://nexus.scarsz.me/content/groups/public/</url>
         </repository>
     </repositories>
 </project>

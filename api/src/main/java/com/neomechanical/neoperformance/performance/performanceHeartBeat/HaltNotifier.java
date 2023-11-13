@@ -4,6 +4,7 @@ import com.neomechanical.neoconfig.neoutils.NeoUtils;
 import com.neomechanical.neoconfig.neoutils.ServerMetrics;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoconfig.neoutils.server.ServerInfo;
+import com.neomechanical.neoperformance.integrations.discorsrv.DiscordSRVHook;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.utils.mail.EmailClient;
 
@@ -28,6 +29,9 @@ public class HaltNotifier {
         //Log to console
         NeoUtils.getNeoUtilities().getFancyLogger().fancyLog(message, true);
 
+        //Send DiscordSRV mesage
+        new DiscordSRVHook().sendMessage(message);
+
         if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isBroadcastHalt()) {
             MessageUtil.sendMMAll(message);
         } else if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isNotifyAdmin()) {
@@ -44,6 +48,9 @@ public class HaltNotifier {
 
         //Log to console
         NeoUtils.getNeoUtilities().getFancyLogger().fancyLog(message, true);
+
+        //Send DiscordSRV message
+        dataManager.getHookIntegrations().getDiscordSRVHook().sendMessage(message);
 
         if (dataManager.getPerformanceConfig().getPerformanceTweakSettings().isBroadcastHalt()) {
             MessageUtil.sendMMAll(message);

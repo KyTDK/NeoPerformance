@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performance.smart.smartReport.utils.spark;
+package com.neomechanical.neoperformance.integrations.spark;
 
 import com.neomechanical.neoperformance.NeoPerformance;
 
