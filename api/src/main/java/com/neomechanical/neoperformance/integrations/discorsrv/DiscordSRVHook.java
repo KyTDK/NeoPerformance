@@ -13,7 +13,7 @@ public class DiscordSRVHook {
         TextChannel textChannel = DiscordSRV.getPlugin().getMainTextChannel();
 
         if (textChannel != null) {
-            textChannel.sendMessage("`[NeoPerformance] " + message + "`").complete();
+            textChannel.sendMessage(message).complete();
         }
     }
 

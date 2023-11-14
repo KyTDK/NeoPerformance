@@ -13,7 +13,9 @@ email_notifications:
   body_halted: "The server has halted because the TPS is too low.\nThe TPS is currently at %TPS% and the TPS threshold is %TPSHALT%."
   subject_resumed: 'TPS back to normal, recovering the server'
   body_resumed: "The server has been restored and now has a tps of %TPS%"
-
+discord:
+  serverHalted: ':octagonal_sign: *TPS is too low, halting server*'
+  serverResumed: ':white_check_mark: *TPS back to normal, recovering the server*'
 #commands
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Player not found'
