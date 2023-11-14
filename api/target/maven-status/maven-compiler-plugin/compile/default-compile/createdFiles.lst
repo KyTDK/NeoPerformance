@@ -53,7 +53,6 @@ com/neomechanical/neoperformance/commands/SmartClearCommand.class
 com/neomechanical/neoperformance/performance/smart/chunks/ChunksScanner.class
 com/neomechanical/neoperformance/commands/BypassCommand.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading.class
-com/neomechanical/neoperformance/integrations/spark/SparkUtils.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Memory.class
 com/neomechanical/neoperformance/performance/haltActions/HaltActionPojo.class
 com/neomechanical/neoperformance/utils/mail/EmailClient.class

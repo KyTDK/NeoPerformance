@@ -1,6 +1,8 @@
 package com.neomechanical.neoperformance.performance.smart.smartReport.utils;
 
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.integrations.spark.SparkRetrievers;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.Grade;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
@@ -89,8 +91,10 @@ public class Grading {
         Grade grade = getGrade(gradeValue);
         return getFancyGrade(grade);
     }
-    public static Grade getServerGrade(NeoPerformance plugin) {
-        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
+
+    public static Grade getServerGrade(NeoPerformance plugin, DataManager dataManager) {
+        SparkRetrievers sparkRetrievers = (SparkRetrievers) dataManager.getHookIntegrations().getIntegration("spark");
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin, sparkRetrievers);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
         //Calculate Overall Grade
         int gradeValues = 0;

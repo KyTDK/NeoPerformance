@@ -2,14 +2,17 @@ package com.neomechanical.neoperformance.commands.smartReport;
 
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReport;
 import org.bukkit.command.CommandSender;
 
 public class SmartReportSubjectsCommand extends Command {
     private final NeoPerformance plugin;
+    private final DataManager dataManager;
 
-    public SmartReportSubjectsCommand(NeoPerformance plugin) {
+    public SmartReportSubjectsCommand(NeoPerformance plugin, DataManager dataManager) {
         this.plugin = plugin;
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -39,6 +42,6 @@ public class SmartReportSubjectsCommand extends Command {
 
     @Override
     public void perform(CommandSender commandSender, String[] args) {
-        new SmartReport(plugin).getPerformanceReportSubjects().sendReport(commandSender);
+        new SmartReport(plugin, dataManager).getPerformanceReportSubjects().sendReport(commandSender);
     }
 }

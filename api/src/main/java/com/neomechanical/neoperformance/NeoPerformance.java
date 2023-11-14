@@ -108,7 +108,7 @@ public final class NeoPerformance extends JavaPlugin {
         // Plugin startup logic
         setupBStats();
         //Commands
-        new RegisterCommands(this).register();
+        new RegisterCommands(this, dataManager).register();
     }
 
     public void setupBStats() {

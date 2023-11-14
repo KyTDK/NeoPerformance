@@ -39,7 +39,7 @@ public class StartRegistering {
         LanguageManager languageManager = new LanguageManager(plugin)
                 .setLanguageCode(() -> dataManager.getPerformanceConfig().getVisual().getLanguage())
                 .setLanguageFile("de-DE.yml", "en-US.yml", "es-ES.yml", "tr-TR.yml", "fr-FR.yml", "ru-RU.yml", "zh-CN.yml", "pt-BR.yml", "pt-PT.yml")
-                .addInternalPlaceholder("%SERVERGRADE%", (Player player) -> Grading.getFancyGrade(Grading.getServerGrade(plugin)))
+                .addInternalPlaceholder("%SERVERGRADE%", (Player player) -> Grading.getFancyGrade(Grading.getServerGrade(plugin, dataManager)))
                 .addInternalPlaceholder("%TPS%", (Player player) -> TpsUtils.getFancyTps(plugin))
                 .addInternalPlaceholder("%TPSHALT%", (Player player) -> TpsUtils.getFancyHaltTps(plugin))
                 .addInternalPlaceholder("%SERVERHALTED%", (Player player) -> TpsUtils.fancyIsServerHalted(TpsUtils.getTPS(plugin), plugin))
@@ -47,7 +47,7 @@ public class StartRegistering {
                 .addInternalPlaceholder("%PLAYER%", (Player player) -> player == null ? "None" : player.getName())
                 .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus());
         //Add smart report placeholders
-        new SmartReportPlaceholders(languageManager).addPlaceholders(plugin);
+        new SmartReportPlaceholders(languageManager, dataManager).addPlaceholders(plugin);
         languageManager.set();
     }
 

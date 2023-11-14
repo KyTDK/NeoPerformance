@@ -5,15 +5,18 @@ import com.neomechanical.neoconfig.neoutils.commands.easyCommands.EasyHelpComman
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.commands.chunks.ChunksCommand;
 import com.neomechanical.neoperformance.commands.smartReport.SmartReportCommand;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.utils.messages.Messages;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
 public class RegisterCommands {
     private final NeoPerformance plugin;
+    private final DataManager dataManager;
 
-    public RegisterCommands(NeoPerformance plugin) {
+    public RegisterCommands(NeoPerformance plugin, DataManager dataManager) {
         this.plugin = plugin;
+        this.dataManager = dataManager;
     }
 
     public void register() {
@@ -30,7 +33,7 @@ public class RegisterCommands {
                 .addSubcommand(new HaltCommand(plugin))
                 .addSubcommand(new SmartClearCommand(plugin))
                 .addSubcommand(new ConfigCommand(plugin))
-                .addSubcommand(new SmartReportCommand(plugin))
+                .addSubcommand(new SmartReportCommand(plugin, dataManager))
                 //.addSubcommand(new ScheduleCommand())
                 .register();
     }

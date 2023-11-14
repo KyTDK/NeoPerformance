@@ -14,8 +14,8 @@ email_notifications:
   subject_resumed: 'TPS revenu à la normale, récupération du serveur'
   body_resumed: "Le serveur a été restauré et a désormais un tps de %TPS%"
 discord:
-  serverHalted: ':octagonal_sign: *TPS est trop bas, arrêt du serveur*'
-  serverResumed: ':white_check_mark: *TPS retour à la normale, récupération du serveur*'
+  serverHalted: ':octagonal_sign: **TPS est trop bas, arrêt du serveur**'
+  serverResumed: ':white_check_mark: **TPS retour à la normale, récupération du serveur**'
 #commandes
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Joueur introuvable'

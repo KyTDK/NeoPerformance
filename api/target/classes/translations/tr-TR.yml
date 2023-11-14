@@ -14,8 +14,8 @@ email_notifications:
   subject_resumed: 'TPS normale döndü, sunucu kurtarılıyor'
   body_resumed: "Sunucu geri yüklendi ve artık %TPS% tps'ye sahip"
 discord:
-  serverHalted: ':octagonal_sign: *TPS çok düşük, sunucu durduruluyor*'
-  serverResumed: ':white_check_mark: *TPS normale döndü, sunucu kurtarılıyor*'
+  serverHalted: ':octagonal_sign: **TPS çok düşük, sunucu durduruluyor**'
+  serverResumed: ':white_check_mark: **TPS normale döndü, sunucu kurtarılıyor**'
 #komutlar
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Oyuncu bulunamadı'

@@ -7,7 +7,8 @@ import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEven
 import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
 import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.integrations.spark.SparkUtils;
+import com.neomechanical.neoperformance.integrations.spark.SparkRetrievers;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.grading.GradingSubjectsManager;
 import com.neomechanical.neoperformance.performance.smart.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.smart.smartReport.report.PerformanceReport;
@@ -16,14 +17,18 @@ import java.util.List;
 
 public class SmartReport {
     private final NeoPerformance plugin;
+    private final SparkRetrievers sparkRetriever;
+    private final DataManager dataManager;
 
-    public SmartReport(NeoPerformance plugin) {
+    public SmartReport(NeoPerformance plugin, DataManager dataManager) {
         this.plugin = plugin;
+        this.dataManager = dataManager;
+        this.sparkRetriever = (SparkRetrievers) dataManager.getHookIntegrations().getIntegration("spark");
     }
 
     public PerformanceReport getPerformanceReportOverview() {
         //Generate data
-        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin, sparkRetriever);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
         LanguageManager languageManager = NeoUtils.getNeoUtilities().getManagers().getLanguageManager();
         Component serverGrade = MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.serverGrade", null));
@@ -49,7 +54,7 @@ public class SmartReport {
                 .addExtraInformation(availableProcessors)
                 .addExtraInformation(cpuJvmLoad)
                 .addExtraInformation(cpuSystemLoad);
-        if (SparkUtils.isInstalled(plugin)) {
+        if (dataManager.getHookIntegrations().isInstalled("spark")) {
             performanceReport
                     .addExtraInformation(MiniMessage.miniMessage().deserialize(languageManager.getString("smartReport.otherTitle", null)))
                     .addExtraInformation(msptMinuteAverage);
@@ -59,7 +64,7 @@ public class SmartReport {
     }
 
     public PerformanceReport getPerformanceReportSubjects() {
-        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin);
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin, sparkRetriever);
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
         return new PerformanceReport.PerformanceReportBuilder(gradingSubjects)
                 .addIndividualGradeSection()
