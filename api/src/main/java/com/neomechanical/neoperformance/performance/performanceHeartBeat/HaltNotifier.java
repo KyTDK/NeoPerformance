@@ -36,7 +36,7 @@ public class HaltNotifier {
 
         // Send DiscordSRV message
         DiscordSRVHook discordSRVHook = (DiscordSRVHook) dataManager.getHookIntegrations().getIntegration("DiscordSRV");
-        if (discordSRVHook != null) {
+        if (discordSRVHook != null && dataManager.getPerformanceConfig().getPerformanceTweakSettings().isNotifyDiscord()) {
             discordSRVHook.sendMessage(getLanguageManager().getString(discordKey, null));
         }
 
