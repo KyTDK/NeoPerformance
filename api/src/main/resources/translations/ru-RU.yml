@@ -13,6 +13,9 @@ email_notifications:
   body_halted: 'Активность сервера была отключена в связи с низким ТПС На данный момент показатель тпс равен %TPS% в то время как минимальное значение %TPSHALT%.'
   subject_resumed: 'TPS возвращается в нормальное состояние, восстанавливается сервер'
   body_resumed: "Сервер восстановлен и теперь имеет tps %TPS%"
+discord:
+  serverHalted: ':octagonal_sign: *ТПС слишком низкий. Выполняется остановка активности*'
+  serverResumed: ':white_check_mark: *ТПС выглядит нормальным. Активность возобновлена*'
 #команды
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Игрок не найден'

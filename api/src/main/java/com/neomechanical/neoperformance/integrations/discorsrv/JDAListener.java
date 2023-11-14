@@ -1,8 +1,8 @@
 package com.neomechanical.neoperformance.integrations.discorsrv;
 
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
-import net.dv8tion.jda.api.events.guild.GuildUnavailableEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import github.scarsz.discordsrv.dependencies.jda.api.events.guild.GuildUnavailableEvent;
+import github.scarsz.discordsrv.dependencies.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class JDAListener extends ListenerAdapter {

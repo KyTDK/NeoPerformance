@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.integrations.discorsrv;
 
 import github.scarsz.discordsrv.DiscordSRV;
-import net.dv8tion.jda.api.entities.TextChannel;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.TextChannel;
 
 public class DiscordSRVHook {
 
@@ -13,7 +13,7 @@ public class DiscordSRVHook {
         TextChannel textChannel = DiscordSRV.getPlugin().getMainTextChannel();
 
         if (textChannel != null) {
-            textChannel.sendMessage(message).complete();
+            textChannel.sendMessage("`[NeoPerformance] " + message + "`").complete();
         }
     }
 
