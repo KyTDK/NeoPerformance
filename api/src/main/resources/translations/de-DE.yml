@@ -14,8 +14,8 @@ email_notifications:
   subject_resumed: 'TPS ist wieder normal und der Server wird wiederhergestellt'
   body_resumed: "Der Server wurde wiederhergestellt und verfügt nun über eine TPS von %TPS%"
 discord:
-  serverHalted: ':octagonal_sign: *TPS ist zu niedrig, Server wird angehalten*'
-  serverResumed: ':white_check_mark: *TPS wieder normal, Wiederherstellung des Servers*'
+  serverHalted: ':octagonal_sign: **TPS ist zu niedrig, Server wird angehalten**'
+  serverResumed: ':white_check_mark: **TPS wieder normal, Wiederherstellung des Servers**'
 #Befehle
 commandGeneric:
   errorPlayerNotFound: '<red><bold>Spieler nicht gefunden'
