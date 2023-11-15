@@ -55,6 +55,9 @@ smartReport:
   msptAverage: "<gray>Média de MSPT de um minuto: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Clique para ver assuntos individuais"
   noticeHover: "Digite /np relatório assuntos para ver classificações individuais"
+insights:
+  recommended: "recomendado"
+  fixAutomaticDone: "<gray>A correção foi implementada, talvez seja necessário reiniciar o servidor se o insights ainda mostrar o insight"
 #Mensagens relacionadas à parada
 halted:
   actionBarMessage: '<red>O servidor está sobrecarregado no momento. Tente novamente mais tarde.'

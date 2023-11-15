@@ -8,6 +8,8 @@ performance_tweak_settings:
   notifyAdmin: true
   # Broadcast that the server is under load and is halting
   broadcastHalt: false
+  # Sends a discord message to your channel if DiscordSRV is installed
+  notifyDiscord: true
   # The maximum number of entities that can exist in a small radius (use -1 to disable)
   mobCap: 50
   # Define the small radius for map (The larger the radius, the more stress on the server, don't make it too large)

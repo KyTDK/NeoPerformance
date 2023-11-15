@@ -55,6 +55,9 @@ smartReport:
   msptAverage: "<gray>MSPT-Minutendurchschnitt: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Klicken, um einzelne Themen anzuzeigen"
   noticeHover: "Geben Sie /np report subjects ein, um einzelne Bewertungen anzuzeigen"
+insights:
+  recommended: "empfohlen"
+  fixAutomaticDone: "<gray>Fix wurde implementiert. Möglicherweise müssen Sie Ihren Server neu starten, wenn Insights die Insights immer noch anzeigt"
   #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'

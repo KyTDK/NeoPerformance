@@ -55,6 +55,9 @@ smartReport:
   msptAverage: "<gray>MSPT minute average: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Click to view individual subjects"
   noticeHover: "Type /np report subjects to view individual gradings"
+insights:
+  recommended: "recommended"
+  fixAutomaticDone: "<gray>Fix has been implemented, you may need to restart your server if insights still shows the insight"
 #Halt related messages
 halted:
   actionBarMessage: '<red>Server is currently under heavy load. Please try again later.'

@@ -34,6 +34,7 @@ public class RegisterCommands {
                 .addSubcommand(new SmartClearCommand(plugin))
                 .addSubcommand(new ConfigCommand(plugin))
                 .addSubcommand(new SmartReportCommand(plugin, dataManager))
+                .addSubcommand(new InsightsCommand())
                 //.addSubcommand(new ScheduleCommand())
                 .register();
     }

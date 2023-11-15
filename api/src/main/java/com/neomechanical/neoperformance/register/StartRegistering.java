@@ -7,6 +7,7 @@ import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
 import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
+import com.neomechanical.neoperformance.performance.insight.InsightPlaceholders;
 import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
@@ -48,6 +49,8 @@ public class StartRegistering {
                 .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus());
         //Add smart report placeholders
         new SmartReportPlaceholders(languageManager, dataManager).addPlaceholders(plugin);
+        //Add insights placeholders
+        new InsightPlaceholders(languageManager).addPlaceholders();
         languageManager.set();
     }
 

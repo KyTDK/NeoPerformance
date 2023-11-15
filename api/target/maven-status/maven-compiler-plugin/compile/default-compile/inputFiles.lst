@@ -7,9 +7,11 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartSchedule/guis/IntervalSchedule.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/haltActions/RegisterHaltActions.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/DataGetter.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightReport.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/RegisterCommands.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/chunks/ChunksCommand.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/PerformanceConfig.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightManager.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/integrations/spark/SparkRetrievers.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/messages/Messages.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/smartReport/SmartReportSubjectsCommand.java
@@ -19,7 +21,11 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/haltActions/HaltActionPojo.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/SmartReport.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/NeoPerformance.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightElement.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/RenderDistance.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/Insights.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/utils/tps/TPSReflection.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/utils/ServerProperties.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/managers/DataHandler.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/ReloadCommand.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartClear/SmartClear.java
@@ -30,6 +36,7 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/haltActions/HaltActions.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/Logger.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/ActionBar.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightPlaceholders.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/utils/TpsUtils.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartSchedule/data/IntervalData.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/UtilManager.java
@@ -70,7 +77,9 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/relatedManagers/SparkData.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/IGradingSubject.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/dataGetters/EntityClusterData.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/InsightsCommand.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/utils/mail/EmailClient.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/Snooper.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/report/PerformanceReport.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReport.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/Visual.java

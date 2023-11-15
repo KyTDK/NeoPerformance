@@ -55,6 +55,9 @@ smartReport:
   msptAverage: "<gray>Moyenne des minutes MSPT: <white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>Cliquez pour afficher les sujets individuels"
   noticeHover: "Tapez /np report subjects pour afficher les notes individuelles"
+insights:
+  recommended: "recommandé"
+  fixAutomaticDone: "<gray>Le correctif a été implémenté. Vous devrez peut-être redémarrer votre serveur si Insights affiche toujours l'insight."
   #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'

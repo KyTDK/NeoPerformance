@@ -64,8 +64,8 @@
             <url>https://hub.neomechanical.com/repository/maven-releases/</url>
         </repository>
     </repositories>
-    <properties>
+    <serverProperties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    </serverProperties>
 </project>

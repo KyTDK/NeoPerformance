@@ -54,6 +54,9 @@ smartReport:
   msptAverage: "<gray>MSPT 分钟平均值：<white><bold>%MSPTMINUTEAVERAGE%"
   notice: "<u><bold>点击查看个别主题"
   noticeHover: "输入 /np report subjects 以查看个人评分"
+insights:
+  recommended: "受到推崇的"
+  fixAutomaticDone: "<gray>修复已实施，如果见解仍然显示见解，您可能需要重新启动服务器"
 #Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'
