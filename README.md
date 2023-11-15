@@ -1,9 +1,8 @@
 # NeoPerformance - Lag Management Utility for Minecraft Servers
 NeoPerformance is a performance management utility. Tools such as cluster detection (find large groups of entities), as well as sorting chunks by entities allows server administrators to find, fix and prevent lag sources. Additionally, it is able to prevent lag machines, as well as prevent fatal server crashes.
 
-PREFACE:
-
-    This plugin isn't designed as an 'anti-lag plugin'—there's no magic solution for that. NeoPerformance empowers administrators by providing tools such as server halting and entity locating to optimize server performance. However, it's crucial to note that if your server uses suboptimal hardware, NeoPerformance's impact may be limited. Hardware limitations are beyond the plugin's control.
+## PREFACE
+This plugin isn't designed as an 'anti-lag plugin'—there's no magic solution for that. NeoPerformance empowers administrators by providing tools such as server halting and entity locating to optimize server performance. However, it's crucial to note that if your server uses suboptimal hardware, NeoPerformance's impact may be limited. Hardware limitations are beyond the plugin's control.
 
 
 ## Features
