@@ -18,6 +18,11 @@ public class InsightsFixAllCommand extends Command {
     }
 
     @Override
+    public String getPermission() {
+        return "neoperformance.fix.all";
+    }
+
+    @Override
     public String getSyntax() {
         return "/np insights fix all";
     }

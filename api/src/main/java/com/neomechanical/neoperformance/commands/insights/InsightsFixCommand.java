@@ -22,6 +22,11 @@ public class InsightsFixCommand extends Command {
     }
 
     @Override
+    public String getPermission() {
+        return "neoperformance.fix";
+    }
+
+    @Override
     public String getDescription() {
         return "Run automatic or suggest fixes for insight";
     }
