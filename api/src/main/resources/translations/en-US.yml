@@ -57,6 +57,8 @@ smartReport:
   noticeHover: "Type /np report subjects to view individual gradings"
 insights:
   recommended: "recommended"
+  fixed: "<green>Fixed"
+  noElements: "<gray>All insights are optimized. Your server meets all recommended settings."
   fixAutomaticDone: "<gray>Fix has been implemented, you may need to restart your server if insights still shows the insight"
 #Halt related messages
 halted:

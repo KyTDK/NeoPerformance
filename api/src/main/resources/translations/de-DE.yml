@@ -57,6 +57,8 @@ smartReport:
   noticeHover: "Geben Sie /np report subjects ein, um einzelne Bewertungen anzuzeigen"
 insights:
   recommended: "empfohlen"
+  fixed: "<green>Fest"
+  noElements: "<gray>Alle Erkenntnisse sind optimiert. Ihr Server erfüllt alle empfohlenen Einstellungen."
   fixAutomaticDone: "<gray>Fix wurde implementiert. Möglicherweise müssen Sie Ihren Server neu starten, wenn Insights die Insights immer noch anzeigt"
   #Halten Sie verwandte Nachrichten an
 halted:

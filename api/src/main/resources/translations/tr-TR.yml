@@ -57,6 +57,8 @@ smartReport:
   noticeHover: "Bireysel derecelendirmeleri görüntülemek için /np report subjects yazın"
 insights:
   recommended: "tavsiye edilen"
+  fixed: "<green>Sabit"
+  noElements: "<gray>Tüm bilgiler optimize edilmiştir. Sunucunuz önerilen tüm ayarları karşılıyor."
   fixAutomaticDone: "<gray>Düzeltme uygulandı, analizler hala analizleri gösteriyorsa sunucunuzu yeniden başlatmanız gerekebilir"
   #İlgili mesajları durdur
 halted:

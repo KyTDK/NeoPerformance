@@ -18,23 +18,27 @@ public class InsightReport {
         insights.forEach((category, categoryInsights) -> {
             TextComponent.Builder insightElements = Component.text();
             categoryInsights.forEach((insightName, insightElement) -> {
-                if (insightElement.isInsightApplicableOrAlreadyPresent()) {
-                    insightElements
-                            .append(Component.newline())
-                            .append(Component.text("  • "))
-                            .append(MessageUtil.parseComponent(insightName.replace("-", " ") + ": <red>" + insightElement.currentValue() + "<white> | "
-                                    + NeoPerformance.getLanguageManager().getString("insights.recommended", null)
-                                    + ": <green>" + insightElement.recommendedValue()))
-                            .append(MessageUtil.parseComponent(" <white><bold>(click to fix)"))
-                            .clickEvent(ClickEvent.runCommand("/np insights fix " + category + " " + insightName))
-                            .hoverEvent(HoverEvent.showText(Component.text("Click to fix")));
-                }
+                insightElements
+                        .append(Component.newline())
+                        .append(Component.text("  • "))
+                        .append(MessageUtil.parseComponent(insightName + ": <red>" + insightElement.currentValue() + "<white> | "
+                                + NeoPerformance.getLanguageManager().getString("insights.recommended", null)
+                                + ": <green>" + insightElement.recommendedValue()))
+                        .append(MessageUtil.parseComponent(" <white><bold>(click to fix)"))
+                        .clickEvent(ClickEvent.runCommand("/np insights fix " + category.replace(" ", "-") + " " + insightName))
+                        .hoverEvent(HoverEvent.showText(Component.text("Click to fix")));
             });
             if (!insightElements.children().isEmpty()) {
-                builder.append(MessageUtil.parseComponent("<gray><bold>" + category.replace("-", " ") + ": "))
+                if (!builder.children().isEmpty()) {
+                    builder.append(Component.newline());
+                }
+                builder.append(MessageUtil.parseComponent("<gray><bold>" + category + ": "))
                         .append(insightElements);
             }
         });
+        if (builder.children().isEmpty()) {
+            builder.append(MessageUtil.parseComponent(NeoPerformance.getLanguageManager().getString("insights.noElements", null)));
+        }
         return this;
     }
 

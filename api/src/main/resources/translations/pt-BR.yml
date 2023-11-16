@@ -57,6 +57,8 @@ smartReport:
   noticeHover: "Digite /np relatório assuntos para ver classificações individuais"
 insights:
   recommended: "recomendado"
+  fixed: "<green>Fixo"
+  noElements: "<gray>Todos os insights são otimizados. Seu servidor atende a todas as configurações recomendadas."
   fixAutomaticDone: "<gray>A correção foi implementada, talvez seja necessário reiniciar o servidor se o insights ainda mostrar o insight"
 #Mensagens relacionadas à parada
 halted:
