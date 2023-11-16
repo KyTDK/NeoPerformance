@@ -10,7 +10,6 @@ public class ChunkGCPeriodLoadThreshold extends InsightElement {
     private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        File file = new File("bukkit.yml");
         if (!yamlOthers.configExists()) {
             return false;
         }
