@@ -1,8 +1,7 @@
-package com.neomechanical.neoperformance.commands;
+package com.neomechanical.neoperformance.commands.insights;
 
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
-import com.neomechanical.neoperformance.commands.insights.InsightsFixCommand;
 import com.neomechanical.neoperformance.performance.insight.Insights;
 import org.bukkit.command.CommandSender;
 
@@ -60,6 +59,6 @@ public class InsightsCommand extends Command {
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
         Insights insights = new Insights();
-        insights.sendInsights(commandSender);
+        insights.openInsights(commandSender);
     }
 }

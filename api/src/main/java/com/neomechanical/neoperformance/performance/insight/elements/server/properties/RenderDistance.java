@@ -2,12 +2,11 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
-import org.bukkit.Bukkit;
 
 public class RenderDistance extends InsightElement {
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        return Bukkit.getViewDistance() > 4;
+        return Integer.parseInt(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE)) > 4;
     }
 
     @Override

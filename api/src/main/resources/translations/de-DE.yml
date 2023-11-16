@@ -59,7 +59,7 @@ insights:
   recommended: "empfohlen"
   fixed: "<green>Fest"
   noElements: "<gray>Alle Erkenntnisse sind optimiert. Ihr Server erfüllt alle empfohlenen Einstellungen."
-  fixAutomaticDone: "<gray>Fix wurde implementiert. Möglicherweise müssen Sie Ihren Server neu starten, wenn Insights die Insights immer noch anzeigt"
+  fixAutomaticDone: "<green>Fix wurde implementiert. Möglicherweise müssen Sie Ihren Server neu starten, wenn Insights die Insights immer noch anzeigt"
   #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'

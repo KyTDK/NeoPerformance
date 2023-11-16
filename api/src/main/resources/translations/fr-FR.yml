@@ -59,7 +59,7 @@ insights:
   recommended: "recommandé"
   fixed: "<green>Fixé"
   noElements: "<gray>Toutes les informations sont optimisées. Votre serveur répond à tous les paramètres recommandés."
-  fixAutomaticDone: "<gray>Le correctif a été implémenté. Vous devrez peut-être redémarrer votre serveur si Insights affiche toujours l'insight."
+  fixAutomaticDone: "<green>Le correctif a été implémenté. Vous devrez peut-être redémarrer votre serveur si Insights affiche toujours l'insight."
   #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'

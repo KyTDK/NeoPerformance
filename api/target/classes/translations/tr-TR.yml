@@ -59,7 +59,7 @@ insights:
   recommended: "tavsiye edilen"
   fixed: "<green>Sabit"
   noElements: "<gray>Tüm bilgiler optimize edilmiştir. Sunucunuz önerilen tüm ayarları karşılıyor."
-  fixAutomaticDone: "<gray>Düzeltme uygulandı, analizler hala analizleri gösteriyorsa sunucunuzu yeniden başlatmanız gerekebilir"
+  fixAutomaticDone: "<green>Düzeltme uygulandı, analizler hala analizleri gösteriyorsa sunucunuzu yeniden başlatmanız gerekebilir"
   #İlgili mesajları durdur
 halted:
   actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'

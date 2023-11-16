@@ -1,19 +1,19 @@
 package com.neomechanical.neoperformance.performance.insight.elements.bukkit.yml;
 
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
+import com.neomechanical.neoperformance.performance.insight.utils.YAMLOthers;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
 public class SpawnLimitsWaterAnimals extends InsightElement {
-
+    private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        File file = new File("bukkit.yml");
-        if (!file.exists()) {
+        if (!yamlOthers.configExists()) {
             return false;
         }
-        return YamlConfiguration.loadConfiguration(file).getDouble("spawn-limits.water-animals") > 3;
+        return yamlOthers.getConfig().getDouble("spawn-limits.water-animals") > 3;
     }
 
     @Override
@@ -23,12 +23,12 @@ public class SpawnLimitsWaterAnimals extends InsightElement {
 
     @Override
     public String currentValue() {
-        return YamlConfiguration.loadConfiguration(new File("bukkit.yml")).getString("spawn-limits.water-animals");
+        return yamlOthers.getConfig().getString("spawn-limits.water-animals");
     }
 
     @Override
     public void fix() {
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File("bukkit.yml"));
+        YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
         yamlConfiguration.set("spawn-limits.water-animals", 3);
         try {
             yamlConfiguration.save(new File("bukkit.yml"));

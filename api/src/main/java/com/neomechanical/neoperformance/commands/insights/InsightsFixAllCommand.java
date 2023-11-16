@@ -30,6 +30,10 @@ public class InsightsFixAllCommand extends Command {
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
         InsightManager insightManager = new InsightManager();
+        if (insightManager.getInsightsMap().isEmpty()) {
+            MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.noElements", null));
+            return;
+        }
         insightManager.getInsightsMap().forEach((category, categoryInsights) -> categoryInsights.forEach((insightName, insightElement) -> {
             insightElement.fix();
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);

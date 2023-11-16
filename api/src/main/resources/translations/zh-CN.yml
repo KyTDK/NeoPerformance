@@ -58,7 +58,7 @@ insights:
   recommended: "受到推崇的"
   fixed: "<green>固定的"
   noElements: "<gray>所有见解均已优化。您的服务器满足所有推荐的设置。"
-  fixAutomaticDone: "<gray>修复已实施，如果见解仍然显示见解，您可能需要重新启动服务器"
+  fixAutomaticDone: "<green>修复已实施，如果见解仍然显示见解，您可能需要重新启动服务器"
 #Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'

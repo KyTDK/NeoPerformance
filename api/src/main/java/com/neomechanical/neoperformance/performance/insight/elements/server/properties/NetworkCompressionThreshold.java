@@ -2,12 +2,11 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
-import org.bukkit.Bukkit;
 
 public class NetworkCompressionThreshold extends InsightElement {
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        return Bukkit.getViewDistance() < 512;
+        return Integer.parseInt(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.PACKET_COMPRESSION_LIMIT)) < 512;
     }
 
     @Override

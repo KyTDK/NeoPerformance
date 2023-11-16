@@ -1,19 +1,20 @@
 package com.neomechanical.neoperformance.performance.insight.elements.spigot.yml;
 
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
+import com.neomechanical.neoperformance.performance.insight.utils.YAMLOthers;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
 public class ItemDespawnRate extends InsightElement {
+    private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        File file = new File("spigot.yml");
-        if (!file.exists()) {
+        if (!yamlOthers.configExists()) {
             return false;
         }
-        return YamlConfiguration.loadConfiguration(file).getDouble("world-settings.default.item-despawn-rate") > 1200;
+        return yamlOthers.getConfig().getDouble("world-settings.default.item-despawn-rate") > 1200;
     }
 
     @Override
@@ -23,12 +24,12 @@ public class ItemDespawnRate extends InsightElement {
 
     @Override
     public String currentValue() {
-        return YamlConfiguration.loadConfiguration(new File("spigot.yml")).getString("world-settings.default.item-despawn-rate");
+        return yamlOthers.getConfig().getString("world-settings.default.item-despawn-rate");
     }
 
     @Override
     public void fix() {
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File("spigot.yml"));
+        YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
         yamlConfiguration.set("world-settings.default.item-despawn-rate", 1200);
         try {
             yamlConfiguration.save(new File("spigot.yml"));

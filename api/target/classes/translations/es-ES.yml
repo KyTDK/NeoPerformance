@@ -60,7 +60,7 @@ insights:
   recommended: "recomendado"
   fixed: "<green>Fijado"
   noElements: "<gray>Todos los conocimientos están optimizados. Su servidor cumple con todas las configuraciones recomendadas."
-  fixAutomaticDone: "<gray>Se ha implementado la solución, es posible que deba reiniciar su servidor si la información aún muestra la información."
+  fixAutomaticDone: "<green>Se ha implementado la solución, es posible que deba reiniciar su servidor si la información aún muestra la información."
 halted:
   actionBarMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
   actionBarTeleportMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Serás teletransportado momentáneamente.'

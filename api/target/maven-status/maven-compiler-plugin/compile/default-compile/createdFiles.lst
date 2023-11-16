@@ -18,7 +18,6 @@ com/neomechanical/neoperformance/NeoPerformance$1.class
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HaltNotifier.class
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat$1.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTntPerTick.class
-com/neomechanical/neoperformance/commands/InsightsCommand.class
 com/neomechanical/neoperformance/performance/lagPrevention/LagPrevention.class
 com/neomechanical/neoperformance/performance/smart/smartReport/grading/GradeData.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/dependent/SparkMSPTGrading.class
@@ -30,7 +29,6 @@ com/neomechanical/neoperformance/performance/smart/smartNotifier/managers/LagDat
 com/neomechanical/neoperformance/commands/scheduling/ScheduleCommand.class
 com/neomechanical/neoperformance/config/PerformanceTweakSettings.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReportBuilder.class
-com/neomechanical/neoperformance/commands/InsightsCommand$1.class
 com/neomechanical/neoperformance/performance/insight/InsightManager.class
 com/neomechanical/neoperformance/commands/smartReport/SmartReportCommand.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/EntityActivationRangeMisc.class
@@ -38,6 +36,7 @@ com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/I
 com/neomechanical/neoperformance/performance/utils/PerformanceConfigurationSettingsUtils.class
 com/neomechanical/neoperformance/commands/chunks/ChunkTeleportCommand.class
 com/neomechanical/neoperformance/performance/smart/smartReport/report/PerformanceReport$PerformanceReportBuilder.class
+com/neomechanical/neoperformance/commands/insights/InsightsCommand$1.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/LagChecker.class
 com/neomechanical/neoperformance/performance/insight/Insights.class
 com/neomechanical/neoperformance/utils/UtilManager.class
@@ -97,6 +96,7 @@ com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/SpawnLi
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.class
 com/neomechanical/neoperformance/config/Commands.class
 com/neomechanical/neoperformance/performance/insight/utils/ServerConfiguration.class
+com/neomechanical/neoperformance/performance/insight/InsightGUIReport.class
 com/neomechanical/neoperformance/performance/smart/smartSchedule/SmartSchedule.class
 com/neomechanical/neoperformance/performance/smart/chunks/ChunksNotifier.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading$1.class
@@ -114,6 +114,7 @@ com/neomechanical/neoperformance/utils/messages/Messages.class
 com/neomechanical/neoperformance/utils/updates/UpdateChecker$1.class
 com/neomechanical/neoperformance/integrations/HookIntegrations.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTickTimeTile.class
+com/neomechanical/neoperformance/commands/insights/InsightsCommand.class
 com/neomechanical/neoperformance/config/HaltSettings.class
 com/neomechanical/neoperformance/config/EmailNotifications.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/CPUUsageGrading.class
