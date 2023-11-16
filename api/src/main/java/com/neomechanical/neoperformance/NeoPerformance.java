@@ -15,6 +15,7 @@ import com.neomechanical.neoconfig.neoutils.version.Versioning;
 import com.neomechanical.neoconfig.neoutils.version.versions.Versions;
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.DataHandler;
+import com.neomechanical.neoperformance.performance.calculate.CalculationManager;
 import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
@@ -72,6 +73,11 @@ public final class NeoPerformance extends JavaPlugin {
         ////////////////////////////////////////////////////////////////////////////////////////
         setInstance(this);// This must always be first, as it sets the instance of the plugin //
         ////////////////////////////////////////////////////////////////////////////////////////
+
+        //Evaluate System Score's//
+        CalculationManager.init();
+        ///////////////////////////
+
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
         //Set POJOs
