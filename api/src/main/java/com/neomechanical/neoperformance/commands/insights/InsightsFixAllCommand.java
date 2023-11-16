@@ -19,7 +19,7 @@ public class InsightsFixAllCommand extends Command {
 
     @Override
     public String getPermission() {
-        return "neoperformance.fix.all";
+        return "neoperformance.insight.fix.all";
     }
 
     @Override
