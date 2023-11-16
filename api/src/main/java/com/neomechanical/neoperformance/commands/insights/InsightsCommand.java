@@ -24,6 +24,11 @@ public class InsightsCommand extends Command {
             }
 
             @Override
+            public String getPermission() {
+                return "neoperformance.insight.sources";
+            }
+
+            @Override
             public boolean playerOnly() {
                 return false;
             }
