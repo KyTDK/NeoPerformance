@@ -86,7 +86,6 @@ com/neomechanical/neoperformance/utils/ActionBar.class
 com/neomechanical/neoperformance/commands/SmartClearCommand$1.class
 com/neomechanical/neoperformance/performance/insight/elements/server/properties/RenderDistance.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/LagChecker$1.class
-com/neomechanical/neoperformance/commands/insights/InsightsFixAllCommand.class
 com/neomechanical/neoperformance/commands/ReloadCommand.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/TicksPerHopperTransfer.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartScanner.class

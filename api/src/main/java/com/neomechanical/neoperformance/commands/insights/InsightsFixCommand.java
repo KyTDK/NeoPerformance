@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class InsightsFixCommand extends Command {
-    public InsightsFixCommand() {
-        this.addSubcommand(new InsightsFixAllCommand());
-    }
-
     @Override
     public String getName() {
         return "fix";
@@ -43,10 +39,22 @@ public class InsightsFixCommand extends Command {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
-        String category = strings[2];
+        String categoryObtained = strings[2];
+        if (categoryObtained.equals("all")) {
+            InsightManager insightManager = new InsightManager();
+            if (insightManager.getInsightsMap().isEmpty()) {
+                MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.noElements", null));
+                return;
+            }
+            insightManager.getInsightsMap().forEach((category, categoryInsights) -> categoryInsights.forEach((insightName, insightElement) -> {
+                insightElement.fix();
+                MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
+            }));
+            MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
+        }
         String element = strings[3];
         InsightManager insightManager = new InsightManager();
-        insightManager.getInsight(category, element).fix();
+        insightManager.getInsight(categoryObtained, element).fix();
         MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
     }
 
@@ -54,12 +62,10 @@ public class InsightsFixCommand extends Command {
     public Map<String, List<String>> mapSuggestions() {
         Map<String, List<String>> map = new HashMap<>();
         InsightManager insightManager = new InsightManager();
-
+        map.put("all", new ArrayList<>());
         insightManager.getInsightsMap().forEach((category, categoryInsights) -> {
             List<String> insightNames = new ArrayList<>();
-            categoryInsights.forEach((insightName, insightElement) -> {
-                insightNames.add(insightName);
-            });
+            categoryInsights.forEach((insightName, insightElement) -> insightNames.add(insightName));
             map.put(category, insightNames);
         });
 
