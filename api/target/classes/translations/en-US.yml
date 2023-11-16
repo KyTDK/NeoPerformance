@@ -59,7 +59,7 @@ insights:
   recommended: "recommended"
   fixed: "<green>Fixed"
   noElements: "<gray>All insights are optimized. Your server meets all recommended settings."
-  fixAutomaticDone: "<green>Fix has been implemented, you may need to restart your server if insights still shows the insight"
+  fixAutomaticDone: "<green>Fix has been implemented, you may need to restart your server"
 #Halt related messages
 halted:
   actionBarMessage: '<red>Server is currently under heavy load. Please try again later.'
