@@ -26,7 +26,9 @@ public class InsightGUIReport {
                     return;
                 }
                 ArrayList<String> lore = new ArrayList<>();
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&aCategory: ") + category);
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Category: ") + category);
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Current value: &4") + insightElement.currentValue());
+                lore.add(ChatColor.translateAlternateColorCodes('&', "&7Recommended value: &a") + insightElement.recommendedValue());
 
                 Consumer<InventoryClickEvent> fixAction = event -> {
                     insightElement.fix();
@@ -34,7 +36,7 @@ public class InsightGUIReport {
                     MessageUtil.sendMM(event.getWhoClicked(), NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
                 };
                 InventoryItem item = new InventoryItem.InventoryItemBuilder(
-                        () -> ItemUtil.createItem(Material.ANVIL, 1, "&7" + insightName + " (Click to fix)", lore))
+                        () -> ItemUtil.createItem(Material.ANVIL, 1, "&7" + insightName + " &f&l(Click to fix)", lore))
                         .setAction(fixAction)
                         .build();
                 inventoryGUI.addItem(item);

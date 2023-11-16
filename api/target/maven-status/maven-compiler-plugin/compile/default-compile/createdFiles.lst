@@ -22,6 +22,7 @@ com/neomechanical/neoperformance/performance/lagPrevention/LagPrevention.class
 com/neomechanical/neoperformance/performance/smart/smartReport/grading/GradeData.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/dependent/SparkMSPTGrading.class
 com/neomechanical/neoperformance/config/LagNotifier.class
+com/neomechanical/neoperformance/performance/insight/utils/YAMLOthers.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartClear.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MergeRadiusExp.class
 com/neomechanical/neoperformance/performance/smart/smartReport/relatedManagers/SparkData.class
@@ -63,7 +64,6 @@ com/neomechanical/neoperformance/utils/updates/UpdateChecker.class
 com/neomechanical/neoperformance/config/PerformanceTweaksConfiguration.class
 com/neomechanical/neoperformance/utils/mail/EmailClient$1.class
 com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/SpawnLimitsWaterAnimals.class
-com/neomechanical/neoperformance/performance/insight/InsightReport.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/dataGetters/ChunkData.class
 com/neomechanical/neoperformance/performance/haltActions/HaltActions.class
 com/neomechanical/neoperformance/integrations/discorsrv/DiscordSRVListener.class

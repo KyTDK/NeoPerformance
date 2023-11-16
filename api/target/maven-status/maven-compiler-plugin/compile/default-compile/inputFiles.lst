@@ -57,6 +57,7 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/integrations/discorsrv/DiscordSRVHook.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/SmartClearCommand.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/PerformanceTweaksConfiguration.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/utils/YAMLOthers.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/SpawnLimitsAmbient.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/register/StartRegistering.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReportBuilder.java
@@ -72,7 +73,6 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/TpsGrading.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/ChunkGCPeriodLoadThreshold.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/haltActions/RegisterHaltActions.java
-/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightReport.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightManager.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/server/properties/NetworkCompressionThreshold.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/SmartReport.java
