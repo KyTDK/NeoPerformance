@@ -38,6 +38,7 @@ public class HeartBeat {
         AtomicLong haltStartTime = new AtomicLong(0);
         AtomicBoolean previouslyHalted = new AtomicBoolean(false);
         AtomicBoolean manualHalt = new AtomicBoolean(false);
+        AtomicBoolean previouslyManuallyHalted = new AtomicBoolean(false);
 
         new BukkitRunnable() {
             @Override
@@ -50,13 +51,16 @@ public class HeartBeat {
                 if (isCurrentlyHalted && !previouslyHalted.get()) {
                     if (!manualHalt.get()) {
                         HaltNotifier.notifyHalted(dataManager);
+                    } else {
+                        previouslyManuallyHalted.set(true);
                     }
                     HaltActions.runHaltActions(tps);
                     haltStartTime.set(System.currentTimeMillis());
                     previouslyHalted.set(true);
                 } else if (!isCurrentlyHalted && previouslyHalted.get()) {
-                    if (!manualHalt.get()) {
+                    if (!previouslyManuallyHalted.get()) {
                         HaltNotifier.notifyResumed(dataManager);
+                        previouslyManuallyHalted.set(false);
                     }
                     haltStartTime.set(0);
                     restoreServer();
