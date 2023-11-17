@@ -45,23 +45,23 @@ public class HeartBeat {
                 setTPS();
 
                 boolean isCurrentlyHalted = TpsUtils.isServerHalted(getUpdatedTPS(), null, plugin);
+                manualHalt.set(dataManager.isManualHalt());
 
                 if (isCurrentlyHalted && !previouslyHalted.get()) {
-                    manualHalt.set(dataManager.isManualHalt());
                     if (!manualHalt.get()) {
                         HaltNotifier.notifyHalted(dataManager);
                     }
                     HaltActions.runHaltActions(tps);
                     haltStartTime.set(System.currentTimeMillis());
+                    previouslyHalted.set(true);
                 } else if (!isCurrentlyHalted && previouslyHalted.get()) {
                     if (!manualHalt.get()) {
                         HaltNotifier.notifyResumed(dataManager);
                     }
                     haltStartTime.set(0);
                     restoreServer();
+                    previouslyHalted.set(false);
                 }
-
-                previouslyHalted.set(isCurrentlyHalted);
             }
         }.runTaskTimer(plugin, 0, dataManager.getPerformanceConfig().getPerformanceTweakSettings().getHeartBeatRate());
     }
