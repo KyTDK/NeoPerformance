@@ -63,7 +63,7 @@ public class InsightsCommand extends Command {
 
     @Override
     public boolean playerOnly() {
-        return false;
+        return true;
     }
 
     @Override

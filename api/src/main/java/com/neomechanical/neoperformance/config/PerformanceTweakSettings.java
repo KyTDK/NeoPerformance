@@ -18,7 +18,7 @@ public class PerformanceTweakSettings {
         this.tpsHaltAt = fileConfiguration.getInt("performance_tweak_settings.tpsHaltAt");
         this.notifyAdmin = fileConfiguration.getBoolean("performance_tweak_settings.notifyAdmin");
         this.broadcastHalt = fileConfiguration.getBoolean("performance_tweak_settings.broadcastHalt");
-        this.broadcastHalt = fileConfiguration.getBoolean("performance_tweak_settings.notifyDiscord");
+        this.notifyDiscord = fileConfiguration.getBoolean("performance_tweak_settings.notifyDiscord");
         this.mobCap = fileConfiguration.getInt("performance_tweak_settings.mobCap");
         this.mobCapRadius = fileConfiguration.getInt("performance_tweak_settings.mobCapRadius");
         this.explosionCap = fileConfiguration.getInt("performance_tweak_settings.explosionCap");
