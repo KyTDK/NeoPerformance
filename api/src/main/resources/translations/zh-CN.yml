@@ -40,6 +40,7 @@ reload:
 smartClear:
   confirm: "<red><bold>再次输入命令以确认集群删除"
   cleared: '<green><bold>集群已删除'
+  noEntities: "<red><bold>没有实体被删除”"
 smartReport:
   serverGrade: "<gray>总体评分：<white><bold>%OVERALLGRADE%"
   memoryTitle: "[内存]"
