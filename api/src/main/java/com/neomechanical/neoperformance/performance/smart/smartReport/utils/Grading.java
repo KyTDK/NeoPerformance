@@ -93,8 +93,7 @@ public class Grading {
     }
 
     public static Grade getServerGrade(NeoPerformance plugin, DataManager dataManager) {
-        SparkRetrievers sparkRetrievers = (SparkRetrievers) dataManager.getHookIntegrations().getIntegration("spark");
-        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin, sparkRetrievers);
+        GradingSubjectsManager gradingSubjectsManager = new GradingSubjectsManager(plugin, (SparkRetrievers) dataManager.getHookIntegrations().getIntegration("spark"));
         List<IGradingSubject> gradingSubjects = gradingSubjectsManager.getAllGrades();
         //Calculate Overall Grade
         int gradeValues = 0;

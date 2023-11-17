@@ -19,7 +19,9 @@ public class GradingSubjectsManager {
         gradingSubjects.add(new PlayersToPerformanceGrading());
         gradingSubjects.add(new CPUUsageGrading());
         if (sparkRetrievers != null) {
-            gradingSubjects.add(new SparkMSPTGrading(sparkRetrievers));
+            if (sparkRetrievers.MSPTSupported()) {
+                gradingSubjects.add(new SparkMSPTGrading(sparkRetrievers));
+            }
         }
     }
 

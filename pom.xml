@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.neomechanical</groupId>
     <artifactId>NeoPerformance-parent</artifactId>
-    <version>1.15.1</version>
+    <version>1.15.2</version>
     <packaging>pom</packaging>
     <name>NeoPerformance</name>
     <properties>
