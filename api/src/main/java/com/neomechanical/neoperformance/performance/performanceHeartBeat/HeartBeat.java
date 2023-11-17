@@ -60,6 +60,7 @@ public class HeartBeat {
                 } else if (!isCurrentlyHalted && previouslyHalted.get()) {
                     if (!previouslyManuallyHalted.get()) {
                         HaltNotifier.notifyResumed(dataManager);
+                    } else {
                         previouslyManuallyHalted.set(false);
                     }
                     haltStartTime.set(0);
