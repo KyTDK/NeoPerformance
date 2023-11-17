@@ -34,9 +34,12 @@ public class SmartReportPlaceholders {
                 .addInternalPlaceholder("%CPUSYSTEMLOAD%", (Player player) -> new DecimalFormat("###.##").format(CPU.getSystemCpuLoad() * 100));
         //Add spark placeholders
         if (dataManager.getHookIntegrations().isInstalled("spark")) {
-            if (sparkRetrievers.MSPTSupported()) {
-                languageManager.addInternalPlaceholder("%MSPTMINUTEAVERAGE%", (Player player) -> new DecimalFormat("###.##").format(sparkRetrievers.MSPT()));
-            }
+            languageManager.addInternalPlaceholder("%MSPTMINUTEAVERAGE%", (Player player) -> {
+                if (!sparkRetrievers.MSPTSupported()) {
+                    return "N.A";
+                }
+                return new DecimalFormat("###.##").format(sparkRetrievers.MSPT());
+            });
         }
     }
 }
