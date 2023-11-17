@@ -39,6 +39,10 @@ public class InsightsFixCommand extends Command {
 
     @Override
     public void perform(CommandSender commandSender, String[] strings) {
+        if (strings.length < 3) {
+            MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
+            return;
+        }
         String categoryObtained = strings[2];
         if (categoryObtained.equals("all")) {
             InsightManager insightManager = new InsightManager();
@@ -51,6 +55,10 @@ public class InsightsFixCommand extends Command {
                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
             }));
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
+            return;
+        }
+        if (strings.length < 4) {
+            MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("commandGeneric.errorInvalidSyntax", null));
             return;
         }
         String element = strings[3];
