@@ -51,6 +51,7 @@ public class InsightsFixCommand extends Command {
                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
             }));
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
+            return;
         }
         String element = strings[3];
         InsightManager insightManager = new InsightManager();
