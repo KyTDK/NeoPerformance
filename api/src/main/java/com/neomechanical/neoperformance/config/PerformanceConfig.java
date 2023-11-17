@@ -25,7 +25,6 @@ public class PerformanceConfig {
 
     public PerformanceConfig(FileConfiguration fileConfiguration) {
         this.fileConfiguration = fileConfiguration;
-
         // Initialize other fields here after setting fileConfiguration
         this.performanceTweakSettings = new PerformanceTweakSettings(fileConfiguration);
         this.haltSettings = new HaltSettings(fileConfiguration);
