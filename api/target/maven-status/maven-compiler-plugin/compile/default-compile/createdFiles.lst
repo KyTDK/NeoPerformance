@@ -71,6 +71,7 @@ com/neomechanical/neoperformance/commands/SmartClearCommand.class
 com/neomechanical/neoperformance/performance/smart/chunks/ChunksScanner.class
 com/neomechanical/neoperformance/commands/BypassCommand.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading.class
+com/neomechanical/neoperformance/performance/insight/InsightGUIReport$1.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Memory.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/EntityActivationRangeMonsters.class
 com/neomechanical/neoperformance/performance/haltActions/HaltActionPojo.class
