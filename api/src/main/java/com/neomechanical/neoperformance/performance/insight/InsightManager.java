@@ -9,7 +9,7 @@ import com.neomechanical.neoperformance.performance.insight.elements.spigot.yml.
 import java.util.HashMap;
 
 public class InsightManager {
-    private final HashMap<String, HashMap<String, InsightElement>> categories = new HashMap<>();
+    private final HashMap<String, HashMap<String, InsightElement<?>>> categories = new HashMap<>();
 
     public InsightManager() {
         //Server.properties
@@ -40,7 +40,7 @@ public class InsightManager {
         addInsight("bukkit.yml", "ticks-per-animal-autosave", new TicksPerAutosave());
     }
 
-    public void addInsight(String category, String insightName, InsightElement insightElement) {
+    public void addInsight(String category, String insightName, InsightElement<?> insightElement) {
         if (insightElement.isInsightApplicableOrAlreadyPresent()) {
             categories.computeIfAbsent(category, k -> new HashMap<>()).put(insightName, insightElement);
         }
@@ -50,7 +50,7 @@ public class InsightManager {
         return categories.getOrDefault(category, new HashMap<>()).get(insight);
     }
 
-    public HashMap<String, HashMap<String, InsightElement>> getInsightsMap() {
+    public HashMap<String, HashMap<String, InsightElement<?>>> getInsightsMap() {
         return categories;
     }
 }

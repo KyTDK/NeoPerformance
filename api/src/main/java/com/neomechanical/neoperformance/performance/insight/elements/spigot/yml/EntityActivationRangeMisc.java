@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class EntityActivationRangeMisc extends InsightElement {
+public class EntityActivationRangeMisc extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
@@ -14,23 +14,23 @@ public class EntityActivationRangeMisc extends InsightElement {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("world-settings.default.entity-activation-range.monsters") > 2;
+        return yamlOthers.getConfig().getDouble("world-settings.default.entity-activation-range.monsters") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "2";
+    public void setDefaultValue() {
+        recommendedValue = 2;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("world-settings.default.entity-activation-range.monsters");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("world-settings.default.entity-activation-range.monsters");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("world-settings.default.entity-activation-range.monsters", 2);
+        yamlConfiguration.set("world-settings.default.entity-activation-range.monsters", recommendedValue);
         try {
             yamlConfiguration.save(new File("spigot.yml"));
         } catch (Exception e) {

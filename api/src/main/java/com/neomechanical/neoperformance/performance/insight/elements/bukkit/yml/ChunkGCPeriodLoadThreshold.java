@@ -6,30 +6,30 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class ChunkGCPeriodLoadThreshold extends InsightElement {
+public class ChunkGCPeriodLoadThreshold extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("spawn-limits.chunk-gc.load-threshold") > 300;
+        return yamlOthers.getConfig().getDouble("spawn-limits.chunk-gc.load-threshold") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "300";
+    public void setDefaultValue() {
+        recommendedValue = 300;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("spawn-limits.chunk-gc.load-threshold");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("spawn-limits.chunk-gc.load-threshold");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("spawn-limits.chunk-gc.load-threshold", 300);
+        yamlConfiguration.set("spawn-limits.chunk-gc.load-threshold", recommendedValue);
         try {
             yamlConfiguration.save(new File("bukkit.yml"));
         } catch (Exception e) {

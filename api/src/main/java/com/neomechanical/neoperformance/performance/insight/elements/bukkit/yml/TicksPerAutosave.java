@@ -6,30 +6,30 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class TicksPerAutosave extends InsightElement {
+public class TicksPerAutosave extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("spawn-limits.ticks-per.autosave") > 6000;
+        return yamlOthers.getConfig().getDouble("spawn-limits.ticks-per.autosave") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "6000";
+    public void setDefaultValue() {
+        recommendedValue = 6000;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("spawn-limits.ticks-per.autosave");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("spawn-limits.ticks-per.autosave");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("spawn-limits.ticks-per.autosave", 6000);
+        yamlConfiguration.set("spawn-limits.ticks-per.autosave", recommendedValue);
         try {
             yamlConfiguration.save(new File("bukkit.yml"));
         } catch (Exception e) {

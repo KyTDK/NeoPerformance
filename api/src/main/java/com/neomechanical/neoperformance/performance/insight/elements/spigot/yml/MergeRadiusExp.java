@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class MergeRadiusExp extends InsightElement {
+public class MergeRadiusExp extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
@@ -14,23 +14,23 @@ public class MergeRadiusExp extends InsightElement {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("world-settings.default.merge-radius.exp") > 6;
+        return yamlOthers.getConfig().getDouble("world-settings.default.merge-radius.exp") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "6";
+    public void setDefaultValue() {
+        recommendedValue = 6;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("world-settings.default.merge-radius.exp");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("world-settings.default.merge-radius.exp");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("world-settings.default.merge-radius.exp", 6);
+        yamlConfiguration.set("world-settings.default.merge-radius.exp", recommendedValue);
         try {
             yamlConfiguration.save(new File("spigot.yml"));
         } catch (Exception e) {

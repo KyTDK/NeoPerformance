@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class MaxTickTimeTile extends InsightElement {
+public class MaxTickTimeTile extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
@@ -14,23 +14,23 @@ public class MaxTickTimeTile extends InsightElement {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("world-settings.default.max-tick-time.tile") > 50;
+        return yamlOthers.getConfig().getDouble("world-settings.default.max-tick-time.tile") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "50";
+    public void setDefaultValue() {
+        recommendedValue = 50;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("world-settings.default.max-tick-time.tile");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("world-settings.default.max-tick-time.tile");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("world-settings.default.max-tick-time.tile", 50);
+        yamlConfiguration.set("world-settings.default.max-tick-time.tile", recommendedValue);
         try {
             yamlConfiguration.save(new File("spigot.yml"));
         } catch (Exception e) {

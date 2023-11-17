@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class ItemDespawnRate extends InsightElement {
+public class ItemDespawnRate extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
@@ -14,23 +14,23 @@ public class ItemDespawnRate extends InsightElement {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("world-settings.default.item-despawn-rate") > 1200;
+        return yamlOthers.getConfig().getDouble("world-settings.default.item-despawn-rate") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "1200";
+    public void setDefaultValue() {
+        recommendedValue = 1200;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("world-settings.default.item-despawn-rate");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("world-settings.default.item-despawn-rate");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("world-settings.default.item-despawn-rate", 1200);
+        yamlConfiguration.set("world-settings.default.item-despawn-rate", recommendedValue);
         try {
             yamlConfiguration.save(new File("spigot.yml"));
         } catch (Exception e) {

@@ -6,30 +6,30 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class TicksPerMonsterSpawns extends InsightElement {
+public class TicksPerMonsterSpawns extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("spawn-limits.ticks-per.monster-spawns") > 40;
+        return yamlOthers.getConfig().getDouble("spawn-limits.ticks-per.monster-spawns") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "40";
+    public void setDefaultValue() {
+        recommendedValue = 40;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("spawn-limits.ticks-per.monster-spawns");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("spawn-limits.ticks-per.monster-spawns");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("spawn-limits.ticks-per.monster-spawns", 40);
+        yamlConfiguration.set("spawn-limits.ticks-per.monster-spawns", recommendedValue);
         try {
             yamlConfiguration.save(new File("bukkit.yml"));
         } catch (Exception e) {

@@ -3,24 +3,24 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
 
-public class Snooper extends InsightElement {
+public class Snooper extends InsightElement<Boolean> {
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
         return Boolean.parseBoolean(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.SNOOPER));
     }
 
     @Override
-    public String recommendedValue() {
-        return "false";
+    public void setDefaultValue() {
+        recommendedValue = false;
     }
 
     @Override
-    public String currentValue() {
-        return ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.SNOOPER);
+    public Boolean currentValue() {
+        return Boolean.valueOf(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.SNOOPER));
     }
 
     @Override
     public void fix() {
-        ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.SNOOPER, "false");
+        ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.SNOOPER, String.valueOf(recommendedValue));
     }
 }

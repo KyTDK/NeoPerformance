@@ -6,30 +6,30 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class SpawnLimitsMonsters extends InsightElement {
+public class SpawnLimitsMonsters extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("bukkit.yml");
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("spawn-limits.monsters") > 50;
+        return yamlOthers.getConfig().getDouble("spawn-limits.monsters") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "50";
+    public void setDefaultValue() {
+        recommendedValue = 50;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("spawn-limits.monsters");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("spawn-limits.monsters");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("spawn-limits.monsters", 50);
+        yamlConfiguration.set("spawn-limits.monsters", recommendedValue);
         try {
             yamlConfiguration.save(new File("bukkit.yml"));
         } catch (Exception e) {

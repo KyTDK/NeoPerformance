@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class MaxTntPerTick extends InsightElement {
+public class MaxTntPerTick extends InsightElement<Integer> {
     private final YAMLOthers yamlOthers = new YAMLOthers("spigot.yml");
 
     @Override
@@ -14,23 +14,23 @@ public class MaxTntPerTick extends InsightElement {
         if (!yamlOthers.configExists()) {
             return false;
         }
-        return yamlOthers.getConfig().getDouble("world-settings.default.max-tnt-per-tick") > 10;
+        return yamlOthers.getConfig().getDouble("world-settings.default.max-tnt-per-tick") > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "10";
+    public void setDefaultValue() {
+        recommendedValue = 10;
     }
 
     @Override
-    public String currentValue() {
-        return yamlOthers.getConfig().getString("world-settings.default.max-tnt-per-tick");
+    public Integer currentValue() {
+        return yamlOthers.getConfig().getInt("world-settings.default.max-tnt-per-tick");
     }
 
     @Override
     public void fix() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
-        yamlConfiguration.set("world-settings.default.max-tnt-per-tick", 10);
+        yamlConfiguration.set("world-settings.default.max-tnt-per-tick", recommendedValue);
         try {
             yamlConfiguration.save(new File("spigot.yml"));
         } catch (Exception e) {

@@ -3,24 +3,24 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 import com.neomechanical.neoperformance.performance.insight.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
 
-public class RenderDistance extends InsightElement {
+public class RenderDistance extends InsightElement<Integer> {
     @Override
     public boolean isInsightApplicableOrAlreadyPresent() {
-        return Integer.parseInt(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE)) > 4;
+        return Integer.parseInt(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE)) > recommendedValue;
     }
 
     @Override
-    public String recommendedValue() {
-        return "4";
+    public void setDefaultValue() {
+        recommendedValue = 4;
     }
 
     @Override
-    public String currentValue() {
-        return ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE);
+    public Integer currentValue() {
+        return Integer.valueOf(ServerConfiguration.getServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE));
     }
 
     @Override
     public void fix() {
-        ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE, "4");
+        ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.VIEW_DISTANCE, String.valueOf(recommendedValue));
     }
 }
