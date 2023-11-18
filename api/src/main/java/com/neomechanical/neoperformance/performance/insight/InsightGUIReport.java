@@ -61,7 +61,7 @@ public class InsightGUIReport {
                 };
 
                 InventoryItem item = new InventoryItem.InventoryItemBuilder(
-                        () -> ItemUtil.createItem(Material.ANVIL, 1, "&7" + insightName + " &f&l(Left click to fix)", lore))
+                        () -> ItemUtil.createItem(Material.ANVIL, 1, "&7" + insightName.replace("-", " ") + " &f&l(Left click to fix)", lore))
                         .setAction(fixAction, ClickType.LEFT)
                         .setAction(changeRecommendedValue, ClickType.RIGHT)
                         .build();
