@@ -60,6 +60,7 @@ insights:
   fixed: "<green>Sabit"
   noElements: "<gray>Tüm bilgiler optimize edilmiştir. Sunucunuz önerilen tüm ayarları karşılıyor."
   fixAutomaticDone: "<green>Düzeltme uygulandı, sunucunuzu yeniden başlatmanız gerekebilir"
+  aikarFlags: "<gray>Başlangıç ​​bayraklarınızı önerilen değerlere ayarlayın <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
   #İlgili mesajları durdur
 halted:
   actionBarMessage: '<red>Sunucu şu anda ağır yük altında. Lütfen daha sonra tekrar deneyiniz.'

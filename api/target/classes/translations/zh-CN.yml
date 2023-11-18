@@ -60,6 +60,7 @@ insights:
   fixed: "<green>固定的"
   noElements: "<gray>所有见解均已优化。您的服务器满足所有推荐的设置。"
   fixAutomaticDone: "<green>修复已实施，您可能需要重新启动服务器"
+  aikarFlags: "<gray>将启动标志设置为推荐值 <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
 #Halt 相关消息
 halted:
   actionBarMessage: '<red>服务器当前负载过重。请稍后再试。'

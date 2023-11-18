@@ -61,6 +61,7 @@ insights:
   fixed: "<green>Fijado"
   noElements: "<gray>Todos los conocimientos están optimizados. Su servidor cumple con todas las configuraciones recomendadas."
   fixAutomaticDone: "<green>Se ha implementado la solución, es posible que deba reiniciar su servidor"
+  aikarFlags: "<gray>Configure sus indicadores de inicio con los valores recomendados <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
 halted:
   actionBarMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Por favor, inténtelo de nuevo más tarde.'
   actionBarTeleportMessage: '<red>El servidor se encuentra actualmente bajo una gran carga. Serás teletransportado momentáneamente.'

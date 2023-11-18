@@ -21,7 +21,6 @@ com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTntP
 com/neomechanical/neoperformance/performance/lagPrevention/LagPrevention.class
 com/neomechanical/neoperformance/performance/smart/smartReport/grading/GradeData.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/dependent/SparkMSPTGrading.class
-com/neomechanical/neoperformance/performance/insight/elements/serverType/ServerType.class
 com/neomechanical/neoperformance/config/LagNotifier.class
 com/neomechanical/neoperformance/performance/insight/utils/YAMLOthers.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartClear.class
@@ -62,6 +61,7 @@ com/neomechanical/neoperformance/integrations/discorsrv/JDAListener.class
 com/neomechanical/neoperformance/performance/smart/smartNotifier/report/LagReport.class
 com/neomechanical/neoperformance/performance/smart/smartReport/SmartReport.class
 com/neomechanical/neoperformance/utils/updates/UpdateChecker.class
+com/neomechanical/neoperformance/performance/insight/elements/software/ServerType.class
 com/neomechanical/neoperformance/config/PerformanceTweaksConfiguration.class
 com/neomechanical/neoperformance/utils/mail/EmailClient$1.class
 com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/SpawnLimitsWaterAnimals.class
@@ -93,6 +93,7 @@ com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/TicksPe
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartScanner.class
 com/neomechanical/neoperformance/performance/smart/smartSchedule/utils/ScheduleTranslation.class
 com/neomechanical/neoperformance/performance/smart/smartReport/SmartReportPlaceholders.class
+com/neomechanical/neoperformance/performance/insight/elements/software/UsingAikarFlags.class
 com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/SpawnLimitsMonsters.class
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.class
 com/neomechanical/neoperformance/config/Commands.class
