@@ -1,11 +1,13 @@
 package com.neomechanical.neoperformance.performance.insight.elements;
 
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
+import org.bukkit.entity.Player;
 
 public abstract class InsightElement<T> {
     public T recommendedValue;
     public boolean canFix = true;
     public boolean canEditValue = true;
+    public boolean sendDoneMessage = true;
     public abstract boolean isInsightApplicableOrAlreadyPresent();
 
     public InsightElement() {
@@ -38,9 +40,9 @@ public abstract class InsightElement<T> {
 
     public abstract T currentValue();
 
-    protected abstract void fixInternally();
+    protected abstract void fixInternally(Player player);
 
-    public void fix() {
-        fixInternally();
+    public void fix(Player player) {
+        fixInternally(player);
     }
 }

@@ -60,6 +60,7 @@ insights:
   fixed: "<green>Fest"
   noElements: "<gray>Alle Erkenntnisse sind optimiert. Ihr Server erfüllt alle empfohlenen Einstellungen."
   fixAutomaticDone: "<green>Der Fix wurde implementiert. Möglicherweise müssen Sie Ihren Server neu starten"
+  aikarFlags: "<gray>Setzen Sie Ihre Startflags auf die empfohlenen Werte <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
   #Halten Sie verwandte Nachrichten an
 halted:
   actionBarMessage: '<red>Server ist derzeit stark ausgelastet. Bitte versuchen Sie es später noch einmal.'

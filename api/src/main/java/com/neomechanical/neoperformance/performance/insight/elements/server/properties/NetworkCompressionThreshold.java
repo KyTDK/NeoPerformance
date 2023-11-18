@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 
 import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
+import org.bukkit.entity.Player;
 
 public class NetworkCompressionThreshold extends InsightElement<Integer> {
     @Override
@@ -20,7 +21,7 @@ public class NetworkCompressionThreshold extends InsightElement<Integer> {
     }
 
     @Override
-    protected void fixInternally() {
+    protected void fixInternally(Player player) {
         ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.PACKET_COMPRESSION_LIMIT, String.valueOf(recommendedValue));
     }
 }

@@ -1,7 +1,8 @@
-package com.neomechanical.neoperformance.performance.insight.elements.serverType;
+package com.neomechanical.neoperformance.performance.insight.elements.software;
 
 import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +39,7 @@ public class ServerType extends InsightElement<String> {
     }
 
     @Override
-    protected void fixInternally() {
+    protected void fixInternally(Player player) {
     }
 
 }

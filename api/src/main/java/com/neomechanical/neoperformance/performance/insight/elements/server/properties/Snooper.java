@@ -2,6 +2,7 @@ package com.neomechanical.neoperformance.performance.insight.elements.server.pro
 
 import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
+import org.bukkit.entity.Player;
 
 public class Snooper extends InsightElement<Boolean> {
     @Override
@@ -20,7 +21,7 @@ public class Snooper extends InsightElement<Boolean> {
     }
 
     @Override
-    protected void fixInternally() {
+    protected void fixInternally(Player player) {
         ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.SNOOPER, String.valueOf(recommendedValue));
     }
 }

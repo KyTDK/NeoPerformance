@@ -60,6 +60,7 @@ insights:
   fixed: "<green>Fixed"
   noElements: "<gray>All insights are optimized. Your server meets all recommended settings."
   fixAutomaticDone: "<green>Fix has been implemented, you may need to restart your server"
+  aikarFlags: "<gray>Set your startup flags to the recommended values <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
 #Halt related messages
 halted:
   actionBarMessage: '<red>Server is currently under heavy load. Please try again later.'

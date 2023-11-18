@@ -36,16 +36,18 @@ public class InsightGUIReport {
                 }
 
                 Consumer<InventoryClickEvent> fixAction = event -> {
-                    insightElement.fix();
+                    insightElement.fix((Player) event.getWhoClicked());
                     new Insights().openInsights(event.getWhoClicked());
-                    MessageUtil.sendMM(event.getWhoClicked(), NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
+                    if (insightElement.sendDoneMessage) {
+                        MessageUtil.sendMM(event.getWhoClicked(), NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
+                    }
                 };
 
                 Consumer<InventoryClickEvent> changeRecommendedValue = event -> {
                     new AnvilGUI.Builder().
                             onClick((slot, snapshot) -> {
                                 insightElement.setRecommendedValue(snapshot.getText());
-                                insightElement.fix();
+                                insightElement.fix((Player) event.getWhoClicked());
                                 new Insights().openInsights(event.getWhoClicked());
                                 return Collections.singletonList(AnvilGUI.ResponseAction.close());
                             })

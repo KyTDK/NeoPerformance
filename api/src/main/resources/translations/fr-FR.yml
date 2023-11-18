@@ -60,6 +60,7 @@ insights:
   fixed: "<green>Fixé"
   noElements: "<gray>Toutes les informations sont optimisées. Votre serveur répond à tous les paramètres recommandés."
   fixAutomaticDone: "<green>Le correctif a été implémenté, vous devrez peut-être redémarrer votre serveur"
+  aikarFlags: "<gray>Définissez vos indicateurs de démarrage sur les valeurs recommandées <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
   #Arrêter les messages liés
 halted:
   actionBarMessage: '<red>Le serveur est actuellement sous forte charge. Veuillez réessayer plus tard.'

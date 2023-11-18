@@ -5,6 +5,7 @@ import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.insight.InsightManager;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class InsightsFixCommand extends Command {
                 return;
             }
             insightManager.getInsightsMap().forEach((category, categoryInsights) -> categoryInsights.forEach((insightName, insightElement) -> {
-                insightElement.fix();
+                insightElement.fix((Player) commandSender);
                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
             }));
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
@@ -63,7 +64,7 @@ public class InsightsFixCommand extends Command {
         }
         String element = strings[3];
         InsightManager insightManager = new InsightManager();
-        insightManager.getInsight(categoryObtained, element).fix();
+        insightManager.getInsight(categoryObtained, element).fix((Player) commandSender);
         MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
     }
 

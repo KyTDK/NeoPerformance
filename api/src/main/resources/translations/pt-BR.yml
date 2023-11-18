@@ -60,6 +60,7 @@ insights:
   fixed: "<green>Fixo"
   noElements: "<gray>Todos os insights são otimizados. Seu servidor atende a todas as configurações recomendadas."
   fixAutomaticDone: "<green>A correção foi implementada, pode ser necessário reiniciar seu servidor"
+  aikarFlags: "<gray>Defina seus sinalizadores de inicialização com os valores recomendados <u><click:open_url:'https://docs.papermc.io/paper/aikars-flags'>https://docs.papermc.io/paper/aikars-flags</click></u>"
 #Mensagens relacionadas à parada
 halted:
   actionBarMessage: '<red>O servidor está sobrecarregado no momento. Tente novamente mais tarde.'
