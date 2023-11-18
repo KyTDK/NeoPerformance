@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.insight.elements.server.properties;
 
-import com.neomechanical.neoperformance.performance.insight.InsightElement;
+import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
 
 public class NetworkCompressionThreshold extends InsightElement<Integer> {
@@ -20,7 +20,7 @@ public class NetworkCompressionThreshold extends InsightElement<Integer> {
     }
 
     @Override
-    public void fix() {
+    protected void fixInternally() {
         ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.PACKET_COMPRESSION_LIMIT, String.valueOf(recommendedValue));
     }
 }

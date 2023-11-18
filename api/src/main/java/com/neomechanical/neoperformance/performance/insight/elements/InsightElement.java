@@ -1,4 +1,4 @@
-package com.neomechanical.neoperformance.performance.insight;
+package com.neomechanical.neoperformance.performance.insight.elements;
 
 import com.neomechanical.neoconfig.neoutils.NeoUtils;
 
@@ -37,5 +37,9 @@ public abstract class InsightElement<T> {
 
     public abstract T currentValue();
 
-    public abstract void fix();
+    protected abstract void fixInternally();
+
+    public void fix() {
+        fixInternally();
+    }
 }

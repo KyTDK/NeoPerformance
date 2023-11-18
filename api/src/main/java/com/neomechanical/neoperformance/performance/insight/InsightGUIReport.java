@@ -7,6 +7,7 @@ import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryIte
 import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;

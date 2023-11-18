@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.insight.elements.spigot.yml;
 
-import com.neomechanical.neoperformance.performance.insight.InsightElement;
+import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.YAMLOthers;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -28,7 +28,7 @@ public class EntityActivationRangeMisc extends InsightElement<Integer> {
     }
 
     @Override
-    public void fix() {
+    protected void fixInternally() {
         YamlConfiguration yamlConfiguration = yamlOthers.getConfig();
         yamlConfiguration.set("world-settings.default.entity-activation-range.monsters", recommendedValue);
         try {

@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.performance.insight;
 
+import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.elements.bukkit.yml.*;
 import com.neomechanical.neoperformance.performance.insight.elements.server.properties.NetworkCompressionThreshold;
 import com.neomechanical.neoperformance.performance.insight.elements.server.properties.RenderDistance;

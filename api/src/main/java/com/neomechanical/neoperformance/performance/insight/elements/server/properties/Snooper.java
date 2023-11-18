@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.insight.elements.server.properties;
 
-import com.neomechanical.neoperformance.performance.insight.InsightElement;
+import com.neomechanical.neoperformance.performance.insight.elements.InsightElement;
 import com.neomechanical.neoperformance.performance.insight.utils.ServerConfiguration;
 
 public class Snooper extends InsightElement<Boolean> {
@@ -20,7 +20,7 @@ public class Snooper extends InsightElement<Boolean> {
     }
 
     @Override
-    public void fix() {
+    protected void fixInternally() {
         ServerConfiguration.setServerProperty(ServerConfiguration.ServerProperty.SNOOPER, String.valueOf(recommendedValue));
     }
 }
