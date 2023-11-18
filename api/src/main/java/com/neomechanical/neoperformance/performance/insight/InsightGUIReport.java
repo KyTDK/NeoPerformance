@@ -31,7 +31,9 @@ public class InsightGUIReport {
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Category: ") + category);
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Current value: &4") + insightElement.currentValue());
                 lore.add(ChatColor.translateAlternateColorCodes('&', "&7Recommended value: &a") + insightElement.getRecommendedValue());
-                lore.add(ChatColor.translateAlternateColorCodes('&', "&f&lRight click &r&7to set custom value"));
+                if (insightElement.canEditValue) {
+                    lore.add(ChatColor.translateAlternateColorCodes('&', "&f&lRight click &r&7to set custom value"));
+                }
 
                 Consumer<InventoryClickEvent> fixAction = event -> {
                     insightElement.fix();
@@ -61,12 +63,22 @@ public class InsightGUIReport {
                             .open((Player) event.getWhoClicked());
                 };
 
-                InventoryItem item = new InventoryItem.InventoryItemBuilder(
-                        () -> ItemUtil.createItem(Material.ANVIL, 1, "&7" + insightName.replace("-", " ") + " &f&l(Left click to fix)", lore))
-                        .setAction(fixAction, ClickType.LEFT)
-                        .setAction(changeRecommendedValue, ClickType.RIGHT)
-                        .build();
-                inventoryGUI.addItem(item);
+
+                InventoryItem.InventoryItemBuilder item = new InventoryItem.InventoryItemBuilder(
+                        () -> {
+                            String elementItemName = "&7" + insightName.replace("-", " ");
+                            if (insightElement.canFix) {
+                                elementItemName = elementItemName + " &f&l(Left click to fix)";
+                            }
+                            return ItemUtil.createItem(Material.ANVIL, 1, elementItemName, lore);
+                        });
+                if (insightElement.canFix) {
+                    item.setAction(fixAction, ClickType.LEFT);
+                }
+                if (insightElement.canEditValue) {
+                    item.setAction(changeRecommendedValue, ClickType.RIGHT);
+                }
+                inventoryGUI.addItem(item.build());
             });
         });
         return this;

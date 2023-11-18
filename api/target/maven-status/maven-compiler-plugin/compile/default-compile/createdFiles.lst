@@ -21,6 +21,7 @@ com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTntP
 com/neomechanical/neoperformance/performance/lagPrevention/LagPrevention.class
 com/neomechanical/neoperformance/performance/smart/smartReport/grading/GradeData.class
 com/neomechanical/neoperformance/performance/smart/smartReport/gradingSubjects/dependent/SparkMSPTGrading.class
+com/neomechanical/neoperformance/performance/insight/elements/serverType/ServerType.class
 com/neomechanical/neoperformance/config/LagNotifier.class
 com/neomechanical/neoperformance/performance/insight/utils/YAMLOthers.class
 com/neomechanical/neoperformance/performance/smart/smartClear/SmartClear.class
@@ -102,8 +103,8 @@ com/neomechanical/neoperformance/performance/smart/chunks/ChunksNotifier.class
 com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading$1.class
 com/neomechanical/neoperformance/performance/utils/tps/TPSReflection.class
 com/neomechanical/neoperformance/performance/insight/InsightPlaceholders.class
-com/neomechanical/neoperformance/performance/insight/InsightElement.class
 com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTickTimeEntity.class
+com/neomechanical/neoperformance/performance/insight/elements/InsightElement.class
 com/neomechanical/neoperformance/register/StartRegistering.class
 com/neomechanical/neoperformance/performance/smart/smartSchedule/guis/TimeDateSchedule.class
 com/neomechanical/neoperformance/managers/DataHandler.class

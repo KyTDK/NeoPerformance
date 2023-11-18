@@ -4,7 +4,8 @@ import com.neomechanical.neoconfig.neoutils.NeoUtils;
 
 public abstract class InsightElement<T> {
     public T recommendedValue;
-
+    public boolean canFix = true;
+    public boolean canEditValue = true;
     public abstract boolean isInsightApplicableOrAlreadyPresent();
 
     public InsightElement() {

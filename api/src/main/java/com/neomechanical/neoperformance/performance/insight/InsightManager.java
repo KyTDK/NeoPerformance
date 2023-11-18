@@ -5,6 +5,7 @@ import com.neomechanical.neoperformance.performance.insight.elements.bukkit.yml.
 import com.neomechanical.neoperformance.performance.insight.elements.server.properties.NetworkCompressionThreshold;
 import com.neomechanical.neoperformance.performance.insight.elements.server.properties.RenderDistance;
 import com.neomechanical.neoperformance.performance.insight.elements.server.properties.Snooper;
+import com.neomechanical.neoperformance.performance.insight.elements.serverType.ServerType;
 import com.neomechanical.neoperformance.performance.insight.elements.spigot.yml.*;
 
 import java.util.HashMap;
@@ -39,6 +40,8 @@ public class InsightManager {
         addInsight("bukkit.yml", "ticks-per-animal-spawns", new TicksPerAnimalSpawns());
         addInsight("bukkit.yml", "ticks-per-animal-monster-spawns", new TicksPerMonsterSpawns());
         addInsight("bukkit.yml", "ticks-per-animal-autosave", new TicksPerAutosave());
+        //ServerType
+        addInsight("server-type", "server-type", new ServerType());
     }
 
     public void addInsight(String category, String insightName, InsightElement<?> insightElement) {

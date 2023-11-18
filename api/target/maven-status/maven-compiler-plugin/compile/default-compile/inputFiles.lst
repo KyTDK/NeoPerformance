@@ -18,7 +18,6 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartNotifier/dataGetters/ChunkData.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/haltActions/HaltActionPojo.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/NeoPerformance.java
-/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/InsightElement.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/server/properties/RenderDistance.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/utils/tps/TPSReflection.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/TicksPerAutosave.java
@@ -38,6 +37,7 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/chunks/ChunksScanner.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartClear/SmartScan.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/PerformanceTweakSettings.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/serverType/ServerType.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/commands/smartReport/SmartReportCommand.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/bukkit/yml/TicksPerMonsterSpawns.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/Commands.java
@@ -87,6 +87,7 @@
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/EmailNotifications.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/performanceHeartBeat/HaltNotifier.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/smart/smartReport/utils/Grading.java
+/mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/InsightElement.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/config/HaltSettings.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.java
 /mnt/HDD1/Documents/GitHub/NeoPerformance/api/src/main/java/com/neomechanical/neoperformance/performance/insight/elements/spigot/yml/MaxTickTimeEntity.java
