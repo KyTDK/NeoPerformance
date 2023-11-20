@@ -2,7 +2,7 @@ package com.neomechanical.neoperformance.commands.insights;
 
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
-import com.neomechanical.neoperformance.performance.insight.Insights;
+import com.neomechanical.neoperformance.performance.modules.insight.Insights;
 import org.bukkit.command.CommandSender;
 
 public class InsightsCommand extends Command {

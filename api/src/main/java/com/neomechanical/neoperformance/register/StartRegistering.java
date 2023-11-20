@@ -7,13 +7,13 @@ import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
 import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
-import com.neomechanical.neoperformance.performance.insight.InsightPlaceholders;
 import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
+import com.neomechanical.neoperformance.performance.modules.insight.InsightPlaceholders;
+import com.neomechanical.neoperformance.performance.modules.smartNotifier.LagChecker;
+import com.neomechanical.neoperformance.performance.modules.smartReport.SmartReportPlaceholders;
+import com.neomechanical.neoperformance.performance.modules.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
-import com.neomechanical.neoperformance.performance.smart.smartNotifier.LagChecker;
-import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReportPlaceholders;
-import com.neomechanical.neoperformance.performance.smart.smartReport.utils.Grading;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.Logger;
 import com.neomechanical.neoperformance.utils.updates.UpdateChecker;
@@ -47,7 +47,7 @@ public class StartRegistering {
                 .addInternalPlaceholder("%PLAYERCOUNT%", (Player player) -> String.valueOf(Bukkit.getOnlinePlayers().size()))
                 .addInternalPlaceholder("%PLAYER%", (Player player) -> player == null ? "None" : player.getName())
                 .addInternalPlaceholder("%UPDATESTATUS%", (Player player) -> TpsUtils.getFancyUpdateStatus());
-        //Add smart report placeholders
+        //Add modules report placeholders
         new SmartReportPlaceholders(languageManager, dataManager).addPlaceholders(plugin);
         //Add insights placeholders
         new InsightPlaceholders(languageManager).addPlaceholders();

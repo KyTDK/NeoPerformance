@@ -3,7 +3,7 @@ package com.neomechanical.neoperformance.commands.insights;
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performance.insight.InsightManager;
+import com.neomechanical.neoperformance.performance.modules.insight.InsightManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

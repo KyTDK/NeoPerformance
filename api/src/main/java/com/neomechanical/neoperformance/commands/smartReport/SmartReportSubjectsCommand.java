@@ -3,7 +3,7 @@ package com.neomechanical.neoperformance.commands.smartReport;
 import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
-import com.neomechanical.neoperformance.performance.smart.smartReport.SmartReport;
+import com.neomechanical.neoperformance.performance.modules.smartReport.SmartReport;
 import org.bukkit.command.CommandSender;
 
 public class SmartReportSubjectsCommand extends Command {

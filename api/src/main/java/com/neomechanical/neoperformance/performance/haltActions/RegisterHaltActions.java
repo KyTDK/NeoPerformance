@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.performance.haltActions;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performance.smart.smartClear.SmartClear;
+import com.neomechanical.neoperformance.performance.modules.smartClear.SmartClear;
 
 public class RegisterHaltActions {
     private final NeoPerformance plugin;

@@ -20,27 +20,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <minimizeJar>true</minimizeJar>
-                    <relocations>
-                        <relocation>
-                            <pattern>com.neomechanical.neoconfig.neoutils</pattern>
-                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludeDefaults>false</excludeDefaults>
-                            <includes>
-                                <include>com/neomechanical/neoutils/**</include>
-                            </includes>
-                            <excludes>
-                                <exclude>com/neomechanical/neoconfig/neoutils/**</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -64,8 +43,8 @@
             <url>https://hub.neomechanical.com/repository/maven-releases/</url>
         </repository>
     </repositories>
-    <serverProperties>
+    <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </serverProperties>
+    </properties>
 </project>

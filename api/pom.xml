@@ -119,6 +119,12 @@
             <version>1.27.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.retrooper.packetevents</groupId>
+            <artifactId>spigot</artifactId>
+            <version>2.0.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -141,6 +147,10 @@
             <id>dv8tion</id>
             <name>m2-dv8tion</name>
             <url>https://m2.dv8tion.net/releases</url>
+        </repository>
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
         </repository>
     </repositories>
 </project>
