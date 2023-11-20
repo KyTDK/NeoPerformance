@@ -64,6 +64,7 @@ public class StartRegistering {
             plugin.setHeartBeat(heartBeat);
             getServer().getPluginManager().registerEvents(new HaltServer(plugin, (IHaltWrapper) mappedVersions.get("halt")), plugin);
             getServer().getPluginManager().registerEvents(new LagPrevention(plugin), plugin);
+            //Update listener
             new UpdateChecker(plugin, 103183).start();
             if (!(dataManager.getPerformanceConfig().getLagNotifier().getLagNotifierRunInterval() < 1)) {
                 new LagChecker(plugin).start();
