@@ -39,7 +39,7 @@ public class SmartClearCommand extends Command {
     }
 
     public String getSyntax() {
-        return "/np smartclear";
+        return "/np smartclear -force <skip confirmation> -world <clear for specific world> -all -size <size of cluster>";
     }
 
     public String getPermission() {

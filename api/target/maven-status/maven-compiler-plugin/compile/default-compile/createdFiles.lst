@@ -34,10 +34,8 @@ com/neomechanical/neoperformance/performance/modules/smartReport/relatedManagers
 com/neomechanical/neoperformance/commands/smartReport/SmartReportCommand.class
 com/neomechanical/neoperformance/performance/utils/PerformanceConfigurationSettingsUtils.class
 com/neomechanical/neoperformance/commands/chunks/ChunkTeleportCommand.class
-com/neomechanical/neoperformance/performance/modules/activity/ThreadDumper.class
 com/neomechanical/neoperformance/commands/insights/InsightsCommand$1.class
 com/neomechanical/neoperformance/performance/modules/smartClear/SmartScanner.class
-com/neomechanical/neoperformance/performance/modules/activity/ThreadDumper$Specific.class
 com/neomechanical/neoperformance/performance/modules/smartSchedule/data/IntervalData.class
 com/neomechanical/neoperformance/performance/modules/insight/elements/bukkit/yml/SpawnLimitsAmbient.class
 com/neomechanical/neoperformance/utils/UtilManager.class
@@ -57,7 +55,6 @@ com/neomechanical/neoperformance/performance/modules/insight/Insights.class
 com/neomechanical/neoperformance/performance/modules/smartNotifier/LagChecker.class
 com/neomechanical/neoperformance/commands/SmartClearCommand$SmartClearAccumulator$1.class
 com/neomechanical/neoperformance/performance/modules/smartSchedule/utils/ScheduleTranslation.class
-com/neomechanical/neoperformance/commands/ActivityCommand.class
 com/neomechanical/neoperformance/commands/insights/InsightsFixCommand.class
 com/neomechanical/neoperformance/integrations/discorsrv/JDAListener.class
 com/neomechanical/neoperformance/performance/modules/smartReport/utils/Memory.class
@@ -97,7 +94,6 @@ com/neomechanical/neoperformance/performance/modules/insight/elements/spigot/yml
 com/neomechanical/neoperformance/commands/ReloadCommand.class
 com/neomechanical/neoperformance/performance/modules/insight/utils/ServerConfiguration.class
 com/neomechanical/neoperformance/performance/modules/smartClear/SmartScan.class
-com/neomechanical/neoperformance/performance/modules/activity/ThreadFinder.class
 com/neomechanical/neoperformance/performance/modules/smartReport/grading/GradingSubjectsManager.class
 com/neomechanical/neoperformance/performance/modules/smartSchedule/guis/TimeDateSchedule.class
 com/neomechanical/neoperformance/performance/performanceHeartBeat/HeartBeat.class
