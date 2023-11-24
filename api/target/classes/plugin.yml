@@ -7,4 +7,6 @@ authors:
 prefix: NeoPerformance
 api-version: 1.13
 softdepend: [ spark, DiscordSRV ]
+dependencies:
+  - com.github.retrooper.packetevents:spigot:2.0.2
 default-permission: op
