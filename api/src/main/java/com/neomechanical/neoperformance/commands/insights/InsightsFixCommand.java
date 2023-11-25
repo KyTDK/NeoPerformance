@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InsightsFixCommand extends Command {
     @Override
@@ -49,17 +50,18 @@ public class InsightsFixCommand extends Command {
         if (categoryObtained.equals("all")) {
             HashMap<String, HashMap<String, InsightElement<?>>> insightMap = new InsightManager().getInsightsMap();
 
-            boolean fixedElement = false;
+            AtomicBoolean fixedElement = new AtomicBoolean(false);
             insightMap.forEach((category, categoryInsights) ->
                     categoryInsights.entrySet().stream()
                             .filter(entry -> entry.getValue().isAutomatic)
                             .forEach(entry -> {
+                                fixedElement.set(true);
                                 InsightElement<?> insightElement = entry.getValue();
                                 insightElement.fix((Player) commandSender);
                                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + entry.getKey());
                             })
             );
-            if (!fixedElement) {
+            if (!fixedElement.get()) {
                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.noElements", null));
                 return;
             }
