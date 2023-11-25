@@ -116,9 +116,7 @@ com/neomechanical/neoperformance/utils/messages/Messages.class
 com/neomechanical/neoperformance/utils/updates/UpdateChecker$1.class
 com/neomechanical/neoperformance/performance/modules/insight/elements/spigot/yml/ItemDespawnRate.class
 com/neomechanical/neoperformance/integrations/HookIntegrations.class
-com/neomechanical/neoperformance/performance/modules/impact/PacketEventsListener.class
 com/neomechanical/neoperformance/performance/modules/insight/elements/InsightElement.class
-com/neomechanical/neoperformance/commands/ImpactCommand.class
 com/neomechanical/neoperformance/commands/insights/InsightsCommand.class
 com/neomechanical/neoperformance/performance/modules/smartReport/report/PerformanceReport.class
 com/neomechanical/neoperformance/config/HaltSettings.class
