@@ -8,6 +8,8 @@ public abstract class InsightElement<T> {
     public boolean canFix = true;
     public boolean canEditValue = true;
     public boolean sendDoneMessage = true;
+    public boolean isAutomatic = true;
+
     public abstract boolean isInsightApplicableOrAlreadyPresent();
 
     public InsightElement() {

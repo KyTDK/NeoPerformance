@@ -52,8 +52,10 @@ public class InsightsFixCommand extends Command {
                 return;
             }
             insightManager.getInsightsMap().forEach((category, categoryInsights) -> categoryInsights.forEach((insightName, insightElement) -> {
-                insightElement.fix((Player) commandSender);
-                MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
+                if (insightElement.isAutomatic) {
+                    insightElement.fix((Player) commandSender);
+                    MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
+                }
             }));
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
             return;
