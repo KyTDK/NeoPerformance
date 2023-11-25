@@ -4,6 +4,7 @@ import com.neomechanical.neoconfig.neoutils.commands.Command;
 import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.modules.insight.InsightManager;
+import com.neomechanical.neoperformance.performance.modules.insight.elements.InsightElement;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -46,17 +47,22 @@ public class InsightsFixCommand extends Command {
         }
         String categoryObtained = strings[2];
         if (categoryObtained.equals("all")) {
-            InsightManager insightManager = new InsightManager();
-            if (insightManager.getInsightsMap().isEmpty()) {
+            HashMap<String, HashMap<String, InsightElement<?>>> insightMap = new InsightManager().getInsightsMap();
+
+            boolean fixedElement = false;
+            insightMap.forEach((category, categoryInsights) ->
+                    categoryInsights.entrySet().stream()
+                            .filter(entry -> entry.getValue().isAutomatic)
+                            .forEach(entry -> {
+                                InsightElement<?> insightElement = entry.getValue();
+                                insightElement.fix((Player) commandSender);
+                                MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + entry.getKey());
+                            })
+            );
+            if (!fixedElement) {
                 MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.noElements", null));
                 return;
             }
-            insightManager.getInsightsMap().forEach((category, categoryInsights) -> categoryInsights.forEach((insightName, insightElement) -> {
-                if (insightElement.isAutomatic) {
-                    insightElement.fix((Player) commandSender);
-                    MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixed", null) + " " + insightName);
-                }
-            }));
             MessageUtil.sendMM(commandSender, NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
             return;
         }
