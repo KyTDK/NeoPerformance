@@ -37,7 +37,9 @@ public class InsightGUIReport {
 
                 Consumer<InventoryClickEvent> fixAction = event -> {
                     insightElement.fix((Player) event.getWhoClicked());
-                    new Insights().openInsights(event.getWhoClicked());
+                    if (!insightElement.closeOnFix) {
+                        new Insights().openInsights(event.getWhoClicked());
+                    }
                     if (insightElement.sendDoneMessage) {
                         MessageUtil.sendMM(event.getWhoClicked(), NeoPerformance.getLanguageManager().getString("insights.fixAutomaticDone", null));
                     }

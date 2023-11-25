@@ -18,6 +18,7 @@ public class ServerType extends InsightElement<String> {
         recommendedValue = "Paper";
         canFix = false;
         canEditValue = false;
+        isAutomatic = false;
     }
 
     @Override

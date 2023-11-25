@@ -24,6 +24,7 @@ public class UsingAikarFlags extends InsightElement<Boolean> {
         recommendedValue = true;
         sendDoneMessage = false;
         isAutomatic = false;
+        closeOnFix = true;
     }
 
     @Override
