@@ -53,6 +53,10 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
+        </repository>
+        <repository>
             <id>neomechanical-releases</id>
             <url>https://hub.neomechanical.com/repository/maven-releases/</url>
         </repository>
