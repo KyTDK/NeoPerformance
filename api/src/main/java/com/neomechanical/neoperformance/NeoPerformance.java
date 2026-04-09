@@ -70,6 +70,9 @@ public final class NeoPerformance extends JavaPlugin {
     @Override
     public void onEnable() {
         setInstance(this);// This must always be first, as it sets the instance of the plugin //
+        // NeoConfig touches NeoUtils-backed config classes during tweak loading.
+        // Initialize NeoUtils before any config access.
+        NeoUtils.init(this);
         dataManager = new DataManager();
         dataManager.loadTweakSettings(this);
         //Set POJOs
