@@ -1,5 +1,6 @@
 package com.neomechanical.neoperformance.version.halt;
 
+import org.bukkit.Material;
 import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Powerable;
@@ -13,7 +14,7 @@ public class HaltWrapperNONLEGACY implements IHaltWrapper {
     @Override
     public void blockPhysics(BlockPhysicsEvent e) {
         BlockData blockData = e.getBlock().getBlockData();
-        if (blockData instanceof AnaloguePowerable || blockData instanceof Powerable) {
+        if (blockData instanceof AnaloguePowerable || blockData instanceof Powerable || isRedstoneRelated(e.getBlock().getType())) {
             return;
         }
         e.setCancelled(true);
@@ -35,5 +36,26 @@ public class HaltWrapperNONLEGACY implements IHaltWrapper {
         if (!e.getSender().getName().equals("CONSOLE")) {
             e.setCancelled(true);
         }
+    }
+
+    private boolean isRedstoneRelated(Material material) {
+        String materialName = material.name();
+        return materialName.contains("REDSTONE")
+                || materialName.contains("REPEATER")
+                || materialName.contains("COMPARATOR")
+                || materialName.contains("OBSERVER")
+                || materialName.contains("PISTON")
+                || materialName.contains("PRESSURE_PLATE")
+                || materialName.contains("BUTTON")
+                || materialName.contains("LEVER")
+                || materialName.contains("TRIPWIRE")
+                || materialName.contains("DAYLIGHT_DETECTOR")
+                || materialName.contains("SCULK_SENSOR")
+                || materialName.contains("TARGET")
+                || materialName.contains("DOOR")
+                || materialName.contains("TRAPDOOR")
+                || materialName.contains("RAIL")
+                || materialName.contains("NOTE_BLOCK")
+                || materialName.contains("LECTERN");
     }
 }
