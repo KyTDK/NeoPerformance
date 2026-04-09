@@ -19,10 +19,6 @@ Each repository now has:
 - `CI` workflow: compile/package validation on pushes and PRs.
 - `Publish` workflow: deploy to Nexus on manual dispatch and version tags.
 
-`NeoPerformance` also has:
-
-- `Deploy To Pterodactyl` workflow: build, upload, restart target server, and print logs.
-
 ## Required GitHub Secrets
 
 ### For publishing in all 3 repos
@@ -34,12 +30,6 @@ These credentials are used for:
 
 - `neomechanical-releases`
 - `neomechanical-snapshots`
-
-### For NeoPerformance deployment workflow
-
-- `PTERO_SSH_HOST`
-- `PTERO_SSH_USER`
-- `PTERO_SSH_PRIVATE_KEY`
 
 ## Recommended Release Procedure
 
@@ -62,20 +52,6 @@ These credentials are used for:
 
 ### 4) Deploy NeoPerformance to server
 
-- Run `Deploy To Pterodactyl` in `NeoPerformance`.
-- Input:
-  - `server_uuid` = your target Pterodactyl server UUID
-  - `plugin_filename` = `NeoPerformance.jar` (default)
-
-The deployment workflow preserves a rollback copy as:
-
-- `plugins/NeoPerformance.jar.prev`
-
-## Rollback
-
-If needed, on the server:
-
-1. Stop/restart container safely.
-2. Restore `plugins/NeoPerformance.jar.prev` to `plugins/NeoPerformance.jar`.
-3. Restart server container.
+- Deploy manually using your preferred server process.
+- Recommended: keep a backup of the previous plugin jar for quick rollback.
 
