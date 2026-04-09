@@ -49,6 +49,10 @@
     </build>
     <repositories>
         <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
             <id>neomechanical-releases</id>
             <url>https://hub.neomechanical.com/repository/maven-releases/</url>
         </repository>
@@ -58,7 +62,7 @@
         <dependency>
             <groupId>com.neomechanical</groupId>
             <artifactId>NeoConfig</artifactId>
-            <version>1.5.7</version>
+            <version>1.5.8</version>
         </dependency>
     </dependencies>
 </project>

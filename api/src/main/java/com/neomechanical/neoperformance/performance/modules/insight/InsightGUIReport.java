@@ -1,6 +1,5 @@
 package com.neomechanical.neoperformance.performance.modules.insight;
 
-import com.neomechanical.neoconfig.anvilgui.AnvilGUI;
 import com.neomechanical.neoconfig.neoutils.inventory.InventoryUtil;
 import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryGUI;
 import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryItem;
@@ -14,10 +13,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
@@ -46,25 +43,11 @@ public class InsightGUIReport {
                 };
 
                 Consumer<InventoryClickEvent> changeRecommendedValue = event -> {
-                    new AnvilGUI.Builder().
-                            onClick((slot, snapshot) -> {
-                                insightElement.setRecommendedValue(snapshot.getText());
-                                insightElement.fix((Player) event.getWhoClicked());
-                                new Insights().openInsights(event.getWhoClicked());
-                                return Collections.singletonList(AnvilGUI.ResponseAction.close());
-                            })
-                            .onClose(stateSnapshot -> {
-                                new BukkitRunnable() {
-                                    @Override
-                                    public void run() {
-                                        new Insights().openInsights(event.getWhoClicked());
-                                    }
-                                }.runTaskLater(NeoPerformance.getInstance(), 1L);
-                            })
-                            .text(insightElement.getRecommendedValue())
-                            .title("Change recommended value")
-                            .plugin(NeoPerformance.getInstance())
-                            .open((Player) event.getWhoClicked());
+                    MessageUtil.sendMM(
+                            event.getWhoClicked(),
+                            "&cInline value editing is temporarily disabled in this build."
+                    );
+                    new Insights().openInsights(event.getWhoClicked());
                 };
 
 
