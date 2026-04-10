@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.smartSchedule;
 
-import com.neomechanical.neoconfig.neoutils.config.ConfigManager;
+import com.neomechanical.neoutils.config.ConfigManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 
 public class SmartSchedule {

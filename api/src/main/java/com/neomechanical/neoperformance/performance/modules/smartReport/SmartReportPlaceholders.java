@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.smartReport;
 
-import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
+import com.neomechanical.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.integrations.spark.SparkRetrievers;
 import com.neomechanical.neoperformance.performance.managers.DataManager;

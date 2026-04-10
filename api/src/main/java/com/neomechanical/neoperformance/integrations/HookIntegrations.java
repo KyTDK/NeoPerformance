@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.integrations;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
+import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.integrations.discorsrv.DiscordSRVHook;
 import com.neomechanical.neoperformance.integrations.spark.SparkRetrievers;
 import lombok.Getter;

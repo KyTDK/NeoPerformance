@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.commands.chunks;
 
-import com.neomechanical.neoconfig.neoutils.commands.Command;
+import com.neomechanical.neoutils.commands.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

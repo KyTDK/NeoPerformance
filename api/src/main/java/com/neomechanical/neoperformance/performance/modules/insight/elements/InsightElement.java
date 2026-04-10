@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.insight.elements;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
+import com.neomechanical.neoutils.NeoUtils;
 import org.bukkit.entity.Player;
 
 public abstract class InsightElement<T> {

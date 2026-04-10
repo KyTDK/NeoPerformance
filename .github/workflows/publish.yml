@@ -1,7 +1,6 @@
 name: Publish
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v*"
@@ -49,7 +48,44 @@ jobs:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
 
+      - name: Resolve project version
+        id: project_version
+        run: |
+          VERSION=$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version | tail -n 1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Validate release tag and version
+        run: |
+          VERSION="${{ steps.project_version.outputs.version }}"
+          EXPECTED_TAG="v$VERSION"
+          if [[ "$VERSION" == *-SNAPSHOT ]]; then
+            echo "Release workflow cannot publish snapshot version: $VERSION" >&2
+            exit 1
+          fi
+          if [ "${GITHUB_REF_NAME}" != "$EXPECTED_TAG" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match project.version $VERSION. Expected $EXPECTED_TAG." >&2
+            exit 1
+          fi
+
+      - name: Check whether release already exists
+        id: release_state
+        run: |
+          VERSION="${{ steps.project_version.outputs.version }}"
+          ARTIFACT_URL="https://hub.neomechanical.com/repository/maven-releases/com/neomechanical/NeoPerformance-parent/$VERSION/NeoPerformance-parent-$VERSION.pom"
+          STATUS=$(curl -sS -o /dev/null -w "%{http_code}" -u "$NEXUS_USERNAME:$NEXUS_PASSWORD" "$ARTIFACT_URL")
+          if [ "$STATUS" = "200" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release $VERSION already exists in Nexus. Skipping deploy."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Release $VERSION is not present in Nexus yet."
+          fi
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+
       - name: Deploy artifact
+        if: steps.release_state.outputs.exists != 'true'
         run: mvn -B -ntp deploy -DskipTests --settings ~/.m2/settings.xml
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}

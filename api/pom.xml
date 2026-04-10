@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.neomechanical</groupId>
         <artifactId>NeoPerformance-parent</artifactId>
-        <version>1.15.10</version>
+        <version>1.15.11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>NeoPerformance</artifactId>
@@ -13,6 +13,19 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.36</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -30,6 +43,10 @@
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>com.neomechanical.neoperformance</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.neomechanical.neoutils</pattern>
+                            <shadedPattern>com.neomechanical.neoperformance.neoutils</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>com.neomechanical.neoconfig</pattern>
@@ -63,7 +80,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
+            <version>1.18.36</version>
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.activation/activation -->

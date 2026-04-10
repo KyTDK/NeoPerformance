@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.smartNotifier.dataGetters;
 
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.modules.chunks.ChunksNotifier;
 import com.neomechanical.neoperformance.performance.modules.chunks.ChunksScanner;

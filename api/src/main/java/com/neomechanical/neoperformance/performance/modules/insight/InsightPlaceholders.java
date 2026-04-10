@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.insight;
 
-import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
+import com.neomechanical.neoutils.languages.LanguageManager;
 import org.bukkit.Bukkit;
 
 public class InsightPlaceholders {

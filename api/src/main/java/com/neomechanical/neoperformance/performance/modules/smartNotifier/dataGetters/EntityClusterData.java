@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.smartNotifier.dataGetters;
 
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.modules.smartClear.SmartScanNotifier;
 import com.neomechanical.neoperformance.performance.modules.smartClear.SmartScanner;

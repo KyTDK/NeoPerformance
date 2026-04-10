@@ -9,10 +9,10 @@
 
 package com.neomechanical.neoperformance;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
-import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
-import com.neomechanical.neoconfig.neoutils.version.Versioning;
-import com.neomechanical.neoconfig.neoutils.version.versions.Versions;
+import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.languages.LanguageManager;
+import com.neomechanical.neoutils.version.Versioning;
+import com.neomechanical.neoutils.version.versions.Versions;
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.DataHandler;
 import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
@@ -32,7 +32,7 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static com.neomechanical.neoconfig.neoutils.updates.IsUpToDate.isUpToDate;
+import static com.neomechanical.neoutils.updates.IsUpToDate.isUpToDate;
 
 public final class NeoPerformance extends JavaPlugin {
     @Getter

@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.commands.scheduling;
 
-import com.neomechanical.neoconfig.neoutils.commands.Command;
-import com.neomechanical.neoconfig.neoutils.inventory.InventoryUtil;
-import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryGUI;
-import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryItem;
-import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
+import com.neomechanical.neoutils.commands.Command;
+import com.neomechanical.neoutils.inventory.InventoryUtil;
+import com.neomechanical.neoutils.inventory.managers.data.InventoryGUI;
+import com.neomechanical.neoutils.inventory.managers.data.InventoryItem;
+import com.neomechanical.neoutils.items.ItemUtil;
 import com.neomechanical.neoperformance.performance.modules.smartSchedule.guis.IntervalSchedule;
 import com.neomechanical.neoperformance.performance.modules.smartSchedule.guis.TimeDateSchedule;
 import org.bukkit.Material;

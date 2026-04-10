@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.config;
 
-import com.neomechanical.neoconfig.neoutils.config.ConfigManager;
+import com.neomechanical.neoutils.config.ConfigManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 

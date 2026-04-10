@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.modules.smartReport.utils;
 
-import com.neomechanical.neoconfig.neoutils.server.resources.DataSize;
+import com.neomechanical.neoutils.server.resources.DataSize;
 
 public class Memory {
     public static long usedMemory() {

@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.performance.halt;
 
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.utils.PerformanceConfigurationSettingsUtils;

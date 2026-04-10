@@ -1,7 +1,7 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.neomechanical.neoconfig.menu.ConfigMenu;
-import com.neomechanical.neoconfig.neoutils.commands.Command;
+import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoperformance.NeoPerformance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

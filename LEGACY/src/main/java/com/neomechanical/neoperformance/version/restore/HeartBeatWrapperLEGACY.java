@@ -1,6 +1,6 @@
 package com.neomechanical.neoperformance.version.restore;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
+import com.neomechanical.neoutils.NeoUtils;
 import com.neomechanical.neoperformance.version.heartbeat.IHeartBeat;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

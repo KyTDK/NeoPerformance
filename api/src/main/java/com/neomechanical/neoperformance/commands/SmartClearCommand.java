@@ -1,8 +1,8 @@
 package com.neomechanical.neoperformance.commands;
 
 import com.google.common.collect.ImmutableMap;
-import com.neomechanical.neoconfig.neoutils.commands.Command;
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.commands.Command;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.modules.smartClear.SmartClear;
 import com.neomechanical.neoperformance.performance.modules.smartClear.SmartScan;

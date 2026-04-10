@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performance.modules.insight;
 
-import com.neomechanical.neoconfig.neoutils.inventory.InventoryUtil;
-import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryGUI;
-import com.neomechanical.neoconfig.neoutils.inventory.managers.data.InventoryItem;
-import com.neomechanical.neoconfig.neoutils.items.ItemUtil;
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.inventory.InventoryUtil;
+import com.neomechanical.neoutils.inventory.managers.data.InventoryGUI;
+import com.neomechanical.neoutils.inventory.managers.data.InventoryItem;
+import com.neomechanical.neoutils.items.ItemUtil;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.modules.insight.elements.InsightElement;
 import org.bukkit.ChatColor;

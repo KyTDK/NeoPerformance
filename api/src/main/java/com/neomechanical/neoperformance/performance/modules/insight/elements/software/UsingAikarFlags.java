@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performance.modules.insight.elements.software;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.audience.Audience;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.inventory.Book;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.kyori.adventure.audience.Audience;
+import com.neomechanical.neoutils.kyori.adventure.inventory.Book;
+import com.neomechanical.neoutils.kyori.adventure.text.Component;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.modules.insight.elements.InsightElement;
 import org.bukkit.entity.Player;

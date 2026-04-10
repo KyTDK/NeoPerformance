@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.register;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
-import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
-import com.neomechanical.neoconfig.neoutils.server.ServerUtils;
-import com.neomechanical.neoconfig.neoutils.version.VersionMatcher;
-import com.neomechanical.neoconfig.neoutils.version.VersionWrapper;
+import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.languages.LanguageManager;
+import com.neomechanical.neoutils.server.ServerUtils;
+import com.neomechanical.neoutils.version.VersionMatcher;
+import com.neomechanical.neoutils.version.VersionWrapper;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.halt.HaltServer;
 import com.neomechanical.neoperformance.performance.lagPrevention.LagPrevention;

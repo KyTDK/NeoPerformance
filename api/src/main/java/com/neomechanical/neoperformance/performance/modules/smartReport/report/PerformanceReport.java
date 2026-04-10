@@ -1,10 +1,10 @@
 package com.neomechanical.neoperformance.performance.modules.smartReport.report;
 
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.TextComponent;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.format.NamedTextColor;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
-import com.neomechanical.neoconfig.neoutils.messages.MessageUtil;
+import com.neomechanical.neoutils.kyori.adventure.text.Component;
+import com.neomechanical.neoutils.kyori.adventure.text.TextComponent;
+import com.neomechanical.neoutils.kyori.adventure.text.format.NamedTextColor;
+import com.neomechanical.neoutils.kyori.adventure.text.minimessage.MiniMessage;
+import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.performance.modules.smartReport.grading.GradeData;
 import com.neomechanical.neoperformance.performance.modules.smartReport.gradingSubjects.IGradingSubject;
 import com.neomechanical.neoperformance.performance.modules.smartReport.utils.Grading;

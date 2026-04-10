@@ -1,11 +1,11 @@
 package com.neomechanical.neoperformance.performance.modules.smartReport;
 
-import com.neomechanical.neoconfig.neoutils.NeoUtils;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.Component;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.ClickEvent;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.event.HoverEvent;
-import com.neomechanical.neoconfig.neoutils.kyori.adventure.text.minimessage.MiniMessage;
-import com.neomechanical.neoconfig.neoutils.languages.LanguageManager;
+import com.neomechanical.neoutils.NeoUtils;
+import com.neomechanical.neoutils.kyori.adventure.text.Component;
+import com.neomechanical.neoutils.kyori.adventure.text.event.ClickEvent;
+import com.neomechanical.neoutils.kyori.adventure.text.event.HoverEvent;
+import com.neomechanical.neoutils.kyori.adventure.text.minimessage.MiniMessage;
+import com.neomechanical.neoutils.languages.LanguageManager;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.integrations.spark.SparkRetrievers;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
