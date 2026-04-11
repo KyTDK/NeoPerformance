@@ -26,7 +26,7 @@ jobs:
           cache: maven
 
       - name: Build plugin
-        run: mvn -B -ntp clean verify -DskipTests
+        run: mvn -U -B -ntp clean verify -DskipTests
 
       - name: Upload API artifact
         uses: actions/upload-artifact@v4

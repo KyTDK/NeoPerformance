@@ -100,6 +100,18 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+target/
+
+.mvn/timing.properties
+.flattened-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
 .gradle
 build/
 
