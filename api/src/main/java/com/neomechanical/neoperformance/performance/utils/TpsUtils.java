@@ -18,17 +18,15 @@ public class TpsUtils {
         if (tps == 0) {
             return false;
         }
-        int haltAt = plugin.getDataManager().tweakSettings().getTpsHaltAt();
-        if (haltAt == -1) {
+        if (player != null && plugin.getDataManager().isBypassed(player)) {
             return false;
-        }
-        if (player != null) {
-            if (plugin.getDataManager().isBypassed(player)) {
-                return false;
-            }
         }
         if (plugin.getDataManager().isManualHalt()) {
             return true;
+        }
+        int haltAt = plugin.getDataManager().tweakSettings().getTpsHaltAt();
+        if (haltAt == -1) {
+            return false;
         }
         return tps <= haltAt;
     }

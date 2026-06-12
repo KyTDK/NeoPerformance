@@ -8,10 +8,12 @@ import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
 import com.neomechanical.neoperformance.utils.OfflinePermissionUtils;
 import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.Location;
 import org.bukkit.entity.Creature;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
@@ -38,6 +40,7 @@ public class HaltServer implements Listener {
             BlockFace.WEST
     };
     public static final CachedData cachedData = new CachedData();
+    private static final int REDSTONE_PRIME_RADIUS = 16;
     private final NeoPerformance plugin;
     private final IHaltWrapper iHaltWrapper;
     private final DataManager dataManager;
@@ -274,6 +277,55 @@ public class HaltServer implements Listener {
         cachedData.cacheRedstoneLocation(block.getLocation());
         for (BlockFace face : DIRECT_NEIGHBORS) {
             cachedData.cacheRedstoneLocation(block.getRelative(face).getLocation());
+        }
+    }
+
+    /**
+     * Snapshot redstone components near online players when halt begins so restore has locations
+     * even if no {@link BlockRedstoneEvent} fired yet during the halt window.
+     */
+    public static void primeRedstoneCache(NeoPerformance plugin) {
+        if (!plugin.getDataManager().haltSettings().isHaltRedstone()) {
+            return;
+        }
+
+        int cachedBefore = cachedData.snapshotRedstoneActivity().size();
+        for (Player player : plugin.getServer().getOnlinePlayers()) {
+            primeRedstoneNear(player.getLocation());
+        }
+        int cachedAfter = cachedData.snapshotRedstoneActivity().size();
+        int added = cachedAfter - cachedBefore;
+        if (added > 0) {
+            plugin.getLogger().info("Primed " + added + " redstone block location(s) for halt restore.");
+        }
+    }
+
+    private static void primeRedstoneNear(Location center) {
+        World world = center.getWorld();
+        if (world == null) {
+            return;
+        }
+
+        int centerX = center.getBlockX();
+        int centerY = center.getBlockY();
+        int centerZ = center.getBlockZ();
+        int minY = world.getMinHeight();
+        int maxY = world.getMaxHeight() - 1;
+
+        for (int x = centerX - REDSTONE_PRIME_RADIUS; x <= centerX + REDSTONE_PRIME_RADIUS; x++) {
+            for (int z = centerZ - REDSTONE_PRIME_RADIUS; z <= centerZ + REDSTONE_PRIME_RADIUS; z++) {
+                if (!world.isChunkLoaded(x >> 4, z >> 4)) {
+                    continue;
+                }
+                for (int y = Math.max(minY, centerY - REDSTONE_PRIME_RADIUS);
+                     y <= Math.min(maxY, centerY + REDSTONE_PRIME_RADIUS);
+                     y++) {
+                    Block block = world.getBlockAt(x, y, z);
+                    if (RedstoneComponentUtils.isRedstoneComponent(block)) {
+                        cachedData.cacheRedstoneLocation(block.getLocation());
+                    }
+                }
+            }
         }
     }
 }

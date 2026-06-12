@@ -3,6 +3,7 @@ package com.neomechanical.neoperformance.commands;
 import com.neomechanical.neoutils.commands.Command;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
+import com.neomechanical.neoperformance.performance.halt.HaltServer;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -46,9 +47,13 @@ public class HaltCommand extends Command {
     public void perform(CommandSender player, String[] args) {
         plugin.getDataManager().toggleManualHalt();
         if (plugin.getDataManager().isManualHalt()) {
+            HaltServer.primeRedstoneCache(plugin);
             MessageUtil.sendMM(player, getLanguageManager().getString("halt.toggleHaltOn", null));
         } else {
             MessageUtil.sendMM(player, getLanguageManager().getString("halt.toggleHaltOff", null));
+            if (plugin.getHeartBeat() != null) {
+                plugin.getHeartBeat().restoreServer();
+            }
         }
     }
 

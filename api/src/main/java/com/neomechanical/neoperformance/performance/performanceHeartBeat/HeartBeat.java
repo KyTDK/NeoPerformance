@@ -57,6 +57,7 @@ public class HeartBeat {
                     } else {
                         previouslyManuallyHalted.set(true);
                     }
+                    HaltServer.primeRedstoneCache(plugin);
                     HaltActions.runHaltActions(plugin, tps);
                     haltStartTime.set(System.currentTimeMillis());
                     previouslyHalted.set(true);
