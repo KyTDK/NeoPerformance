@@ -15,7 +15,7 @@ public final class RedstoneComponentUtils {
     }
 
     public static boolean isRedstoneMaterial(Material material) {
-        if (material == null || material.isAir()) {
+        if (material == null || material == Material.AIR) {
             return false;
         }
         String materialName = material.name();

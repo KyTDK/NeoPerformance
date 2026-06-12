@@ -309,7 +309,7 @@ public class HaltServer implements Listener {
         int centerX = center.getBlockX();
         int centerY = center.getBlockY();
         int centerZ = center.getBlockZ();
-        int minY = world.getMinHeight();
+        int minY = 0;
         int maxY = world.getMaxHeight() - 1;
 
         for (int x = centerX - REDSTONE_PRIME_RADIUS; x <= centerX + REDSTONE_PRIME_RADIUS; x++) {
