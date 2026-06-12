@@ -10,13 +10,9 @@ import java.util.function.Consumer;
 
 public class HaltActions {
     private final HaltActionPojo haltActionPojo;
-    private static DataManager dataManager;
-    private static DataHandler dataHandler;
 
     public HaltActions(NeoPerformance plugin) {
         this.haltActionPojo = plugin.getPerformanceDataHandler().getHaltActionPojo();
-        dataManager = plugin.getDataManager();
-        dataHandler = plugin.getPerformanceDataHandler();
     }
 
     public HaltActions registerHaltAction(String name, Consumer<Double> actionConsumer) {
@@ -28,9 +24,11 @@ public class HaltActions {
         return haltActionPojo.getHaltActionMap();
     }
 
-    public static void runHaltActions(double tps) {
+    public static void runHaltActions(NeoPerformance plugin, double tps) {
+        DataManager dataManager = plugin.getDataManager();
+        DataHandler dataHandler = plugin.getPerformanceDataHandler();
         Map<String, Consumer<Double>> actionMap = dataHandler.getHaltActionPojo().getHaltActionMap();
-        for (String actionName : dataManager.getPerformanceConfig().getHaltActions()) {
+        for (String actionName : dataManager.haltActionNames()) {
             if (actionMap.containsKey(actionName.toLowerCase())) {
                 actionMap.get(actionName.toLowerCase()).accept(tps);
             } else if (!actionName.equals("null")) {

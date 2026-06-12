@@ -1,6 +1,7 @@
 package com.neomechanical.neoperformance.performance.modules.smartClear;
 
 import com.neomechanical.neoperformance.config.PerformanceConfig;
+import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.utils.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -11,6 +12,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class SmartScanner {
+
+    /** Same as {@link #scan(int, int, PerformanceConfig, World...)} but reads command defaults from {@link DataManager}. */
+    public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, DataManager dataManager, World... worlds) {
+        return scan(totalClustersReturn, clusterSize, dataManager.getPerformanceConfig(), worlds);
+    }
+
     public static List<List<Entity>> scan(int totalClustersReturn, int clusterSize, PerformanceConfig performanceConfig, World... worlds) {
         //Create clusters
         List<Entity> entities = new ArrayList<>();
@@ -83,6 +90,11 @@ public class SmartScanner {
             topClusters.add(cluster1);
         }
         return topClusters;
+    }
+
+    /** Same as {@link #scan(int, List, PerformanceConfig, boolean)} using loaded configuration from {@link DataManager}. */
+    public static SmartScan scan(int clusterSize, List<World> world, DataManager dataManager, boolean all) {
+        return scan(clusterSize, world, dataManager.getPerformanceConfig(), all);
     }
 
     public static SmartScan scan(int clusterSize, List<World> world, PerformanceConfig performanceConfig, boolean all) {

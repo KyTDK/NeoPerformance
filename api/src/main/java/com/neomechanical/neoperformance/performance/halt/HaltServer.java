@@ -3,10 +3,10 @@ package com.neomechanical.neoperformance.performance.halt;
 import com.neomechanical.neoutils.messages.MessageUtil;
 import com.neomechanical.neoperformance.NeoPerformance;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
-import com.neomechanical.neoperformance.performance.utils.PerformanceConfigurationSettingsUtils;
 import com.neomechanical.neoperformance.performance.utils.TpsUtils;
 import com.neomechanical.neoperformance.utils.ActionBar;
 import com.neomechanical.neoperformance.utils.NPC;
+import com.neomechanical.neoperformance.utils.OfflinePermissionUtils;
 import com.neomechanical.neoperformance.version.halt.IHaltWrapper;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -24,6 +24,7 @@ import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.neomechanical.neoperformance.NeoPerformance.getLanguageManager;
 
@@ -49,7 +50,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onTeleport(PlayerTeleportEvent e) {
-        if (isHalted(e.getPlayer()) && dataManager.getPerformanceConfig().getHaltSettings().isHaltTeleportation()) {
+        if (isHalted(e.getPlayer()) && dataManager.haltSettings().isHaltTeleportation()) {
             if (NPC.isNpc(e.getPlayer())) {
                 return;
             }
@@ -66,7 +67,7 @@ public class HaltServer implements Listener {
             if (goTo == null) {
                 return;
             }
-            if (!PerformanceConfigurationSettingsUtils.canMove(dataManager.getPerformanceConfig(), e.getFrom().distance(goTo))) {
+            if (!dataManager.allowsPlayerMoveSpeed(e.getFrom().distance(goTo))) {
                 e.setCancelled(true);
                 new ActionBar().SendComponentToPlayer(e.getPlayer(), getLanguageManager().getString("halted.actionBarMessage", null));
             }
@@ -75,7 +76,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltExplosions()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltExplosions()) {
             List<Entity> list = e.getEntity().getNearbyEntities(10, 10, 10);
             //remove all entities that explode
             e.setCancelled(true);
@@ -90,7 +91,7 @@ public class HaltServer implements Listener {
     //Halt all redstone activity
     @EventHandler
     public void onRedstone(BlockRedstoneEvent e) {
-        if (!dataManager.getPerformanceConfig().getHaltSettings().isHaltRedstone()) {
+        if (!dataManager.haltSettings().isHaltRedstone()) {
             return;
         }
         if (!isHalted(null)) {
@@ -105,7 +106,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPistonExtend(BlockPistonExtendEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltRedstone()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltRedstone()) {
             e.setCancelled(true);
             cachePistonImpact(e.getBlock(), e.getBlocks(), e.getDirection(), false);
         }
@@ -114,7 +115,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPistonRetract(BlockPistonRetractEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltRedstone()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltRedstone()) {
             e.setCancelled(true);
             cachePistonImpact(e.getBlock(), e.getBlocks(), e.getDirection(), true);
         }
@@ -122,7 +123,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltMobSpawning()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltMobSpawning()) {
             if (NPC.isNpc(e.getEntity())) {
                 return;
             }
@@ -135,21 +136,21 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onItemMove(InventoryMoveItemEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltInventoryMovement()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltInventoryMovement()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onServerCommand(ServerCommandEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltCommandBlock()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltCommandBlock()) {
             iHaltWrapper.onServerCommand(e);
         }
     }
 
     @EventHandler()
     public void onItemDrop(PlayerDropItemEvent e) {
-        if (isHalted(e.getPlayer()) && dataManager.getPerformanceConfig().getHaltSettings().isHaltItemDrops()) {
+        if (isHalted(e.getPlayer()) && dataManager.haltSettings().isHaltItemDrops()) {
             e.setCancelled(true);
             sendHaltFeedback(e.getPlayer(), "halted.onItemDrop");
         }
@@ -157,7 +158,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onBlockBreak(BlockBreakEvent e) {
-        if (isHalted(e.getPlayer()) && dataManager.getPerformanceConfig().getHaltSettings().isHaltBlockBreaking()) {
+        if (isHalted(e.getPlayer()) && dataManager.haltSettings().isHaltBlockBreaking()) {
             e.setCancelled(true);
             sendHaltFeedback(e.getPlayer(), "halted.onBlockBreak");
         }
@@ -165,7 +166,7 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onPlayerInteraction(PlayerInteractEvent e) {
-        if (isHalted(e.getPlayer()) && dataManager.getPerformanceConfig().getHaltSettings().isHaltPlayerInteractions()) {
+        if (isHalted(e.getPlayer()) && dataManager.haltSettings().isHaltPlayerInteractions()) {
             iHaltWrapper.onPlayerInteraction(e);
             sendHaltFeedback(e.getPlayer(), "halted.onPlayerInteract");
         }
@@ -173,14 +174,14 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onProjectile(ProjectileHitEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltProjectiles()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltProjectiles()) {
             iHaltWrapper.onProjectile(e);
         }
     }
 
     @EventHandler()
     public void onProjectile(ProjectileLaunchEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltProjectiles()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltProjectiles()) {
             e.setCancelled(true);
             if (e.getEntity().getShooter() instanceof Creature) {
                 List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
@@ -196,14 +197,14 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onEntityInteract(EntityInteractEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltEntityInteractions()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltEntityInteractions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void onEntityTarget(EntityTargetEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltEntityTargeting()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltEntityTargeting()) {
             e.setCancelled(true);
             List<Entity> entities = e.getEntity().getNearbyEntities(10, 10, 10);
             if (entities.size() >= 10) {
@@ -214,26 +215,34 @@ public class HaltServer implements Listener {
 
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltVehicleCollisions()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltVehicleCollisions()) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler()
     public void blockPhysics(BlockPhysicsEvent e) {
-        if (isHalted(null) && dataManager.getPerformanceConfig().getHaltSettings().isHaltBlockPhysics()) {
+        if (isHalted(null) && dataManager.haltSettings().isHaltBlockPhysics()) {
             iHaltWrapper.blockPhysics(e);
         }
     }
-    @EventHandler()
-    public void onPlayerJoin(PlayerLoginEvent e) {
-        if (isHalted(null) && !dataManager.getPerformanceConfig().getHaltSettings().isAllowJoinWhileHalted()) {
-            if (e.getPlayer().hasPermission("neoperformance.bypass")) {
-                return;
-            }
-            //stop player from joining because lag might be due to too many players
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, getLanguageManager().getString("halted.onPlayerInteract", null));
+    @EventHandler
+    public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+        if (!isHalted(null) || dataManager.haltSettings().isAllowJoinWhileHalted()) {
+            return;
         }
+        if (canJoinWhileHalted(event.getUniqueId())) {
+            return;
+        }
+        event.disallow(
+                AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
+                getLanguageManager().getString("halted.onJoin", null)
+        );
+    }
+
+    private boolean canJoinWhileHalted(UUID uuid) {
+        return OfflinePermissionUtils.hasPermission(uuid, "neoperformance.bypass")
+                || OfflinePermissionUtils.hasPermission(uuid, "neoperformance.bypass.auto");
     }
 
     private boolean isHalted(org.bukkit.entity.Player player) {

@@ -15,6 +15,7 @@ import com.neomechanical.neoutils.version.Versioning;
 import com.neomechanical.neoutils.version.versions.Versions;
 import com.neomechanical.neoperformance.commands.RegisterCommands;
 import com.neomechanical.neoperformance.managers.DataHandler;
+import com.neomechanical.neoperformance.moderation.ChatModerationCoordinator;
 import com.neomechanical.neoperformance.performance.haltActions.RegisterHaltActions;
 import com.neomechanical.neoperformance.performance.managers.DataManager;
 import com.neomechanical.neoperformance.performance.performanceHeartBeat.HeartBeat;
@@ -56,6 +57,9 @@ public final class NeoPerformance extends JavaPlugin {
         this.heartBeat = heartBeat;
     }
 
+    @Getter
+    private final ChatModerationCoordinator chatModerationCoordinator = new ChatModerationCoordinator();
+
     private static DataHandler dataHandler;
 
     public DataHandler getPerformanceDataHandler() {
@@ -65,6 +69,7 @@ public final class NeoPerformance extends JavaPlugin {
     public void reload() {
         dataManager.loadTweakSettings(this);
         getLanguageManager().loadLanguageConfig();
+        chatModerationCoordinator.resetCircuit();
     }
 
     @Override
@@ -81,13 +86,25 @@ public final class NeoPerformance extends JavaPlugin {
         new Versioning.VersioningBuilder("heartbeat")
                 .addClass(Versions.vLEGACY.toString(), HeartBeatWrapperLEGACY.class)
                 .addClass(Versions.vNONLEGACY.toString(), HeartBeatWrapperNONLEGACY.class)
-                .setLegacyFunction((ver) -> !isUpToDate(ver, Versions.v1_13_R1.toString()))
+                .setLegacyFunction((ver) -> {
+                    try {
+                        return !isUpToDate(ver, Versions.v1_13_R1.toString());
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
                 .build()
                 .register();
         new Versioning.VersioningBuilder("halt")
                 .addClass(Versions.vLEGACY.toString(), HaltWrapperLEGACY.class)
                 .addClass(Versions.vNONLEGACY.toString(), HaltWrapperNONLEGACY.class)
-                .setLegacyFunction((ver) -> !isUpToDate(ver, Versions.v1_13_R1.toString()))
+                .setLegacyFunction((ver) -> {
+                    try {
+                        return !isUpToDate(ver, Versions.v1_13_R1.toString());
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
                 .build()
                 .register();
         new RegisterHaltActions(this).registerActions();
@@ -116,12 +133,13 @@ public final class NeoPerformance extends JavaPlugin {
         int pluginId = 15711;
         metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new SimplePie("Language", () -> getLanguageManager().getLanguageCode()));
-        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getTpsHaltAt())));
+        metrics.addCustomChart(new SimplePie("halt_at_tps", () -> String.valueOf(getDataManager().tweakSettings().getTpsHaltAt())));
         metrics.addCustomChart(new SimplePie("current_server_tps", () -> String.valueOf((double) Math.round(TpsUtils.getTPS(this) * 100) / 100)));
     }
 
     @Override
     public void onDisable() {
+        chatModerationCoordinator.close();
     }
 
     /**

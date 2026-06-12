@@ -14,12 +14,13 @@ public class SmartClear {
         }
     }
 
-    public static void scanThenExterminate() {
+    /** Clears dense entity clusters during halt; requires a live plugin reference (see halt-action registration). */
+    public static void scanThenExterminate(NeoPerformance plugin) {
+        if (plugin == null) {
+            return;
+        }
         World[] worlds = Bukkit.getWorlds().toArray(new World[0]);
-        List<List<Entity>> clusters = SmartScanner.scan(-1,
-                -1,
-                NeoPerformance.getInstance().getDataManager().getPerformanceConfig(),
-                worlds);
+        List<List<Entity>> clusters = SmartScanner.scan(-1, -1, plugin.getDataManager(), worlds);
         //For every cluster remove every entity
         for (List<Entity> cluster : clusters) {
             for (Entity e : cluster) {

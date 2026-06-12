@@ -11,6 +11,8 @@
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Set -Dproguard.skip=true for a faster unobfuscated dev jar (api module only). -->
+        <proguard.skip>false</proguard.skip>
     </properties>
     <modules>
         <module>api</module>

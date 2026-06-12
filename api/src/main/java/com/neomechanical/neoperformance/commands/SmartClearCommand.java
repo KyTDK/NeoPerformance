@@ -147,7 +147,7 @@ public class SmartClearCommand extends Command {
 
             // Set clusterSize to default if not set
             if (clusterSize < 1) {
-                clusterSize = plugin.getDataManager().getPerformanceConfig().getCommands().getDefaultClusterSize();
+                clusterSize = plugin.getDataManager().commands().getDefaultClusterSize();
             }
 
             if (toBeConfirmed.containsKey(player)) {
@@ -160,7 +160,7 @@ public class SmartClearCommand extends Command {
             scheduleConfirmationRemoval(player);
 
             // Scan for clusters of entities
-            SmartScan smartScan = SmartScanner.scan(clusterSize, world, plugin.getDataManager().getPerformanceConfig(), all);
+            SmartScan smartScan = SmartScanner.scan(clusterSize, world, plugin.getDataManager(), all);
 
             // No clusters, show error message and return
             if (smartScan.getClusters().isEmpty()) {

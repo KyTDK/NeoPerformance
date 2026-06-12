@@ -66,6 +66,47 @@ commands:
     - item_frame
     - painting
     - armor_stand
+
+# Chat moderation integration via Neomechanical platform API.
+# Remote calls use a small worker pool + circuit breaker: repeated transport/5xx/timeout failures
+# pause outbound checks for 60s (after 3 hits in a row). /np reload resets breaker state and auth logs.
+chat_moderation:
+  enabled: false
+  api:
+    endpoint: "https://api.neomechanical.com/v1/moderation/chat"
+    # Add your platform API key here.
+    apiKey: ""
+    connectTimeoutMs: 3000
+    readTimeoutMs: 3000
+  # Default category coverage requested: sexual + hate.
+  categories:
+    sexual: true
+    hate: true
+  # Actions are processed in order when a message is flagged.
+  # Available action types:
+  # CLEAR_CHAT, MUTE, KICK, BAN, TIMEOUT, GIVE_ROLE, TAKE_ROLE, TEMP_ROLE, COMMAND
+  actions:
+    - type: CLEAR_CHAT
+    - type: MUTE
+      durationSeconds: 300
+      reason: "Inappropriate chat message"
+    # Examples:
+    # - type: KICK
+    #   reason: "Inappropriate chat message"
+    # - type: BAN
+    #   reason: "Repeated hate speech"
+    # - type: TIMEOUT
+    #   durationSeconds: 600
+    #   reason: "Chat timeout"
+    # - type: GIVE_ROLE
+    #   role: "trusted"
+    # - type: TAKE_ROLE
+    #   role: "member"
+    # - type: TEMP_ROLE
+    #   role: "probation"
+    #   durationSeconds: 3600
+    # - type: COMMAND
+    #   command: "warn %PLAYER% Watch your language"
 ###########################################################################
 #        ADVANCED (DON'T TOUCH UNLESS YOU KNOW WHAT YOU ARE DOING)        #
 ###########################################################################

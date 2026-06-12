@@ -53,16 +53,16 @@ public class HeartBeat {
 
                 if (isCurrentlyHalted && !previouslyHalted.get()) {
                     if (!manualHalt.get()) {
-                        HaltNotifier.notifyHalted(dataManager);
+                        HaltNotifier.notifyHalted(plugin);
                     } else {
                         previouslyManuallyHalted.set(true);
                     }
-                    HaltActions.runHaltActions(tps);
+                    HaltActions.runHaltActions(plugin, tps);
                     haltStartTime.set(System.currentTimeMillis());
                     previouslyHalted.set(true);
                 } else if (!isCurrentlyHalted && previouslyHalted.get()) {
                     if (!previouslyManuallyHalted.get()) {
-                        HaltNotifier.notifyResumed(dataManager);
+                        HaltNotifier.notifyResumed(plugin);
                     } else {
                         previouslyManuallyHalted.set(false);
                     }
@@ -71,7 +71,7 @@ public class HeartBeat {
                     previouslyHalted.set(false);
                 }
             }
-        }.runTaskTimer(plugin, 0, dataManager.getPerformanceConfig().getPerformanceTweakSettings().getHeartBeatRate());
+        }.runTaskTimer(plugin, 0, dataManager.tweakSettings().getHeartBeatRate());
     }
 
     public void restoreServer() {

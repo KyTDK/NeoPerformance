@@ -14,6 +14,6 @@ public class RegisterHaltActions {
 
     public void registerActions() {
         haltActions.registerHaltAction("smartclear",
-                (tps) -> SmartClear.scanThenExterminate());
+                (tps) -> SmartClear.scanThenExterminate(plugin));
     }
 }

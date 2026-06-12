@@ -48,7 +48,7 @@ public class ChunksScanner {
                 topChunks.add(chunk);
             }
             // go back to the tick loop
-            Bukkit.getScheduler().runTask(NeoPerformance.getInstance(), () -> {
+            Bukkit.getScheduler().runTask(plugin, () -> {
                 // call the callback with the result
                 callback.onChunkScanDone(topChunks);
             });

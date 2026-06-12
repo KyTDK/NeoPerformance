@@ -16,24 +16,26 @@ import java.util.Date;
 import java.util.Properties;
 
 public class EmailClient {
+    private final NeoPerformance plugin;
     private final String outgoingHost;
     private final String senderEmail;
     private final String[] recipients;
     private final String senderPassword;
     private final int outgoingPort;
 
-    public EmailClient(DataManager dataManager) {
-        outgoingHost = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerHost();
-        senderEmail = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerUsername();
-        recipients = dataManager.getPerformanceConfig().getEmailNotifications().getRecipients().toArray(new String[0]);
-        senderPassword = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerPassword();
-        outgoingPort = dataManager.getPerformanceConfig().getEmailNotifications().getMailServerPort();
+    public EmailClient(NeoPerformance plugin, DataManager dataManager) {
+        this.plugin = plugin;
+        var mail = dataManager.emailNotifications();
+        outgoingHost = mail.getMailServerHost();
+        senderEmail = mail.getMailServerUsername();
+        recipients = mail.getRecipients().toArray(new String[0]);
+        senderPassword = mail.getMailServerPassword();
+        outgoingPort = mail.getMailServerPort();
     }
 
     public void sendAsHtml(String title, String html) {
-        Bukkit.getScheduler().runTaskAsynchronously(NeoPerformance.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             Session session = createSession();
-            //create message using session
             Message message = new MimeMessage(session);
             for (String s : recipients) {
                 try {
@@ -41,7 +43,6 @@ public class EmailClient {
                 } catch (MessagingException | IOException e) {
                     throw new RuntimeException(e);
                 }
-                //sending message
                 try {
                     Transport.send(message);
                 } catch (MessagingException e) {
@@ -64,16 +65,17 @@ public class EmailClient {
 
     private Session createSession() {
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");//Outgoing server requires authentication
-        props.put("mail.smtp.starttls.enable", "true");//TLS must be activated
-        props.put("mail.smtp.host", outgoingHost); //Outgoing server (SMTP) - change it to your SMTP server
-        props.put("mail.smtp.port", outgoingPort);//Outgoing port
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", outgoingHost);
+        props.put("mail.smtp.port", outgoingPort);
         return Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(senderEmail, senderPassword);
             }
         });
     }
+
     private void collect(BufferedReader in, Message msg, String body)
             throws MessagingException, IOException {
         String subject = msg.getSubject();

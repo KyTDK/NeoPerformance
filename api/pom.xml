@@ -15,6 +15,33 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.7.1</version>
+                <executions>
+                    <execution>
+                        <id>proguard-spigot-api</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.spigotmc</groupId>
+                                    <artifactId>spigot-api</artifactId>
+                                    <version>1.8-R0.1-SNAPSHOT</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/proguard-libs</outputDirectory>
+                                    <destFileName>spigot-api.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <skip>${proguard.skip}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
@@ -53,6 +80,40 @@
                             <shadedPattern>com.neomechanical.neoperformance.neoconfig</shadedPattern>
                         </relocation>
                     </relocations>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <id>obfuscate-release-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>${proguard.skip}</skip>
+                    <proguardInclude>${project.basedir}/proguard.conf</proguardInclude>
+                    <includeDependency>false</includeDependency>
+                    <mappingFileName>proguard-mapping.txt</mappingFileName>
+                    <maxMemory>768m</maxMemory>
+                    <libs>
+                        <lib>${project.build.directory}/proguard-libs/spigot-api.jar</lib>
+                        <lib>${java.home}/jmods/java.base.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.logging.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.xml.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.management.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.naming.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.prefs.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.datatransfer.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.desktop.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.net.http.jmod(!**.jar;!module-info.class)</lib>
+                        <lib>${java.home}/jmods/java.sql.jmod(!**.jar;!module-info.class)</lib>
+                    </libs>
                 </configuration>
             </plugin>
         </plugins>

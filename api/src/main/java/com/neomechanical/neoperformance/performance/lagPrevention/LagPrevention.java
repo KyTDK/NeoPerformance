@@ -1,7 +1,6 @@
 package com.neomechanical.neoperformance.performance.lagPrevention;
 
 import com.neomechanical.neoperformance.NeoPerformance;
-import com.neomechanical.neoperformance.performance.utils.PerformanceConfigurationSettingsUtils;
 import com.neomechanical.neoperformance.utils.NPC;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
@@ -22,7 +21,7 @@ public class LagPrevention implements Listener {
     @EventHandler()
     public void onExplosion(EntityExplodeEvent e) {
         //canExplode handles removing entities from the list so that the explosion doesn't happen and lag is prevented
-        if (!PerformanceConfigurationSettingsUtils.canExplode(plugin.getDataManager().getPerformanceConfig(), e)) {
+        if (!plugin.getDataManager().allowsExplosion(e)) {
             e.setCancelled(true);
         }
     }
@@ -30,7 +29,7 @@ public class LagPrevention implements Listener {
     //Unnecessary amount of mobs in area will be capped.
     @EventHandler()
     public void onMobSpawn(EntitySpawnEvent e) {
-        if (!PerformanceConfigurationSettingsUtils.canMobSpawn(plugin.getDataManager().getPerformanceConfig(), e)) {
+        if (!plugin.getDataManager().allowsMobSpawn(e)) {
             //Making sure it's not an NPC ensures that nothing is broken by the lag prevention
             if (NPC.isNpc(e.getEntity())) {
                 return;
@@ -42,7 +41,8 @@ public class LagPrevention implements Listener {
     //Prevents minecart powered lagging machines, apart mobCapRadius
     @EventHandler()
     public void onVehicleCollision(VehicleEntityCollisionEvent e) {
-        List<Entity> list = e.getVehicle().getNearbyEntities(plugin.getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getMobCapRadius(), 2, plugin.getDataManager().getPerformanceConfig().getPerformanceTweakSettings().getMobCapRadius());
+        int mobCapRadius = plugin.getDataManager().tweakSettings().getMobCapRadius();
+        List<Entity> list = e.getVehicle().getNearbyEntities(mobCapRadius, 2, mobCapRadius);
         list.removeIf(entity -> entity.getType() != e.getVehicle().getType());
         if (list.size() >= 20) {
             e.getVehicle().remove();

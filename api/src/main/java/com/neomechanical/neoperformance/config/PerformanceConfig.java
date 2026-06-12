@@ -22,6 +22,8 @@ public class PerformanceConfig {
     private EmailNotifications emailNotifications;
     // Visual
     private Visual visual;
+    // Chat Moderation
+    private ChatModerationSettings chatModerationSettings;
 
     public PerformanceConfig(FileConfiguration fileConfiguration) {
         this.fileConfiguration = fileConfiguration;
@@ -33,5 +35,6 @@ public class PerformanceConfig {
         this.commands = new Commands(fileConfiguration);
         this.emailNotifications = new EmailNotifications(fileConfiguration);
         this.visual = new Visual(fileConfiguration);
+        this.chatModerationSettings = new ChatModerationSettings(fileConfiguration);
     }
 }
