@@ -2,9 +2,6 @@ package com.neomechanical.neoperformance.performance.halt;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.AnaloguePowerable;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Powerable;
 
 public final class RedstoneComponentUtils {
     private RedstoneComponentUtils() {
@@ -13,10 +10,6 @@ public final class RedstoneComponentUtils {
     public static boolean isRedstoneComponent(Block block) {
         if (block == null || block.isEmpty()) {
             return false;
-        }
-        BlockData blockData = block.getBlockData();
-        if (blockData instanceof AnaloguePowerable || blockData instanceof Powerable) {
-            return true;
         }
         return isRedstoneMaterial(block.getType());
     }
